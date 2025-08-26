@@ -1,0 +1,27 @@
+﻿# --- Python ---
+backend/.venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.env
+
+# --- Django/Flask/FastAPI specific ---
+db.sqlite3
+instance/
+*.db
+
+# --- Testing ---
+.coverage
+htmlcov/
+.pytest_cache/
+
+# --- Node/Frontend ---
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# --- IDE ---
+.idea/
+.vscode/
+*.iml

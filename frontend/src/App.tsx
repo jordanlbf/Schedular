@@ -1,12 +1,65 @@
+import { useEffect, useState } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import "./home.css";
 
+type Theme = "light" | "dark";
+const THEME_KEY = "schedular-theme";
+
+function getInitialTheme(): Theme {
+  const saved = localStorage.getItem(THEME_KEY) as Theme | null;
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme: Theme) {
+  const root = document.documentElement; // <html>
+  root.setAttribute("data-theme", theme);
+  root.classList.remove("theme-light", "theme-dark");
+  root.classList.add(`theme-${theme}`);
+}
+
+function ThemeToggle({
+  theme,
+  onToggle,
+}: {
+  theme: Theme;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="theme-toggle" role="group" aria-label="Color theme">
+      <span className={`theme-label ${theme === "dark" ? "active" : ""}`}>DARK</span>
+      <button
+        className="switch"
+        role="switch"
+        aria-checked={theme === "light"}
+        onClick={onToggle}
+        title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        <span className="knob" aria-hidden />
+      </button>
+      <span className={`theme-label ${theme === "light" ? "active" : ""}`}>LIGHT</span>
+    </div>
+  );
+}
+
 function Home() {
+  const [theme, setTheme] = useState<Theme>(getInitialTheme());
+
+  useEffect(() => {
+    applyTheme(theme);
+    localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
+
   return (
     <div className="home-wrap">
       <header className="home-topbar">
         <div className="brand">Schedular</div>
-        <div className="profile" aria-label="User menu">👤</div>
+        <div className="actions">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+          <div className="profile" aria-label="User menu">👤</div>
+        </div>
       </header>
 
       <main className="home-hero">
@@ -26,9 +79,7 @@ function Home() {
         </div>
       </main>
 
-      <footer className="home-footer">
-        © {new Date().getFullYear()} Schedular
-      </footer>
+      <footer className="home-footer">© {new Date().getFullYear()} Schedular</footer>
     </div>
   );
 }

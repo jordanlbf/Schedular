@@ -1,12 +1,37 @@
-/* Theme tokens */
-:root {
+/* Light theme (default tokens) */
+:root,
+html.theme-light {
+  color-scheme: light;
+
   --bg: #f9fafb;
   --panel: #ffffff;
+  --panel-elev: #f3f4f6;
   --text: #111827;
   --muted: #6b7280;
   --border: #e5e7eb;
   --accent: #3b82f6;
-  --ring: rgba(59,130,246,.4);
+  --ring: rgba(59,130,246,.45);
+
+  --track-bg: var(--panel-elev);
+  --knob-bg: #e8ecff;
+  --shadow: 0 10px 30px rgba(0,0,0,.10);
+}
+
+/* Dark overrides */
+html.theme-dark {
+  color-scheme: dark;
+
+  --bg: #0b1020;
+  --panel: #111729;
+  --panel-elev: #1a2238;
+  --text: #e8ecff;
+  --muted: #a2acc5;
+  --border: #1c2440;
+  --accent: #60a5fa;
+  --ring: rgba(96,165,250,.5);
+
+  --track-bg: #1a2238;
+  --knob-bg: #e3e8ff;
 }
 
 /* Baseline */
@@ -18,6 +43,7 @@ body {
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background .25s ease, color .25s ease;
 }
 
 /* Layout: header | main | footer */
@@ -36,13 +62,58 @@ body {
   border-bottom: 1px solid var(--border);
   background: var(--panel);
 }
-.brand {
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--accent);
-}
+.brand { font-weight: 700; font-size: 18px; color: var(--accent); }
+.actions { display: flex; gap: 16px; align-items: center; }
 
-/* Hero (centered, nudged upward) */
+/* Elegant DARK/LIGHT toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+.theme-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  color: var(--muted);
+}
+.theme-label.active { color: var(--text); }
+
+.switch {
+  width: 68px;
+  height: 36px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--track-bg);
+  position: relative;
+  transition: background .2s ease, border-color .2s ease;
+}
+.switch:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+}
+.knob {
+  position: absolute;
+  top: 4px; left: 4px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--knob-bg);
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  transition: transform .22s cubic-bezier(.2,.8,.2,1);
+}
+.knob::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: -10px 0 0 0 var(--track-bg);
+}
+/* knob position in light mode */
+html.theme-light .switch .knob { transform: translateX(32px); }
+
+/* Hero */
 .home-hero {
   height: 100%;
   padding: 24px;
@@ -54,16 +125,10 @@ body {
   text-align: center;
   transform: translateY(-6vh);
 }
-.home-title {
-  font-size: 34px;
-  margin: 0 0 8px;
-}
-.home-subtitle {
-  margin: 0 0 8px;
-  color: var(--muted);
-}
+.home-title { font-size: 34px; margin: 0 0 8px; }
+.home-subtitle { margin: 0 0 8px; color: var(--muted); }
 
-/* Cards — larger footprint */
+/* Cards */
 .home-cards {
   width: 100%;
   max-width: 1100px;
@@ -81,24 +146,16 @@ body {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  box-shadow: var(--shadow);
 }
 .home-card:hover {
   transform: translateY(-2px);
   border-color: var(--accent);
-  box-shadow: 0 12px 30px rgba(0,0,0,.10);
 }
 
-.emoji {
-  font-size: 44px;
-  display: block;
-  margin-bottom: 16px;
-}
-.home-card h2 {
-  margin: 0;
-  font-size: 26px;
-  letter-spacing: .2px;
-}
+.emoji { font-size: 44px; display: block; margin-bottom: 16px; }
+.home-card h2 { margin: 0; font-size: 26px; letter-spacing: .2px; }
 
 /* Footer */
 .home-footer {
@@ -111,11 +168,7 @@ body {
 }
 
 /* Utility pages */
-.page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 24px;
-}
+.page { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
 .back-link { color: var(--accent); text-decoration: none; }
 .back-link:hover { text-decoration: underline; }
 
@@ -126,7 +179,7 @@ a:focus-visible {
   border-radius: 10px;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 640px), (max-height: 700px) {
   .home-hero { transform: none; }
   .home-cards { max-width: 560px; grid-template-columns: 1fr; gap: 20px; }

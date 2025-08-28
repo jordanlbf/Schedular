@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Link, Navigate } from "react-router-dom";
+import "./home.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Home() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="home-wrap">
+      <header className="home-topbar">
+        <div className="brand">Schedular</div>
+        <div className="profile" aria-label="User menu">👤</div>
+      </header>
+
+      <main className="home-hero">
+        <h1 className="home-title">Welcome to Schedular</h1>
+        <p className="home-subtitle">Choose a workspace to get started.</p>
+
+        <div className="home-cards">
+          <Link to="/pos" className="home-card" aria-label="Open Front Desk workspace">
+            <span className="emoji" aria-hidden>💳</span>
+            <h2>Front Desk</h2>
+          </Link>
+
+          <Link to="/admin" className="home-card" aria-label="Open Backend workspace">
+            <span className="emoji" aria-hidden>🛠️</span>
+            <h2>Backend</h2>
+          </Link>
+        </div>
+      </main>
+
+      <footer className="home-footer">
+        © {new Date().getFullYear()} Schedular
+      </footer>
+    </div>
+  );
 }
 
-export default App
+function POS() {
+  return (
+    <div className="page">
+      <h1>Front Desk</h1>
+      <p><Link to="/" className="back-link">← Back home</Link></p>
+    </div>
+  );
+}
+
+function Admin() {
+  return (
+    <div className="page">
+      <h1>Backend</h1>
+      <p><Link to="/" className="back-link">← Back home</Link></p>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/pos" element={<POS />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}

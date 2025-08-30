@@ -8,12 +8,13 @@ const THEME_KEY = "schedular-theme";
 function getInitialTheme(): Theme {
   const saved = localStorage.getItem(THEME_KEY) as Theme | null;
   if (saved === "light" || saved === "dark") return saved;
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ? "dark"
+    : "light";
 }
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement; // <html>
-  root.setAttribute("data-theme", theme);
   root.classList.remove("theme-light", "theme-dark");
   root.classList.add(`theme-${theme}`);
 }
@@ -30,12 +31,12 @@ function ThemeToggle({
       <span className={`theme-label ${theme === "dark" ? "active" : ""}`}>DARK</span>
       <button
         className="switch"
+        onClick={onToggle}
         role="switch"
         aria-checked={theme === "light"}
-        onClick={onToggle}
-        title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        title="Toggle theme"
       >
-        <span className="knob" aria-hidden />
+        <span className="knob" />
       </button>
       <span className={`theme-label ${theme === "light" ? "active" : ""}`}>LIGHT</span>
     </div>
@@ -43,14 +44,14 @@ function ThemeToggle({
 }
 
 function Home() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme());
+    const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
-  useEffect(() => {
-    applyTheme(theme);
-    localStorage.setItem(THEME_KEY, theme);
-  }, [theme]);
+    useEffect(() => {
+      applyTheme(theme);
+      localStorage.setItem(THEME_KEY, theme);
+    }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
+    const toggleTheme = () => setTheme(t => (t === "dark" ? "light" : "dark"));
 
   return (
     <div className="home-wrap">

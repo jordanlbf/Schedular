@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+// @ts-ignore
 import Header from "@/app/layout/Header.tsx";
 
 export default function Admin() {

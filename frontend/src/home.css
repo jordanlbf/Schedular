@@ -104,6 +104,7 @@ body {
   background: var(--knob-bg);
   box-shadow: 0 2px 6px rgba(0,0,0,.25);
   transition: transform .22s cubic-bezier(.2,.8,.2,1);
+  transform: translateX(0);
 }
 .knob::after {
   content: "";
@@ -112,7 +113,6 @@ body {
   border-radius: 50%;
   box-shadow: -10px 0 0 0 var(--track-bg);
 }
-/* knob position in light mode */
 html.theme-light .switch .knob { transform: translateX(32px); }
 
 /* Hero */

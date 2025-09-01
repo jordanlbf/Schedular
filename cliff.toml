@@ -1,0 +1,43 @@
+# cliff.toml
+[changelog]
+header = """
+# Changelog
+All notable changes to this project will be documented here.
+"""
+body = """
+{% for group, commits in commits | group_by(attribute="group") %}
+## {{ group }}
+{% for commit in commits %}
+- {{ commit.message | split(pat="\n") | first }} ({{ commit.id | truncate(length=7, end="" }})
+{%- if commit.breaking %} **BREAKING**{% endif -%}
+{%- if commit.footers %}{% for f in commit.footers %}{% if f.token == "PR" %} [#{{ f.value }}]{% endif %}{% endfor %}{% endif %}
+{% endfor %}
+
+{% endfor %}
+"""
+footer = ""
+trim = true
+
+[git]
+conventional_commits = true
+split_commits = false
+filter_unconventional = true
+tag_pattern = "v[0-9]*"
+protect_breaking_commits = true
+
+# Map types to groups
+commit_parsers = [
+  { message = "^feat", group = "Features" },
+  { message = "^fix", group = "Fixes" },
+  { message = "^perf", group = "Performance" },
+  { message = "^refactor", group = "Refactors" },
+  { message = "^docs", group = "Docs" },
+  { message = "^test", group = "Tests" },
+  { message = "^build|^ci|^chore", group = "Build" },
+]
+
+# Exclude noise
+filter_commits = [
+  { message = "merge branch" },
+  { message = "^chore\\(release\\)" },
+]

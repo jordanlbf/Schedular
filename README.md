@@ -24,18 +24,29 @@ uvicorn app:app --reload --port 8000
 ### One command
 
 * **Windows:**
-  - In **PowerShell**:  
+
+  * In **PowerShell**:
+
     ```powershell
     .\run-dev.ps1
     ```
-  - In **CMD Prompt**:  
+  * In **CMD Prompt**:
+
+    ```bat
+    run-dev.bat
+    ```
+
+    or
+
     ```bat
     powershell -ExecutionPolicy Bypass -File run-dev.ps1
     ```
-  - (Optional) You can also use `run-dev.bat` if you prefer CMD only.
 
 * **macOS/Linux:**
-  Run `./run-dev.sh`
+
+  ```bash
+  ./run-dev.sh
+  ```
 
 ## 📂 Project Layout
 
@@ -44,5 +55,6 @@ uvicorn app:app --reload --port 8000
 * `docs/` — documentation and notes
 
 ## 🤝 Contributing
-This project uses [Conventional Commits](https://www.conventionalcommits.org/).  
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/).
 Please update docs if relevant when making changes.

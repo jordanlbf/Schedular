@@ -10,7 +10,7 @@ const SearchCustomer = lazy(() => import("../features/customers/SearchCustomer")
 
 export default function AppRoutes() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<div style={{padding:16}}>Loading…</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pos" element={<FrontDesk />} />

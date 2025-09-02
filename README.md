@@ -62,6 +62,12 @@ uvicorn app:app --reload --port 8000
 This project uses [Conventional Commits](https://www.conventionalcommits.org/).
 Please update docs if relevant when making changes.
 
+## 📖 Documentation
+A full docs site will come later. For now, see:
+- Frontend routes: [`frontend/README.md`](frontend/README.md#routes)
+- Quickstart: (above)
+
+
 ## 🪪 License
 MIT License. See [`LICENSE`](LICENSE) for details.  
 © 2025 Jordan Brewis Foulger.

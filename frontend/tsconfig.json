@@ -5,7 +5,10 @@
     "moduleResolution": "bundler",
     "noEmit": true,
     "strict": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["vite.config.ts", "eslint.config.js"]
 }

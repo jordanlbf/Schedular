@@ -1,44 +1,22 @@
 import type { Customer } from "../types";
+import Panel from "@/shared/ui/Panel";
+import Field from "@/shared/ui/Field";
+import Input from "@/shared/ui/Input";
 
-export default function CustomerForm({
-  value,
-  onChange,
-}: {
-  value: Customer;
-  onChange: (next: Customer) => void;
-}) {
+export default function CustomerForm({ value, onChange }: { value: Customer; onChange: (c: Customer) => void; }) {
   return (
-    <section className="panel">
-      <h2 className="panel-title">Customer</h2>
+    <Panel title="Customer">
       <div className="form-row">
-        <label className="field">
-          <span className="label">Name</span>
-          <input
-            className="input"
-            value={value.name}
-            onChange={(e) => onChange({ ...value, name: e.target.value })}
-            placeholder="Full name"
-          />
-        </label>
-        <label className="field">
-          <span className="label">Phone</span>
-          <input
-            className="input"
-            value={value.phone}
-            onChange={(e) => onChange({ ...value, phone: e.target.value })}
-            placeholder="e.g. 555-1234"
-          />
-        </label>
-        <label className="field">
-          <span className="label">Email</span>
-          <input
-            className="input"
-            value={value.email}
-            onChange={(e) => onChange({ ...value, email: e.target.value })}
-            placeholder="name@example.com"
-          />
-        </label>
+        <Field label="Name">
+          <Input value={value.name} onChange={(e) => onChange({ ...value, name: e.target.value })} placeholder="Full name" />
+        </Field>
+        <Field label="Phone">
+          <Input value={value.phone} onChange={(e) => onChange({ ...value, phone: e.target.value })} placeholder="e.g. 555-1234" />
+        </Field>
+        <Field label="Email">
+          <Input value={value.email} onChange={(e) => onChange({ ...value, email: e.target.value })} placeholder="name@example.com" />
+        </Field>
       </div>
-    </section>
+    </Panel>
   );
 }

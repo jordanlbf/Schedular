@@ -1,4 +1,7 @@
 # Schedular
+[![License: MIT](https://img.shields.io/badge/license-MIT-informational)](LICENSE)
+![Stack](https://img.shields.io/badge/stack-React%20%7C%20Vite%20%7C%20FastAPI-blue)
+![Status](https://img.shields.io/badge/status-Alpha-yellow)
 
 POS software with enhanced AI scheduling for delivery services.
 
@@ -58,3 +61,7 @@ uvicorn app:app --reload --port 8000
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/).
 Please update docs if relevant when making changes.
+
+## 🪪 License
+MIT License. See [`LICENSE`](LICENSE) for details.  
+© 2025 Jordan Brewis Foulger.

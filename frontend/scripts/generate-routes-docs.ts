@@ -1,9 +1,12 @@
 // frontend/scripts/generate-routes-docs.ts
+// @ts-ignore
 import fs from "node:fs";
+// @ts-ignore
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ROUTE_DOCS } from "../src/app/routeDocs";
 
+// @ts-ignore
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

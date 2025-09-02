@@ -21,65 +21,146 @@ export default function CreateSale() {
   const [nextId, setNextId] = useState(1);
 
   // pricing
-  const [deliveryFee, setDeliveryFee] = useState(0); // cents
-  const [discountPct, setDiscountPct] = useState(0);
-  const taxRate = 0.1;
+  const [deliveryFee, setDeliveryFee] = useState<number>(0);
+  const [discountPct, setDiscountPct] = useState<number>(0);
 
-  // actions
-  const addItem = (sku: string) => {
-    const p = CATALOG.find((x) => x.sku === sku);
-    if (!p) return;
-    setLines((xs) => {
-      const exist = xs.find((l) => l.sku === sku);
-      if (exist) return xs.map((l) => (l.sku === sku ? { ...l, qty: l.qty + 1 } : l));
-      const id = nextId; setNextId(id + 1);
-      return [...xs, { id, sku: p.sku, name: p.name, qty: 1, price: p.price }];
-    });
-  };
-  const changeQty = (id: number, delta: number) =>
-    setLines((xs) => xs.map((l) => (l.id === id ? { ...l, qty: Math.max(1, l.qty + delta) } : l)));
-  const removeLine = (id: number) => setLines((xs) => xs.filter((l) => l.id !== id));
+  // optional notes
+  const [deliveryNotes, setDeliveryNotes] = useState<string>("");
 
-  // totals
+  // derived totals
   const totals = useMemo(() => {
-    const subtotal = lines.reduce((s, l) => s + l.qty * l.price, 0);
-    const discount = Math.round((subtotal * Math.min(100, Math.max(0, discountPct))) / 100);
-    const withFees = subtotal - discount + deliveryFee;
-    const tax = Math.round(withFees * taxRate);
-    const total = withFees + tax;
-    return { subtotal, discount, tax, total };
+    const itemCount = lines.reduce((n, l) => n + (l.qty ?? 0), 0);
+    const subtotal = lines.reduce((sum, l) => sum + (l.price ?? 0) * (l.qty ?? 0), 0);
+    const discountAmt = subtotal * (Math.max(0, Math.min(discountPct, 100)) / 100);
+    const shipping = Math.max(0, deliveryFee);
+    const total = Math.max(0, subtotal - discountAmt + shipping);
+    return { itemCount, subtotal, discountPct, discountAmt, shipping, total };
   }, [lines, discountPct, deliveryFee]);
 
+  // Add/merge by SKU; only bump nextId if a new row was created
+  const handleAddToCart = (sku: string | number) => {
+    const item = CATALOG.find((p) => p.sku === sku);
+    if (!item) return;
+
+    let created = false;
+
+    setLines((curr) => {
+      const i = curr.findIndex((l) => l.sku === sku);
+      if (i !== -1) {
+        const copy = [...curr];
+        const existing = copy[i];
+        copy[i] = { ...existing, qty: (existing.qty ?? 0) + 1 };
+        return copy;
+      }
+      created = true;
+      return [
+        {
+          id: nextId,
+          sku: item.sku,
+          name: item.name,
+          price: item.price,
+          qty: 1,
+        },
+        ...curr,
+      ];
+    });
+
+    if (created) setNextId((n) => n + 1);
+  };
+
   return (
-    <div className="home-wrap">
-      <Header right={<Link to="/pos" className="btn btn-soft">Front Desk</Link>} />
-
-      <main className="page">
-        <h1 className="page-title">Create Sale</h1>
-
-        <div className="sale-grid">
-          <CustomerForm value={customer} onChange={setCustomer} />
-
-          <section className="panel">
-            <ProductPicker catalog={CATALOG} onAdd={addItem} />
-            <CartTable lines={lines} onChangeQty={changeQty} onRemove={removeLine} />
-          </section>
-
-          <PricingSummary
-            deliveryFee={deliveryFee}
-            setDeliveryFee={setDeliveryFee}
-            discountPct={discountPct}
-            setDiscountPct={setDiscountPct}
-            totals={totals}
-            onSave={() => {/* TODO: wire later */}}
-            onConfirm={() => {/* TODO: payment modal later */}}
-          />
+    <>
+      <Header />
+      <main className="container sale-container">
+        <div className="sale-header">
+          <h1 className="page-title">Create Sale</h1>
+          <Link to="/pos" className="back-link">← Back to Front Desk</Link>
         </div>
 
-        <p><Link to="/pos" className="back-link">← Back to Front Desk</Link></p>
-      </main>
+        <div className="sale-grid3">
+          {/* LEFT: Customer */}
+          <aside className="col-left">
+            <div className="panel">
+              <div className="panel-head">
+                <h2 className="panel-title">Customer</h2>
+              </div>
+              <div className="panel-body">
+                {/* Frameless to avoid duplicate inner title */}
+                <CustomerForm value={customer} onChange={setCustomer} framed={false} />
+              </div>
+            </div>
+          </aside>
 
-      <footer className="home-footer">© {new Date().getFullYear()} Schedular</footer>
-    </div>
+          {/* CENTRE: Product Search / Picker and Cart */}
+          <section className="col-center">
+            <div className="panel">
+              <div className="panel-head">
+                <h2 className="panel-title">Add Products</h2>
+              </div>
+              <div className="panel-body">
+                <ProductPicker catalog={CATALOG} onAdd={handleAddToCart} />
+              </div>
+            </div>
+
+            <div className="panel cart-panel">
+              <div className="panel-head">
+                <h2 className="panel-title">Cart</h2>
+              </div>
+
+              <div className="panel-body cart-scroll">
+                {lines.length > 0 ? (
+                  <CartTable
+                    lines={lines}
+                    onChangeQty={(id, delta) => {
+                      setLines((arr) =>
+                        arr
+                          .map((l) =>
+                            l.id === id ? { ...l, qty: Math.max(0, (l.qty ?? 1) + delta) } : l
+                          )
+                          .filter((l) => (l.qty ?? 1) > 0) // drop lines that hit 0
+                      );
+                    }}
+                    onRemove={(id) => setLines((arr) => arr.filter((l) => l.id !== id))}
+                  />
+                ) : (
+                  <div className="cart-empty">
+                    <p>Your cart is empty</p>
+                    <span className="hint">Search products to add items.</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+
+          {/* RIGHT: Pricing and Delivery Instructions */}
+          <aside className="col-right">
+            <PricingSummary
+              deliveryFee={deliveryFee}
+              setDeliveryFee={setDeliveryFee}
+              discountPct={discountPct}
+              setDiscountPct={setDiscountPct}
+              totals={totals}
+              onSave={() => {}}
+              onConfirm={() => {}}
+            />
+
+            <div className="panel">
+              <div className="panel-head">
+                <h2 className="panel-title">Delivery Instructions</h2>
+              </div>
+              <div className="panel-body">
+                <textarea
+                  className="input"
+                  rows={5}
+                  value={deliveryNotes}
+                  placeholder="e.g. Call on arrival, gate code, preferred delivery window"
+                  onChange={(e) => setDeliveryNotes(e.target.value)}
+                />
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </>
   );
 }

@@ -260,10 +260,18 @@
 }
 
 .form-grid-3 {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  display: flex;
   gap: 16px;
-  align-items: end;
+  align-items: flex-start;
+}
+
+.form-grid-3 > .form-group:first-child {
+  flex: 2; /* City gets double width */
+}
+
+.form-grid-3 > .form-group:nth-child(2),
+.form-grid-3 > .form-group:nth-child(3) {
+  flex: 1; /* State and Postcode get equal width */
 }
 
 .form-group {
@@ -292,6 +300,7 @@
 
 .form-input {
   width: 100%;
+  min-width: 0; /* Prevent grid blowout */
   padding: 14px 16px;
   border: 1px solid var(--border, #1c2440);
   border-radius: 12px;
@@ -869,8 +878,18 @@ select.form-input:focus {
   }
 
   .form-grid-3 {
-    grid-template-columns: 2fr 1fr 1fr;
+    display: flex;
     gap: 16px;
+    align-items: end;
+  }
+
+  .form-grid-3 > .form-group:first-child {
+    flex: 2;
+  }
+
+  .form-grid-3 > .form-group:nth-child(2),
+  .form-grid-3 > .form-group:nth-child(3) {
+    flex: 1;
   }
 
   .form-card-body {
@@ -911,8 +930,15 @@ select.form-input:focus {
   }
 
   .form-grid-3 {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+  }
+
+  .form-grid-3 > .form-group:first-child,
+  .form-grid-3 > .form-group:nth-child(2),
+  .form-grid-3 > .form-group:nth-child(3) {
+    flex: none; /* Reset flex on mobile */
   }
 
   .form-card-body {

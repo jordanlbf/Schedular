@@ -98,11 +98,11 @@ export default function CustomerStep({
           {/* Delivery Address Card */}
           <div className="form-card">
             <div className="form-card-header">
-              <h3>Delivery Address *</h3>
+              <h3>Delivery Address</h3>
             </div>
             <div className="form-card-body">
               <div className="form-group">
-                <label className="form-label">Street Address</label>
+                <label className="form-label">Street Address *</label>
                 <input
                   className="form-input"
                   placeholder="123 Main Street"
@@ -112,8 +112,8 @@ export default function CustomerStep({
               </div>
 
               <div className="form-grid-3">
-                <div className="form-group form-group-2">
-                  <label className="form-label">City</label>
+                <div className="form-group">
+                  <label className="form-label">City *</label>
                   <input
                     className="form-input"
                     placeholder="Brisbane"
@@ -123,7 +123,7 @@ export default function CustomerStep({
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">State</label>
+                  <label className="form-label">State *</label>
                   <select
                     className="form-input"
                     value={customer.deliveryAddress?.state || ""}
@@ -138,7 +138,7 @@ export default function CustomerStep({
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label">Postcode</label>
+                  <label className="form-label">Postcode *</label>
                   <input
                     className="form-input"
                     placeholder="4000"

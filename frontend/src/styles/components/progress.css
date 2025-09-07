@@ -1,0 +1,105 @@
+/* Progress Bar Components */
+
+/* Progress Bar - Enhanced */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--panel) 0%, #0f1623 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  padding: 28px var(--spacing-2xl);
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-strong);
+  gap: var(--spacing-xl);
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex: 1;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.progress-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--spacing-xl);
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.progress-step.completed::after {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+/* Step icons */
+.step-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--spacing-lg);
+  font-weight: bold;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.progress-step.pending .step-icon {
+  background: var(--panel-elev);
+  color: #6b7280;
+  border: 3px solid var(--border);
+}
+
+.progress-step.active .step-icon {
+  background: linear-gradient(135deg, var(--accent), #3b82f6);
+  color: white;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.15), 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+.progress-step.completed .step-icon {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: 3px solid #10b981;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Step labels */
+.step-label {
+  font-size: var(--spacing-lg);
+  font-weight: 700;
+  transition: all 0.3s ease;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.step-detail {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+  margin: 4px 0 0 0;
+  font-weight: 500;
+}
+
+.progress-step.pending .step-label {
+  color: #6b7280;
+}
+
+.progress-step.active .step-label {
+  color: var(--accent);
+}
+
+.progress-step.completed .step-label {
+  color: #10b981;
+}

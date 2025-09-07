@@ -1,0 +1,46 @@
+/* Design System Variables */
+:root {
+  /* Colors */
+  --panel: #111729;
+  --panel-elev: #1a2238;
+  --border: #1c2440;
+  --accent: #60a5fa;
+  --text-primary: #fff;
+  --muted: #a2acc5;
+  
+  /* Shadows */
+  --shadow: 0 6px 18px rgba(0,0,0,.2);
+  --shadow-soft: 0 2px 8px rgba(0,0,0,0.1);
+  --shadow-medium: 0 4px 16px rgba(0,0,0,0.1);
+  --shadow-strong: 0 8px 24px rgba(0,0,0,0.15);
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  
+  /* Typography */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 15px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 28px;
+  
+  /* Layout */
+  --container-max-width: 1600px;
+  --container-padding: clamp(16px, 2vw, 24px);
+}

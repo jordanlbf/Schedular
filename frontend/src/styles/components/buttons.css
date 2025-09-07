@@ -1,0 +1,73 @@
+/* Button Components */
+
+/* Base button styles */
+.btn { 
+  padding: 10px var(--spacing-md); 
+  border-radius: var(--radius-md); 
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  font-size: var(--font-size-md);
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+/* Button variants */
+.btn-primary { 
+  background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);
+  color: white;
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 6px 16px rgba(96, 165, 250, 0.4);
+}
+
+.btn-soft { 
+  background: var(--panel-elev); 
+  border: 1px solid var(--border); 
+  color: inherit;
+}
+
+.btn-soft:hover:not(:disabled) {
+  background: #2a3448;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-ghost { 
+  background: transparent; 
+  border: 1px solid transparent; 
+}
+
+.btn-complete {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  border-color: #10b981 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+}
+
+.btn-complete:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Enhanced button styles for wizard */
+.btn {
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+}

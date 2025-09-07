@@ -1,0 +1,202 @@
+/* Form Components */
+
+/* Base input styles */
+.input { 
+  width: 100%; 
+  padding: 10px var(--spacing-md); 
+  border: 1px solid var(--border); 
+  border-radius: var(--radius-md); 
+  background: transparent; 
+  color: inherit; 
+}
+
+.input.prefix { 
+  display: grid; 
+  grid-template-columns: auto 1fr; 
+  gap: 6px; 
+  align-items: center; 
+}
+
+.input.prefix .prefix { 
+  opacity: .7; 
+  padding-left: var(--spacing-sm); 
+}
+
+/* Enhanced form inputs */
+.form-input {
+  width: 100%;
+  min-width: 0;
+  padding: 14px var(--spacing-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--panel-elev);
+  color: inherit;
+  font-size: var(--font-size-md);
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--panel);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.form-input::placeholder {
+  color: #6b7280;
+  opacity: 0.8;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+/* Select dropdown styling */
+select.form-input {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+  appearance: none;
+}
+
+select.form-input:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2360a5fa' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Form layout */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.form-grid-3 {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+.form-grid-3 > .form-group:first-child {
+  flex: 2;
+}
+
+.form-grid-3 > .form-group:nth-child(2),
+.form-grid-3 > .form-group:nth-child(3) {
+  flex: 1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Legacy form components */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.field-small {
+  max-width: 120px;
+}
+
+.label {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Form sections */
+.section-divider {
+  margin: var(--spacing-xl) 0 var(--spacing-lg) 0;
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--border);
+}
+
+.section-divider h4 {
+  margin: 0;
+  font-size: var(--spacing-lg);
+  color: var(--text-primary);
+}
+
+/* Checkbox fields */
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  padding: var(--spacing-md) 0;
+}
+
+.checkbox-field input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+/* Form errors */
+.form-errors {
+  background: linear-gradient(135deg, #1f0a0a 0%, var(--panel) 100%);
+  border: 1px solid #ef4444;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg) 20px;
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-errors h4 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: #ef4444;
+}
+
+.form-errors ul {
+  margin: 0;
+  padding: 0 0 0 20px;
+  color: #fca5a5;
+}
+
+.form-errors li {
+  margin-bottom: 4px;
+  font-size: var(--font-size-sm);
+}
+
+/* Summary form */
+.summary-form textarea.input { 
+  width: 100%; 
+  min-height: 96px; 
+}

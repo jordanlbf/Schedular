@@ -1,0 +1,78 @@
+/* Panel Components */
+
+/* Panel shell */
+.panel { 
+  background: var(--panel); 
+  border: 1px solid var(--border); 
+  border-radius: var(--radius-xl); 
+  box-shadow: var(--shadow); 
+}
+
+.panel-head { 
+  padding: var(--spacing-lg) var(--spacing-lg) 0; 
+}
+
+.panel-title { 
+  margin: 0; 
+  font-size: var(--spacing-lg); 
+}
+
+.panel-body { 
+  padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg); 
+}
+
+/* Enhanced panel variants */
+.form-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--spacing-2xl);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.form-card-header {
+  background: linear-gradient(135deg, var(--panel-elev) 0%, #171d32 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 20px var(--spacing-2xl);
+}
+
+.form-card-header h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.form-card-body {
+  padding: var(--spacing-2xl);
+}
+
+/* Section components */
+.products-section, .cart-section, .delivery-form, .payment-section, .pricing-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
+  max-width: none;
+  box-shadow: var(--shadow-soft);
+}
+
+.products-section h3, .cart-section h3, .delivery-form h3, .payment-section h3, .pricing-section h3 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.section-help {
+  color: var(--muted);
+  font-size: var(--font-size-md);
+  margin: 0 0 var(--spacing-2xl) 0;
+  line-height: 1.5;
+  opacity: 0.9;
+}

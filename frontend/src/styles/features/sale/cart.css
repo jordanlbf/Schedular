@@ -1,0 +1,48 @@
+/* Cart Components */
+
+/* Summary sticky */
+.summary-sticky { 
+  position: relative; 
+  display: grid; 
+  gap: var(--spacing-md); 
+}
+
+.summary-totals { 
+  display: grid; 
+  gap: var(--spacing-sm); 
+  border-top: 1px solid var(--border); 
+  padding-top: var(--spacing-sm); 
+}
+
+.summary-totals .row { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: baseline; 
+  font-size: var(--font-size-base); 
+}
+
+.summary-totals .row.total { 
+  font-weight: 700; 
+  font-size: var(--spacing-lg); 
+}
+
+.summary-actions { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: var(--spacing-sm); 
+}
+
+/* Cart Summary Styles */
+.cart-summary {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: var(--spacing-lg);
+}

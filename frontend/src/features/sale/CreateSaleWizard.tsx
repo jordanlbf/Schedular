@@ -63,7 +63,12 @@ export default function CreateSaleWizard() {
   );
 
   // Handle wizard navigation
-  const { nextStep, prevStep, canProceed } = useWizardNavigation(currentStep, setCurrentStep, validation);
+  const { nextStep, prevStep, canProceed } = useWizardNavigation(
+    currentStep, 
+    setCurrentStep, 
+    validation, 
+    validation.markStepAttempted
+  );
 
   // Toast notifications
   const toast = useToast();

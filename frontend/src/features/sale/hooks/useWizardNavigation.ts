@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import type { WizardStep } from './useSaleDraft';
-import type { StepValidation } from './useSaleValidation';
+import type { StepValidation, ValidationState } from './useSaleValidation';
 
 /**
  * Custom hook for managing wizard step navigation
@@ -8,30 +8,35 @@ import type { StepValidation } from './useSaleValidation';
 export function useWizardNavigation(
   currentStep: WizardStep,
   setCurrentStep: (step: WizardStep) => void,
-  validation: StepValidation
+  validation: StepValidation,
+  markStepAttempted: (step: keyof ValidationState) => void
 ) {
   const nextStep = useCallback(() => {
     switch (currentStep) {
       case 'customer':
+        markStepAttempted('customerAttempted');
         if (validation.customer.isValid) {
           setCurrentStep('products');
         }
         break;
       case 'products':
+        markStepAttempted('productsAttempted');
         if (validation.products.isValid) {
           setCurrentStep('delivery');
         }
         break;
       case 'delivery':
+        markStepAttempted('deliveryAttempted');
         if (validation.delivery.isValid) {
           setCurrentStep('payment');
         }
         break;
       case 'payment':
+        markStepAttempted('paymentAttempted');
         // Final step - handle completion elsewhere
         break;
     }
-  }, [currentStep, validation, setCurrentStep]);
+  }, [currentStep, validation, setCurrentStep, markStepAttempted]);
 
   const prevStep = useCallback(() => {
     switch (currentStep) {

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import type { Customer, Line, DeliveryDetails } from '../types';
 
 export interface ValidationResult {
@@ -13,8 +13,15 @@ export interface StepValidation {
   payment: ValidationResult;
 }
 
+export interface ValidationState {
+  customerAttempted: boolean;
+  productsAttempted: boolean;
+  deliveryAttempted: boolean;
+  paymentAttempted: boolean;
+}
+
 /**
- * Custom hook for sale wizard validation
+ * Custom hook for sale wizard validation with attempt tracking
  */
 export function useSaleValidation(
   customer: Customer,
@@ -22,7 +29,24 @@ export function useSaleValidation(
   deliveryDetails: DeliveryDetails,
   paymentMethod: string,
   depositAmount: number
-): StepValidation {
+): StepValidation & {
+  markStepAttempted: (step: keyof ValidationState) => void;
+  validationState: ValidationState;
+} {
+  const [validationState, setValidationState] = useState<ValidationState>({
+    customerAttempted: false,
+    productsAttempted: false,
+    deliveryAttempted: false,
+    paymentAttempted: false,
+  });
+
+  const markStepAttempted = (step: keyof ValidationState) => {
+    setValidationState(prev => ({
+      ...prev,
+      [step]: true
+    }));
+  };
+
   const customerValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
     
@@ -52,9 +76,9 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors: validationState.customerAttempted ? errors : [] // Only show errors if attempted
     };
-  }, [customer]);
+  }, [customer, validationState.customerAttempted]);
 
   const productsValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
@@ -71,9 +95,9 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors: validationState.productsAttempted ? errors : [] // Only show errors if attempted
     };
-  }, [lines]);
+  }, [lines, validationState.productsAttempted]);
 
   const deliveryValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
@@ -99,9 +123,9 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors: validationState.deliveryAttempted ? errors : [] // Only show errors if attempted
     };
-  }, [deliveryDetails]);
+  }, [deliveryDetails, validationState.deliveryAttempted]);
 
   const paymentValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
@@ -116,14 +140,16 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors: validationState.paymentAttempted ? errors : [] // Only show errors if attempted
     };
-  }, [paymentMethod, depositAmount]);
+  }, [paymentMethod, depositAmount, validationState.paymentAttempted]);
 
   return {
     customer: customerValidation,
     products: productsValidation,
     delivery: deliveryValidation,
     payment: paymentValidation,
+    markStepAttempted,
+    validationState,
   };
 }

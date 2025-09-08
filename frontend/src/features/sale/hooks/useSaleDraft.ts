@@ -101,6 +101,24 @@ export function useSaleDraft() {
     return () => clearTimeout(timeoutId);
   }, [customer, lines, nextId, deliveryDetails, deliveryFee, discountPct, paymentMethod, depositAmount, currentStep, setDraftData]);
 
+  // Check if there's any unsaved data
+  const hasUnsavedData = useCallback(() => {
+    return (
+      customer.name !== '' ||
+      customer.phone !== '' ||
+      customer.email !== '' ||
+      lines.length > 0 ||
+      deliveryDetails.preferredDate !== '' ||
+      deliveryDetails.timeSlot !== '' ||
+      deliveryDetails.specialInstructions !== '' ||
+      deliveryFee > 0 ||
+      discountPct > 0 ||
+      paymentMethod !== '' ||
+      depositAmount > 0 ||
+      currentStep !== 'customer'
+    );
+  }, [customer, lines, deliveryDetails, deliveryFee, discountPct, paymentMethod, depositAmount, currentStep]);
+
   // Clear draft
   const clearDraft = useCallback(() => {
     setCustomer(defaultCustomer);
@@ -140,5 +158,6 @@ export function useSaleDraft() {
     
     // Utils
     clearDraft,
+    hasUnsavedData,
   };
 }

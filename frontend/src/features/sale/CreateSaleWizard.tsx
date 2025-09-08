@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/app/layout/Header";
 import "./sale.css";
@@ -16,7 +16,7 @@ import {
   removeLine,
   getEstimatedDeliveryDate
 } from "./utils/saleUtils";
-import { useToast, fmt } from "../../shared";
+import { useToast, fmt, useBeforeUnload } from "../../shared";
 import { CATALOG } from "./catalog";
 
 // Import wizard step components
@@ -47,6 +47,7 @@ export default function CreateSaleWizard() {
     setPaymentMethod,
     setDepositAmount,
     clearDraft,
+    hasUnsavedData,
   } = useSaleDraft();
 
   // Calculate totals
@@ -66,6 +67,37 @@ export default function CreateSaleWizard() {
 
   // Toast notifications
   const toast = useToast();
+
+  // Enable browser refresh warning and handle page reload data clearing
+  useBeforeUnload({
+    when: hasUnsavedData(),
+    message: 'You have unsaved sale data. Are you sure you want to leave?'
+  });
+
+  // Handle page reload - clear data if it's a refresh (not a navigation)
+  useEffect(() => {
+    const handlePageReload = () => {
+      // Set a flag indicating this is a reload, not a fresh session
+      sessionStorage.setItem('schedulerPageReloaded', 'true');
+    };
+
+    // Check if this was a page reload
+    const wasReloaded = sessionStorage.getItem('schedulerPageReloaded');
+    if (wasReloaded) {
+      // Clear the reload flag
+      sessionStorage.removeItem('schedulerPageReloaded');
+      // Clear the sale data since user confirmed they wanted to refresh
+      clearDraft();
+      toast.info('Sale data cleared due to page refresh');
+    }
+
+    // Listen for beforeunload to set reload flag
+    window.addEventListener('beforeunload', handlePageReload);
+    
+    return () => {
+      window.removeEventListener('beforeunload', handlePageReload);
+    };
+  }, [clearDraft, toast]);
 
   // Refs
   const searchRef = useRef<HTMLInputElement | null>(null);

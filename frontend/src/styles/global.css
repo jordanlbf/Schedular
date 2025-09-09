@@ -1,12 +1,10 @@
-/* Import Google Fonts - Inter for modern typography */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('./styles/tokens.css');
-@import url('./styles/ui.css');
-
-/* Global baseline for the app. */
+@import url('./tokens.css');
+@import url('./ui.css');
+@import url('./index.css');
 
 :root {
-  color-scheme: light; /* don't force dark */
+  color-scheme: light;
 }
 
 *,
@@ -24,7 +22,7 @@ html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  max-width: none; /* remove Vite's 1280px cap */
+  max-width: none;
 }
 
 body {
@@ -34,7 +32,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Keep elements neutral; style them in page-specific CSS */
 a {
   color: inherit;
   text-decoration: none;
@@ -52,9 +49,7 @@ button {
   border-radius: 8px;
 }
 
-/* Media resets */
 img, svg, video, canvas {
   display: block;
   max-width: 100%;
 }
-

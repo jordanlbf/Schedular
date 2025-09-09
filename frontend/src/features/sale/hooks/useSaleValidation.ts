@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import type { Customer, Line, DeliveryDetails } from '../types';
+import type { Customer, LineItem, DeliveryDetails } from '@/shared/types';
 
 export interface ValidationResult {
   isValid: boolean;
@@ -11,6 +11,7 @@ export interface StepValidation {
   products: ValidationResult;
   delivery: ValidationResult;
   payment: ValidationResult;
+  isValid?: boolean;
 }
 
 export interface ValidationState {
@@ -20,17 +21,14 @@ export interface ValidationState {
   paymentAttempted: boolean;
 }
 
-/**
- * Custom hook for sale wizard validation with attempt tracking
- */
 export function useSaleValidation(
   customer: Customer,
-  lines: Line[],
+  lines: LineItem[],
   deliveryDetails: DeliveryDetails,
   paymentMethod: string,
   depositAmount: number
 ): StepValidation & {
-  markStepAttempted: (step: keyof ValidationState) => void;
+  markStepAttempted: (step: keyof ValidationState | string) => void;
   validationState: ValidationState;
 } {
   const [validationState, setValidationState] = useState<ValidationState>({
@@ -40,7 +38,7 @@ export function useSaleValidation(
     paymentAttempted: false,
   });
 
-  const markStepAttempted = (step: keyof ValidationState) => {
+  const markStepAttempted = (step: keyof ValidationState | string) => {
     setValidationState(prev => ({
       ...prev,
       [step]: true
@@ -76,7 +74,7 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.customerAttempted ? errors : [] // Only show errors if attempted
+      errors: validationState.customerAttempted ? errors : []
     };
   }, [customer, validationState.customerAttempted]);
 
@@ -87,7 +85,6 @@ export function useSaleValidation(
       errors.push('At least one product must be added');
     }
     
-    // Check for invalid quantities
     const invalidLines = lines.filter(line => line.qty <= 0);
     if (invalidLines.length > 0) {
       errors.push('All products must have a quantity greater than 0');
@@ -95,7 +92,7 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.productsAttempted ? errors : [] // Only show errors if attempted
+      errors: validationState.productsAttempted ? errors : []
     };
   }, [lines, validationState.productsAttempted]);
 
@@ -110,7 +107,6 @@ export function useSaleValidation(
       errors.push('Time slot is required');
     }
 
-    // Validate date is not in the past
     if (deliveryDetails.preferredDate) {
       const selectedDate = new Date(deliveryDetails.preferredDate);
       const today = new Date();
@@ -123,7 +119,7 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.deliveryAttempted ? errors : [] // Only show errors if attempted
+      errors: validationState.deliveryAttempted ? errors : []
     };
   }, [deliveryDetails, validationState.deliveryAttempted]);
 
@@ -140,15 +136,21 @@ export function useSaleValidation(
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.paymentAttempted ? errors : [] // Only show errors if attempted
+      errors: validationState.paymentAttempted ? errors : []
     };
   }, [paymentMethod, depositAmount, validationState.paymentAttempted]);
+
+  const isValid = customerValidation.isValid && 
+                  productsValidation.isValid && 
+                  deliveryValidation.isValid && 
+                  paymentValidation.isValid;
 
   return {
     customer: customerValidation,
     products: productsValidation,
     delivery: deliveryValidation,
     payment: paymentValidation,
+    isValid,
     markStepAttempted,
     validationState,
   };

@@ -1,15 +1,11 @@
 import { useCallback } from 'react';
-import type { WizardStep } from './useSaleDraft';
-import type { StepValidation, ValidationState } from './useSaleValidation';
+import type { WizardStep } from '../stores/useSaleDraftStore';
 
-/**
- * Custom hook for managing wizard step navigation
- */
 export function useWizardNavigation(
   currentStep: WizardStep,
   setCurrentStep: (step: WizardStep) => void,
-  validation: StepValidation,
-  markStepAttempted: (step: keyof ValidationState) => void
+  validation: any,
+  markStepAttempted: (step: string) => void
 ) {
   const nextStep = useCallback(() => {
     switch (currentStep) {
@@ -33,7 +29,6 @@ export function useWizardNavigation(
         break;
       case 'payment':
         markStepAttempted('paymentAttempted');
-        // Final step - handle completion elsewhere
         break;
     }
   }, [currentStep, validation, setCurrentStep, markStepAttempted]);
@@ -50,7 +45,6 @@ export function useWizardNavigation(
         setCurrentStep('delivery');
         break;
       case 'customer':
-        // First step - no previous
         break;
     }
   }, [currentStep, setCurrentStep]);

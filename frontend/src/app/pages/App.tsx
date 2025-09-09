@@ -1,9 +1,8 @@
-import AppRoutes from "../routes.tsx";
-import { useSessionManager } from "../../shared";
+import { AppRouter } from "@/core/router";
+import { useSessionManager } from "@/shared/hooks";
 
 export default function App() {
-  // Initialize global session management
   useSessionManager();
   
-  return <AppRoutes />;
+  return <AppRouter />;
 }

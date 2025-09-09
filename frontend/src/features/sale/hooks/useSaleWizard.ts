@@ -1,0 +1,77 @@
+import { useMemo } from 'react';
+import { useSaleTotals } from './useSaleTotals';
+import { useSaleValidation } from './useSaleValidation';
+import { useWizardNavigation } from './useWizardNavigation';
+import type { WizardStep } from '../stores/useSaleDraftStore';
+
+export function useSaleWizard(state: any, updateField: any) {
+  const totals = useSaleTotals(
+    state.lines,
+    state.deliveryDetails,
+    state.deliveryFee,
+    state.discountPct
+  );
+
+  const validation = useSaleValidation(
+    state.customer,
+    state.lines,
+    state.deliveryDetails,
+    state.paymentMethod,
+    state.depositAmount
+  );
+
+  const navigation = useWizardNavigation(
+    state.currentStep,
+    (step: WizardStep) => updateField('currentStep', step),
+    validation,
+    validation.markStepAttempted
+  );
+
+  const progressSteps = useMemo(() => [
+    {
+      id: 'customer',
+      label: 'Customer Details',
+      detail: validation.customer.isValid ? state.customer.name : 'Name & delivery address',
+      icon: '1',
+      isActive: state.currentStep === 'customer',
+      isCompleted: validation.customer.isValid
+    },
+    {
+      id: 'products',
+      label: 'Product Selection',
+      detail: validation.products.isValid 
+        ? `${state.lines.length} item${state.lines.length !== 1 ? 's' : ''}` 
+        : 'Choose products',
+      icon: '2',
+      isActive: state.currentStep === 'products',
+      isCompleted: validation.products.isValid
+    },
+    {
+      id: 'delivery',
+      label: 'Delivery Details',
+      detail: validation.delivery.isValid 
+        ? state.deliveryDetails.preferredDate 
+        : 'Schedule delivery',
+      icon: '3',
+      isActive: state.currentStep === 'delivery',
+      isCompleted: validation.delivery.isValid
+    },
+    {
+      id: 'payment',
+      label: 'Payment',
+      detail: validation.payment.isValid 
+        ? state.paymentMethod.charAt(0).toUpperCase() + state.paymentMethod.slice(1) 
+        : 'Select payment method',
+      icon: '💳',
+      isActive: state.currentStep === 'payment',
+      isCompleted: validation.payment.isValid
+    }
+  ], [state, validation]);
+
+  return {
+    totals,
+    validation,
+    navigation,
+    progressSteps
+  };
+}

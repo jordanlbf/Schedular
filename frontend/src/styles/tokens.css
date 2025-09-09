@@ -1,0 +1,133 @@
+/* ===========================
+   Design Tokens (Single Source)
+   ===========================
+   Shared tokens live in :root.
+   Theme-specific tokens live under html.theme-light / html.theme-dark.
+*/
+
+/* Shared, theme-agnostic tokens */
+:root {
+  /* Brand scale (kept for possible use elsewhere) */
+  --brand-50:#f2f7f6; --brand-100:#d9ebe8; --brand-200:#b6d8d3;
+  --brand-300:#8dc1ba; --brand-400:#62a8a0; --brand-500:#3b8f86;
+  --brand-600:#2f766e; --brand-700:#275f59; --brand-800:#1f4a45; --brand-900:#173835;
+
+  /* Spacing */
+  --spacing-xs:4px;
+  --spacing-sm:8px;
+  --spacing-md:12px;
+  --spacing-lg:16px;
+  --spacing-xl:20px;
+  --spacing-2xl:24px;
+  --spacing-3xl:32px;
+  --spacing-4xl:40px;
+
+  /* Type scale */
+  --text-sm:12px;
+  --text-base:14px;
+  --text-lg:16px;
+  --text-xl:18px;
+  --text-2xl:22px;
+  --text-3xl:26px;
+  --text-4xl:32px;
+
+  /* Shape & layout */
+  --radius-xl:16px;
+  --radius-2xl:20px;
+  --container-padding:24px;
+  --container-max-width:1200px;
+
+  /* Blur primitives (base) */
+  --blur: blur(8px);
+  --blur-strong: blur(16px);
+
+  /* Accent colours that don’t change between themes */
+  --accent-primary: #ef4444;  /* vibrant red */
+  --accent-cyan:    #06b6d4;
+  --accent-warm:    #f39c12;
+  --accent-solid:   #ef4444;
+
+  /* Status colours (same in both themes) */
+  --success: #27ae60;
+  --warning: #f39c12;
+  --error:   #e74c3c;
+}
+
+/* Light theme (colours, shadows, borders, focus ring) */
+:root,
+html.theme-light {
+  color-scheme: light;
+
+  /* Backgrounds */
+  --bg: #f8fafc;                 /* app background */
+  --bg-overlay: rgba(0, 0, 0, 0.02);
+
+  /* Panels */
+  --panel: #ffffff;              /* main panels/cards */
+  --panel-elev: #f1f5f9;         /* elevated surfaces */
+  --panel-hover: #f8fafc;        /* hover surfaces */
+  --panel-border: rgba(0, 0, 0, 0.08);
+
+  /* Text */
+  --text: #1e293b;               /* primary text */
+  --text-subtle: #475569;        /* secondary text */
+  --muted: #64748b;              /* muted */
+  --muted-light: #94a3b8;        /* very subtle */
+
+  /* Borders */
+  --border: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.15);
+  --border-gradient: rgba(239, 68, 68, 0.2);
+
+  /* Accents (light-specific where different) */
+  --accent-secondary: #0ea5e9;   /* headers in light mode */
+
+  /* Shadows */
+  --shadow-ambient: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-glass:   0 2px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  --shadow-float:   0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.3);
+
+  /* Focus ring */
+  --ring: rgba(239, 68, 68, 0.3);
+  --ring-glow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Dark theme (overrides that differ from light) */
+html.theme-dark {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg: #202123;
+  --bg-overlay: rgba(0, 0, 0, 0.1);
+
+  /* Panels */
+  --panel: #272728;
+  --panel-elev: #565E63;
+  --panel-hover: #282C2E;
+  --panel-border: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text: #EBF3F7;
+  --text-subtle: #AAB6BE;
+  --muted: #AAB6BE;
+  --muted-light: #565E63;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-gradient: rgba(255, 255, 255, 0.05);
+
+  /* Accents (dark-specific where different) */
+  --accent-secondary: #6b7280;   /* headers in dark mode */
+
+  /* Shadows */
+  --shadow-ambient: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-glass:   0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow-float:   0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.4);
+
+  /* Focus ring */
+  --ring: rgba(239, 68, 68, 0.4);
+  --ring-glow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}

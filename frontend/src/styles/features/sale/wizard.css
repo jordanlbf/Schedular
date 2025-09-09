@@ -1,14 +1,14 @@
 /* Clean Professional Wizard Styling */
 
-/* Main wizard container */
+/* Main wizard container with modern gradient */
 .wizard-container {
   min-height: calc(100vh - 60px); /* Account for header */
-  background: var(--bg);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 0%, var(--bg) 0%);
   padding: var(--spacing-lg) 0 0 0;
   position: relative;
 }
 
-/* Background overlay for ambiance */
+/* Modern gradient mesh background */
 .wizard-container::before {
   content: '';
   position: fixed;
@@ -16,9 +16,19 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--bg-overlay);
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(147, 197, 253, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.03) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
+}
+
+html.theme-dark .wizard-container::before {
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(147, 197, 253, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.01) 0%, transparent 50%);
 }
 
 /* All content above overlay */
@@ -80,26 +90,57 @@
 /* Page headers within steps */
 .wizard-page-header {
   text-align: center;
-  margin-bottom: var(--spacing-4xl);
-  padding: var(--spacing-3xl) var(--spacing-lg);
+  margin-bottom: 24px;
+  padding: var(--spacing-lg) var(--spacing-lg) 0;
 }
 
 .wizard-page-header.compact {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: 24px;
   padding: var(--spacing-lg);
 }
 
 .wizard-page-header h2 {
-  margin: 0 0 var(--spacing-md) 0;
-  font-size: var(--text-3xl);
-  font-weight: var(--font-bold);
-  color: var(--accent-primary);
-  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  font-size: 36px;
+  font-weight: 600;
+  color: #0ea5e9;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+.wizard-page-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: #0ea5e9;
+  border-radius: 1px;
+  opacity: 0.3;
 }
 
 .wizard-page-header.compact h2 {
   margin: 0;
-  font-size: var(--text-2xl);
+  font-size: 36px;
+  font-weight: 600;
+  color: #0ea5e9;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+.wizard-page-header.compact h2::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 2px;
+  background: #0ea5e9;
+  border-radius: 1px;
+  opacity: 0.3;
 }
 
 .wizard-page-header p {
@@ -114,7 +155,7 @@
 /* Wizard content area */
 .wizard-content {
   min-height: 60vh;
-  padding: var(--spacing-2xl) var(--spacing-3xl) var(--spacing-5xl);
+  padding: var(--spacing-lg) var(--spacing-3xl) var(--spacing-5xl);
   display: flex;
   justify-content: center;
 }
@@ -178,13 +219,23 @@
   gap: var(--spacing-lg);
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-2xl) var(--spacing-3xl);
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border-top: 1px solid var(--border);
-  box-shadow: var(--shadow-glass);
-  z-index: 10;
+  padding: var(--spacing-md) var(--spacing-3xl);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 -4px 20px rgba(0, 0, 0, 0.08),
+    0 -1px 4px rgba(0, 0, 0, 0.04);
+  z-index: 100;
+}
+
+html.theme-dark .step-actions {
+  background: rgba(39, 39, 40, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 -4px 20px rgba(0, 0, 0, 0.2),
+    0 -1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .step-help {
@@ -376,7 +427,7 @@
   }
   
   .step-actions {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-lg);
   }
   
   .form-section {

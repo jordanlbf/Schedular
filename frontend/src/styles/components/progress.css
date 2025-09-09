@@ -10,8 +10,8 @@
   -webkit-backdrop-filter: var(--blur);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-2xl);
-  padding: var(--spacing-xl) var(--spacing-lg);
-  margin: 0 auto var(--spacing-4xl);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: 0 auto var(--spacing-xs);
   width: min(99.5vw, 2200px);
   box-shadow: var(--shadow-glass);
   gap: var(--spacing-2xl);
@@ -23,37 +23,53 @@
 .progress-steps-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(var(--spacing-5xl), 8vw, 120px);
-  max-width: 1800px;
+  justify-content: space-between;
+  max-width: 2400px;
   width: 100%;
+  padding: 0 var(--spacing-3xl);
+  position: relative;
 }
 
 /* Clean step design */
 .progress-step {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xl);
-  flex: 1;
+  text-align: center;
   position: relative;
   transition: all var(--transition-normal);
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-lg);
+  flex: 0 0 auto;
 }
 
 /* Connection lines between steps */
-.progress-step:not(:last-child)::after {
+.progress-steps-container::before {
   content: '';
   position: absolute;
-  right: calc(-1 * clamp(var(--spacing-5xl), 8vw, 120px) / 2);
-  top: 50%;
-  transform: translateY(-50%);
-  width: clamp(var(--spacing-3xl), 6vw, 80px);
+  top: 24px;
+  left: 0;
+  right: 0;
   height: 3px;
-  background: var(--border);
+  background: 
+    linear-gradient(to right,
+      transparent 0%,
+      transparent 12.5%,
+      rgba(255, 255, 255, 0.15) 12.5%,
+      rgba(255, 255, 255, 0.15) 29.16%,
+      transparent 29.16%,
+      transparent 41.67%,
+      rgba(255, 255, 255, 0.15) 41.67%,
+      rgba(255, 255, 255, 0.15) 58.33%,
+      transparent 58.33%,
+      transparent 70.84%,
+      rgba(255, 255, 255, 0.15) 70.84%,
+      rgba(255, 255, 255, 0.15) 87.5%,
+      transparent 87.5%,
+      transparent 100%
+    );
+  z-index: 0;
   border-radius: 2px;
-  z-index: 1;
-  transition: all var(--transition-normal);
 }
 
 .progress-step.completed::after {
@@ -66,13 +82,13 @@
 
 /* Clean step icons */
 .step-icon {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
   flex-shrink: 0;
   transition: all var(--transition-normal);
@@ -82,16 +98,17 @@
 
 /* Step states */
 .progress-step.pending .step-icon {
-  background: var(--panel-elev);
-  color: var(--muted);
-  border: 2px solid var(--border);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .progress-step.active .step-icon {
-  background: var(--panel-elev);  /* Use grey instead of red */
-  color: var(--text);
-  border: 2px solid var(--border);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+  background: #ffffff;
+  color: #1f2937;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  font-weight: 800;
 }
 
 .progress-step.completed .step-icon {
@@ -103,35 +120,66 @@
 
 /* Step text content */
 .step-label {
-  font-size: var(--text-xl);
+  font-size: var(--text-base);
   font-weight: var(--font-bold);
   transition: all var(--transition-normal);
-  margin: 0;
+  margin: var(--spacing-xs) 0 0 0;
   letter-spacing: var(--tracking-tight);
+  text-transform: capitalize;
 }
 
 .step-detail {
-  font-size: var(--text-base);
-  margin: var(--spacing-xs) 0 0 0;
+  font-size: var(--text-xs);
+  margin: 2px 0 0 0;
   font-weight: var(--font-medium);
   line-height: var(--leading-snug);
+  text-transform: capitalize;
 }
 
 /* Step text colors */
 .progress-step.pending .step-label {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .progress-step.pending .step-detail {
-  color: var(--muted-light);
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Future steps - dimmed but readable */
+.progress-step.future .step-icon {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.progress-step.future .step-label {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.progress-step.future .step-detail {
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .progress-step.active .step-label {
-  color: var(--text);  /* Use regular text color instead of red */
+  color: #ffffff;
+  position: relative;
+  font-weight: var(--font-bold);
+}
+
+.progress-step.active .step-label::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #e5e7eb;
+  border-radius: 1px;
+  opacity: 0.3;
 }
 
 .progress-step.active .step-detail {
-  color: var(--text-subtle);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .progress-step.completed .step-label {

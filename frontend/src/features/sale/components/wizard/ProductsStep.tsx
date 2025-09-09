@@ -32,71 +32,72 @@ export default function ProductsStep({
   errors = []
 }: ProductsStepProps) {
   return (
-    <div className="wizard-step">
-      <div className="step-content">
-        <div className="step-main">
-          <div className="wizard-page-header">
-            <h2>Product Selection</h2>
-            <p>Search and select items for this order. For custom sizes or specifications, add the base product and include details in delivery notes.</p>
-          </div>
-
-          {/* Error display */}
-          {errors.length > 0 && (
-            <div className="form-errors">
-              <h4>Please fix the following issues:</h4>
-              <ul>
-                {errors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
+    <>
+      <div className="wizard-step">
+        <div className="step-content">
+          <div className="step-main">
+            <div className="wizard-page-header">
+              <h2>Product Selection</h2>
             </div>
-          )}
 
-          <div className="products-section">
-            <h3>Add Products</h3>
-            <ProductPicker
-              catalog={catalog}
-              onAdd={onAddLine}
-              inputRef={searchRef}
-            />
-          </div>
 
-          {lines.length > 0 && (
-            <div className="cart-section">
-              <h3>Selected Items ({lines.length})</h3>
-              <CartTable 
-                lines={lines} 
-                onChangeQty={onChangeQty} 
-                onRemove={onRemoveLine} 
+            <div className="products-section">
+              <h3>Add Products</h3>
+              <ProductPicker
+                catalog={catalog}
+                onAdd={onAddLine}
+                inputRef={searchRef}
               />
-              <div className="cart-summary">
-                <div className="summary-row">
-                  <span>Subtotal:</span>
-                  <span>{fmt(subtotal)}</span>
+            </div>
+
+            {lines.length > 0 && (
+              <div className="cart-section">
+                <h3>Selected Items ({lines.length})</h3>
+                <CartTable 
+                  lines={lines} 
+                  onChangeQty={onChangeQty} 
+                  onRemove={onRemoveLine} 
+                />
+                <div className="cart-summary">
+                  <div className="summary-row">
+                    <span>Subtotal:</span>
+                    <span>{fmt(subtotal)}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-        
-        <div className="step-actions">
-          <button className="btn btn-soft" onClick={onPrev}>
-            ← Back to Customer
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={onNext}
-            disabled={!canProceed}
-          >
-            Continue to Delivery →
-          </button>
-          {!canProceed && (
-            <div className="step-help">
-              Please add at least one product to continue
-            </div>
-          )}
+            )}
+            
+            {errors.length > 0 && (
+              <div className="form-errors-bottom-content" role="alert">
+                <h4>Please fix the following issues:</h4>
+                <ul>
+                  {errors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      
+      <div className="step-actions">
+        <button className="btn btn-soft" onClick={onPrev}>
+          ← Back to Customer
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={onNext}
+          disabled={!canProceed}
+        >
+          Continue to Delivery →
+        </button>
+        {!canProceed && (
+          <div className="step-help">
+            Please add at least one product to continue
+          </div>
+        )}
+      </div>
+    </>
   );
 }

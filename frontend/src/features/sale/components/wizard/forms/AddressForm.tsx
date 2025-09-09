@@ -14,6 +14,16 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
       </div>
       <div className="form-card-body">
         <div className="form-group">
+          <label className="form-label form-label-optional">Unit / Apartment / Suite</label>
+          <input
+            className="form-input"
+            placeholder="Unit 5, Apartment 2B, Suite 100 (optional)"
+            value={address?.unit || ""}
+            onChange={(e) => onChange({ unit: e.target.value })}
+          />
+        </div>
+
+        <div className="form-group">
           <label className="form-label">Street Address *</label>
           <input
             className="form-input"
@@ -23,9 +33,19 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
           />
         </div>
 
+        <div className="form-group">
+          <label className="form-label form-label-optional">Street Address Line 2</label>
+          <input
+            className="form-input"
+            placeholder="Building name, complex, landmark (optional)"
+            value={address?.street2 || ""}
+            onChange={(e) => onChange({ street2: e.target.value })}
+          />
+        </div>
+
         <div className="form-grid-3">
           <div className="form-group">
-            <label className="form-label">City *</label>
+            <label className="form-label">City / Suburb *</label>
             <input
               className="form-input"
               placeholder="Brisbane"
@@ -41,9 +61,10 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
               value={address?.state || ""}
               onChange={(e) => onChange({ state: e.target.value })}
             >
+              <option value="">Select state...</option>
               {states.map((state) => (
                 <option key={state.code} value={state.code}>
-                  {state.code || state.name}
+                  {state.code}
                 </option>
               ))}
             </select>
@@ -56,17 +77,22 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
               placeholder="4000"
               maxLength={4}
               value={address?.zip || ""}
-              onChange={(e) => onChange({ zip: e.target.value })}
+              onChange={(e) => {
+                // Only allow numbers
+                const value = e.target.value.replace(/\D/g, '');
+                onChange({ zip: value });
+              }}
+              inputMode="numeric"
             />
           </div>
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Delivery Notes</label>
+        <div className="form-group" style={{ marginTop: 'var(--spacing-xl)' }}>
+          <label className="form-label">Delivery Instructions</label>
           <textarea
             className="form-input form-textarea"
             rows={3}
-            placeholder="Unit number, building access, special instructions..."
+            placeholder="Gate codes, building access, where to leave package, special instructions..."
             value={address?.notes || ""}
             onChange={(e) => onChange({ notes: e.target.value })}
           />

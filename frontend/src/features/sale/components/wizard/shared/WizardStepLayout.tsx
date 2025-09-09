@@ -24,60 +24,62 @@ export function WizardStepLayout({
   helpText
 }: WizardStepLayoutProps) {
   return (
-    <div className="wizard-step">
-      <div className="step-content">
-        <div className="step-main">
-          <div className="wizard-page-header compact">
-            <h2>{title}</h2>
+    <>
+      <div className="wizard-step">
+        <div className="step-content">
+          <div className="step-main">
+            <div className="wizard-page-header compact">
+              <h2>{title}</h2>
+            </div>
+
+            {children}
+            
+            {errors.length > 0 && (
+              <div className="form-errors-bottom-content" role="alert">
+                <h4>Please fix the following issues:</h4>
+                <ul>
+                  {errors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
-          {errors.length > 0 && (
-            <div className="form-errors" role="alert">
-              <h4>Please fix the following issues:</h4>
-              <ul>
-                {errors.map((error, index) => (
-                  <li key={index}>{error}</li>
-                ))}
-              </ul>
+          {helpText && !canProceed && (
+            <div className="step-help">
+              {helpText}
             </div>
           )}
-
-          {children}
         </div>
-
-        <div className="step-actions">
-          <div>
-            {onPrev && (
-              <button
-                className="btn btn-secondary"
-                onClick={onPrev}
-                type="button"
-              >
-                ← {prevLabel}
-              </button>
-            )}
-          </div>
-          
-          <div>
-            {onNext && (
-              <button
-                className="btn btn-primary"
-                onClick={onNext}
-                disabled={!canProceed}
-                type="button"
-              >
-                {nextLabel} →
-              </button>
-            )}
-          </div>
-        </div>
-
-        {helpText && !canProceed && (
-          <div className="step-help">
-            {helpText}
-          </div>
-        )}
       </div>
-    </div>
+
+      <div className="step-actions">
+        <div>
+          {onPrev && (
+            <button
+              className="btn btn-secondary"
+              onClick={onPrev}
+              type="button"
+            >
+              ← {prevLabel}
+            </button>
+          )}
+        </div>
+        
+        <div>
+          {onNext && (
+            <button
+              className="btn btn-primary"
+              onClick={onNext}
+              disabled={!canProceed}
+              type="button"
+            >
+              {nextLabel} →
+            </button>
+          )}
+        </div>
+      </div>
+    </>
   );
 }

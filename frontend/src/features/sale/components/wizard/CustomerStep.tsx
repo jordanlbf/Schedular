@@ -22,7 +22,9 @@ export default function CustomerStep({
   
   const updateDeliveryAddress = (updates: Partial<Address>) => {
     const current = customer.deliveryAddress || { 
+      unit: "",
       street: "", 
+      street2: "",
       city: "", 
       state: "", 
       zip: "", 
@@ -36,7 +38,7 @@ export default function CustomerStep({
 
   return (
     <WizardStepLayout
-      title="Customer Information"
+      title="Customer Details"
       onNext={onNext}
       canProceed={canProceed}
       nextLabel="Continue to Products"

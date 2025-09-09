@@ -20,11 +20,15 @@ export interface SaleDraftState {
 const DRAFT_KEY = "schedular.saleWizardDraft.v1";
 
 const initialCustomer: Customer = {
+  firstName: "",
+  lastName: "",
   name: "",
   phone: "",
   email: "",
-  billingAddress: { street: "", city: "", state: "", zip: "", notes: "" },
-  deliveryAddress: { street: "", city: "", state: "", zip: "" },
+  additionalPhone: "",
+  secondPerson: undefined,
+  billingAddress: { unit: "", street: "", street2: "", city: "", state: "", zip: "", notes: "" },
+  deliveryAddress: { unit: "", street: "", street2: "", city: "", state: "", zip: "" },
   sameAsDelivery: true
 };
 

@@ -250,43 +250,47 @@ body::before {
 }
 .theme-label.active { color: var(--text); }
 
-/* Modern theme toggle with strategic color use */
+/* Minimalist light blue theme toggle */
 .switch {
-  width: 72px;
-  height: 40px;
-  padding: 4px;
-  border-radius: var(--radius-full);
-  background: var(--panel-elev);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border: 1px solid var(--panel-border);
+  width: 52px;
+  height: 26px;
+  padding: 3px;
+  border-radius: 100px;
+  background: #e2e8f0; /* Light grey for dark mode position */
   position: relative;
-  transition: all var(--transition-normal);
-  box-shadow: var(--shadow-glass);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
+
+html.theme-light .switch {
+  background: #bfdbfe; /* Light blue for light mode */
+}
+
+.switch:hover {
+  opacity: 0.85;
+}
+
 .switch:focus-visible {
-  box-shadow: var(--ring-glow);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(147, 197, 253, 0.5);
 }
+
 .knob {
   position: absolute;
-  top: 4px; left: 4px;
-  width: 32px; height: 32px;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: var(--accent-primary);
-  box-shadow: var(--shadow-float);
-  transition: transform .3s var(--ease-spring);
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
   transform: translateX(0);
 }
-.knob::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  border-radius: 50%;
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
+
+html.theme-light .switch .knob {
+  transform: translateX(26px);
 }
-html.theme-light .switch .knob { transform: translateX(32px); }
 
 /* Hero */
 .home-hero {

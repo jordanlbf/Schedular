@@ -7,7 +7,6 @@ import { ProgressBar } from "./components/wizard/shared/ProgressBar";
 import { WizardSteps } from "./components/wizard/WizardSteps";
 import { ToastContainer } from "@/shared/components/ToastContainer";
 import { useToast, useBeforeUnload } from "@/shared/hooks";
-import "./sale.css";
 
 export default function CreateSaleWizard() {
   const { state, updateField, hasUnsavedData, clearDraft } = useSaleDraftStore();

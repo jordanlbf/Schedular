@@ -1,5 +1,23 @@
 /* Clean Professional Form Components */
 
+/* Quantity control */
+.qty { 
+  display: inline-flex; 
+  border: 1px solid var(--border); 
+  border-radius: 10px; 
+}
+.qty button { 
+  padding: 4px 10px; 
+  border: 0; 
+  background: transparent; 
+}
+.qty input { 
+  width: 44px; 
+  text-align: center; 
+  border: 0; 
+  background: transparent; 
+}
+
 /* Modern form cards */
 .form-card {
   background: var(--panel);

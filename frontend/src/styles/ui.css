@@ -219,7 +219,7 @@ body::before {
 .brand { 
   font-weight: var(--font-bold); 
   font-size: var(--text-2xl); 
-  color: var(--accent-secondary);
+  color: var(--accent-secondary) !important; /* Keep blue in both light and dark mode */
   letter-spacing: var(--tracking-tight);
 }
 .header-title {

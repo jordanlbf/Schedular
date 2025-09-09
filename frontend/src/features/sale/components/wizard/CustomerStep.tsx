@@ -41,7 +41,6 @@ export default function CustomerStep({
       canProceed={canProceed}
       nextLabel="Continue to Products"
       errors={errors}
-      helpText="Please complete all required fields (marked with *)"
     >
       <div className="form-cards-grid">
         <ContactDetailsForm

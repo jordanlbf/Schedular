@@ -7,9 +7,10 @@ interface ProgressBarProps {
     isActive: boolean;
     isCompleted: boolean;
   }[];
+  onStepClick?: (stepId: string) => void;
 }
 
-export function ProgressBar({ steps }: ProgressBarProps) {
+export function ProgressBar({ steps, onStepClick }: ProgressBarProps) {
   // Find the current active step index to determine future steps
   const activeStepIndex = steps.findIndex(step => step.isActive);
   
@@ -19,11 +20,20 @@ export function ProgressBar({ steps }: ProgressBarProps) {
         {steps.map((step, index) => {
           const isFuture = !step.isActive && !step.isCompleted && activeStepIndex !== -1 && index > activeStepIndex;
           const stepClass = step.isActive ? 'active' : step.isCompleted ? 'completed' : isFuture ? 'future' : 'pending';
+          const isClickable = onStepClick && (step.isCompleted || step.isActive);
+          
+          const handleStepClick = () => {
+            if (isClickable) {
+              onStepClick(step.id);
+            }
+          };
           
           return (
             <div
               key={step.id}
-              className={`progress-step ${stepClass}`}
+              className={`progress-step ${stepClass} ${isClickable ? 'clickable' : ''}`}
+              onClick={handleStepClick}
+              style={{ cursor: isClickable ? 'pointer' : 'default' }}
             >
               <div className="step-icon">
                 {step.isActive ? step.icon : (step.isCompleted ? '✓' : step.icon)}

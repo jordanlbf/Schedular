@@ -2,6 +2,8 @@ import type { Customer, Line, DeliveryDetails } from '../../types';
 import type { SaleTotals } from '../../hooks/useSaleTotals';
 import { fmt } from '../../../../shared/utils/money';
 import { PAYMENT_METHODS } from '../../constants/wizard';
+import { WizardStepLayout } from './shared/WizardStepLayout';
+import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
 
 interface PaymentStepProps {
   paymentMethod: string;
@@ -37,16 +39,15 @@ export default function PaymentStep({
   errors = []
 }: PaymentStepProps) {
   return (
-    <>
-      <div className="wizard-step">
-        <div className="step-content">
-          <div className="step-main">
-            <div className="wizard-page-header">
-              <h2>Order Summary & Payment</h2>
-            </div>
-
-
-            <div className="payment-section">
+    <WizardStepLayout
+      title={WIZARD_STEP_TITLES.payment}
+      onPrev={onPrev}
+      canProceed={canProceed}
+      nextLabel="Complete Order"
+      onNext={onComplete}
+      errors={errors}
+    >
+      <div className="payment-section">
               <h3>Order Summary</h3>
               <div className="order-summary-card">
                 <div className="summary-customer">
@@ -175,38 +176,6 @@ export default function PaymentStep({
                 </div>
               )}
             </div>
-            
-            {errors.length > 0 && (
-              <div className="form-errors-bottom-content" role="alert">
-                <h4>Please fix the following issues:</h4>
-                <ul>
-                  {errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      
-      <div className="step-actions">
-        <button className="btn btn-soft" onClick={onPrev}>
-          ← Back to Delivery
-        </button>
-        <button
-          className="btn btn-primary btn-complete"
-          onClick={onComplete}
-          disabled={!canProceed}
-        >
-          Complete Order ({fmt(paymentMethod === 'financing' ? depositAmount : totals.total)})
-        </button>
-        {!canProceed && (
-          <div className="step-help">
-            {paymentMethod ? 'Please enter a deposit amount' : 'Please select a payment method'}
-          </div>
-        )}
-      </div>
-    </>
+    </WizardStepLayout>
   );
 }

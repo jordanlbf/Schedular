@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Header from "@/app/layout/Header";
-import { useSaleDraftStore } from "./stores/useSaleDraftStore";
+import { useSaleDraftStore, type WizardStep } from "./stores/useSaleDraftStore";
 import { useSaleWizard } from "./hooks/useSaleWizard";
 import { usePageReloadHandler } from "./hooks/usePageReloadHandler";
 import { ProgressBar } from "./components/wizard/shared/ProgressBar";
@@ -35,11 +35,19 @@ export default function CreateSaleWizard() {
     totals: wizard.totals
   };
 
+  // Handle step navigation from progress bar clicks
+  const handleStepClick = (stepId: string) => {
+    wizard.navigation.goToStep(stepId as WizardStep);
+  };
+
   return (
     <>
       <Header title="Create Sale" />
       <main className="wizard-container">
-        <ProgressBar steps={wizard.progressSteps} />
+        <ProgressBar 
+          steps={wizard.progressSteps} 
+          onStepClick={handleStepClick}
+        />
         
         <WizardSteps
           currentStep={state.currentStep}

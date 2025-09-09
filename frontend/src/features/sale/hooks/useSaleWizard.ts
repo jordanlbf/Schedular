@@ -3,6 +3,7 @@ import { useSaleTotals } from './useSaleTotals';
 import { useSaleValidation } from './useSaleValidation';
 import { useWizardNavigation } from './useWizardNavigation';
 import type { WizardStep } from '../stores/useSaleDraftStore';
+import { WIZARD_STEP_TITLES } from '../constants/wizardTitles';
 
 export function useSaleWizard(state: any, updateField: any) {
   const totals = useSaleTotals(
@@ -30,7 +31,7 @@ export function useSaleWizard(state: any, updateField: any) {
   const progressSteps = useMemo(() => [
     {
       id: 'customer',
-      label: 'Customer Details',
+      label: WIZARD_STEP_TITLES.customer,
       detail: validation.customer.isValid ? state.customer.name : 'Name & delivery address',
       icon: '1',
       isActive: state.currentStep === 'customer',
@@ -38,7 +39,7 @@ export function useSaleWizard(state: any, updateField: any) {
     },
     {
       id: 'products',
-      label: 'Product Selection',
+      label: WIZARD_STEP_TITLES.products,
       detail: validation.products.isValid 
         ? `${state.lines.length} item${state.lines.length !== 1 ? 's' : ''}` 
         : 'Choose products',
@@ -48,7 +49,7 @@ export function useSaleWizard(state: any, updateField: any) {
     },
     {
       id: 'delivery',
-      label: 'Delivery Details',
+      label: WIZARD_STEP_TITLES.delivery,
       detail: validation.delivery.isValid 
         ? state.deliveryDetails.preferredDate 
         : 'Schedule delivery',
@@ -58,7 +59,7 @@ export function useSaleWizard(state: any, updateField: any) {
     },
     {
       id: 'payment',
-      label: 'Payment',
+      label: WIZARD_STEP_TITLES.payment,
       detail: validation.payment.isValid 
         ? state.paymentMethod.charAt(0).toUpperCase() + state.paymentMethod.slice(1) 
         : 'Select payment method',

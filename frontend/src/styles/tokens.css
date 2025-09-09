@@ -12,15 +12,18 @@
   --brand-300:#8dc1ba; --brand-400:#62a8a0; --brand-500:#3b8f86;
   --brand-600:#2f766e; --brand-700:#275f59; --brand-800:#1f4a45; --brand-900:#173835;
 
-  /* Spacing */
-  --spacing-xs:4px;
-  --spacing-sm:8px;
-  --spacing-md:12px;
-  --spacing-lg:16px;
-  --spacing-xl:20px;
-  --spacing-2xl:24px;
-  --spacing-3xl:32px;
-  --spacing-4xl:40px;
+  /* Enhanced spacing scale for better rhythm */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+  --spacing-4xl: 40px;
+  --spacing-5xl: 48px;
+  --spacing-6xl: 56px;
+  --spacing-8xl: 72px;
 
   /* Type scale */
   --text-sm:12px;
@@ -47,10 +50,22 @@
   --accent-warm:    #f39c12;
   --accent-solid:   #ef4444;
 
-  /* Status colours (same in both themes) */
-  --success: #27ae60;
-  --warning: #f39c12;
-  --error:   #e74c3c;
+  /* Enhanced semantic colors for better UX */
+  --success: #10b981;        /* Modern green */
+  --success-light: #d1fae5;  /* Light success background */
+  --success-dark: #047857;   /* Dark success variant */
+  
+  --warning: #f59e0b;        /* Modern amber */
+  --warning-light: #fef3c7;  /* Light warning background */
+  --warning-dark: #d97706;   /* Dark warning variant */
+  
+  --error: #ef4444;          /* Modern red */
+  --error-light: #fee2e2;    /* Light error background */
+  --error-dark: #dc2626;     /* Dark error variant */
+  
+  --info: #3b82f6;           /* Modern blue for info */
+  --info-light: #dbeafe;     /* Light info background */
+  --info-dark: #1d4ed8;      /* Dark info variant */
 }
 
 /* Light theme (colours, shadows, borders, focus ring) */
@@ -66,7 +81,7 @@ html.theme-light {
   --panel: #ffffff;              /* main panels/cards */
   --panel-elev: #f1f5f9;         /* elevated surfaces */
   --panel-hover: #f8fafc;        /* hover surfaces */
-  --panel-border: rgba(0, 0, 0, 0.08);
+  --panel-border: rgba(0, 0, 0, 0.03);       /* ultra-subtle panel borders */
 
   /* Text */
   --text: #1e293b;               /* primary text */
@@ -75,8 +90,8 @@ html.theme-light {
   --muted-light: #94a3b8;        /* very subtle */
 
   /* Borders */
-  --border: rgba(0, 0, 0, 0.1);
-  --border-hover: rgba(0, 0, 0, 0.15);
+  --border: rgba(0, 0, 0, 0.06);             /* very light borders */
+  --border-hover: rgba(14, 165, 233, 0.2);   /* accent hover borders */
   --border-gradient: rgba(239, 68, 68, 0.2);
 
   /* Accents (light-specific where different) */
@@ -105,7 +120,7 @@ html.theme-dark {
   --panel: #272728;
   --panel-elev: #565E63;
   --panel-hover: #282C2E;
-  --panel-border: rgba(255, 255, 255, 0.08);
+  --panel-border: rgba(255, 255, 255, 0.04); /* ultra-subtle panel borders */
 
   /* Text */
   --text: #EBF3F7;
@@ -114,8 +129,8 @@ html.theme-dark {
   --muted-light: #565E63;
 
   /* Borders */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.06);       /* very light borders */
+  --border-hover: rgba(14, 165, 233, 0.3);   /* accent hover borders */
   --border-gradient: rgba(255, 255, 255, 0.05);
 
   /* Accents (dark-specific where different) */

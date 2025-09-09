@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import type { DeliveryDetails } from '../../types';
 import { TIME_SLOTS, SERVICE_OPTIONS, MIN_DELIVERY_DAYS } from '../../constants/wizard';
+import { WizardStepLayout } from './shared/WizardStepLayout';
+import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
 
 interface DeliveryStepProps {
   deliveryDetails: DeliveryDetails;
@@ -33,16 +35,14 @@ export default function DeliveryStep({
   }, []);
 
   return (
-    <>
-      <div className="wizard-step">
-        <div className="step-content">
-          <div className="step-main">
-            <div className="wizard-page-header">
-              <h2>Delivery Schedule</h2>
-            </div>
-
-
-            <div className="delivery-form">
+    <WizardStepLayout
+      title={WIZARD_STEP_TITLES.delivery}
+      onNext={onNext}
+      onPrev={onPrev}
+      canProceed={canProceed}
+      errors={errors}
+    >
+      <div className="delivery-form">
               <h3>Delivery Schedule</h3>
 
               <div className="field-row">
@@ -158,38 +158,6 @@ export default function DeliveryStep({
                 />
               </label>
             </div>
-            
-            {errors.length > 0 && (
-              <div className="form-errors-bottom-content" role="alert">
-                <h4>Please fix the following issues:</h4>
-                <ul>
-                  {errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      
-      <div className="step-actions">
-        <button className="btn btn-soft" onClick={onPrev}>
-          ← Back to Products
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={onNext}
-          disabled={!canProceed}
-        >
-          Continue to Payment →
-        </button>
-        {!canProceed && (
-          <div className="step-help">
-            Please select a delivery date and time slot
-          </div>
-        )}
-      </div>
-    </>
+    </WizardStepLayout>
   );
 }

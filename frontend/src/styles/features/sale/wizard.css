@@ -90,36 +90,26 @@ html.theme-dark .wizard-container::before {
 /* Page headers within steps */
 .wizard-page-header {
   text-align: center;
-  margin-bottom: 24px;
-  padding: var(--spacing-lg) var(--spacing-lg) 0;
+  margin-bottom: var(--spacing-3xl);
+  padding: var(--spacing-xl) var(--spacing-xl) 0;
 }
 
 .wizard-page-header.compact {
-  margin-bottom: 24px;
-  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-3xl);
+  padding: var(--spacing-xl);
 }
 
 .wizard-page-header h2 {
   margin: 0;
-  font-size: 36px;
-  font-weight: 600;
-  color: #0ea5e9;
-  letter-spacing: -0.5px;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.8px;
   position: relative;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.wizard-page-header h2::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 2px;
-  background: #0ea5e9;
-  border-radius: 1px;
-  opacity: 0.3;
-}
+/* Removed decorative underline for cleaner look */
 
 .wizard-page-header.compact h2 {
   margin: 0;
@@ -130,18 +120,7 @@ html.theme-dark .wizard-container::before {
   position: relative;
 }
 
-.wizard-page-header.compact h2::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 2px;
-  background: #0ea5e9;
-  border-radius: 1px;
-  opacity: 0.3;
-}
+/* Removed decorative underline for cleaner look */
 
 .wizard-page-header p {
   margin: 0;
@@ -179,7 +158,7 @@ html.theme-dark .wizard-container::before {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4xl);
-  max-width: 1200px; /* Expanded from 800px */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -194,9 +173,10 @@ html.theme-dark .wizard-container::before {
   -webkit-backdrop-filter: var(--blur);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-2xl);
-  padding: var(--spacing-3xl);
-  box-shadow: var(--shadow-glass);
-  margin-bottom: var(--spacing-3xl);
+  padding: var(--spacing-4xl);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: var(--spacing-4xl);
+  position: relative;
 }
 
 .form-section h3 {

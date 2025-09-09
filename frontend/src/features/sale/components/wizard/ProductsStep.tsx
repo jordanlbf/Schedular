@@ -3,6 +3,8 @@ import type { Line, CatalogItem } from '../../types';
 import ProductPicker from '../ProductPicker';
 import CartTable from '../CartTable';
 import { fmt } from '../../../../shared/utils/money';
+import { WizardStepLayout } from './shared/WizardStepLayout';
+import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
 
 interface ProductsStepProps {
   lines: Line[];
@@ -32,16 +34,14 @@ export default function ProductsStep({
   errors = []
 }: ProductsStepProps) {
   return (
-    <>
-      <div className="wizard-step">
-        <div className="step-content">
-          <div className="step-main">
-            <div className="wizard-page-header">
-              <h2>Product Selection</h2>
-            </div>
-
-
-            <div className="products-section">
+    <WizardStepLayout
+      title={WIZARD_STEP_TITLES.products}
+      onNext={onNext}
+      onPrev={onPrev}
+      canProceed={canProceed}
+      errors={errors}
+    >
+      <div className="products-section">
               <h3>Add Products</h3>
               <ProductPicker
                 catalog={catalog}
@@ -66,38 +66,6 @@ export default function ProductsStep({
                 </div>
               </div>
             )}
-            
-            {errors.length > 0 && (
-              <div className="form-errors-bottom-content" role="alert">
-                <h4>Please fix the following issues:</h4>
-                <ul>
-                  {errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      
-      <div className="step-actions">
-        <button className="btn btn-soft" onClick={onPrev}>
-          ← Back to Customer
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={onNext}
-          disabled={!canProceed}
-        >
-          Continue to Delivery →
-        </button>
-        {!canProceed && (
-          <div className="step-help">
-            Please add at least one product to continue
-          </div>
-        )}
-      </div>
-    </>
+    </WizardStepLayout>
   );
 }

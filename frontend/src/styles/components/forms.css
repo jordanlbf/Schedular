@@ -23,34 +23,68 @@
   background: var(--panel);
   backdrop-filter: var(--blur);
   -webkit-backdrop-filter: var(--blur);
-  border: 1px solid var(--panel-border);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-glass);
-  margin-bottom: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: var(--spacing-3xl);
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.form-card-header {
-  padding: 24px 24px 20px;
-  border-bottom: 3px solid rgba(14, 165, 233, 0.4);
-  background: transparent;
-  position: relative;
+.form-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08), 0 6px 24px rgba(0, 0, 0, 0.06);
+  border-color: rgba(14, 165, 233, 0.08);
 }
 
-.form-card-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 32px;
-  right: 32px;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(14, 165, 233, 0.2), 
-    transparent
+.form-card-header {
+  padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
+  background: linear-gradient(135deg, 
+    rgba(219, 234, 254, 0.4) 0%, 
+    rgba(147, 197, 253, 0.2) 100%
+  );
+  position: relative;
+  border-bottom: none;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+
+html.theme-dark .form-card-header {
+  background: linear-gradient(135deg, 
+    rgba(14, 165, 233, 0.08) 0%, 
+    rgba(59, 130, 246, 0.04) 100%
   );
 }
+
+/* Semantic header variations */
+.form-card-header.success {
+  background: linear-gradient(135deg, 
+    var(--success-light) 0%, 
+    rgba(16, 185, 129, 0.1) 100%
+  );
+}
+
+html.theme-dark .form-card-header.success {
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.08) 0%, 
+    rgba(5, 150, 105, 0.04) 100%
+  );
+}
+
+.form-card-header.warning {
+  background: linear-gradient(135deg, 
+    var(--warning-light) 0%, 
+    rgba(245, 158, 11, 0.1) 100%
+  );
+}
+
+html.theme-dark .form-card-header.warning {
+  background: linear-gradient(135deg, 
+    rgba(245, 158, 11, 0.08) 0%, 
+    rgba(217, 119, 6, 0.04) 100%
+  );
+}
+
+/* Removed decorative line for cleaner modern look */
 
 .form-card-header h3 {
   margin: 0;
@@ -59,31 +93,21 @@
   color: var(--text);
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the heading text */
+  justify-content: center;
   gap: var(--spacing-md);
   position: relative;
-  padding-bottom: var(--spacing-md);
-  opacity: 0.95;
+  letter-spacing: var(--tracking-tight);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-.form-card-header h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 2px;
-  background: rgba(14, 165, 233, 0.6);
-  border-radius: 1px;
-}
+/* Removed decorative dots for cleaner look */
 
-.form-card-header h3::before {
-  display: none; /* Remove the decorative bar */
-}
+/* Clean modern section with no extra decorations */
 
 .form-card-body {
-  padding: 24px;
+  padding: var(--spacing-4xl);
+  background: var(--panel);
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 }
 
 /* Enhanced form inputs */
@@ -140,14 +164,31 @@
 
 .form-input:hover {
   border-color: var(--border-hover);
-  background: var(--panel-hover);
+  background: var(--panel);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: var(--accent-primary);
+  border-color: var(--accent-secondary);
   background: var(--panel);
-  box-shadow: var(--ring-glow);
+  box-shadow: var(--ring-glow), 0 0 0 1px var(--accent-secondary);
+  transform: translateY(-1px);
+}
+
+/* Enhanced interaction states for better UX */
+.form-input:focus-visible {
+  outline: none;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
+}
+
+.form-input:invalid:not(:placeholder-shown) {
+  border-color: var(--error);
+  box-shadow: 0 0 0 1px var(--error);
+}
+
+.form-input:valid:not(:placeholder-shown):not(:focus) {
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
 .form-input:disabled {
@@ -284,8 +325,8 @@ select.form-input:hover:focus {
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  margin-bottom: 16px;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
   position: relative;
 }
 
@@ -324,14 +365,15 @@ select.form-input:hover:focus {
 .form-label:has(+ input[required])::after,
 .form-label:has(+ select[required])::after {
   content: ' *';
-  color: #ef4444;
+  color: var(--error);
   font-weight: 600;
   margin-left: 2px;
 }
 
 /* Subtle glow on required field focus */
 .form-input[required]:focus {
-  box-shadow: var(--ring-glow), 0 0 0 3px rgba(239, 68, 68, 0.1);
+  box-shadow: var(--ring-glow), 0 0 0 3px var(--info-light);
+  border-color: var(--info);
 }
 
 /* Legacy compatibility */
@@ -369,6 +411,42 @@ select.form-input:hover:focus {
 .input.prefix .prefix { 
   color: var(--muted);
   font-weight: var(--font-medium);
+}
+
+/* Form sections and organization with subtle accents */
+.form-section-divider {
+  position: relative;
+  margin: var(--spacing-4xl) 0;
+  text-align: center;
+}
+
+.form-section-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(14, 165, 233, 0.1) 25%,
+    rgba(14, 165, 233, 0.2) 50%,
+    rgba(14, 165, 233, 0.1) 75%,
+    transparent 100%
+  );
+  z-index: 0;
+}
+
+.form-section-divider span {
+  background: var(--panel);
+  padding: 0 var(--spacing-lg);
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  position: relative;
+  z-index: 1;
 }
 
 /* Form sections and organization */
@@ -611,6 +689,32 @@ select.form-input:hover:focus {
   background: rgba(14, 165, 233, 0.08);
   border-color: rgba(14, 165, 233, 0.3);
   transform: translateY(-1px);
+}
+
+/* Optional section indicators with semantic colors */
+.form-section-optional {
+  position: relative;
+}
+
+.form-section-optional::before {
+  content: 'Optional';
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-xl);
+  background: var(--warning-light);
+  color: var(--warning-dark);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  z-index: 1;
+}
+
+html.theme-dark .form-section-optional::before {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
 }
 
 .add-person-content {

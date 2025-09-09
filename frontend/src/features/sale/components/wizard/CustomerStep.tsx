@@ -3,6 +3,7 @@ import { AUSTRALIAN_STATES } from '@/shared/constants';
 import { WizardStepLayout } from './shared/WizardStepLayout';
 import { ContactDetailsForm } from './forms/ContactDetailsForm';
 import { AddressForm } from './forms/AddressForm';
+import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
 
 interface CustomerStepProps {
   customer: Customer;
@@ -38,7 +39,7 @@ export default function CustomerStep({
 
   return (
     <WizardStepLayout
-      title="Customer Details"
+      title={WIZARD_STEP_TITLES.customer}
       onNext={onNext}
       canProceed={canProceed}
       nextLabel="Continue to Products"

@@ -13,10 +13,11 @@ interface ProgressBarProps {
 export function ProgressBar({ steps, onStepClick }: ProgressBarProps) {
   // Find the current active step index to determine future steps
   const activeStepIndex = steps.findIndex(step => step.isActive);
+  const completedSteps = steps.filter(step => step.isCompleted).length;
   
   return (
     <div className="progress-bar">
-      <div className="progress-steps-container">
+      <div className="progress-steps-container" data-completed-steps={completedSteps}>
         {steps.map((step, index) => {
           const isFuture = !step.isActive && !step.isCompleted && activeStepIndex !== -1 && index > activeStepIndex;
           const stepClass = step.isActive ? 'active' : step.isCompleted ? 'completed' : isFuture ? 'future' : 'pending';

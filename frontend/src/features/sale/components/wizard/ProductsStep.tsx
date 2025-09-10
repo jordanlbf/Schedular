@@ -39,6 +39,7 @@ export default function ProductsStep({
       onNext={onNext}
       onPrev={onPrev}
       canProceed={canProceed}
+      nextLabel="Continue to Delivery"
       errors={errors}
     >
       <div className="form-card">

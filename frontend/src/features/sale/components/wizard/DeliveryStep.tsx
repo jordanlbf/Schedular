@@ -40,6 +40,7 @@ export default function DeliveryStep({
       onNext={onNext}
       onPrev={onPrev}
       canProceed={canProceed}
+      nextLabel="Continue to Payment"
       errors={errors}
     >
       <div className="form-card">

@@ -62,7 +62,7 @@
   transform: translateY(0);
 }
 
-/* Connection lines between steps */
+/* Connection lines between steps - default inactive state */
 .progress-steps-container::before {
   content: '';
   position: absolute;
@@ -74,35 +74,85 @@
     linear-gradient(to right,
       transparent 0%,
       transparent 12.5%,
-      rgba(255, 255, 255, 0.15) 12.5%,
-      rgba(255, 255, 255, 0.15) 29.16%,
+      rgba(255, 255, 255, 0.1) 12.5%,
+      rgba(255, 255, 255, 0.1) 29.16%,
       transparent 29.16%,
       transparent 41.67%,
-      rgba(255, 255, 255, 0.15) 41.67%,
-      rgba(255, 255, 255, 0.15) 58.33%,
+      rgba(255, 255, 255, 0.1) 41.67%,
+      rgba(255, 255, 255, 0.1) 58.33%,
       transparent 58.33%,
       transparent 70.84%,
-      rgba(255, 255, 255, 0.15) 70.84%,
-      rgba(255, 255, 255, 0.15) 87.5%,
+      rgba(255, 255, 255, 0.1) 70.84%,
+      rgba(255, 255, 255, 0.1) 87.5%,
       transparent 87.5%,
       transparent 100%
     );
   z-index: 0;
   border-radius: 2px;
+  transition: background 0.3s ease;
 }
 
-.progress-step.completed::after {
-  background: var(--success);
+/* Connection lines turn green as steps are completed */
+.progress-steps-container[data-completed-steps="1"]::before {
+  background: 
+    linear-gradient(to right,
+      transparent 0%,
+      transparent 12.5%,
+      var(--success) 12.5%,
+      var(--success) 29.16%,
+      transparent 29.16%,
+      transparent 41.67%,
+      rgba(255, 255, 255, 0.1) 41.67%,
+      rgba(255, 255, 255, 0.1) 58.33%,
+      transparent 58.33%,
+      transparent 70.84%,
+      rgba(255, 255, 255, 0.1) 70.84%,
+      rgba(255, 255, 255, 0.1) 87.5%,
+      transparent 87.5%,
+      transparent 100%
+    );
 }
 
-.progress-step.active::after {
-  background: linear-gradient(90deg, 
-    var(--panel-elev) 0%, 
-    rgba(14, 165, 233, 0.1) 30%,
-    rgba(14, 165, 233, 0.15) 70%,
-    var(--panel-elev) 100%
-  );  /* Subtle blue accent in connection lines */
+.progress-steps-container[data-completed-steps="2"]::before {
+  background: 
+    linear-gradient(to right,
+      transparent 0%,
+      transparent 12.5%,
+      var(--success) 12.5%,
+      var(--success) 29.16%,
+      transparent 29.16%,
+      transparent 41.67%,
+      var(--success) 41.67%,
+      var(--success) 58.33%,
+      transparent 58.33%,
+      transparent 70.84%,
+      rgba(255, 255, 255, 0.1) 70.84%,
+      rgba(255, 255, 255, 0.1) 87.5%,
+      transparent 87.5%,
+      transparent 100%
+    );
 }
+
+.progress-steps-container[data-completed-steps="3"]::before {
+  background: 
+    linear-gradient(to right,
+      transparent 0%,
+      transparent 12.5%,
+      var(--success) 12.5%,
+      var(--success) 29.16%,
+      transparent 29.16%,
+      transparent 41.67%,
+      var(--success) 41.67%,
+      var(--success) 58.33%,
+      transparent 58.33%,
+      transparent 70.84%,
+      var(--success) 70.84%,
+      var(--success) 87.5%,
+      transparent 87.5%,
+      transparent 100%
+    );
+}
+
 
 /* Clean step icons */
 .step-icon {
@@ -191,17 +241,6 @@
   font-weight: var(--font-bold);
 }
 
-.progress-step.active .step-label::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #e5e7eb;
-  border-radius: 1px;
-  opacity: 0.3;
-}
 
 .progress-step.active .step-detail {
   color: rgba(255, 255, 255, 0.9);

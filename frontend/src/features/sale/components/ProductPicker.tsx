@@ -23,7 +23,7 @@ export default function ProductPicker({ catalog, onAdd }: Props) {
   const [q, setQ] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-focus for speedy POS use
+  // Auto-focus search input for better UX
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
@@ -40,23 +40,23 @@ export default function ProductPicker({ catalog, onAdd }: Props) {
     });
   }, [catalog, q]);
 
-  // Press Enter to add the top result (nice for barcode/scanner)
+  // Press Enter to add the first search result
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && filtered.length > 0) {
       onAdd(filtered[0].sku);
-      setQ("");           // clear
+      setQ("");
       inputRef.current?.focus();
     }
   };
 
   return (
     <div className="product-picker">
-      {/* Sticky search row lives inside .panel-body; CSS makes it sticky */}
+      {/* Product search input */}
       <div className="product-search">
         <input
           id="product-search-input"
           ref={inputRef}
-          className="input"
+          className="form-input"
           placeholder="Search products..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -64,7 +64,7 @@ export default function ProductPicker({ catalog, onAdd }: Props) {
         />
       </div>
 
-      {/* 2-col responsive grid */}
+      {/* Product grid */}
       <div className="product-grid">
         {filtered.map((p) => (
           <div key={p.sku} className="product-card">

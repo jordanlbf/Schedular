@@ -1,4 +1,4 @@
-/* Clean Professional Form Components */
+/* Form Components */
 
 /* Quantity control */
 .qty { 
@@ -18,7 +18,7 @@
   background: transparent; 
 }
 
-/* Modern form cards */
+/* Form cards */
 .form-card {
   background: var(--panel);
   backdrop-filter: var(--blur);
@@ -35,6 +35,17 @@
   transform: translateY(-1px);
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08), 0 6px 24px rgba(0, 0, 0, 0.06);
   border-color: rgba(14, 165, 233, 0.08);
+}
+
+.form-card:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  border-color: rgba(14, 165, 233, 0.4) !important;
+}
+
+.form-card:focus-within {
+  border-color: rgba(14, 165, 233, 0.3) !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
 }
 
 .form-card-header {
@@ -84,7 +95,6 @@ html.theme-dark .form-card-header.warning {
   );
 }
 
-/* Removed decorative line for cleaner modern look */
 
 .form-card-header h3 {
   margin: 0;
@@ -100,9 +110,6 @@ html.theme-dark .form-card-header.warning {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-/* Removed decorative dots for cleaner look */
-
-/* Clean modern section with no extra decorations */
 
 .form-card-body {
   padding: var(--spacing-4xl);
@@ -110,7 +117,7 @@ html.theme-dark .form-card-header.warning {
   border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 }
 
-/* Enhanced form inputs */
+/* Form inputs */
 .form-input {
   width: 100%;
   min-width: 0;
@@ -128,7 +135,7 @@ html.theme-dark .form-card-header.warning {
   box-sizing: border-box;
 }
 
-/* Form cards grid matching progress bar exactly */
+/* Form cards grid layout */
 .form-cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -140,7 +147,7 @@ html.theme-dark .form-card-header.warning {
   transform: translateX(-50%);
 }
 
-/* Slide-up animation for form cards matching wizard steps */
+/* Form card animations */
 .form-cards-grid .form-card:first-child {
   animation: slideUpForm 0.4s ease-out;
 }
@@ -171,11 +178,11 @@ html.theme-dark .form-card-header.warning {
   outline: none;
   border-color: var(--accent-secondary);
   background: var(--panel);
-  box-shadow: var(--ring-glow), 0 0 0 1px var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
   transform: translateY(-1px);
 }
 
-/* Enhanced interaction states for better UX */
+/* Form input interaction states */
 .form-input:focus-visible {
   outline: none;
   border-color: var(--accent-secondary);
@@ -186,6 +193,28 @@ html.theme-dark .form-card-header.warning {
   border-color: var(--error);
   box-shadow: 0 0 0 1px var(--error);
 }
+
+/* Error state for fields when validation fails */
+.form-input.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+  background: rgba(254, 242, 242, 0.5);
+}
+
+html.theme-dark .form-input.error {
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.form-input.error:focus {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
+}
+
+.form-group.error .form-label {
+  color: var(--error);
+  opacity: 1;
+}
+
 
 .form-input:valid:not(:placeholder-shown):not(:focus) {
   border-color: rgba(16, 185, 129, 0.3);
@@ -258,7 +287,7 @@ html:not(.theme-dark) .form-input::placeholder {
   min-height: 120px;
 }
 
-/* Select dropdown styling - Modern minimal design */
+/* Select dropdown styling */
 select.form-input {
   cursor: pointer;
   background-color: var(--panel-elev);
@@ -334,10 +363,6 @@ select.form-input:hover:focus {
   margin-bottom: 0;
 }
 
-.form-group:last-child {
-  margin-bottom: 0;
-}
-
 .form-label {
   font-size: 13px;
   font-weight: 500;
@@ -376,7 +401,7 @@ select.form-input:hover:focus {
   border-color: var(--info);
 }
 
-/* Legacy compatibility */
+/* Legacy compatibility - deprecated, use .form-input instead */
 .input { 
   width: 100%; 
   padding: var(--spacing-lg) var(--spacing-xl); 
@@ -395,8 +420,8 @@ select.form-input:hover:focus {
 
 .input:focus {
   outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: var(--ring-glow);
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
   background: var(--panel);
 }
 

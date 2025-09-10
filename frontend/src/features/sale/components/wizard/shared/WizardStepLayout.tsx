@@ -72,7 +72,6 @@ export function WizardStepLayout({
             <button
               className="btn btn-primary"
               onClick={onNext}
-              disabled={!canProceed}
               type="button"
             >
               {nextLabel} →

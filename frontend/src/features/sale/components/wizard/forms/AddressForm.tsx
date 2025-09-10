@@ -1,12 +1,14 @@
 import type { Address } from '@/shared/types';
+import { FormField } from '@/shared/components/FormField';
 
 interface AddressFormProps {
   address?: Address;
   onChange: (updates: Partial<Address>) => void;
   states: { code: string; name: string }[];
+  fieldErrors?: { [key: string]: string };
 }
 
-export function AddressForm({ address, onChange, states }: AddressFormProps) {
+export function AddressForm({ address, onChange, states, fieldErrors = {} }: AddressFormProps) {
   return (
     <div className="form-card">
       <div className="form-card-header">
@@ -23,15 +25,18 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
           />
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Street Address *</label>
+        <FormField
+          label="Street Address"
+          required
+          error={fieldErrors.street}
+        >
           <input
-            className="form-input"
+            className={`form-input ${fieldErrors.street ? 'error' : ''}`}
             placeholder="123 Main Street"
             value={address?.street || ""}
             onChange={(e) => onChange({ street: e.target.value })}
           />
-        </div>
+        </FormField>
 
         <div className="form-group">
           <label className="form-label form-label-optional">Street Address Line 2</label>
@@ -44,20 +49,26 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
         </div>
 
         <div className="form-grid-3">
-          <div className="form-group">
-            <label className="form-label">City / Suburb *</label>
+          <FormField
+            label="City / Suburb"
+            required
+            error={fieldErrors.city}
+          >
             <input
-              className="form-input"
+              className={`form-input ${fieldErrors.city ? 'error' : ''}`}
               placeholder="Brisbane"
               value={address?.city || ""}
               onChange={(e) => onChange({ city: e.target.value })}
             />
-          </div>
+          </FormField>
 
-          <div className="form-group">
-            <label className="form-label">State *</label>
+          <FormField
+            label="State"
+            required
+            error={fieldErrors.state}
+          >
             <select
-              className="form-input"
+              className={`form-input ${fieldErrors.state ? 'error' : ''}`}
               value={address?.state || ""}
               onChange={(e) => onChange({ state: e.target.value })}
             >
@@ -68,12 +79,15 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
                 </option>
               ))}
             </select>
-          </div>
+          </FormField>
 
-          <div className="form-group">
-            <label className="form-label">Postcode *</label>
+          <FormField
+            label="Postcode"
+            required
+            error={fieldErrors.zip}
+          >
             <input
-              className="form-input"
+              className={`form-input ${fieldErrors.zip ? 'error' : ''}`}
               placeholder="4000"
               maxLength={4}
               value={address?.zip || ""}
@@ -84,7 +98,7 @@ export function AddressForm({ address, onChange, states }: AddressFormProps) {
               }}
               inputMode="numeric"
             />
-          </div>
+          </FormField>
         </div>
 
         <div className="form-group" style={{ marginTop: 'var(--spacing-xl)' }}>

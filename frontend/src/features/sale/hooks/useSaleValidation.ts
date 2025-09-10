@@ -4,6 +4,7 @@ import type { Customer, LineItem, DeliveryDetails } from '@/shared/types';
 export interface ValidationResult {
   isValid: boolean;
   errors: string[];
+  fieldErrors?: { [key: string]: string };
 }
 
 export interface StepValidation {
@@ -47,64 +48,84 @@ export function useSaleValidation(
 
   const customerValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
+    const fieldErrors: { [key: string]: string } = {};
     
-    if (!customer.name?.trim()) {
-      errors.push('Customer name is required');
+    if (!customer.firstName?.trim()) {
+      errors.push('First name is required');
+      fieldErrors.firstName = 'First name is required';
+    }
+    
+    if (!customer.lastName?.trim()) {
+      errors.push('Last name is required');
+      fieldErrors.lastName = 'Last name is required';
     }
     
     if (!customer.phone?.trim()) {
       errors.push('Phone number is required');
+      fieldErrors.phone = 'Phone number is required';
     }
     
     if (!customer.deliveryAddress?.street?.trim()) {
       errors.push('Street address is required');
+      fieldErrors.street = 'Street address is required';
     }
     
     if (!customer.deliveryAddress?.city?.trim()) {
       errors.push('City is required');
+      fieldErrors.city = 'City is required';
     }
     
     if (!customer.deliveryAddress?.state?.trim()) {
       errors.push('State is required');
+      fieldErrors.state = 'State is required';
     }
     
     if (!customer.deliveryAddress?.zip?.trim()) {
       errors.push('Postcode is required');
+      fieldErrors.zip = 'Postcode is required';
     }
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.customerAttempted ? errors : []
+      errors: validationState.customerAttempted ? errors : [],
+      fieldErrors: validationState.customerAttempted ? fieldErrors : {}
     };
   }, [customer, validationState.customerAttempted]);
 
   const productsValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
+    const fieldErrors: { [key: string]: string } = {};
     
     if (lines.length === 0) {
       errors.push('At least one product must be added');
+      fieldErrors.products = 'At least one product must be added';
     }
     
     const invalidLines = lines.filter(line => line.qty <= 0);
     if (invalidLines.length > 0) {
       errors.push('All products must have a quantity greater than 0');
+      fieldErrors.quantities = 'All products must have a quantity greater than 0';
     }
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.productsAttempted ? errors : []
+      errors: validationState.productsAttempted ? errors : [],
+      fieldErrors: validationState.productsAttempted ? fieldErrors : {}
     };
   }, [lines, validationState.productsAttempted]);
 
   const deliveryValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
+    const fieldErrors: { [key: string]: string } = {};
     
     if (!deliveryDetails.preferredDate) {
       errors.push('Delivery date is required');
+      fieldErrors.preferredDate = 'Delivery date is required';
     }
     
     if (!deliveryDetails.timeSlot) {
       errors.push('Time slot is required');
+      fieldErrors.timeSlot = 'Time slot is required';
     }
 
     if (deliveryDetails.preferredDate) {
@@ -114,29 +135,35 @@ export function useSaleValidation(
       
       if (selectedDate < today) {
         errors.push('Delivery date cannot be in the past');
+        fieldErrors.preferredDate = 'Delivery date cannot be in the past';
       }
     }
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.deliveryAttempted ? errors : []
+      errors: validationState.deliveryAttempted ? errors : [],
+      fieldErrors: validationState.deliveryAttempted ? fieldErrors : {}
     };
   }, [deliveryDetails, validationState.deliveryAttempted]);
 
   const paymentValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
+    const fieldErrors: { [key: string]: string } = {};
     
     if (!paymentMethod) {
       errors.push('Payment method is required');
+      fieldErrors.paymentMethod = 'Payment method is required';
     }
     
     if (paymentMethod === 'financing' && depositAmount <= 0) {
       errors.push('Deposit amount is required for financing');
+      fieldErrors.depositAmount = 'Deposit amount is required for financing';
     }
 
     return {
       isValid: errors.length === 0,
-      errors: validationState.paymentAttempted ? errors : []
+      errors: validationState.paymentAttempted ? errors : [],
+      fieldErrors: validationState.paymentAttempted ? fieldErrors : {}
     };
   }, [paymentMethod, depositAmount, validationState.paymentAttempted]);
 

@@ -51,23 +51,6 @@
   padding: var(--spacing-2xl);
 }
 
-/* Section components */
-.products-section, .cart-section, .delivery-form, .payment-section, .pricing-section {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-2xl);
-  margin-bottom: var(--spacing-xl);
-  max-width: none;
-  box-shadow: var(--shadow-soft);
-}
-
-.products-section h3, .cart-section h3, .delivery-form h3, .payment-section h3, .pricing-section h3 {
-  margin: 0 0 var(--spacing-md) 0;
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--text-primary);
-}
 
 .section-help {
   color: var(--muted);

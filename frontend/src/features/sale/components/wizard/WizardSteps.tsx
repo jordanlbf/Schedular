@@ -55,6 +55,7 @@ export function WizardSteps({
         onNext={navigation.nextStep}
         canProceed={validation.customer.isValid}
         errors={validation.customer.errors}
+        fieldErrors={validation.customer.fieldErrors}
       />
     ),
     products: (

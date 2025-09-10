@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import type { Customer, SecondPerson } from '@/shared/types';
+import { FormField } from '@/shared/components/FormField';
 
 interface ContactDetailsFormProps {
   customer: Customer;
   onChange: (customer: Customer) => void;
+  fieldErrors?: { [key: string]: string };
 }
 
-export function ContactDetailsForm({ customer, onChange }: ContactDetailsFormProps) {
+export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: ContactDetailsFormProps) {
   const [isSecondPersonExpanded, setIsSecondPersonExpanded] = useState(!!customer.secondPerson);
   
   const formatPhone = (value: string) => {
@@ -55,39 +57,48 @@ export function ContactDetailsForm({ customer, onChange }: ContactDetailsFormPro
       </div>
       <div className="form-card-body">
         <div className="form-grid-2">
-          <div className="form-group">
-            <label className="form-label">First Name *</label>
+          <FormField
+            label="First Name"
+            required
+            error={fieldErrors.firstName}
+          >
             <input
-              className="form-input"
+              className={`form-input ${fieldErrors.firstName ? 'error' : ''}`}
               placeholder="John"
               value={customer.firstName || ''}
               onChange={(e) => updateCustomer({ firstName: e.target.value })}
             />
-          </div>
+          </FormField>
 
-          <div className="form-group">
-            <label className="form-label">Last Name *</label>
+          <FormField
+            label="Last Name"
+            required
+            error={fieldErrors.lastName}
+          >
             <input
-              className="form-input"
+              className={`form-input ${fieldErrors.lastName ? 'error' : ''}`}
               placeholder="Smith"
               value={customer.lastName || ''}
               onChange={(e) => updateCustomer({ lastName: e.target.value })}
             />
-          </div>
+          </FormField>
         </div>
 
         <div className="form-grid-2">
-          <div className="form-group">
-            <label className="form-label">Primary Phone *</label>
+          <FormField
+            label="Primary Phone"
+            required
+            error={fieldErrors.phone}
+          >
             <input
-              className="form-input"
+              className={`form-input ${fieldErrors.phone ? 'error' : ''}`}
               placeholder="0412 345 678"
               value={customer.phone}
               onChange={(e) => updateCustomer({ phone: formatPhone(e.target.value) })}
               inputMode="tel"
               maxLength={12}
             />
-          </div>
+          </FormField>
 
           <div className="form-group">
             <label className="form-label">Additional Phone</label>

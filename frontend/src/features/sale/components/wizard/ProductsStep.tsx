@@ -41,27 +41,35 @@ export default function ProductsStep({
       canProceed={canProceed}
       errors={errors}
     >
-      <div className="products-section">
-              <h3>Add Products</h3>
-              <ProductPicker
-                catalog={catalog}
-                onAdd={onAddLine}
-                inputRef={searchRef}
-              />
-            </div>
+      <div className="form-card">
+        <div className="form-card-header">
+          <h3>Add Products</h3>
+        </div>
+        <div className="form-card-body">
+          <ProductPicker
+            catalog={catalog}
+            onAdd={onAddLine}
+            inputRef={searchRef}
+          />
+        </div>
+      </div>
 
             {lines.length > 0 && (
-              <div className="cart-section">
-                <h3>Selected Items ({lines.length})</h3>
-                <CartTable 
-                  lines={lines} 
-                  onChangeQty={onChangeQty} 
-                  onRemove={onRemoveLine} 
-                />
-                <div className="cart-summary">
-                  <div className="summary-row">
-                    <span>Subtotal:</span>
-                    <span>{fmt(subtotal)}</span>
+              <div className="form-card">
+                <div className="form-card-header">
+                  <h3>Selected Items ({lines.length})</h3>
+                </div>
+                <div className="form-card-body">
+                  <CartTable 
+                    lines={lines} 
+                    onChangeQty={onChangeQty} 
+                    onRemove={onRemoveLine} 
+                  />
+                  <div className="cart-summary">
+                    <div className="summary-row">
+                      <span>Subtotal:</span>
+                      <span>{fmt(subtotal)}</span>
+                    </div>
                   </div>
                 </div>
               </div>

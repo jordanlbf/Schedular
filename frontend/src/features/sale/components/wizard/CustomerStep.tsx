@@ -11,6 +11,7 @@ interface CustomerStepProps {
   onNext: () => void;
   canProceed: boolean;
   errors?: string[];
+  fieldErrors?: { [key: string]: string };
 }
 
 export default function CustomerStep({ 
@@ -18,7 +19,8 @@ export default function CustomerStep({
   setCustomer, 
   onNext, 
   canProceed,
-  errors = []
+  errors = [],
+  fieldErrors = {}
 }: CustomerStepProps) {
   
   const updateDeliveryAddress = (updates: Partial<Address>) => {
@@ -49,12 +51,14 @@ export default function CustomerStep({
         <ContactDetailsForm
           customer={customer}
           onChange={setCustomer}
+          fieldErrors={fieldErrors}
         />
         
         <AddressForm
           address={customer.deliveryAddress}
           onChange={updateDeliveryAddress}
           states={AUSTRALIAN_STATES}
+          fieldErrors={fieldErrors}
         />
       </div>
     </WizardStepLayout>

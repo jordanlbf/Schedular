@@ -42,7 +42,6 @@ export function useSessionManager() {
           localStorage.removeItem(key);
         });
         
-        console.log('🧹 Cleared old sale data due to new session or expiration');
       }
       
       // Mark this browser session as active

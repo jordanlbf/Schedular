@@ -4,6 +4,7 @@ type CatalogItem = {
   sku: string | number;
   name: string;
   price: number;
+  image?: string;
 };
 
 type Props = {
@@ -11,11 +12,16 @@ type Props = {
   onAdd: (sku: CatalogItem["sku"]) => void;
 };
 
-function formatMoney(n: number) {
+function formatMoney(dollars: number) {
   try {
-    return n.toLocaleString(undefined, { style: "currency", currency: "USD" });
+    return dollars.toLocaleString(undefined, { 
+      style: "currency", 
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
   } catch {
-    return `$${n.toFixed(2)}`;
+    return `$${Math.round(dollars)}`;
   }
 }
 
@@ -30,7 +36,10 @@ export default function ProductPicker({ catalog, onAdd }: Props) {
 
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase();
-    if (!term) return catalog;
+    if (!term) {
+      // Show only first 3 products as "Popular Products"
+      return catalog.slice(0, 3);
+    }
     return catalog.filter((p) => {
       const skuStr = String(p.sku).toLowerCase();
       return (
@@ -51,7 +60,6 @@ export default function ProductPicker({ catalog, onAdd }: Props) {
 
   return (
     <div className="product-picker">
-      {/* Product search input */}
       <div className="product-search">
         <input
           id="product-search-input"
@@ -64,12 +72,24 @@ export default function ProductPicker({ catalog, onAdd }: Props) {
         />
       </div>
 
-      {/* Product grid */}
+      {q === "" && (
+        <div className="product-hint">
+          Popular
+        </div>
+      )}
+
       <div className="product-grid">
         {filtered.map((p) => (
           <div key={p.sku} className="product-card">
-            <div className="sku">{p.sku}</div>
-            <h3 className="name">{p.name}</h3>
+            <div className="product-header">
+              <h3 className="name">{p.name}</h3>
+              <span className="sku">{p.sku}</span>
+            </div>
+            {p.image && (
+              <div className="product-image">
+                <img src={p.image} alt={p.name} />
+              </div>
+            )}
             <div className="price">{formatMoney(p.price)}</div>
 
             <div className="actions">
@@ -78,15 +98,15 @@ export default function ProductPicker({ catalog, onAdd }: Props) {
                 className="btn btn-primary"
                 onClick={() => onAdd(p.sku)}
               >
-                Add to sale
+                Add
               </button>
             </div>
           </div>
         ))}
 
-        {filtered.length === 0 && (
+        {filtered.length === 0 && q.trim() && (
           <div className="product-empty">
-            No products match “{q}”.
+            No products match "{q}"
           </div>
         )}
       </div>

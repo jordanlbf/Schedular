@@ -31,6 +31,7 @@ html.theme-dark .wizard-container::before {
     radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.01) 0%, transparent 50%);
 }
 
+
 /* All content above overlay */
 .wizard-container > * {
   position: relative;
@@ -87,48 +88,31 @@ html.theme-dark .wizard-container::before {
   text-decoration: underline;
 }
 
-/* Page headers within steps */
+/* Invisible/minimal page headers - let content speak */
 .wizard-page-header {
-  text-align: center;
-  margin-bottom: var(--spacing-3xl);
-  padding: var(--spacing-xl) var(--spacing-xl) 0;
+  display: none;
 }
 
 .wizard-page-header.compact {
-  margin-bottom: var(--spacing-3xl);
-  padding: var(--spacing-xl);
+  display: none;
 }
 
+/* Alternative: Hidden step indicators for accessibility */
 .wizard-page-header h2 {
-  margin: 0;
-  font-size: 42px;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.8px;
-  position: relative;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
-/* Removed decorative underline for cleaner look */
-
-.wizard-page-header.compact h2 {
-  margin: 0;
-  font-size: 36px;
-  font-weight: 600;
-  color: #0ea5e9;
-  letter-spacing: -0.5px;
-  position: relative;
-}
-
-/* Removed decorative underline for cleaner look */
-
-.wizard-page-header p {
-  margin: 0;
-  font-size: var(--text-lg);
-  color: var(--text-subtle);
-  line-height: var(--leading-relaxed);
-  max-width: 600px;
-  margin: 0 auto;
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /* Wizard content area */

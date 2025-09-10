@@ -30,6 +30,7 @@ export function useSaleValidation(
   depositAmount: number
 ): StepValidation & {
   markStepAttempted: (step: keyof ValidationState | string) => void;
+  resetStepAttempted: (step: keyof ValidationState | string) => void;
   validationState: ValidationState;
 } {
   const [validationState, setValidationState] = useState<ValidationState>({
@@ -43,6 +44,13 @@ export function useSaleValidation(
     setValidationState(prev => ({
       ...prev,
       [step]: true
+    }));
+  };
+
+  const resetStepAttempted = (step: keyof ValidationState | string) => {
+    setValidationState(prev => ({
+      ...prev,
+      [step]: false
     }));
   };
 
@@ -97,8 +105,8 @@ export function useSaleValidation(
     const fieldErrors: { [key: string]: string } = {};
     
     if (lines.length === 0) {
-      errors.push('At least one product must be added');
-      fieldErrors.products = 'At least one product must be added';
+      errors.push('Please add an item to continue');
+      fieldErrors.products = 'Please add an item to continue';
     }
     
     const invalidLines = lines.filter(line => line.qty <= 0);
@@ -179,6 +187,7 @@ export function useSaleValidation(
     payment: paymentValidation,
     isValid,
     markStepAttempted,
+    resetStepAttempted,
     validationState,
   };
 }

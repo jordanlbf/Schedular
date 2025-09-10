@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 interface WizardStepLayoutProps {
   title: string;
+  stepNumber?: string;
   children: ReactNode;
   onNext?: () => void;
   onPrev?: () => void;
@@ -14,6 +15,7 @@ interface WizardStepLayoutProps {
 
 export function WizardStepLayout({
   title,
+  stepNumber = '1',
   children,
   onNext,
   onPrev,
@@ -29,19 +31,16 @@ export function WizardStepLayout({
         <div className="step-content">
           <div className="step-main">
             <div className="wizard-page-header compact">
-              <h2>{title}</h2>
+              <h2 data-step={stepNumber} className="sr-only">{title}</h2>
             </div>
 
             {children}
             
             {errors.length > 0 && (
-              <div className="form-errors-bottom-content" role="alert">
-                <h4>Please fix the following issues:</h4>
-                <ul>
-                  {errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
+              <div className="subtle-error-message" role="alert">
+                {errors.map((error, index) => (
+                  <p key={index}>{error}</p>
+                ))}
               </div>
             )}
           </div>

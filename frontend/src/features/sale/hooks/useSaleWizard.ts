@@ -5,7 +5,7 @@ import { useWizardNavigation } from './useWizardNavigation';
 import type { WizardStep } from '../stores/useSaleDraftStore';
 import { WIZARD_STEP_TITLES } from '../constants/wizardTitles';
 
-export function useSaleWizard(state: any, updateField: any) {
+export function useSaleWizard(state: any, updateField: (field: string, value: any) => void) {
   const totals = useSaleTotals(
     state.lines,
     state.deliveryDetails,
@@ -25,7 +25,8 @@ export function useSaleWizard(state: any, updateField: any) {
     state.currentStep,
     (step: WizardStep) => updateField('currentStep', step),
     validation,
-    validation.markStepAttempted
+    validation.markStepAttempted,
+    validation.resetStepAttempted
   );
 
   const progressSteps = useMemo(() => {

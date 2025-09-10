@@ -42,6 +42,7 @@ export default function CustomerStep({
   return (
     <WizardStepLayout
       title={WIZARD_STEP_TITLES.customer}
+      stepNumber="1"
       onNext={onNext}
       canProceed={canProceed}
       nextLabel="Continue to Products"

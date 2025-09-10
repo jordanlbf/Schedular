@@ -6,6 +6,7 @@ import PaymentStep from './PaymentStep';
 import { CATALOG } from '../../catalog';
 import { addLineToCart, updateLineQuantity, removeLine, getEstimatedDeliveryDate } from '../../utils/saleUtils';
 import type { WizardStep, SaleDraftState } from '../../stores/useSaleDraftStore';
+import type { StepValidation } from '../../hooks/useSaleValidation';
 
 interface WizardStepsProps {
   currentStep: WizardStep;
@@ -14,8 +15,11 @@ interface WizardStepsProps {
     field: K,
     value: SaleDraftState[K]
   ) => void;
-  navigation: any;
-  validation: any;
+  navigation: any; // Navigation interface - contains nextStep, prevStep, goToStep, canProceed
+  validation: StepValidation & {
+    markStepAttempted: (step: string) => void;
+    resetStepAttempted: (step: string) => void;
+  };
   onComplete: () => void;
 }
 
@@ -37,15 +41,28 @@ export function WizardSteps({
   };
 
   const changeQty = (id: number, delta: number) => {
-    updateField('lines', updateLineQuantity(state.lines, id, delta));
+    const newLines = updateLineQuantity(state.lines, id, delta);
+    updateField('lines', newLines);
+    // Reset validation state if no valid items remain
+    if (currentStep === 'products') {
+      const validItems = newLines.filter(line => line.qty > 0);
+      if (validItems.length === 0) {
+        validation.resetStepAttempted('productsAttempted');
+      }
+    }
   };
 
   const removeLineFromCart = (id: number) => {
-    updateField('lines', removeLine(state.lines, id));
+    const newLines = removeLine(state.lines, id);
+    updateField('lines', newLines);
+    // Reset validation state if cart becomes empty
+    if (newLines.length === 0 && currentStep === 'products') {
+      validation.resetStepAttempted('productsAttempted');
+    }
   };
 
-  // Calculate subtotal for products step
-  const subtotal = state.lines.reduce((sum: number, line: any) => sum + (line.price * line.qty), 0);
+  // Calculate subtotal for products step  
+  const subtotal = state.lines.reduce((sum: number, line) => sum + (line.price * line.qty), 0);
 
   const stepComponents = {
     customer: (

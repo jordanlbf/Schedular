@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
 import type { WizardStep } from '../stores/useSaleDraftStore';
+import type { StepValidation } from './useSaleValidation';
 
 export function useWizardNavigation(
   currentStep: WizardStep,
   setCurrentStep: (step: WizardStep) => void,
-  validation: any,
-  markStepAttempted: (step: string) => void
+  validation: StepValidation,
+  markStepAttempted: (step: string) => void,
+  resetStepAttempted: (step: string) => void
 ) {
   const nextStep = useCallback(() => {
     switch (currentStep) {
@@ -39,6 +41,7 @@ export function useWizardNavigation(
         setCurrentStep('customer');
         break;
       case 'delivery':
+        resetStepAttempted('productsAttempted');
         setCurrentStep('products');
         break;
       case 'payment':
@@ -47,11 +50,14 @@ export function useWizardNavigation(
       case 'customer':
         break;
     }
-  }, [currentStep, setCurrentStep]);
+  }, [currentStep, setCurrentStep, resetStepAttempted]);
 
   const goToStep = useCallback((step: WizardStep) => {
+    if (step === 'products') {
+      resetStepAttempted('productsAttempted');
+    }
     setCurrentStep(step);
-  }, [setCurrentStep]);
+  }, [setCurrentStep, resetStepAttempted]);
 
   const canProceed = useCallback(() => {
     switch (currentStep) {

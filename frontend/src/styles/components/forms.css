@@ -185,7 +185,7 @@ html.theme-dark .form-card-header.warning {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  align-items: stretch;
+  align-items: end;
   animation: slideUpLayout 0.5s ease-out;
 }
 
@@ -371,7 +371,20 @@ html.theme-dark .form-card-header.warning {
   box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
 }
 
-.form-input:invalid:not(:placeholder-shown) {
+.form-input:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--error);
+  box-shadow: 0 0 0 1px var(--error);
+}
+
+/* Override invalid styling for required fields that haven't been touched yet */
+.form-input[required]:invalid:not(:focus):not(.attempted) {
+  border-color: var(--border);
+  box-shadow: none;
+  background: var(--panel-elev);
+}
+
+/* Only show error state when form submission has been attempted */
+.form-input[required]:invalid:not(:focus).attempted {
   border-color: var(--error);
   box-shadow: 0 0 0 1px var(--error);
 }
@@ -398,8 +411,146 @@ html.theme-dark .form-input.error {
 }
 
 
-.form-input:valid:not(:placeholder-shown):not(:focus) {
-  border-color: rgba(16, 185, 129, 0.3);
+/* Only show success styling when field has actual content */
+.form-input:valid:not(:placeholder-shown):not(:focus):not([value=""]) {
+  border-color: var(--success);
+  border-width: 2px;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15), 0 2px 8px rgba(16, 185, 129, 0.1);
+  background: linear-gradient(135deg, 
+    var(--panel) 0%, 
+    rgba(16, 185, 129, 0.03) 100%
+  );
+}
+
+/* Specifically for select dropdowns - only show success when a real option is selected */
+select.form-input:valid:not(:focus):not([value=""]) {
+  border-color: var(--success);
+  border-width: 2px;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15), 0 2px 8px rgba(16, 185, 129, 0.1);
+  background: linear-gradient(135deg, 
+    var(--panel-elev) 0%, 
+    rgba(16, 185, 129, 0.03) 100%
+  );
+}
+
+/* Keep select dropdowns neutral when no selection made - but not when there's an error */
+select.form-input[value=""]:not(:focus):not(.error):not(.attempted) {
+  border-color: var(--border);
+  border-width: 1px;
+  box-shadow: none;
+  background: var(--panel-elev);
+}
+
+/* Ensure error styling works for select dropdowns */
+select.form-input.error,
+select.form-input.attempted:invalid {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1) !important;
+  background: rgba(254, 242, 242, 0.5) !important;
+}
+
+html.theme-dark select.form-input.error,
+html.theme-dark select.form-input.attempted:invalid {
+  background: rgba(239, 68, 68, 0.05) !important;
+}
+
+/* Style empty select to show muted placeholder text */
+select.form-input:invalid {
+  color: var(--muted);
+}
+
+/* When a state is actually selected, show normal text color */
+select.form-input:valid {
+  color: var(--text);
+}
+
+/* Override for error state */
+select.form-input.error:invalid {
+  color: var(--muted);
+}
+
+/* Ensure placeholder option appears muted in dropdown */
+select.form-input option[value=""] {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Form completion visual states */
+.form-card {
+  position: relative;
+  min-height: 500px;
+  padding-bottom: 60px;
+}
+
+.form-card.complete {
+  border: 2px solid rgba(34, 197, 94, 0.5);
+  transition: all 0.2s ease;
+}
+
+.form-card.complete * {
+  opacity: 0.8;
+}
+
+.completion-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--success);
+  background: var(--success-bg);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  animation: fadeInComplete 0.3s ease;
+  opacity: 1 !important;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.completion-indicator svg {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+@keyframes fadeInComplete {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Form field wrapper with success icon */
+.form-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-field-wrapper.valid::after {
+  content: '✓';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--success);
+  font-weight: bold;
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(16, 185, 129, 0.2);
+}
+
+.form-field-wrapper.valid .form-input {
+  padding-right: 50px;
 }
 
 .form-input:disabled {
@@ -726,14 +877,12 @@ select.form-input:hover:focus {
   accent-color: var(--accent-primary);
 }
 
-/* Form errors - updated styling */
-.form-errors {
-  background: var(--panel);
-  border: 2px solid var(--error);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-xl) var(--spacing-2xl);
-  margin-bottom: var(--spacing-3xl);
-  box-shadow: var(--shadow-glass);
+/* Hide all error message containers - using visual styling only */
+.form-errors,
+.form-errors-bottom,
+.form-errors-bottom-content,
+.subtle-error-message {
+  display: none !important;
 }
 
 .form-errors h4 {
@@ -757,14 +906,7 @@ select.form-input:hover:focus {
 
 /* Bottom error messages in action bar */
 .form-errors-bottom {
-  background: var(--panel);
-  border: 2px solid var(--error);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-md) var(--spacing-lg);
-  margin: 0 var(--spacing-lg);
-  box-shadow: var(--shadow-glass);
-  flex: 1;
-  text-align: center;
+  display: none;
 }
 
 .form-errors-bottom h4 {
@@ -909,11 +1051,11 @@ select.form-input:hover:focus {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   transition: all 0.2s ease;
+  position: relative;
   color: var(--text);
   font-family: inherit;
-  position: relative;
 }
 
 .add-second-person-btn:hover {
@@ -951,7 +1093,9 @@ html.theme-dark .form-section-optional::before {
 .add-person-content {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-md);
+  flex: 1;
 }
 
 .add-person-icon {
@@ -975,12 +1119,12 @@ html.theme-dark .form-section-optional::before {
 }
 
 .optional-badge {
-  font-size: var(--text-xs);
-  padding: 2px 6px;
-  background: rgba(14, 165, 233, 0.1);
+  font-size: var(--text-base);
+  padding: 8px 16px;
+  background: rgba(14, 165, 233, 0.15);
   color: #0ea5e9;
-  border-radius: 12px;
-  font-weight: 500;
+  border-radius: 20px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }

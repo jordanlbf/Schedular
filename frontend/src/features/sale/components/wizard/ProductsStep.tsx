@@ -21,15 +21,17 @@ function formatPrice(dollars: number) {
 interface ProductsStepProps {
   lines: Line[];
   catalog: CatalogItem[];
-  onAddLine: (sku: string | number) => void;
+  onAddLine: (sku: string | number, color?: string) => void;
   onChangeQty: (id: number, delta: number) => void;
   onRemoveLine: (id: number) => void;
+  onPriceChange?: (id: number, newPrice: number) => void;
   searchRef?: MutableRefObject<HTMLInputElement | null>;
   onNext: () => void;
   onPrev: () => void;
   canProceed: boolean;
   subtotal: number;
   errors?: string[];
+  onAddSuccess?: (productName: string) => void;
 }
 
 export default function ProductsStep({
@@ -38,12 +40,14 @@ export default function ProductsStep({
   onAddLine,
   onChangeQty,
   onRemoveLine,
+  onPriceChange,
   searchRef,
   onNext,
   onPrev,
   canProceed,
   subtotal,
-  errors = []
+  errors = [],
+  onAddSuccess
 }: ProductsStepProps) {
   return (
     <WizardStepLayout
@@ -66,6 +70,7 @@ export default function ProductsStep({
                 catalog={catalog}
                 onAdd={onAddLine}
                 inputRef={searchRef}
+                onAddSuccess={onAddSuccess}
               />
             </div>
           </div>
@@ -83,14 +88,14 @@ export default function ProductsStep({
                     <CartTable 
                       lines={lines} 
                       onChangeQty={onChangeQty} 
-                      onRemove={onRemoveLine} 
+                      onRemove={onRemoveLine}
+                      onPriceChange={onPriceChange}
                     />
                   </div>
                   <div className="cart-summary">
                     <div className="summary-details">
                       <span className="summary-count">
-                        {lines.reduce((total, line) => total + line.qty, 0)} item{lines.reduce((total, line) => total + line.qty, 0) !== 1 ? 's' : ''} 
-                        {lines.length > 1 ? ` across ${lines.length} products` : ''}
+                        {lines.reduce((total, line) => total + line.qty, 0)} item{lines.reduce((total, line) => total + line.qty, 0) !== 1 ? 's' : ''}
                       </span>
                     </div>
                     <div className="summary-total">
@@ -100,9 +105,10 @@ export default function ProductsStep({
                   </div>
                 </>
               ) : (
-                <div className="empty-sale">
-                  <div className="empty-icon">📋</div>
-                  <h4>No items added</h4>
+                <div className="empty-cart">
+                  <div className="empty-cart-icon">🛒</div>
+                  <h4>Your cart is empty</h4>
+                  <p>Search and add products from the catalog to get started</p>
                 </div>
               )}
             </div>

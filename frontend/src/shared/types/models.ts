@@ -29,13 +29,30 @@ export interface Customer {
   sameAsDelivery?: boolean;
 }
 
+export type StockStatus = 'in-stock' | 'low-stock' | 'out-of-stock' | 'discontinued';
+
+export interface StockInfo {
+  status: StockStatus;
+  quantity: number;
+  leadTimeDays?: number; // For out-of-stock items
+  leadTimeText?: string; // Human readable lead time
+}
+
+export interface ColorOption {
+  name: string;
+  value: string; // hex color code
+  inStock?: boolean;
+}
+
 export interface Product {
   sku: string;
   name: string;
   price: number;
   category?: string;
-  inStock?: boolean;
+  inStock?: boolean; // Keep for backwards compatibility
   image?: string;
+  stock: StockInfo;
+  colors?: ColorOption[];
 }
 
 export interface LineItem {
@@ -44,6 +61,7 @@ export interface LineItem {
   name: string;
   qty: number;
   price: number;
+  color?: string;
 }
 
 export interface DeliveryDetails {

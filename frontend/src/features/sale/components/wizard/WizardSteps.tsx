@@ -21,6 +21,7 @@ interface WizardStepsProps {
     resetStepAttempted: (step: string) => void;
   };
   onComplete: () => void;
+  onAddSuccess?: (productName: string) => void;
 }
 
 export function WizardSteps({
@@ -29,13 +30,14 @@ export function WizardSteps({
   updateField,
   navigation,
   validation,
-  onComplete
+  onComplete,
+  onAddSuccess
 }: WizardStepsProps) {
   const searchRef = useRef<HTMLInputElement | null>(null);
 
   // Product management functions
-  const addLine = (sku: string | number) => {
-    const result = addLineToCart(state.lines, sku, state.nextId);
+  const addLine = (sku: string | number, color?: string) => {
+    const result = addLineToCart(state.lines, sku, state.nextId, color);
     updateField('lines', result.lines);
     updateField('nextId', result.nextId);
   };
@@ -88,6 +90,7 @@ export function WizardSteps({
         canProceed={validation.products.isValid}
         subtotal={subtotal}
         errors={validation.products.errors}
+        onAddSuccess={onAddSuccess}
       />
     ),
     delivery: (

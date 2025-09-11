@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { Customer, SecondPerson } from '@/shared/types';
 import { FormField } from '@/shared/components/FormField';
 
@@ -10,6 +10,12 @@ interface ContactDetailsFormProps {
 
 export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: ContactDetailsFormProps) {
   const [isSecondPersonExpanded, setIsSecondPersonExpanded] = useState(!!customer.secondPerson);
+  const [hasFocus, setHasFocus] = useState(false);
+
+  // Check if all required fields are completed
+  const isComplete = useMemo(() => {
+    return !!(customer.firstName?.trim() && customer.lastName?.trim() && customer.phone?.trim());
+  }, [customer.firstName, customer.lastName, customer.phone]);
   
   const formatPhone = (value: string) => {
     let formatted = value.replace(/\D/g, '');
@@ -51,7 +57,16 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
   };
 
   return (
-    <div className="form-card">
+    <div 
+      className={`form-card ${isComplete && !hasFocus ? 'complete' : ''}`}
+      onFocusCapture={() => setHasFocus(true)}
+      onBlurCapture={(e) => {
+        // Only set hasFocus to false if focus is leaving the entire form card
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+          setHasFocus(false);
+        }
+      }}
+    >
       <div className="form-card-header">
         <h3>Contact Details</h3>
       </div>
@@ -136,7 +151,7 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
             <div className="add-person-content">
               <span className="add-person-icon">{isSecondPersonExpanded ? '−' : '+'}</span>
               <span className="add-person-text">
-                {isSecondPersonExpanded ? 'Hide second contact' : 'Add second contact'}
+                {isSecondPersonExpanded ? 'Hide Second Contact' : 'Add Second Contact'}
               </span>
               <span className="optional-badge">Optional</span>
             </div>
@@ -157,48 +172,29 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
           </button>
           
           <div className={`form-section-content ${isSecondPersonExpanded ? 'expanded' : ''}`}>
-            <div className="form-grid-3">
-              <div className="form-group">
-                <label className="form-label">First Name</label>
+            <div className="form-grid-2">
+              <FormField label="First Name">
                 <input
                   className="form-input"
                   placeholder="Jane"
                   value={customer.secondPerson?.firstName || ''}
                   onChange={(e) => updateSecondPerson({ firstName: e.target.value })}
                 />
-              </div>
+              </FormField>
 
-              <div className="form-group">
-                <label className="form-label">Last Name</label>
+              <FormField label="Last Name">
                 <input
                   className="form-input"
                   placeholder="Smith"
                   value={customer.secondPerson?.lastName || ''}
                   onChange={(e) => updateSecondPerson({ lastName: e.target.value })}
                 />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Relationship</label>
-                <select
-                  className="form-input"
-                  value={customer.secondPerson?.relationship || ''}
-                  onChange={(e) => updateSecondPerson({ relationship: e.target.value })}
-                >
-                  <option value="">Select...</option>
-                  <option value="Spouse">Spouse</option>
-                  <option value="Partner">Partner</option>
-                  <option value="Roommate">Roommate</option>
-                  <option value="Family Member">Family Member</option>
-                  <option value="Friend">Friend</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
+              </FormField>
             </div>
 
+
             <div className="form-grid-2">
-              <div className="form-group">
-                <label className="form-label">Phone</label>
+              <FormField label="Phone">
                 <input
                   className="form-input"
                   placeholder="0412 345 678 (optional)"
@@ -207,10 +203,9 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
                   inputMode="tel"
                   maxLength={12}
                 />
-              </div>
+              </FormField>
 
-              <div className="form-group">
-                <label className="form-label">Email</label>
+              <FormField label="Email">
                 <input
                   className="form-input"
                   placeholder="jane.smith@example.com (optional)"
@@ -219,10 +214,24 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
                   onChange={(e) => updateSecondPerson({ email: e.target.value })}
                   inputMode="email"
                 />
-              </div>
+              </FormField>
             </div>
           </div>
         </div>
+        {isComplete && !hasFocus && (
+          <div className="completion-indicator">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path 
+                d="M20 6L9 17L4 12" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>Complete</span>
+          </div>
+        )}
       </div>
     </div>
   );

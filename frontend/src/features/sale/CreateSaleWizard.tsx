@@ -29,6 +29,10 @@ export default function CreateSaleWizard() {
     }
   };
 
+  const handleAddSuccess = (productName: string) => {
+    toast.success(`${productName} added to cart!`);
+  };
+
   // Add totals to navigation for payment step
   const navigationWithTotals = {
     ...wizard.navigation,
@@ -56,6 +60,7 @@ export default function CreateSaleWizard() {
           navigation={navigationWithTotals}
           validation={wizard.validation}
           onComplete={handleComplete}
+          onAddSuccess={handleAddSuccess}
         />
 
         <ToastContainer toasts={toast.toasts} onRemove={toast.removeToast} />

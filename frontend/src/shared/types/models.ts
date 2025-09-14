@@ -42,6 +42,7 @@ export interface ColorOption {
   name: string;
   value: string; // hex color code
   inStock?: boolean;
+  image?: string; // color-specific product image
 }
 
 export interface Product {

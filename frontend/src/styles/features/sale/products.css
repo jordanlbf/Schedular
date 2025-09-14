@@ -1,6 +1,6 @@
 /* Product Components */
 
-/* Enhanced product search styling */
+/* Product search styling */
 .product-search {
   position: relative;
   margin-bottom: var(--spacing-xl);
@@ -34,7 +34,7 @@
   pointer-events: none;
 }
 
-/* Subtle product hint */
+/* Product hint */
 .product-hint {
   text-align: center;
   font-size: var(--text-sm);
@@ -44,9 +44,7 @@
   opacity: 0.7;
 }
 
-
-
-/* Enhanced product grid layout - 3 columns for larger images */
+/* Product grid layout */
 .product-grid { 
   display: grid; 
   grid-template-columns: repeat(3, 1fr); 
@@ -54,7 +52,7 @@
   margin-top: var(--spacing-xl);
 }
 
-/* Enhanced product cards with modern styling */
+/* Product cards */
 .product-card { 
   background: rgba(255, 255, 255, 0.08);
   border: 2px solid var(--border);
@@ -249,7 +247,7 @@
 /* Color selector styling */
 .product-card .product-colors {
   position: absolute;
-  bottom: 95px; /* Above the button area */
+  bottom: 95px;
   right: var(--spacing-2xl);
   z-index: 2;
 }
@@ -259,14 +257,6 @@
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-sm);
-}
-
-.product-card .color-label {
-  font-size: var(--text-xs);
-  color: var(--text-subtle);
-  font-weight: var(--font-semibold);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
 }
 
 .product-card .color-options {
@@ -366,7 +356,7 @@
   transform: scale(1.05);
 }
 
-/* Keyframe animations */
+/* Animation keyframes */
 @keyframes cardAddPulse {
   0% {
     transform: scale(1);
@@ -396,12 +386,6 @@
   }
 }
 
-/* Button text transition for smooth text change */
-.product-card .btn {
-  transition: all 0.2s ease, background-color 0.3s ease, transform 0.3s ease;
-}
-
-
 /* Empty state styling */
 .product-empty {
   grid-column: 1 / -1;
@@ -426,79 +410,7 @@
   opacity: 0.7;
 }
 
-/* Success animation when item is added */
-@keyframes productAdded {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.product-card.just-added {
-  animation: productAdded 0.6s ease-out;
-  border-color: var(--success);
-}
-
-.product-card.just-added::before {
-  background: linear-gradient(90deg, var(--success), var(--success-light));
-  opacity: 1;
-}
-
-/* Product grid animations */
-.product-grid .product-card {
-  animation: slideInProduct 0.4s ease-out;
-  animation-fill-mode: backwards;
-}
-
-.product-grid .product-card:nth-child(1) { animation-delay: 0ms; }
-.product-grid .product-card:nth-child(2) { animation-delay: 50ms; }
-.product-grid .product-card:nth-child(3) { animation-delay: 100ms; }
-.product-grid .product-card:nth-child(4) { animation-delay: 150ms; }
-.product-grid .product-card:nth-child(5) { animation-delay: 200ms; }
-.product-grid .product-card:nth-child(6) { animation-delay: 250ms; }
-
-@keyframes slideInProduct {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Enhanced search results counter */
-.product-search-results {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: var(--spacing-lg) 0;
-  padding: var(--spacing-md) var(--spacing-lg);
-  color: var(--text-subtle);
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  background: var(--panel-hover);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-}
-
-.product-search-results .search-term {
-  background: var(--accent-secondary);
-  color: white;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-sm);
-  font-weight: var(--font-bold);
-  font-family: 'Courier New', monospace;
-}
-
-/* Responsive product grid */
+/* Responsive design */
 @media (max-width: 1200px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);

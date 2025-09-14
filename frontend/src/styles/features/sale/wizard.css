@@ -1,14 +1,14 @@
-/* Clean Professional Wizard Styling */
+/* Wizard Styling */
 
-/* Main wizard container with modern gradient */
+/* Main wizard container */
 .wizard-container {
-  min-height: calc(100vh - 60px); /* Account for header */
+  min-height: calc(100vh - 60px);
   background: linear-gradient(135deg, #667eea 0%, #764ba2 0%, var(--bg) 0%);
   padding: var(--spacing-lg) 0 0 0;
   position: relative;
 }
 
-/* Modern gradient mesh background */
+/* Gradient background overlay */
 .wizard-container::before {
   content: '';
   position: fixed;
@@ -31,88 +31,9 @@ html.theme-dark .wizard-container::before {
     radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.01) 0%, transparent 50%);
 }
 
-
-/* All content above overlay */
 .wizard-container > * {
   position: relative;
   z-index: 1;
-}
-
-/* Clean wizard header */
-.wizard-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-2xl) var(--spacing-3xl);
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow-glass);
-  position: relative;
-}
-
-.wizard-header h1 {
-  margin: 0;
-  font-size: var(--text-3xl);
-  font-weight: var(--font-bold);
-  color: var(--accent-primary);
-  text-align: center;
-}
-
-.header-actions {
-  position: absolute;
-  right: var(--spacing-3xl);
-  display: flex;
-  gap: var(--spacing-lg);
-  align-items: center;
-}
-
-/* Breadcrumbs styling */
-.breadcrumbs {
-  padding: var(--spacing-lg) var(--spacing-3xl);
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border-bottom: 1px solid var(--border);
-  font-size: var(--text-sm);
-  color: var(--muted);
-}
-
-.breadcrumbs a {
-  color: var(--accent-primary);
-  text-decoration: none;
-}
-
-.breadcrumbs a:hover {
-  text-decoration: underline;
-}
-
-/* Invisible/minimal page headers - let content speak */
-.wizard-page-header {
-  display: none;
-}
-
-.wizard-page-header.compact {
-  display: none;
-}
-
-/* Alternative: Hidden step indicators for accessibility */
-.wizard-page-header h2 {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-/* Screen reader only content */
-.sr-only {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
 }
 
 /* Wizard content area */
@@ -148,29 +69,6 @@ html.theme-dark .wizard-container::before {
 
 .step-main {
   flex: 1;
-}
-
-/* Clean form sections */
-.form-section {
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-2xl);
-  padding: var(--spacing-4xl);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
-  margin-bottom: var(--spacing-4xl);
-  position: relative;
-}
-
-.form-section h3 {
-  margin: 0 0 var(--spacing-xl) 0;
-  font-size: var(--text-xl);
-  font-weight: var(--font-semibold);
-  color: var(--text);
-  border-bottom: 2px solid var(--panel-elev);
-  padding-bottom: var(--spacing-md);
-  display: inline-block;
 }
 
 /* Step Actions - bottom navigation */
@@ -369,41 +267,23 @@ html.theme-dark .step-actions {
   color: var(--text);
 }
 
-/* Responsive adjustments - Enhanced for dynamic width */
+/* Responsive design */
 @media (max-width: 768px) {
   .wizard-container {
     padding: 0;
   }
   
-  .wizard-header,
-  .breadcrumbs {
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
-  }
-  
-  .header-actions {
-    right: var(--spacing-lg);
-  }
-  
   .wizard-content {
     padding: var(--spacing-lg);
-    padding-bottom: 120px; /* Space for fixed bottom bar */
+    padding-bottom: 120px;
   }
   
   .step-actions {
     padding: var(--spacing-sm) var(--spacing-lg);
   }
   
-  .form-section {
-    padding: var(--spacing-xl);
-  }
-  
   .order-summary-card {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
-  }
-  
-  .progress-bar {
-    width: calc(100vw - 2 * var(--spacing-lg));
   }
 }

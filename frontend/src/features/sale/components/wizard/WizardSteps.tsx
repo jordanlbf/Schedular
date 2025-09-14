@@ -63,6 +63,13 @@ export function WizardSteps({
     }
   };
 
+  const changePriceForLine = (id: number, newPrice: number) => {
+    const newLines = state.lines.map(line => 
+      line.id === id ? { ...line, price: newPrice } : line
+    );
+    updateField('lines', newLines);
+  };
+
   // Calculate subtotal for products step  
   const subtotal = state.lines.reduce((sum: number, line) => sum + (line.price * line.qty), 0);
 
@@ -84,6 +91,7 @@ export function WizardSteps({
         onAddLine={addLine}
         onChangeQty={changeQty}
         onRemoveLine={removeLineFromCart}
+        onPriceChange={changePriceForLine}
         searchRef={searchRef}
         onNext={navigation.nextStep}
         onPrev={navigation.prevStep}

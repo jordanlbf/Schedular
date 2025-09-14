@@ -165,6 +165,17 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess }: Props) {
           const isOutOfStock = p.stock.status === 'out-of-stock' || p.stock.status === 'discontinued';
           const isAdding = addingProduct === String(p.sku);
           
+          // Get the correct image based on selected color
+          const getProductImage = () => {
+            const selectedColor = selectedColors[String(p.sku)];
+            if (!selectedColor || !p.colors) return p.image;
+            
+            const selectedColorObj = p.colors.find(color => color.value === selectedColor);
+            return selectedColorObj?.image || p.image;
+          };
+          
+          const productImage = getProductImage();
+          
           const getButtonText = () => {
             if (isAdding) return 'Added ✓';
             if (p.stock.status === 'discontinued') return 'Unavailable';
@@ -190,9 +201,13 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess }: Props) {
                   </div>
                 </div>
               </div>
-              {p.image && (
+              {productImage && (
                 <div className="product-image">
-                  <img src={p.image} alt={p.name} />
+                  <img 
+                    key={`product-img-${p.sku}-${selectedColors[String(p.sku)] || 'default'}`}
+                    src={productImage} 
+                    alt={p.name} 
+                  />
                 </div>
               )}
               <div className="price-section">

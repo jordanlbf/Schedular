@@ -18,6 +18,33 @@ function formatPrice(dollars: number) {
   }
 }
 
+function formatSavings(dollars: number) {
+  try {
+    // Fix floating point precision issues first
+    const absAmount = Math.round(Math.abs(dollars) * 100) / 100;
+    
+    if (absAmount >= 10) {
+      // For amounts $10 and above, round to whole dollars
+      return Math.round(absAmount).toLocaleString(undefined, { 
+        style: "currency", 
+        currency: "USD",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      });
+    } else {
+      // For amounts under $10, show up to 2 decimals but clean format
+      return absAmount.toLocaleString(undefined, { 
+        style: "currency", 
+        currency: "USD",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      });
+    }
+  } catch {
+    return `$${Math.round(Math.abs(dollars))}`;
+  }
+}
+
 interface ProductsStepProps {
   lines: Line[];
   catalog: CatalogItem[];
@@ -78,8 +105,18 @@ export default function ProductsStep({
 
         <div className="products-cart-section">
           <div className="form-card sale-items">
-            <div className="form-card-header">
-              <h3>Cart</h3>
+            <div className="form-card-header cart-header">
+              <div className="cart-header-content">
+                <div className="cart-title-spacer"></div>
+                <h3>🛒 Shopping Cart</h3>
+                <div className="cart-item-count-container">
+                  {lines.length > 0 && (
+                    <span className="cart-item-count">
+                      {lines.reduce((total, line) => total + line.qty, 0)} items
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="form-card-body cart-container">
               {lines.length > 0 ? (
@@ -93,22 +130,79 @@ export default function ProductsStep({
                     />
                   </div>
                   <div className="cart-summary">
-                    <div className="summary-details">
-                      <span className="summary-count">
-                        {lines.reduce((total, line) => total + line.qty, 0)} item{lines.reduce((total, line) => total + line.qty, 0) !== 1 ? 's' : ''}
+                    <div className="summary-row summary-items">
+                      <span className="summary-label">Items:</span>
+                      <span className="summary-value">
+                        {lines.reduce((total, line) => total + line.qty, 0)}
                       </span>
                     </div>
-                    <div className="summary-total">
-                      <span>Subtotal:</span>
-                      <span>{formatPrice(subtotal)}</span>
-                    </div>
+                    
+                    {(() => {
+                      const rrpTotal = Math.round(lines.reduce((total, line) => {
+                        const product = catalog.find(p => p.sku === line.sku);
+                        return total + ((product?.price || line.price) * line.qty);
+                      }, 0) * 100) / 100;
+                      const currentTotal = Math.round(subtotal * 100) / 100;
+                      const totalSavings = Math.round((rrpTotal - currentTotal) * 100) / 100;
+                      
+                      // Debug: console.log('RRP Total:', rrpTotal, 'Current Total:', currentTotal, 'Savings:', totalSavings);
+                      
+                      return (
+                        <>
+                          {rrpTotal !== currentTotal && (
+                            <div className="discount-summary-section">
+                              <div className="summary-row summary-original">
+                                <span className="summary-label">Original Total:</span>
+                                <span className="summary-value original-price">{formatPrice(rrpTotal)}</span>
+                              </div>
+                              <div className="summary-row summary-discount">
+                                <span className="summary-label discount-label">
+                                  {totalSavings > 0 ? (
+                                    <>
+                                      <span className="discount-icon">🎉</span>
+                                      You Save:
+                                    </>
+                                  ) : (
+                                    'Premium Added:'
+                                  )}
+                                </span>
+                                <span className={`summary-value discount-amount ${totalSavings > 0 ? 'savings' : 'premium'}`}>
+                                  {totalSavings > 0 ? '-' : '+'}{formatSavings(totalSavings)}
+                                </span>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {/* Line Item Breakdown */}
+                          <div className="line-items-breakdown">
+                            {lines.map((line) => (
+                              <div key={line.id} className="summary-row line-item-row">
+                                <span className="summary-label line-item-label">
+                                  {line.name} × {line.qty}
+                                </span>
+                                <span className="summary-value line-item-value">
+                                  {formatPrice(line.price * line.qty)}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          <div className="summary-row summary-total">
+                            <span className="summary-label">Subtotal:</span>
+                            <span className="summary-value summary-price">{formatPrice(currentTotal)}</span>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                 </>
               ) : (
                 <div className="empty-cart">
                   <div className="empty-cart-icon">🛒</div>
-                  <h4>Your cart is empty</h4>
-                  <p>Search and add products from the catalog to get started</p>
+                  <h4>Your Cart is Empty</h4>
+                  <div className="empty-cart-hint">
+                    <span>💡 Tip: Use the search bar to quickly find products</span>
+                  </div>
                 </div>
               )}
             </div>

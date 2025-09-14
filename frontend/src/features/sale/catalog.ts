@@ -19,8 +19,8 @@ export const CATALOG: CatalogItem[] = [
     image: "/images/products/leather-sofa-tan.png",
     stock: { status: 'low-stock', quantity: 3 },
     colors: [
-      { name: "Tan", value: "#CD853F" },
-      { name: "Black", value: "#1A1A1A" }
+      { name: "Tan", value: "#CD853F", image: "/images/products/leather-sofa-tan.png" },
+      { name: "Black", value: "#1A1A1A", image: "/images/products/leather-sofa-black.png" }
     ]
   },
   { 

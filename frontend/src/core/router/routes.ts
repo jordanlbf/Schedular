@@ -15,11 +15,6 @@ export const routeConfig: RouteConfig[] = [
     name: "Home"
   },
   {
-    path: "/demo",
-    component: lazy(() => import("@/app/pages/ColorDemo")),
-    name: "Color Demo"
-  },
-  {
     path: "/pos",
     component: lazy(() => import("@/features/frontdesk/FrontDesk")),
     name: "Front Desk"

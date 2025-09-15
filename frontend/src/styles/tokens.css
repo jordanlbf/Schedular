@@ -74,34 +74,34 @@ html.theme-light {
   color-scheme: light;
 
   /* Backgrounds */
-  --bg: #f8fafc;                 /* app background */
-  --bg-overlay: rgba(0, 0, 0, 0.02);
+  --bg: #fafbfc;                 /* app background - slightly warmer */
+  --bg-overlay: rgba(0, 0, 0, 0.03);
 
   /* Panels */
   --panel: #ffffff;              /* main panels/cards */
-  --panel-elev: #f1f5f9;         /* elevated surfaces */
+  --panel-elev: #f4f6f8;         /* elevated surfaces - more contrast */
   --panel-hover: #f8fafc;        /* hover surfaces */
-  --panel-border: rgba(0, 0, 0, 0.03);       /* ultra-subtle panel borders */
+  --panel-border: rgba(0, 0, 0, 0.08);       /* stronger panel borders for definition */
 
   /* Text */
-  --text: #1e293b;               /* primary text */
-  --text-subtle: #475569;        /* secondary text */
-  --muted: #64748b;              /* muted */
-  --muted-light: #94a3b8;        /* very subtle */
+  --text: #1a202c;               /* primary text - higher contrast */
+  --text-subtle: #4a5568;        /* secondary text - stronger contrast */
+  --muted: #718096;              /* muted - better readability */
+  --muted-light: #a0aec0;        /* very subtle - still accessible */
 
   /* Borders */
-  --border: rgba(0, 0, 0, 0.06);             /* very light borders */
-  --border-hover: rgba(14, 165, 233, 0.2);   /* accent hover borders */
-  --border-gradient: rgba(239, 68, 68, 0.2);
+  --border: rgba(0, 0, 0, 0.12);             /* stronger borders for clarity */
+  --border-hover: rgba(14, 165, 233, 0.25);   /* more visible accent hover borders */
+  --border-gradient: rgba(239, 68, 68, 0.25);
 
   /* Accents (light-specific where different) */
-  --accent-secondary: #0ea5e9;   /* headers in light mode */
+  --accent-secondary: #0284c7;   /* darker blue for better contrast */
 
   /* Shadows */
-  --shadow-ambient: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-glass:   0 2px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  --shadow-float:   0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.3);
+  --shadow-ambient: 0 2px 8px rgba(0, 0, 0, 0.12);
+  --shadow-glass:   0 2px 8px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --shadow-float:   0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.35);
 
   /* Focus ring */
   --ring: rgba(239, 68, 68, 0.3);

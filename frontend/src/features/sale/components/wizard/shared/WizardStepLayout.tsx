@@ -30,9 +30,6 @@ export function WizardStepLayout({
       <div className="wizard-step">
         <div className="step-content">
           <div className="step-main">
-            <div className="wizard-page-header compact">
-              <h2 data-step={stepNumber} className="sr-only">{title}</h2>
-            </div>
 
             {children}
             

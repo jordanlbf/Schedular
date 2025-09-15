@@ -4,46 +4,7 @@ import ProductPicker from '../ProductPicker';
 import CartTable from '../CartTable';
 import { WizardStepLayout } from './shared/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
-
-function formatPrice(dollars: number) {
-  try {
-    return dollars.toLocaleString(undefined, { 
-      style: "currency", 
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    });
-  } catch {
-    return `$${Math.round(dollars)}`;
-  }
-}
-
-function formatSavings(dollars: number) {
-  try {
-    // Fix floating point precision issues first
-    const absAmount = Math.round(Math.abs(dollars) * 100) / 100;
-    
-    if (absAmount >= 10) {
-      // For amounts $10 and above, round to whole dollars
-      return Math.round(absAmount).toLocaleString(undefined, { 
-        style: "currency", 
-        currency: "USD",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      });
-    } else {
-      // For amounts under $10, show up to 2 decimals but clean format
-      return absAmount.toLocaleString(undefined, { 
-        style: "currency", 
-        currency: "USD",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2
-      });
-    }
-  } catch {
-    return `$${Math.round(Math.abs(dollars))}`;
-  }
-}
+import { formatPrice, formatSavings } from '@/shared/utils/price';
 
 interface ProductsStepProps {
   lines: Line[];
@@ -144,9 +105,7 @@ export default function ProductsStep({
                       }, 0) * 100) / 100;
                       const currentTotal = Math.round(subtotal * 100) / 100;
                       const totalSavings = Math.round((rrpTotal - currentTotal) * 100) / 100;
-                      
-                      // Debug: console.log('RRP Total:', rrpTotal, 'Current Total:', currentTotal, 'Savings:', totalSavings);
-                      
+
                       return (
                         <>
                           {rrpTotal !== currentTotal && (

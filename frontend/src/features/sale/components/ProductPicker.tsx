@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import type { Product, StockStatus, ColorOption } from '@/shared/types';
+import type { Product } from '@/shared/types';
+import { formatPrice } from '@/shared/utils/price';
+import { StockBadge } from '@/shared/components/StockBadge';
+import { ColorSelector } from '@/shared/components/ColorSelector';
 
 type CatalogItem = Product;
 
@@ -8,88 +11,20 @@ type Props = {
   catalog: CatalogItem[];
   onAdd: (sku: CatalogItem["sku"], color?: string) => void;
   onAddSuccess?: (productName: string) => void;
+  inputRef?: React.RefObject<HTMLInputElement> | React.MutableRefObject<HTMLInputElement | null>;
 };
 
-function formatMoney(dollars: number) {
-  try {
-    return dollars.toLocaleString(undefined, { 
-      style: "currency", 
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    });
-  } catch {
-    return `$${Math.round(dollars)}`;
-  }
-}
 
-function StockBadge({ stock }: { stock: CatalogItem['stock'] }) {
-  const getBadgeInfo = () => {
-    switch (stock.status) {
-      case 'in-stock':
-        return { text: 'In Stock', className: 'in-stock' };
-      case 'low-stock':
-        return { text: 'Low Stock', className: 'low-stock' };
-      case 'out-of-stock':
-        return { text: 'No Stock', className: 'out-of-stock' };
-      case 'discontinued':
-        return { text: 'Discontinued', className: 'discontinued' };
-      default:
-        return { text: '', className: '' };
-    }
-  };
-
-  const { text, className } = getBadgeInfo();
-  if (!text) return null;
-
-  return (
-    <span className={`stock-badge ${className}`}>
-      {text}
-    </span>
-  );
-}
-
-function ColorSelector({ colors, selectedColor, onColorSelect }: {
-  colors: CatalogItem['colors'];
-  selectedColor?: string;
-  onColorSelect: (color: string) => void;
-}) {
-  if (!colors || colors.length === 0) return null;
-
-  return (
-    <div className="color-selector">
-      {selectedColor && (
-        <div className="selected-color-name">
-          {colors.find(c => c.value === selectedColor)?.name}
-        </div>
-      )}
-      <div className="color-options">
-        {colors.map((color) => (
-          <button
-            key={color.value}
-            type="button"
-            className={`color-option ${selectedColor === color.value ? 'selected' : ''}`}
-            style={{ backgroundColor: color.value }}
-            onClick={() => onColorSelect(color.value)}
-            aria-label={`Select ${color.name} color`}
-            title={color.name}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-
-export default function ProductPicker({ catalog, onAdd, onAddSuccess }: Props) {
+export default function ProductPicker({ catalog, onAdd, onAddSuccess: _onAddSuccess, inputRef }: Props) {
   const [q, setQ] = useState("");
   const [addingProduct, setAddingProduct] = useState<string | null>(null);
   const [selectedColors, setSelectedColors] = useState<Record<string, string>>({});
-  const inputRef = useRef<HTMLInputElement>(null);
+  const internalInputRef = useRef<HTMLInputElement>(null);
+  const finalInputRef = inputRef || internalInputRef;
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    finalInputRef.current?.focus();
+  }, [finalInputRef]);
 
   useEffect(() => {
     const defaultColors: Record<string, string> = {};
@@ -125,7 +60,7 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess }: Props) {
     const colorName = selectedColor && product.colors ? 
       product.colors.find(c => c.value === selectedColor)?.name : undefined;
     
-    onAdd(sku, colorName);
+    onAdd(String(sku), colorName);
     
     setTimeout(() => {
       setAddingProduct(null);
@@ -136,7 +71,7 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess }: Props) {
     if (e.key === "Enter" && filtered.length > 0) {
       handleAddProduct(filtered[0].sku);
       setQ("");
-      inputRef.current?.focus();
+      finalInputRef.current?.focus();
     }
   };
 
@@ -145,7 +80,7 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess }: Props) {
       <div className="product-search">
         <input
           id="product-search-input"
-          ref={inputRef}
+          ref={finalInputRef}
           className="form-input"
           placeholder="Search products..."
           value={q}
@@ -211,7 +146,7 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess }: Props) {
                 </div>
               )}
               <div className="price-section">
-                <div className="price">{formatMoney(p.price)}</div>
+                <div className="price">{formatPrice(p.price)}</div>
               </div>
 
               {p.colors && p.colors.length > 0 && (

@@ -10,7 +10,6 @@ export function usePageReloadHandler(clearDraft: () => void, toast: any) {
     if (wasReloaded) {
       sessionStorage.removeItem('schedulerPageReloaded');
       clearDraft();
-      // Removed toast notification for page refresh
     }
 
     window.addEventListener('beforeunload', handlePageReload);

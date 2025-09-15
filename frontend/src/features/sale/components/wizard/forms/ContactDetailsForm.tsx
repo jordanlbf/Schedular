@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { Customer, SecondPerson } from '@/shared/types';
 import { FormField } from '@/shared/components/FormField';
+import { formatPhone } from '@/shared/utils/phone';
 
 interface ContactDetailsFormProps {
   customer: Customer;
@@ -16,20 +17,6 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
   const isComplete = useMemo(() => {
     return !!(customer.firstName?.trim() && customer.lastName?.trim() && customer.phone?.trim());
   }, [customer.firstName, customer.lastName, customer.phone]);
-  
-  const formatPhone = (value: string) => {
-    let formatted = value.replace(/\D/g, '');
-    if (formatted.length > 0) {
-      if (formatted.length <= 4) {
-        return formatted;
-      } else if (formatted.length <= 7) {
-        return formatted.slice(0, 4) + ' ' + formatted.slice(4);
-      } else {
-        return formatted.slice(0, 4) + ' ' + formatted.slice(4, 7) + ' ' + formatted.slice(7, 10);
-      }
-    }
-    return formatted;
-  };
 
   // Compute full name for backwards compatibility
   const updateCustomer = (updates: Partial<Customer>) => {

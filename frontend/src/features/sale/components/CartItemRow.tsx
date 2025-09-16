@@ -13,8 +13,17 @@ interface CartItemRowProps {
   onPriceChange?: (id: number, newPrice: number) => void;
 }
 
-// Helper function to map color names to actual colors
-const getColorValue = (colorName: string): string => {
+// Helper function to get color value from catalog or fallback to hardcoded values
+const getColorValue = (colorName: string, originalProduct?: any): string => {
+  // First try to get the color from the actual product catalog
+  if (originalProduct?.colors) {
+    const catalogColor = originalProduct.colors.find((color: { name: string; value: string }) => color.name === colorName);
+    if (catalogColor?.value) {
+      return catalogColor.value;
+    }
+  }
+
+  // Fallback to hardcoded mapping for colors not in catalog
   const colorMap: Record<string, string> = {
     'Red': '#ef4444',
     'Blue': '#3b82f6',
@@ -29,11 +38,16 @@ const getColorValue = (colorName: string): string => {
     'Grey': '#6b7280',
     'Black': '#1f2937',
     'White': '#f9fafb',
-    'Brown': '#a3a3a3',
+    'Brown': '#8b4513',
+    'Tan': '#CD853F',
     'Navy': '#1e3a8a',
     'Maroon': '#7f1d1d',
     'Silver': '#d1d5db',
-    'Gold': '#fbbf24'
+    'Gold': '#fbbf24',
+    'Natural Oak': '#C8956D',
+    'Dark Walnut': '#4A2C17',
+    'Arctic White': '#F8F8FF',
+    'Dove Gray': '#696969'
   };
 
   return colorMap[colorName] || colorMap[colorName.charAt(0).toUpperCase() + colorName.slice(1)] || '#6b7280';
@@ -128,7 +142,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
             <div className="cart-item-color-swatch">
               <div
                 className="color-dot"
-                style={{ backgroundColor: getColorValue(line.color) }}
+                style={{ backgroundColor: getColorValue(line.color, originalProduct) }}
                 title={line.color}
               />
               <span className="color-name">{line.color}</span>

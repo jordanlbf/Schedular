@@ -5,6 +5,8 @@ __pycache__/
 *.sqlite3
 *.log
 *.env
+dev.db
+*.db
 
 # --- Node/Frontend ---
 frontend/node_modules/

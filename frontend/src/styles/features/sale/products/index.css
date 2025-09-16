@@ -1,0 +1,17 @@
+/* Product Components - Modular Structure */
+
+/* Core layout and search */
+@import './product-search.css';
+@import './product-grid.css';
+
+/* Product cards and styling */
+@import './product-card.css';
+@import './product-stock.css';
+@import './product-colors.css';
+
+/* Interactions and states */
+@import './product-animations.css';
+@import './product-empty-state.css';
+
+/* Responsive design */
+@import './product-responsive.css';

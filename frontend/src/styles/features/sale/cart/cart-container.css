@@ -24,7 +24,7 @@
 }
 
 .products-cart-section .shopping-cart-header {
-  padding: var(--spacing-4xl) var(--spacing-5xl) var(--spacing-lg);
+  padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
   background: linear-gradient(135deg,
     rgba(219, 234, 254, 0.4) 0%,
     rgba(147, 197, 253, 0.2) 100%
@@ -33,7 +33,9 @@
   border-bottom: none;
   border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
   box-sizing: border-box;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 html.theme-dark .shopping-cart-header {

@@ -136,56 +136,60 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
         <h4 className="cart-item-name" title={line.name}>
           {line.name}
         </h4>
-        <div className="cart-item-details-row">
-          <div className="cart-item-sku">SKU: {line.sku}</div>
-          {line.color && (
-            <div className="cart-item-color-swatch">
-              <div
-                className="color-dot"
-                style={{ backgroundColor: getColorValue(line.color, originalProduct) }}
-                title={line.color}
-              />
-              <span className="color-name">{line.color}</span>
-            </div>
-          )}
-        </div>
+        <span className="sku">{line.sku}</span>
+        {product?.stock && (
+          <div className="cart-item-stock">
+            <StockBadge stock={product.stock} />
+          </div>
+        )}
+        {line.color && (
+          <div className="cart-item-color-swatch">
+            <div
+              className="color-dot"
+              style={{ backgroundColor: getColorValue(line.color, originalProduct) }}
+              title={line.color}
+            />
+            <span className="color-name">{line.color}</span>
+          </div>
+        )}
       </div>
 
-      {/* Column 3: Stock/Status Chips */}
+      {/* Column 3: Status Chips */}
       <div className="cart-item-status">
         <div className="status-chips">
-          {product?.stock && <StockBadge stock={product.stock} />}
           {isDiscounted && (
             <span className="discount-chip">
               Save {formatPrice(discount)}
             </span>
           )}
         </div>
+      </div>
+
+      {/* Column 4: Quantity Controls & Remove */}
+      <div className="cart-item-quantity-section">
+        <div className="cart-item-quantity">
+          <button
+            className="qty-btn qty-decrease"
+            onClick={handleQuantityDecrease}
+            aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
+          >
+            −
+          </button>
+          <span className="qty-value">{line.qty}</span>
+          <button
+            className="qty-btn qty-increase"
+            onClick={handleQuantityIncrease}
+            aria-label="Increase quantity"
+          >
+            +
+          </button>
+        </div>
         <button
-          className="remove-btn-text"
+          className="remove-btn-text remove-btn-centered"
           onClick={handleRemove}
           aria-label="Remove item from cart"
         >
           Remove
-        </button>
-      </div>
-
-      {/* Column 4: Quantity Controls */}
-      <div className="cart-item-quantity">
-        <button
-          className="qty-btn qty-decrease"
-          onClick={handleQuantityDecrease}
-          aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
-        >
-          −
-        </button>
-        <span className="qty-value">{line.qty}</span>
-        <button
-          className="qty-btn qty-increase"
-          onClick={handleQuantityIncrease}
-          aria-label="Increase quantity"
-        >
-          +
         </button>
       </div>
 

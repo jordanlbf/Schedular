@@ -6,14 +6,14 @@
 /* Component styles */
 @import url('./components/panels.css');
 @import url('./components/buttons.css');
-@import url('./components/forms.css');
+@import url('./components/forms/index.css');
 @import url('./components/toast.css');
 @import url('./components/progress.css');
 @import url('./components/utilities.css');
 
 /* Feature-specific styles */
 @import url('./features/sale/products.css');
-@import url('./features/sale/cart.css');
+@import url('./features/sale/cart/index.css');
 @import url('./features/sale/wizard.css');
 @import url('./features/sale/products-layout.css');
 

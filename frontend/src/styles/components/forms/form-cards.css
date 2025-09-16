@@ -1,0 +1,185 @@
+/* Form Components */
+
+/* Quantity control */
+.qty {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.qty button {
+  padding: 4px 10px;
+  border: 0;
+  background: transparent;
+}
+.qty input {
+  width: 44px;
+  text-align: center;
+  border: 0;
+  background: transparent;
+}
+
+/* Form cards */
+.form-card {
+  background: var(--panel);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: var(--spacing-3xl);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08), 0 6px 24px rgba(0, 0, 0, 0.06);
+  border-color: rgba(14, 165, 233, 0.08);
+}
+
+.form-card:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  border-color: rgba(14, 165, 233, 0.4) !important;
+}
+
+.form-card:focus-within {
+  border-color: rgba(14, 165, 233, 0.3) !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.form-card-header {
+  padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
+  background: linear-gradient(135deg,
+    rgba(219, 234, 254, 0.4) 0%,
+    rgba(147, 197, 253, 0.2) 100%
+  );
+  position: relative;
+  border-bottom: none;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+
+html.theme-dark .form-card-header {
+  background: linear-gradient(135deg,
+    rgba(14, 165, 233, 0.08) 0%,
+    rgba(59, 130, 246, 0.04) 100%
+  );
+}
+
+/* Semantic header variations */
+.form-card-header.success {
+  background: linear-gradient(135deg,
+    var(--success-light) 0%,
+    rgba(16, 185, 129, 0.1) 100%
+  );
+}
+
+html.theme-dark .form-card-header.success {
+  background: linear-gradient(135deg,
+    rgba(16, 185, 129, 0.08) 0%,
+    rgba(5, 150, 105, 0.04) 100%
+  );
+}
+
+.form-card-header.warning {
+  background: linear-gradient(135deg,
+    var(--warning-light) 0%,
+    rgba(245, 158, 11, 0.1) 100%
+  );
+}
+
+html.theme-dark .form-card-header.warning {
+  background: linear-gradient(135deg,
+    rgba(245, 158, 11, 0.08) 0%,
+    rgba(217, 119, 6, 0.04) 100%
+  );
+}
+
+
+.form-card-header h3 {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  position: relative;
+  letter-spacing: var(--tracking-wide);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  line-height: var(--leading-tight);
+  text-wrap: balance;
+  text-transform: uppercase;
+}
+
+/* Item count badge for Selected Items header */
+.products-cart-section .form-card-header h3 {
+  position: relative;
+}
+
+
+/* Professional POS sale items styling */
+.sale-items .form-card-header {
+  background: var(--panel-hover);
+  border-bottom: 1px solid var(--border);
+  padding: var(--spacing-lg) var(--spacing-xl);
+}
+
+.sale-items .form-card-header h3 {
+  color: var(--text);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  margin: 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+
+
+
+.form-card-body {
+  padding: var(--spacing-4xl);
+  background: var(--panel);
+  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+}
+
+/* Form cards grid layout */
+.form-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-bottom: var(--spacing-4xl);
+  width: min(99.5vw, 2200px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+
+
+
+
+
+/* Form card animations */
+.form-cards-grid .form-card:first-child {
+  animation: slideUpForm 0.4s ease-out;
+}
+
+.form-cards-grid .form-card:last-child {
+  animation: slideUpForm 0.4s ease-out;
+  animation-delay: 0.1s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes slideUpForm {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

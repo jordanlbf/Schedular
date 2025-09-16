@@ -3,6 +3,7 @@ import type { Line } from "../types";
 import { CATALOG } from "../catalog";
 import type { Product } from '@/shared/types';
 import { formatPrice } from '@/shared/utils/price';
+import { StockBadge } from '@/shared/components/StockBadge';
 
 interface CartItemRowProps {
   line: Line;
@@ -11,6 +12,32 @@ interface CartItemRowProps {
   onRemove: (id: number) => void;
   onPriceChange?: (id: number, newPrice: number) => void;
 }
+
+// Helper function to map color names to actual colors
+const getColorValue = (colorName: string): string => {
+  const colorMap: Record<string, string> = {
+    'Red': '#ef4444',
+    'Blue': '#3b82f6',
+    'Green': '#10b981',
+    'Yellow': '#f59e0b',
+    'Purple': '#8b5cf6',
+    'Pink': '#ec4899',
+    'Orange': '#f97316',
+    'Teal': '#14b8a6',
+    'Indigo': '#6366f1',
+    'Gray': '#6b7280',
+    'Grey': '#6b7280',
+    'Black': '#1f2937',
+    'White': '#f9fafb',
+    'Brown': '#a3a3a3',
+    'Navy': '#1e3a8a',
+    'Maroon': '#7f1d1d',
+    'Silver': '#d1d5db',
+    'Gold': '#fbbf24'
+  };
+
+  return colorMap[colorName] || colorMap[colorName.charAt(0).toUpperCase() + colorName.slice(1)] || '#6b7280';
+};
 
 export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChange }: CartItemRowProps) {
   const [isEditingPrice, setIsEditingPrice] = useState(false);
@@ -71,9 +98,9 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
   }, [line.id, onRemove]);
 
   return (
-    <div className="cart-item-modern">
-      {/* Product Image */}
-      <div className="cart-item-image">
+    <div className="cart-item-grid">
+      {/* Column 1: Thumbnail */}
+      <div className="cart-item-thumbnail">
         {productImage ? (
           <img
             key={`cart-img-${line.sku}-${line.color || 'default'}-${productImage}`}
@@ -83,90 +110,111 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
           />
         ) : (
           <div className="cart-item-placeholder">
-            <span>📦</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+            </svg>
           </div>
         )}
       </div>
 
-      {/* Product Details Section */}
-      <div className="cart-item-details">
-        {/* Product Info */}
-        <div className="cart-item-info">
-          <h4 className="cart-item-name">
-            {line.color ? `${line.name} (${line.color})` : line.name}
-          </h4>
+      {/* Column 2: Product Meta */}
+      <div className="cart-item-meta">
+        <h4 className="cart-item-name" title={line.name}>
+          {line.name}
+        </h4>
+        <div className="cart-item-details-row">
           <div className="cart-item-sku">SKU: {line.sku}</div>
+          {line.color && (
+            <div className="cart-item-color-swatch">
+              <div
+                className="color-dot"
+                style={{ backgroundColor: getColorValue(line.color) }}
+                title={line.color}
+              />
+              <span className="color-name">{line.color}</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Column 3: Stock/Status Chips */}
+      <div className="cart-item-status">
+        <div className="status-chips">
+          {product?.stock && <StockBadge stock={product.stock} />}
+          {isDiscounted && (
+            <span className="discount-chip">
+              Save {formatPrice(discount)}
+            </span>
+          )}
+        </div>
+        <button
+          className="remove-btn-text"
+          onClick={handleRemove}
+          aria-label="Remove item from cart"
+        >
+          Remove
+        </button>
+      </div>
+
+      {/* Column 4: Quantity Controls */}
+      <div className="cart-item-quantity">
+        <button
+          className="qty-btn qty-decrease"
+          onClick={handleQuantityDecrease}
+          aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
+        >
+          −
+        </button>
+        <span className="qty-value">{line.qty}</span>
+        <button
+          className="qty-btn qty-increase"
+          onClick={handleQuantityIncrease}
+          aria-label="Increase quantity"
+        >
+          +
+        </button>
+      </div>
+
+      {/* Column 5: Price */}
+      <div className="cart-item-price">
+        <div className="price-main">
+          {isEditingPrice ? (
+            <input
+              type="number"
+              className="price-input"
+              value={tempPrice}
+              onChange={(e) => setTempPrice(e.target.value)}
+              onBlur={handlePriceSubmit}
+              onKeyDown={handlePriceKeyDown}
+              step="0.01"
+              min="0"
+              autoFocus
+            />
+          ) : (
+            <div
+              className="price-value price-editable"
+              onClick={() => setIsEditingPrice(true)}
+              title="Click to edit price"
+            >
+              {formatPrice(totalPrice)}
+            </div>
+          )}
         </div>
 
-        {/* Quantity Controls */}
-        <div className="cart-item-quantity">
-          <button
-            className="qty-btn qty-decrease"
-            onClick={handleQuantityDecrease}
-            aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
-          >
-            −
-          </button>
-          <span className="qty-value">{line.qty}</span>
-          <button
-            className="qty-btn qty-increase"
-            onClick={handleQuantityIncrease}
-            aria-label="Increase quantity"
-          >
-            +
-          </button>
-        </div>
-
-        {/* Price Section */}
-        <div className="cart-item-price-section">
-          <div className="cart-item-pricing">
-            <div className="price-column">
-              <div className="price-label">RRP</div>
-              <div className={`price-value ${discount > 0 ? 'original-price' : ''}`}>
-                {formatPrice(rrpPrice)}
+        {(rrpPrice !== line.price || isDiscounted) && (
+          <div className="price-meta">
+            {rrpPrice !== line.price && (
+              <div className="price-rrp">
+                RRP {formatPrice(rrpPrice)}
               </div>
-            </div>
-            <div className="price-column">
-              <div className="price-label">Savings</div>
-              <div className={`price-value ${isDiscounted ? 'discount-amount' : 'no-discount'}`}>
-                {formatPrice(discount)}
+            )}
+            {isDiscounted && (
+              <div className="price-savings">
+                Save {formatPrice(discount)}
               </div>
-            </div>
-            <div className="price-column">
-              <div className="price-label">Price</div>
-              {isEditingPrice ? (
-                <input
-                  type="number"
-                  className="price-input"
-                  value={tempPrice}
-                  onChange={(e) => setTempPrice(e.target.value)}
-                  onBlur={handlePriceSubmit}
-                  onKeyDown={handlePriceKeyDown}
-                  step="0.01"
-                  min="0"
-                  autoFocus
-                />
-              ) : (
-                <div 
-                  className="price-value price-editable"
-                  onClick={() => setIsEditingPrice(true)}
-                  title="Click to edit price"
-                >
-                  {formatPrice(totalPrice)}
-                </div>
-              )}
-            </div>
+            )}
           </div>
-
-          {/* Remove Button */}
-          <button 
-            className="cart-item-remove"
-            onClick={handleRemove}
-            aria-label="Remove item from cart"
-          >
-            Remove
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );

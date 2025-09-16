@@ -2,12 +2,8 @@
 
 /* Responsive breakpoints */
 @media (max-width: 1279px) {
-  .sale-grid { 
-    grid-template-columns: 1fr 1.6fr 1fr; 
-  }
-  
-  .product-grid { 
-    grid-template-columns: repeat(2, minmax(0,1fr)); 
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
   }
 }
 
@@ -60,16 +56,8 @@
 }
 
 @media (max-width: 991px) {
-  .sale-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .col-right .sticky { 
-    position: static; 
-  }
-  
-  .product-grid { 
-    grid-template-columns: repeat(2, minmax(0,1fr)); 
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
   }
 }
 
@@ -146,11 +134,7 @@
 }
 
 @media (max-width: 599px) {
-  .product-grid { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .summary-actions { 
-    grid-template-columns: 1fr; 
+  .product-grid {
+    grid-template-columns: 1fr;
   }
 }

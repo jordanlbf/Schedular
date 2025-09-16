@@ -67,72 +67,64 @@ export default function ProductsStep({
         </div>
 
         <div className="products-cart-section">
-          <div className="form-card sale-items">
-            <div className="form-card-header cart-header">
-              <div className="cart-header-content">
-                <h3>🛒 Shopping Cart</h3>
-                {lines.length > 0 && (
-                  <span className="cart-item-count">
-                    {itemCount} {itemCount === 1 ? 'item' : 'items'}
+          <div className="shopping-cart-section">
+            <div className="shopping-cart-header">
+              <h3>
+                Shopping Cart
+                {itemCount > 0 && (
+                  <span className="cart-item-badge">
+                    {itemCount}
                   </span>
                 )}
-              </div>
+              </h3>
             </div>
-            <div className="form-card-body cart-container">
+            <div className="shopping-cart-body">
               {lines.length > 0 ? (
                 <>
                   <div className="cart-items-section">
-                    <CartTable 
-                      lines={lines} 
-                      onChangeQty={onChangeQty} 
+                    <CartTable
+                      lines={lines}
+                      onChangeQty={onChangeQty}
                       onRemove={onRemoveLine}
                       onPriceChange={onPriceChange}
                     />
                   </div>
-                  <div className="cart-summary">
-                    {/* Line Item Breakdown */}
-                    <div className="line-items-breakdown">
-                      {lines.map((line) => (
-                        <div key={line.id} className="summary-row line-item-row">
-                          <span className="summary-label line-item-label">
-                            {line.name} × {line.qty}
-                          </span>
-                          <span className="summary-value line-item-value">
-                            {formatPrice(line.price * line.qty)}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    {(() => {
-                      const rrpTotal = Math.round(lines.reduce((total, line) => {
-                        const product = catalog.find(p => p.sku === line.sku);
-                        return total + ((product?.price || line.price) * line.qty);
-                      }, 0) * 100) / 100;
-                      const currentTotal = Math.round(subtotal * 100) / 100;
-                      const totalSavings = Math.round((rrpTotal - currentTotal) * 100) / 100;
 
-                      return (
-                        <>
-                          {totalSavings > 0 && (
-                            <div className="summary-row summary-discount">
+                  <div className="cart-footer">
+                    <div className="cart-totals">
+                      <div className="totals-summary">
+                        <div className="summary-row">
+                          <span className="summary-label">Items ({itemCount})</span>
+                          <span className="summary-value">{formatPrice(subtotal)}</span>
+                        </div>
+
+                        {(() => {
+                          const rrpTotal = Math.round(lines.reduce((total, line) => {
+                            const product = catalog.find(p => p.sku === line.sku);
+                            return total + ((product?.price || line.price) * line.qty);
+                          }, 0) * 100) / 100;
+                          const currentTotal = Math.round(subtotal * 100) / 100;
+                          const totalSavings = Math.round((rrpTotal - currentTotal) * 100) / 100;
+
+                          return totalSavings > 0 ? (
+                            <div className="summary-row">
                               <span className="summary-label discount-label">
                                 <span className="discount-icon">💰</span>
-                                You Save
+                                Discount
                               </span>
-                              <span className="summary-value discount-amount savings">
+                              <span className="summary-value discount-amount">
                                 -{formatSavings(totalSavings)}
                               </span>
                             </div>
-                          )}
-                          
-                          <div className="summary-row summary-total">
-                            <span className="summary-label">Subtotal</span>
-                            <span className="summary-value summary-price">{formatPrice(currentTotal)}</span>
-                          </div>
-                        </>
-                      );
-                    })()}
+                          ) : null;
+                        })()}
+
+                        <div className="summary-row summary-total">
+                          <span className="summary-label">Subtotal</span>
+                          <span className="summary-value summary-price">{formatPrice(subtotal)}</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </>
               ) : (

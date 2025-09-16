@@ -30,8 +30,3 @@
   cursor: help; 
 }
 
-/* Utility classes */
-.muted {
-  color: var(--muted);
-  font-size: var(--font-size-xs);
-}

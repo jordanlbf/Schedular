@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from app.api import routes_health
+
 
 app = FastAPI(title="Schedular API", version="0.1.0")
+
+app.include_router(routes_health.router, prefix="/api/v1", tags=["system"])
 
 # Allow Vite dev server
 app.add_middleware(

@@ -1,13 +1,12 @@
 @media (max-width: 768px) {
   .cart-item-grid {
-    grid-template-columns: 80px 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 110px 1fr;
+    grid-template-rows: auto auto;
     grid-template-areas:
       "thumbnail meta"
-      "thumbnail remove"
       "quantity price";
-    gap: var(--spacing-xs) var(--spacing-md);
-    padding: var(--spacing-lg) var(--spacing-2xl);
+    gap: var(--spacing-md) var(--spacing-lg); /* Maintain good spacing */
+    padding: var(--spacing-xl) var(--spacing-2xl); /* Increased vertical padding */
     background: transparent;
     border: none;
     border-bottom: 1px solid var(--border);
@@ -15,7 +14,8 @@
 
   .cart-item-thumbnail {
     grid-area: thumbnail;
-    align-self: start;
+    width: 110px;
+    height: 100%;
   }
 
   .cart-item-meta {
@@ -23,48 +23,24 @@
     max-width: none;
   }
 
-  .cart-item-status {
-    grid-area: remove;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-  }
-
-  .status-chips {
-    flex-direction: row;
-    align-items: center;
-    margin-right: var(--spacing-sm);
-  }
+  /* Status column removed - integrated into price block */
 
   .cart-item-quantity-section {
     grid-area: quantity;
     justify-self: start;
     flex-direction: row;
     align-items: center;
-    gap: var(--spacing-md);
   }
 
   .cart-item-quantity {
     width: 96px;
   }
 
-  .remove-btn-centered {
-    margin-top: 0;
-  }
-
   .cart-item-price {
     grid-area: price;
-    align-items: center;
-    text-align: center;
-  }
-
-  .price-main {
-    justify-content: center;
-  }
-
-  .price-meta {
-    align-items: center;
+    align-items: flex-end;
+    justify-self: end;
+    min-width: 100px;
   }
 
   .cart-item-color-swatch {
@@ -84,17 +60,16 @@
 @media (max-width: 640px) {
   .cart-item-grid {
     padding: var(--spacing-lg) var(--spacing-xl);
-    grid-template-columns: 72px 1fr;
+    grid-template-columns: 90px 1fr;
   }
 
   .cart-item-thumbnail {
-    width: 72px;
-    height: 72px;
+    width: 90px;
+    height: 100%;
   }
 
   .cart-item-quantity-section {
     flex-direction: row;
-    gap: var(--spacing-sm);
   }
 
   .cart-item-quantity {
@@ -112,14 +87,7 @@
     font-size: var(--text-xs);
   }
 
-  .status-chips {
-    gap: var(--spacing-xs);
-  }
-
-  .discount-chip {
-    font-size: 9px;
-    padding: 1px var(--spacing-xs);
-  }
+  /* Status chips removed - integrated into price block */
 
   .cart-totals {
     padding: var(--spacing-sm) var(--spacing-md);

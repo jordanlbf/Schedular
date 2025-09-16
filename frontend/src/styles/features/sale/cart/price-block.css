@@ -1,0 +1,108 @@
+/* Price Block Component Styles */
+
+.price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  text-align: right;
+}
+
+/* Current price - large and bold */
+.price-block-current {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+/* Editable price styles */
+.price-block-editable {
+  cursor: pointer;
+  padding: 2px 6px;
+  margin: -2px -6px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.price-block-editable:hover {
+  background: rgba(14, 165, 233, 0.08);
+  color: var(--accent-secondary);
+}
+
+.price-block-editable:hover::after {
+  content: '✏️';
+  font-size: 10px;
+  margin-left: 6px;
+  opacity: 0.5;
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Discount row container */
+.price-block-discount-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* RRP price - struck through */
+.price-block-rrp {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  text-decoration: line-through;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+/* Save badge - green pill */
+.price-block-save {
+  font-size: 11px;
+  font-weight: var(--font-medium);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  white-space: nowrap;
+  line-height: 1.2;
+  display: inline-block;
+}
+
+/* Unit price helper text */
+.price-block-unit {
+  font-size: 11px;
+  color: var(--muted);
+  opacity: 0.8;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+/* Dark mode adjustments */
+html.theme-dark .price-block-save {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .price-block-current {
+    font-size: var(--text-lg);
+  }
+  
+  .price-block-rrp {
+    font-size: 12px;
+  }
+  
+  .price-block-save {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+}

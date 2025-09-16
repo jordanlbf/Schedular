@@ -2,8 +2,9 @@ import { useState, useMemo, useCallback } from 'react';
 import type { Line } from "../types";
 import { CATALOG } from "../catalog";
 import type { Product } from '@/shared/types';
-import { formatPrice } from '@/shared/utils/price';
+
 import { StockBadge } from '@/shared/components/StockBadge';
+import { PriceBlock } from './cart/PriceBlock';
 
 interface CartItemRowProps {
   line: Line;
@@ -60,9 +61,6 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
   // Memoize expensive calculations
   const originalProduct = useMemo(() => CATALOG.find(p => p.sku === line.sku), [line.sku]);
   const rrpPrice = originalProduct?.price || line.price;
-  const discount = rrpPrice - line.price;
-  const isDiscounted = discount > 0;
-  const totalPrice = line.price * line.qty;
 
   // Get the correct image based on selected color
   const productImage = useMemo(() => {
@@ -107,10 +105,6 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     onChangeQty(line.id, +1);
   }, [line.id, onChangeQty]);
 
-  const handleRemove = useCallback((): void => {
-    onRemove(line.id);
-  }, [line.id, onRemove]);
-
   return (
     <div className="cart-item-grid">
       {/* Column 1: Thumbnail */}
@@ -136,36 +130,31 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
         <h4 className="cart-item-name" title={line.name}>
           {line.name}
         </h4>
-        <span className="sku">{line.sku}</span>
+        <div className="product-info-row">
+          <span className="sku">{line.sku}</span>
+        </div>
+        <div className="cart-item-color-swatch">
+          {line.color ? (
+            <>
+              <div
+                className="color-dot"
+                style={{ backgroundColor: getColorValue(line.color, originalProduct) }}
+                title={line.color}
+              />
+              <span className="color-name">{line.color}</span>
+            </>
+          ) : (
+            <span className="color-placeholder">&nbsp;</span>
+          )}
+        </div>
         {product?.stock && (
           <div className="cart-item-stock">
             <StockBadge stock={product.stock} />
           </div>
         )}
-        {line.color && (
-          <div className="cart-item-color-swatch">
-            <div
-              className="color-dot"
-              style={{ backgroundColor: getColorValue(line.color, originalProduct) }}
-              title={line.color}
-            />
-            <span className="color-name">{line.color}</span>
-          </div>
-        )}
       </div>
 
-      {/* Column 3: Status Chips */}
-      <div className="cart-item-status">
-        <div className="status-chips">
-          {isDiscounted && (
-            <span className="discount-chip">
-              Save {formatPrice(discount)}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Column 4: Quantity Controls & Remove */}
+      {/* Column 3: Quantity Controls */}
       <div className="cart-item-quantity-section">
         <div className="cart-item-quantity">
           <button
@@ -184,54 +173,30 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
             +
           </button>
         </div>
-        <button
-          className="remove-btn-text remove-btn-centered"
-          onClick={handleRemove}
-          aria-label="Remove item from cart"
-        >
-          Remove
-        </button>
       </div>
 
-      {/* Column 5: Price */}
+      {/* Column 4: Price */}
       <div className="cart-item-price">
-        <div className="price-main">
-          {isEditingPrice ? (
-            <input
-              type="number"
-              className="price-input"
-              value={tempPrice}
-              onChange={(e) => setTempPrice(e.target.value)}
-              onBlur={handlePriceSubmit}
-              onKeyDown={handlePriceKeyDown}
-              step="0.01"
-              min="0"
-              autoFocus
-            />
-          ) : (
-            <div
-              className="price-value price-editable"
-              onClick={() => setIsEditingPrice(true)}
-              title="Click to edit price"
-            >
-              {formatPrice(totalPrice)}
-            </div>
-          )}
-        </div>
-
-        {(rrpPrice !== line.price || isDiscounted) && (
-          <div className="price-meta">
-            {rrpPrice !== line.price && (
-              <div className="price-rrp">
-                RRP {formatPrice(rrpPrice)}
-              </div>
-            )}
-            {isDiscounted && (
-              <div className="price-savings">
-                Save {formatPrice(discount)}
-              </div>
-            )}
-          </div>
+        {isEditingPrice ? (
+          <input
+            type="number"
+            className="price-input"
+            value={tempPrice}
+            onChange={(e) => setTempPrice(e.target.value)}
+            onBlur={handlePriceSubmit}
+            onKeyDown={handlePriceKeyDown}
+            step="0.01"
+            min="0"
+            autoFocus
+          />
+        ) : (
+          <PriceBlock
+            price={line.price}
+            compareAtPrice={rrpPrice !== line.price ? rrpPrice : undefined}
+            quantity={line.qty}
+            isEditable={!!onPriceChange}
+            onPriceEdit={() => setIsEditingPrice(true)}
+          />
         )}
       </div>
     </div>

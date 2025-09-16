@@ -3,6 +3,7 @@
 /* Import all cart modules */
 @import url('./cart-container.css');
 @import url('./cart-item.css');
+@import url('./price-block.css');
 @import url('./cart-footer.css');
 @import url('./cart-empty-state.css');
 @import url('./cart-responsive.css');

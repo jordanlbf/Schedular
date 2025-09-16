@@ -21,7 +21,6 @@ export function PriceBlock({
 }: PriceBlockProps) {
   const hasDiscount = compareAtPrice && compareAtPrice > price;
   const lineTotal = price * quantity;
-  const compareLineTotal = compareAtPrice ? compareAtPrice * quantity : 0;
   const totalSave = hasDiscount ? (compareAtPrice - price) * quantity : 0;
 
   // Format currency using toLocaleString for proper formatting
@@ -35,37 +34,34 @@ export function PriceBlock({
   };
 
   return (
-    <div className={`price-block ${className}`}>
-      {/* Main price - large and bold */}
-      <div 
-        className={`price-block-current ${isEditable ? 'price-block-editable' : ''}`}
-        onClick={isEditable ? onPriceEdit : undefined}
-        title={isEditable ? 'Click to edit price' : undefined}
-      >
-        {formatCurrency(lineTotal)}
+    <div className={`price-block-grid ${className}`}>
+      {/* Row 1: Item Price - Always visible */}
+      <div className="price-grid-row">
+        <span className="price-grid-label">Item Price</span>
+        <span 
+          className={`price-grid-value ${isEditable ? 'price-grid-editable' : ''}`}
+          onClick={isEditable ? onPriceEdit : undefined}
+          title={isEditable ? 'Click to edit price' : undefined}
+        >
+          {formatCurrency(price)}
+        </span>
+      </div>
+      
+      {/* Row 2: Save - Always takes up space, but only visible if discounted */}
+      <div className={`price-grid-row price-grid-save-row ${!hasDiscount ? 'price-grid-row-hidden' : ''}`}>
+        <span className="price-grid-label">Save</span>
+        <span className="price-grid-value price-grid-save">
+          {hasDiscount ? formatCurrency(totalSave / quantity) : '\u00A0'}
+        </span>
       </div>
 
-      {/* Discount row with RRP and Save badge on same line */}
-      {hasDiscount && (
-        <div className="price-block-discount-row">
-          <span className="price-block-rrp">
-            {formatCurrency(compareLineTotal)}
-          </span>
-          <span 
-            className="price-block-save"
-            aria-label={`You save ${formatCurrency(totalSave)}`}
-          >
-            Save {formatCurrency(totalSave)}
-          </span>
-        </div>
-      )}
-
-      {/* Unit price helper when quantity > 1 */}
-      {quantity > 1 && showLineTotal && (
-        <div className="price-block-unit">
-          {formatCurrency(price)} each • {formatCurrency(lineTotal)} total
-        </div>
-      )}
+      {/* Row 3: Total - Always visible */}
+      <div className="price-grid-row price-grid-total-row">
+        <span className="price-grid-label">Total</span>
+        <span className="price-grid-value price-grid-total">
+          {formatCurrency(lineTotal)}
+        </span>
+      </div>
     </div>
   );
 }

@@ -1,97 +1,132 @@
-/* Price Block Component - Clean and Compact */
+/* Price Block Component - Grid Layout */
 
-.price-block {
-  text-align: right;
+/* Main grid container */
+.price-block-grid {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 4px; /* Tight spacing - gap-1 equivalent */
+  gap: 6px;
+  min-width: 180px;
 }
 
-/* Current price - large and bold with responsive sizing */
-.price-block-current {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 700; /* font-bold */
+/* Grid row - label and value */
+.price-grid-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--spacing-md);
+  align-items: baseline;
+  min-height: 20px; /* Ensure consistent height */
+}
+
+/* Hidden row - maintains space but invisible */
+.price-grid-row-hidden {
+  visibility: hidden;
+}
+
+/* Labels */
+.price-grid-label {
+  font-size: 0.875rem; /* 14px */
+  color: var(--text-subtle);
+  font-weight: var(--font-normal);
+  text-align: left;
+}
+
+/* Values */
+.price-grid-value {
+  font-size: 1.125rem; /* 18px */
+  font-weight: var(--font-semibold);
   color: var(--text);
   font-variant-numeric: tabular-nums;
-  line-height: 1.2;
+  text-align: right;
 }
 
-/* Larger on medium screens and up */
-@media (min-width: 768px) {
-  .price-block-current {
-    font-size: 1.875rem; /* text-3xl */
-  }
+/* Save row - green styling */
+.price-grid-save-row .price-grid-label {
+  color: #10b981; /* Emerald green */
 }
 
-/* Editable price hover state */
-.price-block-editable {
+.price-grid-save {
+  color: #10b981; /* Emerald green */
+  font-weight: var(--font-bold);
+}
+
+/* Total row - more prominent */
+.price-grid-total-row {
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 2px;
+}
+
+.price-grid-total {
+  font-size: 1.25rem; /* 20px */
+  font-weight: var(--font-bold);
+}
+
+/* Editable price */
+.price-grid-editable {
   cursor: pointer;
-  padding: 2px 6px;
-  margin: -2px -6px;
-  border-radius: 6px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  border-radius: 4px;
   transition: all 0.15s ease;
-  position: relative;
 }
 
-.price-block-editable:hover {
+.price-grid-editable:hover {
   background: rgba(14, 165, 233, 0.08);
   color: var(--accent-secondary);
 }
 
-.price-block-editable:hover::after {
-  content: '✏️';
-  font-size: 10px;
-  margin-left: 6px;
-  opacity: 0.5;
-  position: absolute;
-  right: -20px;
-  top: 50%;
-  transform: translateY(-50%);
+/* Smaller sizes in cart items */
+.cart-item-price .price-grid-label {
+  font-size: 0.75rem; /* 12px */
 }
 
-/* Discount row - RRP and Save badge on same line */
-.price-block-discount-row {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* gap-2 equivalent */
+.cart-item-price .price-grid-value {
+  font-size: 1rem; /* 16px */
+  font-weight: var(--font-medium);
 }
 
-/* RRP price - muted and struck through */
-.price-block-rrp {
-  font-size: 0.875rem; /* text-sm */
-  color: var(--muted);
-  text-decoration: line-through;
-  font-variant-numeric: tabular-nums;
+.cart-item-price .price-grid-total {
+  font-size: 1.125rem; /* 18px */
+  font-weight: var(--font-semibold);
 }
 
-/* Save badge - subtle green pill */
-.price-block-save {
-  font-size: 11px; /* text-[11px] */
-  padding: 2px 8px; /* px-2 py-0.5 */
-  border-radius: 9999px; /* rounded-full */
-  background: rgba(16, 185, 129, 0.12); /* bg-emerald-500/12 */
-  color: #10b981; /* text-emerald-400 */
-  border: 1px solid rgba(16, 185, 129, 0.2); /* border-emerald-500/20 */
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-/* Unit price helper text */
-.price-block-unit {
-  font-size: 0.75rem; /* text-xs */
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+.cart-item-price .price-grid-save {
+  font-size: 1rem; /* 16px */
+  font-weight: var(--font-semibold);
 }
 
 /* Dark mode adjustments */
-html.theme-dark .price-block-save {
-  color: #34d399; /* text-emerald-400 in dark */
-  background: rgba(16, 185, 129, 0.1);
-  border-color: rgba(16, 185, 129, 0.15);
+html.theme-dark .price-grid-save-row .price-grid-label {
+  color: #34d399; /* Lighter emerald in dark mode */
 }
 
-/* Ensure all numeric content uses tabular nums */
-.price-block span {
-  font-variant-numeric: tabular-nums;
+html.theme-dark .price-grid-save {
+  color: #34d399; /* Lighter emerald in dark mode */
+}
+
+html.theme-dark .price-grid-total-row {
+  border-top-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .price-block-grid {
+    min-width: 150px;
+  }
+  
+  .price-grid-row {
+    gap: var(--spacing-sm);
+  }
+  
+  .cart-item-price .price-grid-value {
+    font-size: 0.875rem; /* 14px on mobile */
+  }
+  
+  .cart-item-price .price-grid-total {
+    font-size: 1rem; /* 16px on mobile */
+  }
+  
+  .cart-item-price .price-grid-save {
+    font-size: 0.875rem; /* 14px on mobile */
+  }
 }

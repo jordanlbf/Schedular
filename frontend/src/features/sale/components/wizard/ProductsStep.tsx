@@ -109,7 +109,6 @@ export default function ProductsStep({
                           return totalSavings > 0 ? (
                             <div className="summary-row">
                               <span className="summary-label discount-label">
-                                <span className="discount-icon">💰</span>
                                 Discount
                               </span>
                               <span className="summary-value discount-amount">

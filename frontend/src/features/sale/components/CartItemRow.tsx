@@ -107,22 +107,42 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
 
   return (
     <div className="cart-item-grid">
-      {/* Column 1: Thumbnail */}
-      <div className="cart-item-thumbnail">
-        {productImage ? (
-          <img
-            key={`cart-img-${line.sku}-${line.color || 'default'}-${productImage}`}
-            src={productImage}
-            alt={`${line.name}${line.color ? ` in ${line.color}` : ''}`}
-            loading="lazy"
-          />
-        ) : (
-          <div className="cart-item-placeholder">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            </svg>
-          </div>
-        )}
+      {/* Column 1: Stacked Image + Quantity Controls */}
+      <div className="cart-item-media-stack">
+        <div className="cart-item-thumbnail">
+          {productImage ? (
+            <img
+              key={`cart-img-${line.sku}-${line.color || 'default'}-${productImage}`}
+              src={productImage}
+              alt={`${line.name}${line.color ? ` in ${line.color}` : ''}`}
+              loading="lazy"
+            />
+          ) : (
+            <div className="cart-item-placeholder">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+              </svg>
+            </div>
+          )}
+        </div>
+        
+        <div className="cart-item-quantity">
+          <button
+            className="qty-btn qty-decrease"
+            onClick={handleQuantityDecrease}
+            aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
+          >
+            −
+          </button>
+          <span className="qty-value">{line.qty}</span>
+          <button
+            className="qty-btn qty-increase"
+            onClick={handleQuantityIncrease}
+            aria-label="Increase quantity"
+          >
+            +
+          </button>
+        </div>
       </div>
 
       {/* Column 2: Product Meta */}
@@ -154,28 +174,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
         )}
       </div>
 
-      {/* Column 3: Quantity Controls */}
-      <div className="cart-item-quantity-section">
-        <div className="cart-item-quantity">
-          <button
-            className="qty-btn qty-decrease"
-            onClick={handleQuantityDecrease}
-            aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
-          >
-            −
-          </button>
-          <span className="qty-value">{line.qty}</span>
-          <button
-            className="qty-btn qty-increase"
-            onClick={handleQuantityIncrease}
-            aria-label="Increase quantity"
-          >
-            +
-          </button>
-        </div>
-      </div>
-
-      {/* Column 4: Price */}
+      {/* Column 3: Price */}
       <div className="cart-item-price">
         {isEditingPrice ? (
           <input

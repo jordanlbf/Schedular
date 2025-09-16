@@ -194,6 +194,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
             price={line.price}
             compareAtPrice={rrpPrice !== line.price ? rrpPrice : undefined}
             quantity={line.qty}
+            showLineTotal={true}
             isEditable={!!onPriceChange}
             onPriceEdit={() => setIsEditingPrice(true)}
           />

@@ -3,7 +3,8 @@ import React from 'react';
 interface PriceBlockProps {
   price: number;               // current unit price
   compareAtPrice?: number;     // optional RRP/original price
-  quantity?: number;           // optional; if >1 we also show line total below
+  quantity?: number;           // optional, default 1
+  showLineTotal?: boolean;     // optional, default false
   isEditable?: boolean;        // whether price can be edited
   onPriceEdit?: () => void;    // callback when price edit is clicked
   className?: string;
@@ -13,24 +14,29 @@ export function PriceBlock({
   price,
   compareAtPrice,
   quantity = 1,
+  showLineTotal = false,
   isEditable = false,
   onPriceEdit,
   className = ''
 }: PriceBlockProps) {
-  const hasDiscount = typeof compareAtPrice === 'number' && compareAtPrice > price;
-  const save = hasDiscount ? (compareAtPrice - price) : 0;
+  const hasDiscount = compareAtPrice && compareAtPrice > price;
   const lineTotal = price * quantity;
   const compareLineTotal = compareAtPrice ? compareAtPrice * quantity : 0;
-  const totalSave = save * quantity;
+  const totalSave = hasDiscount ? (compareAtPrice - price) * quantity : 0;
 
-  // Format currency with proper locale string
+  // Format currency using toLocaleString for proper formatting
   const formatCurrency = (amount: number) => {
-    return `$${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+    return amount.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
   };
 
   return (
     <div className={`price-block ${className}`}>
-      {/* Main price - clickable if editable */}
+      {/* Main price - large and bold */}
       <div 
         className={`price-block-current ${isEditable ? 'price-block-editable' : ''}`}
         onClick={isEditable ? onPriceEdit : undefined}
@@ -39,8 +45,8 @@ export function PriceBlock({
         {formatCurrency(lineTotal)}
       </div>
 
-      {/* Discount row with RRP and savings */}
-      {hasDiscount && compareAtPrice && (
+      {/* Discount row with RRP and Save badge on same line */}
+      {hasDiscount && (
         <div className="price-block-discount-row">
           <span className="price-block-rrp">
             {formatCurrency(compareLineTotal)}
@@ -55,9 +61,9 @@ export function PriceBlock({
       )}
 
       {/* Unit price helper when quantity > 1 */}
-      {quantity > 1 && (
+      {quantity > 1 && showLineTotal && (
         <div className="price-block-unit">
-          {formatCurrency(price)} each
+          {formatCurrency(price)} each • {formatCurrency(lineTotal)} total
         </div>
       )}
     </div>

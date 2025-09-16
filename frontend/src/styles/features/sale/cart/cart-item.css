@@ -79,7 +79,6 @@
   max-width: 280px; /* Increased from 220px for longer names */
   overflow: hidden;
   justify-content: flex-start;
-  padding-top: 2px; /* Slight padding to align with price baseline */
 }
 
 /* Match product card info row */

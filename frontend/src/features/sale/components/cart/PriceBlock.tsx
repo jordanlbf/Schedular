@@ -52,17 +52,21 @@ export function PriceBlock({
       {/* Row 2: Save - Always takes up space, but only visible if discounted */}
       <div className={`price-grid-row price-grid-save-row ${!hasDiscount ? 'price-grid-row-hidden' : ''}`}>
         <span className="price-grid-label">Save</span>
-        <span className="price-grid-value price-grid-save">
-          {hasDiscount ? formatCurrency(totalSave / quantity) : '\u00A0'}
-        </span>
+        <div className="price-grid-value">
+          <span className="price-grid-save">
+            {hasDiscount ? formatCurrency(totalSave / quantity) : '\u00A0'}
+          </span>
+        </div>
       </div>
 
       {/* Row 3: Total - Always visible */}
       <div className="price-grid-row price-grid-total-row">
         <span className="price-grid-label">Total</span>
-        <span className="price-grid-value price-grid-total">
-          {formatCurrency(lineTotal)}
-        </span>
+        <div className="price-grid-value">
+          <span className="price-grid-total">
+            {formatCurrency(lineTotal)}
+          </span>
+        </div>
       </div>
     </div>
   );

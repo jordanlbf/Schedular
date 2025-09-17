@@ -58,6 +58,9 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
   const [isEditingPrice, setIsEditingPrice] = useState(false);
   const [tempPrice, setTempPrice] = useState(line.price.toString());
   const [originalPrice, setOriginalPrice] = useState(line.price);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const [quantityAnimating, setQuantityAnimating] = useState(false);
+  const [priceAnimating, setPriceAnimating] = useState(false);
 
   // Update originalPrice when line.price changes (from external updates)
   useEffect(() => {
@@ -98,6 +101,9 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     if (!isNaN(newPrice) && newPrice > 0 && onPriceChange) {
       onPriceChange(line.id, newPrice);
       setOriginalPrice(newPrice);
+      // Trigger price animation
+      setPriceAnimating(true);
+      setTimeout(() => setPriceAnimating(false), 500);
     } else {
       // Revert to the original price if invalid
       setTempPrice(originalPrice.toString());
@@ -122,18 +128,33 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
 
   const handleQuantityDecrease = useCallback((): void => {
     if (line.qty === 1) {
-      onRemove(line.id);
+      setIsRemoving(true);
+      setTimeout(() => {
+        onRemove(line.id);
+      }, 300); // Wait for animation to complete
     } else {
+      setQuantityAnimating(true);
+      setTimeout(() => setQuantityAnimating(false), 300);
       onChangeQty(line.id, -1);
     }
   }, [line.qty, line.id, onRemove, onChangeQty]);
 
   const handleQuantityIncrease = useCallback((): void => {
+    setQuantityAnimating(true);
+    setTimeout(() => setQuantityAnimating(false), 300);
     onChangeQty(line.id, +1);
   }, [line.id, onChangeQty]);
 
+  // Add animation trigger for quantity changes
+  useEffect(() => {
+    if (line.qty) {
+      setQuantityAnimating(true);
+      setTimeout(() => setQuantityAnimating(false), 300);
+    }
+  }, [line.qty]);
+
   return (
-    <div className="cart-item-grid">
+    <div className={`cart-item-grid ${isRemoving ? 'removing' : ''}`}>
       {/* Column 1: Stacked Image + Quantity Controls */}
       <div className="cart-item-media-stack">
         <div className="cart-item-thumbnail">
@@ -161,7 +182,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
           >
             −
           </button>
-          <span className="qty-value">{line.qty}</span>
+          <span className={`qty-value ${quantityAnimating ? 'updating' : ''}`}>{line.qty}</span>
           <button
             className="qty-btn qty-increase"
             onClick={handleQuantityIncrease}
@@ -207,7 +228,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
           <div className="price-block-grid">
             <div className="price-grid-row">
               <span className="price-grid-label">Item Price</span>
-              <div className="price-grid-value">
+              <div className={`price-grid-value ${priceAnimating ? 'price-updating' : ''}`}>
                 <input
                   type="number"
                   className="price-input"
@@ -224,15 +245,19 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
             </div>
             <div className={`price-grid-row price-grid-save-row ${rrpPrice === originalPrice ? 'price-grid-row-hidden' : ''}`}>
               <span className="price-grid-label">Save</span>
-              <span className="price-grid-value price-grid-save">
-                {rrpPrice !== originalPrice ? formatCurrency((rrpPrice - originalPrice) * line.qty) : '\u00A0'}
-              </span>
+              <div className={`price-grid-value ${priceAnimating ? 'price-updating' : ''}`}>
+                <span className={`price-grid-save ${priceAnimating ? 'save-updating' : ''}`}>
+                  {rrpPrice !== originalPrice ? formatCurrency(rrpPrice - originalPrice) : '\u00A0'}
+                </span>
+              </div>
             </div>
             <div className="price-grid-row price-grid-total-row">
               <span className="price-grid-label">Total</span>
-              <span className="price-grid-value price-grid-total">
-                {formatCurrency(originalPrice * line.qty)}
-              </span>
+              <div className={`price-grid-value ${priceAnimating || quantityAnimating ? 'price-updating' : ''}`}>
+                <span className={`price-grid-total ${priceAnimating || quantityAnimating ? 'total-updating' : ''}`}>
+                  {formatCurrency(originalPrice * line.qty)}
+                </span>
+              </div>
             </div>
           </div>
         ) : (

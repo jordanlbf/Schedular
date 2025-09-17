@@ -1,0 +1,236 @@
+/* Cart Item Animations */
+
+/* Fade in animation for new items */
+@keyframes cartItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide out animation for removed items */
+@keyframes cartItemSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+    max-height: 200px;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* Pulse animation for quantity change */
+@keyframes quantityPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    color: var(--accent-secondary);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Price update flash */
+@keyframes priceUpdate {
+  0% {
+    background: transparent;
+  }
+  50% {
+    background: rgba(16, 185, 129, 0.1);
+    transform: scale(1.05);
+  }
+  100% {
+    background: transparent;
+    transform: scale(1);
+  }
+}
+
+/* Save amount highlight */
+@keyframes saveHighlight {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* Add item animation class */
+.cart-item-grid {
+  animation: cartItemFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Stagger animation for multiple items */
+.cart-item-grid:nth-child(1) { animation-delay: 0s; }
+.cart-item-grid:nth-child(2) { animation-delay: 0.05s; }
+.cart-item-grid:nth-child(3) { animation-delay: 0.1s; }
+.cart-item-grid:nth-child(4) { animation-delay: 0.15s; }
+.cart-item-grid:nth-child(5) { animation-delay: 0.2s; }
+
+/* Removing item animation */
+.cart-item-grid.removing {
+  animation: cartItemSlideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Quantity value animation */
+.qty-value {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.2s ease;
+}
+
+.qty-value.updating {
+  animation: quantityPulse 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Price animations */
+.price-grid-value {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.3s ease;
+  border-radius: 4px;
+}
+
+.price-grid-value.price-updating {
+  animation: priceUpdate 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Save value animation */
+.price-grid-save {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.price-grid-save.save-updating {
+  animation: saveHighlight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Total value animation */
+.price-grid-total {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.price-grid-total.total-updating {
+  animation: priceUpdate 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth number transitions using CSS counters (for modern browsers) */
+.animated-number {
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cart summary animations */
+.cart-summary-row {
+  animation: cartItemFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.cart-summary-row:nth-child(1) { animation-delay: 0.1s; }
+.cart-summary-row:nth-child(2) { animation-delay: 0.15s; }
+.cart-summary-row:nth-child(3) { animation-delay: 0.2s; }
+
+/* Hover state transitions */
+.cart-item-grid {
+  transition: background 0.2s ease,
+              box-shadow 0.2s ease,
+              transform 0.2s ease;
+}
+
+.cart-item-grid:hover {
+  transform: translateX(2px);
+  box-shadow: -4px 0 0 0 var(--accent-secondary);
+}
+
+/* Button press animation */
+.qty-btn:active {
+  animation: buttonPress 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.85); }
+  100% { transform: scale(1); }
+}
+
+/* Stock badge pulse for low stock */
+@keyframes lowStockPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.stock-badge.stock-low {
+  animation: lowStockPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Loading skeleton animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.cart-item-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Smooth transitions for edit mode */
+.price-input {
+  animation: cartItemFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add to cart success animation */
+@keyframes addSuccess {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(1deg);
+  }
+  50% {
+    transform: scale(0.95) rotate(-1deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(0.5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.cart-item-grid.just-added {
+  animation: addSuccess 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

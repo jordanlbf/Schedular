@@ -37,10 +37,14 @@
   color: var(--text);
   font-variant-numeric: tabular-nums;
   text-align: right;
-  min-width: 120px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  width: 100px; /* Fixed width for perfect alignment */
+  display: block;
+}
+
+/* Ensure all price values align right consistently */
+.price-grid-value span {
+  display: block;
+  text-align: right;
 }
 
 /* Save row - green styling */
@@ -51,6 +55,7 @@
 .price-grid-save {
   color: #10b981; /* Emerald green */
   font-weight: var(--font-bold);
+  /* Remove any special alignment - inherit from parent */
 }
 
 /* Total row - more prominent */

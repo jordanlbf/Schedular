@@ -1,0 +1,49 @@
+/* Summary Card and Fee Input */
+
+.summary-card {
+  background: linear-gradient(135deg,
+    rgba(14, 165, 233, 0.02) 0%,
+    var(--panel) 100%);
+}
+
+.fee-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fee-currency {
+  position: absolute;
+  left: var(--spacing-md);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-subtle);
+}
+
+.fee-input {
+  padding-left: var(--spacing-3xl);
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+}
+
+.summary-breakdown {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: var(--text-sm);
+}
+
+.summary-row.summary-total {
+  margin-top: var(--spacing-xs);
+  padding-top: var(--spacing-xs);
+  border-top: 2px solid var(--border);
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+}

@@ -1,0 +1,48 @@
+/* Compact Card Styling - building on shared form-card styles */
+
+.compact-card .form-card-header {
+  padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
+  background: linear-gradient(135deg,
+    rgba(14, 165, 233, 0.03) 0%,
+    rgba(147, 197, 253, 0.01) 100%);
+}
+
+.compact-card .form-card-header h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  margin: 0;
+  color: var(--accent-secondary);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.compact-card .form-card-body {
+  padding: var(--spacing-lg) var(--spacing-4xl);
+}
+
+/* Compact form groups with tighter spacing */
+.compact-card .form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.compact-card .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.compact-card .form-label {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Dark mode adjustments */
+html.theme-dark .compact-card {
+  background: rgba(39, 39, 40, 0.6);
+}
+
+/* Responsive padding adjustments */
+@media (max-width: 768px) {
+  .compact-card .form-card-header,
+  .compact-card .form-card-body {
+    padding-left: var(--spacing-xl);
+    padding-right: var(--spacing-xl);
+  }
+}

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { DeliveryDetails } from '../../types';
 import { TIME_SLOTS, SERVICE_OPTIONS, MIN_DELIVERY_DAYS } from '../../constants/wizard';
 import { WizardStepLayout } from './shared/WizardStepLayout';
@@ -16,6 +16,25 @@ interface DeliveryStepProps {
   errors?: string[];
 }
 
+// Helper function to format date nicely
+const formatDate = (dateString: string) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    weekday: 'long',
+    month: 'long', 
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
+
+// Helper function to get day of week
+const getDayOfWeek = (dateString: string) => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { weekday: 'short' });
+};
+
 export default function DeliveryStep({
   deliveryDetails,
   setDeliveryDetails,
@@ -27,12 +46,50 @@ export default function DeliveryStep({
   canProceed,
   errors = []
 }: DeliveryStepProps) {
-  // Get minimum delivery date
-  const minDate = useMemo(() => {
-    const date = new Date();
-    date.setDate(date.getDate() + MIN_DELIVERY_DAYS);
-    return date.toISOString().split('T')[0];
+  const [showCalendar, setShowCalendar] = useState(false);
+  
+  // Get minimum and suggested delivery dates
+  const { minDate, suggestedDates, maxDate } = useMemo(() => {
+    const min = new Date();
+    min.setDate(min.getDate() + MIN_DELIVERY_DAYS);
+    
+    const max = new Date();
+    max.setMonth(max.getMonth() + 3); // Max 3 months out
+    
+    // Generate suggested dates (weekdays preferred)
+    const suggested = [];
+    const current = new Date(min);
+    while (suggested.length < 5 && current <= max) {
+      const dayOfWeek = current.getDay();
+      // Prefer weekdays (Mon-Fri)
+      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+        suggested.push(current.toISOString().split('T')[0]);
+      }
+      current.setDate(current.getDate() + 1);
+    }
+    
+    return {
+      minDate: min.toISOString().split('T')[0],
+      maxDate: max.toISOString().split('T')[0],
+      suggestedDates: suggested
+    };
   }, []);
+
+  // Calculate total service charges
+  const totalServiceCharges = useMemo(() => {
+    let total = 0;
+    if (deliveryDetails.whiteGloveService) total += SERVICE_OPTIONS.whiteGlove.price;
+    if (deliveryDetails.oldMattressRemoval) total += SERVICE_OPTIONS.mattressRemoval.price;
+    if (deliveryDetails.setupService) total += SERVICE_OPTIONS.setupService.price;
+    return total;
+  }, [deliveryDetails]);
+
+  // Enhanced time slots with availability indicators
+  const enhancedTimeSlots = TIME_SLOTS.map(slot => ({
+    ...slot,
+    available: slot.value !== 'morning' || !deliveryDetails.preferredDate || new Date(deliveryDetails.preferredDate).getDay() !== 0, // Example: morning not available on Sundays
+    popular: slot.value === 'afternoon'
+  }));
 
   return (
     <WizardStepLayout
@@ -44,127 +101,224 @@ export default function DeliveryStep({
       nextLabel="Continue to Payment"
       errors={errors}
     >
-      <div className="form-card">
-        <div className="form-card-header">
-          <h3>Delivery Schedule</h3>
-        </div>
-        <div className="form-card-body">
-          <div className="form-grid-2">
-            <div className="form-group">
-              <label className="form-label">Preferred Delivery Date *</label>
-              <input
-                type="date"
-                className="form-input"
-                value={deliveryDetails.preferredDate}
-                onChange={(e) => setDeliveryDetails({
-                  ...deliveryDetails, 
-                  preferredDate: e.target.value
-                })}
-                min={minDate}
-              />
+      {/* Two Column Layout */}
+      <div className="delivery-layout-grid">
+        {/* Left Column - Schedule & Services */}
+        <div className="delivery-left-column">
+          {/* Delivery Schedule Card */}
+          <div className="form-card compact-card">
+            <div className="form-card-header">
+              <h3>Schedule Delivery</h3>
             </div>
+            <div className="form-card-body">
+              {/* Date Selection */}
+              <div className="form-group">
+                <label className="form-label">Delivery Date *</label>
+                <div className="suggested-dates compact">
+                  {suggestedDates.slice(0, 4).map((date, index) => (
+                    <button
+                      key={date}
+                      type="button"
+                      className={`date-chip compact ${deliveryDetails.preferredDate === date ? 'selected' : ''}`}
+                      onClick={() => setDeliveryDetails({ ...deliveryDetails, preferredDate: date })}
+                    >
+                      <span className="date-day">{getDayOfWeek(date)}</span>
+                      <span className="date-number">{new Date(date).getDate()}</span>
+                      {index === 0 && <span className="date-badge">Soon</span>}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    className="date-chip compact date-chip-custom"
+                    onClick={() => setShowCalendar(!showCalendar)}
+                  >
+                    <span className="date-text">More</span>
+                  </button>
+                </div>
+                
+                {showCalendar && (
+                  <div className="custom-date-picker compact">
+                    <input
+                      type="date"
+                      className="form-input"
+                      value={deliveryDetails.preferredDate}
+                      onChange={(e) => {
+                        setDeliveryDetails({ ...deliveryDetails, preferredDate: e.target.value });
+                        setShowCalendar(false);
+                      }}
+                      min={minDate}
+                      max={maxDate}
+                    />
+                  </div>
+                )}
+              </div>
 
-            <div className="form-group">
-              <label className="form-label">Time Slot *</label>
-              <select
-                className="form-input"
-                value={deliveryDetails.timeSlot}
-                onChange={(e) => setDeliveryDetails({
-                  ...deliveryDetails, 
-                  timeSlot: e.target.value
-                })}
-              >
-                {TIME_SLOTS.map((slot) => (
-                  <option key={slot.value} value={slot.value}>
-                    {slot.label}
-                  </option>
-                ))}
-              </select>
+              {/* Time Slot Selection */}
+              <div className="form-group">
+                <label className="form-label">Time Slot *</label>
+                <div className="time-slots-compact">
+                  {enhancedTimeSlots.filter(slot => slot.value).map((slot) => (
+                    <button
+                      key={slot.value}
+                      type="button"
+                      className={`time-slot-compact ${deliveryDetails.timeSlot === slot.value ? 'selected' : ''} ${!slot.available ? 'unavailable' : ''}`}
+                      onClick={() => slot.available && setDeliveryDetails({ ...deliveryDetails, timeSlot: slot.value })}
+                      disabled={!slot.available}
+                    >
+                      <span className="slot-label">{slot.label.split(' ')[0]}</span>
+                      <span className="slot-time">{slot.label.match(/\(([^)]+)\)/)?.[1] || ''}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Premium Services Card */}
+          <div className="form-card compact-card">
+            <div className="form-card-header">
+              <h3>Additional Services</h3>
+            </div>
+            <div className="form-card-body">
+              <div className="services-list-compact">
+                <label className="service-item-compact">
+                  <input
+                    type="checkbox"
+                    checked={deliveryDetails.whiteGloveService}
+                    onChange={(e) => setDeliveryDetails({
+                      ...deliveryDetails, 
+                      whiteGloveService: e.target.checked
+                    })}
+                    className="service-checkbox-compact"
+                  />
+                  <div className="service-info-compact">
+                    <div className="service-main">
+                      <span className="service-name-compact">{SERVICE_OPTIONS.whiteGlove.name}</span>
+                      <span className="service-price-compact">+${(SERVICE_OPTIONS.whiteGlove.price / 100).toFixed(0)}</span>
+                    </div>
+                    <span className="service-desc-compact">{SERVICE_OPTIONS.whiteGlove.description}</span>
+                  </div>
+                </label>
+
+                <label className="service-item-compact">
+                  <input
+                    type="checkbox"
+                    checked={deliveryDetails.oldMattressRemoval}
+                    onChange={(e) => setDeliveryDetails({
+                      ...deliveryDetails, 
+                      oldMattressRemoval: e.target.checked
+                    })}
+                    className="service-checkbox-compact"
+                  />
+                  <div className="service-info-compact">
+                    <div className="service-main">
+                      <span className="service-name-compact">{SERVICE_OPTIONS.mattressRemoval.name}</span>
+                      <span className="service-price-compact">+${(SERVICE_OPTIONS.mattressRemoval.price / 100).toFixed(0)}</span>
+                    </div>
+                    <span className="service-desc-compact">{SERVICE_OPTIONS.mattressRemoval.description}</span>
+                  </div>
+                </label>
+
+                <label className="service-item-compact">
+                  <input
+                    type="checkbox"
+                    checked={deliveryDetails.setupService}
+                    onChange={(e) => setDeliveryDetails({
+                      ...deliveryDetails, 
+                      setupService: e.target.checked
+                    })}
+                    className="service-checkbox-compact"
+                  />
+                  <div className="service-info-compact">
+                    <div className="service-main">
+                      <span className="service-name-compact">{SERVICE_OPTIONS.setupService.name}</span>
+                      <span className="service-price-compact">+${(SERVICE_OPTIONS.setupService.price / 100).toFixed(0)}</span>
+                    </div>
+                    <span className="service-desc-compact">{SERVICE_OPTIONS.setupService.description}</span>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="form-card">
-        <div className="form-card-header">
-          <h3>Additional Services</h3>
-        </div>
-        <div className="form-card-body">
-          <div className="service-options">
-            <label className="service-option">
-              <input
-                type="checkbox"
-                checked={deliveryDetails.whiteGloveService}
-                onChange={(e) => setDeliveryDetails({
-                  ...deliveryDetails, 
-                  whiteGloveService: e.target.checked
-                })}
-              />
-              <div className="service-details">
-                <div className="service-name">{SERVICE_OPTIONS.whiteGlove.name}</div>
-                <div className="service-description">{SERVICE_OPTIONS.whiteGlove.description}</div>
-                <div className="service-price">+${(SERVICE_OPTIONS.whiteGlove.price / 100).toFixed(0)}</div>
+        {/* Right Column - Instructions & Summary */}
+        <div className="delivery-right-column">
+          {/* Special Instructions Card */}
+          <div className="form-card compact-card">
+            <div className="form-card-header">
+              <h3>Delivery Instructions</h3>
+            </div>
+            <div className="form-card-body">
+              <div className="form-group">
+                <textarea
+                  className="form-input form-textarea"
+                  rows={3}
+                  value={deliveryDetails.specialInstructions}
+                  onChange={(e) => setDeliveryDetails({
+                    ...deliveryDetails, 
+                    specialInstructions: e.target.value
+                  })}
+                  placeholder="Special requirements: gate codes, stairs, contact preferences, etc."
+                />
               </div>
-            </label>
-
-            <label className="service-option">
-              <input
-                type="checkbox"
-                checked={deliveryDetails.oldMattressRemoval}
-                onChange={(e) => setDeliveryDetails({
-                  ...deliveryDetails, 
-                  oldMattressRemoval: e.target.checked
-                })}
-              />
-              <div className="service-details">
-                <div className="service-name">{SERVICE_OPTIONS.mattressRemoval.name}</div>
-                <div className="service-description">{SERVICE_OPTIONS.mattressRemoval.description}</div>
-                <div className="service-price">+${(SERVICE_OPTIONS.mattressRemoval.price / 100).toFixed(0)}</div>
-              </div>
-            </label>
-
-            <label className="service-option">
-              <input
-                type="checkbox"
-                checked={deliveryDetails.setupService}
-                onChange={(e) => setDeliveryDetails({
-                  ...deliveryDetails, 
-                  setupService: e.target.checked
-                })}
-              />
-              <div className="service-details">
-                <div className="service-name">{SERVICE_OPTIONS.setupService.name}</div>
-                <div className="service-description">{SERVICE_OPTIONS.setupService.description}</div>
-                <div className="service-price">+${(SERVICE_OPTIONS.setupService.price / 100).toFixed(0)}</div>
-              </div>
-            </label>
+            </div>
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Special Instructions</label>
-            <textarea
-              className="form-input form-textarea"
-              rows={3}
-              value={deliveryDetails.specialInstructions}
-              onChange={(e) => setDeliveryDetails({
-                ...deliveryDetails, 
-                specialInstructions: e.target.value
-              })}
-              placeholder="Custom dimensions, firmness preferences, stairs, narrow hallways, gate codes, etc."
-            />
-          </div>
+          {/* Delivery Summary Card */}
+          <div className="form-card compact-card summary-card">
+            <div className="form-card-header">
+              <h3>Delivery Summary</h3>
+            </div>
+            <div className="form-card-body">
+              {/* Base Delivery Fee */}
+              <div className="form-group">
+                <label className="form-label">Base Delivery Fee</label>
+                <div className="fee-input-wrapper">
+                  <span className="fee-currency">$</span>
+                  <input
+                    type="number"
+                    className="form-input fee-input"
+                    min="0"
+                    step="0.01"
+                    value={(deliveryFee/100).toFixed(2)}
+                    onChange={(e) => setDeliveryFee(Math.round(parseFloat(e.target.value || '0') * 100))}
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
 
-          <div className="form-group">
-            <label className="form-label">Delivery Fee</label>
-            <input
-              type="number"
-              className="form-input"
-              min="0"
-              step="0.01"
-              value={(deliveryFee/100).toFixed(2)}
-              onChange={(e) => setDeliveryFee(Math.round(parseFloat(e.target.value || '0') * 100))}
-              placeholder="0.00"
-            />
+              {/* Fee Breakdown */}
+              <div className="summary-breakdown">
+                <div className="summary-row">
+                  <span>Base Delivery</span>
+                  <span>${(deliveryFee/100).toFixed(2)}</span>
+                </div>
+                {totalServiceCharges > 0 && (
+                  <>
+                    <div className="summary-row">
+                      <span>Additional Services</span>
+                      <span>+${(totalServiceCharges/100).toFixed(2)}</span>
+                    </div>
+                    <div className="summary-row summary-total">
+                      <span>Total Delivery</span>
+                      <span>${((deliveryFee + totalServiceCharges)/100).toFixed(2)}</span>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Delivery Details */}
+              {deliveryDetails.preferredDate && deliveryDetails.timeSlot && (
+                <div className="delivery-confirmation">
+                  <div className="confirmation-label">Scheduled For:</div>
+                  <div className="confirmation-date">{formatDate(deliveryDetails.preferredDate)}</div>
+                  <div className="confirmation-time">
+                    {enhancedTimeSlots.find(s => s.value === deliveryDetails.timeSlot)?.label}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

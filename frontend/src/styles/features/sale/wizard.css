@@ -1,5 +1,8 @@
 /* Wizard Styling */
 
+/* Import delivery step styles */
+@import url('./delivery/delivery-step.css');
+
 /* Main wizard container */
 .wizard-container {
   min-height: calc(100vh - 60px);

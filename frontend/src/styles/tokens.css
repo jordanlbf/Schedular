@@ -74,38 +74,38 @@ html.theme-light {
   color-scheme: light;
 
   /* Backgrounds */
-  --bg: #fafbfc;                 /* app background - slightly warmer */
-  --bg-overlay: rgba(0, 0, 0, 0.03);
+  --bg: #f8f9fa;                 /* slightly darker app background for better contrast */
+  --bg-overlay: rgba(0, 0, 0, 0.05);
 
   /* Panels */
   --panel: #ffffff;              /* main panels/cards */
-  --panel-elev: #f4f6f8;         /* elevated surfaces - more contrast */
-  --panel-hover: #f8fafc;        /* hover surfaces */
-  --panel-border: rgba(0, 0, 0, 0.08);       /* stronger panel borders for definition */
+  --panel-elev: #f1f3f4;         /* more contrast for elevated surfaces */
+  --panel-hover: #f5f7fa;        /* subtle hover surfaces */
+  --panel-border: rgba(0, 0, 0, 0.15);       /* stronger panel borders for better definition */
 
   /* Text */
-  --text: #1a202c;               /* primary text - higher contrast */
-  --text-subtle: #4a5568;        /* secondary text - stronger contrast */
-  --muted: #718096;              /* muted - better readability */
-  --muted-light: #a0aec0;        /* very subtle - still accessible */
+  --text: #0f172a;               /* much darker primary text for high contrast */
+  --text-subtle: #334155;        /* darker secondary text for better readability */
+  --muted: #64748b;              /* better contrast for muted text */
+  --muted-light: #94a3b8;        /* lighter muted but still accessible */
 
   /* Borders */
-  --border: rgba(0, 0, 0, 0.12);             /* stronger borders for clarity */
-  --border-hover: rgba(14, 165, 233, 0.25);   /* more visible accent hover borders */
-  --border-gradient: rgba(239, 68, 68, 0.25);
+  --border: rgba(0, 0, 0, 0.18);             /* stronger borders for better visibility */
+  --border-hover: rgba(14, 165, 233, 0.35);   /* more visible accent hover borders */
+  --border-gradient: rgba(239, 68, 68, 0.3);
 
   /* Accents (light-specific where different) */
-  --accent-secondary: #0284c7;   /* darker blue for better contrast */
+  --accent-secondary: #0369a1;   /* even darker blue for maximum contrast */
 
   /* Shadows */
-  --shadow-ambient: 0 2px 8px rgba(0, 0, 0, 0.12);
-  --shadow-glass:   0 2px 8px rgba(0, 0, 0, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  --shadow-float:   0 4px 16px rgba(0, 0, 0, 0.15);
-  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.35);
+  --shadow-ambient: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-glass:   0 2px 8px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --shadow-float:   0 4px 16px rgba(0, 0, 0, 0.18);
+  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.4);
 
   /* Focus ring */
-  --ring: rgba(239, 68, 68, 0.3);
-  --ring-glow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  --ring: rgba(239, 68, 68, 0.35);
+  --ring-glow: 0 0 0 3px rgba(239, 68, 68, 0.25);
 }
 
 /* Dark theme (overrides that differ from light) */

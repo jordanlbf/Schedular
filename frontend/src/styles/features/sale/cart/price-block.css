@@ -4,17 +4,18 @@
 .price-block-grid {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px; /* Increased from 6px */
   min-width: 180px;
+  padding-top: 2px; /* Slight padding to align with title baseline */
 }
 
 /* Grid row - label and value */
 .price-grid-row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--spacing-md);
-  align-items: baseline;
-  min-height: 20px; /* Ensure consistent height */
+  grid-template-columns: 80px 1fr; /* Fixed label width for better alignment */
+  gap: var(--spacing-lg); /* Increased gap */
+  align-items: center; /* Changed from baseline to center */
+  min-height: 24px; /* Increased from 20px */
 }
 
 /* Hidden row - maintains space but invisible */
@@ -24,20 +25,23 @@
 
 /* Labels */
 .price-grid-label {
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem; /* 14px - increased from 0.875rem */
   color: var(--text-subtle);
   font-weight: var(--font-normal);
   text-align: left;
+  text-transform: none; /* Remove uppercase for better readability */
+  letter-spacing: 0;
 }
 
 /* Values */
 .price-grid-value {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.25rem; /* 20px - increased from 1.125rem */
   font-weight: var(--font-semibold);
   color: var(--text);
   font-variant-numeric: tabular-nums;
   text-align: right;
-  width: 100px; /* Fixed width for perfect alignment */
+  min-width: 110px; /* Increased from 100px */
+  width: 110px;
   display: block;
 }
 
@@ -55,18 +59,18 @@
 .price-grid-save {
   color: #10b981; /* Emerald green */
   font-weight: var(--font-bold);
-  /* Remove any special alignment - inherit from parent */
+  font-size: 1.25rem; /* Match other values */
 }
 
 /* Total row - more prominent */
 .price-grid-total-row {
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  margin-top: 2px;
+  padding-top: 10px; /* Increased from 6px */
+  border-top: 1px solid rgba(255, 255, 255, 0.08); /* Slightly more visible */
+  margin-top: 4px; /* Increased from 2px */
 }
 
 .price-grid-total {
-  font-size: 1.25rem; /* 20px */
+  font-size: 1.375rem; /* 22px - increased from 1.25rem */
   font-weight: var(--font-bold);
 }
 
@@ -86,24 +90,27 @@
   color: var(--accent-secondary);
 }
 
-/* Smaller sizes in cart items */
+/* Smaller sizes in cart items - but not too small */
 .cart-item-price .price-grid-label {
-  font-size: 0.75rem; /* 12px */
+  font-size: 0.8125rem; /* 13px - increased from 0.75rem */
+  color: var(--muted);
+  opacity: 0.9;
+  font-weight: 500;
 }
 
 .cart-item-price .price-grid-value {
-  font-size: 1rem; /* 16px */
-  font-weight: var(--font-medium);
+  font-size: 1.125rem; /* 18px - increased from 1rem */
+  font-weight: var(--font-semibold);
 }
 
 .cart-item-price .price-grid-total {
-  font-size: 1.125rem; /* 18px */
-  font-weight: var(--font-semibold);
+  font-size: 1.25rem; /* 20px - increased from 1.125rem */
+  font-weight: var(--font-bold);
 }
 
 .cart-item-price .price-grid-save {
-  font-size: 1rem; /* 16px */
-  font-weight: var(--font-semibold);
+  font-size: 1.125rem; /* 18px - increased from 1rem */
+  font-weight: var(--font-bold);
 }
 
 /* Dark mode adjustments */

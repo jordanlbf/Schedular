@@ -12,12 +12,13 @@
   display: grid;
   grid-template-columns: 100px 1fr auto;
   gap: var(--spacing-xl);
-  align-items: stretch;
-  padding: var(--spacing-xl) var(--spacing-xl);
+  align-items: start; /* Changed from stretch to start for top alignment */
+  padding: var(--spacing-2xl) var(--spacing-xl);
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.2s ease;
+  min-height: 140px;
 }
 
 .cart-item-grid:hover {
@@ -34,6 +35,9 @@
   flex-direction: column;
   gap: 6px;
   width: 100px;
+  justify-content: space-between; /* Push quantity to bottom */
+  height: 100%; /* Take full height */
+  align-items: stretch; /* Ensure full width for alignment */
 }
 
 /* Thumbnail - Smaller and refined */
@@ -288,20 +292,23 @@
 .cart-item-meta {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0; /* Remove gap to control spacing manually */
   min-width: 0;
   max-width: 320px;
   overflow: hidden;
-  justify-content: center;
-  padding: var(--spacing-xs) 0;
+  justify-content: space-between; /* Distribute space between top and bottom */
+  padding: 0; /* Remove padding to align with image top */
+  margin-top: 0; /* Ensure alignment with image */
+  height: 100%; /* Take full height to enable flex spacing */
 }
 
 .cart-item-meta .product-info-row {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  min-height: 22px;
-  margin-top: 2px;
+  align-items: center;
+  gap: var(--spacing-sm);
+  min-height: 20px;
+  margin-top: 4px; /* Small gap after name */
+  margin-bottom: 0; /* Remove bottom margin */
 }
 
 .cart-item-name {
@@ -314,6 +321,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   letter-spacing: -0.01em;
+  padding-top: 0; /* Remove padding - exact alignment with image top */
+  margin-top: 0; /* Remove negative margin for clean alignment */
 }
 
 /* SKU badge - more subtle */
@@ -334,12 +343,13 @@
   opacity: 0.75;
 }
 
-/* Color swatch and variant info */
+/* Color swatch and variant info - positioned in middle */
 .cart-item-color-swatch {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 4px;
+  margin-top: auto; /* Push down from SKU */
+  margin-bottom: auto; /* Push up from stock badge */
   min-height: 18px;
 }
 
@@ -359,8 +369,21 @@
   opacity: 0.8;
 }
 
+/* Wrapper for product details at top */
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Take available space */
+  gap: 0; /* Remove gap to use margin auto */
+}
+
 .cart-item-stock {
-  margin-top: 4px;
+  margin-top: auto; /* Push to bottom */
+  padding: 0; /* Remove all padding */
+  margin-bottom: 2px; /* Move up by 2px total */
+  display: flex;
+  align-items: flex-end; /* Align to bottom edge */
+  height: 38px; /* Match quantity control container height with gap */
 }
 
 /* Price Column */
@@ -368,8 +391,19 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
-  min-width: 140px;
+  justify-content: space-between; /* Distribute between top and bottom */
+  min-width: 180px;
+  padding: 0; /* Remove padding for better alignment */
+  margin-top: 0; /* Remove negative margin */
+  height: 100%; /* Take full height */
+  position: relative;
+}
+
+/* Price block positioning - ensure proper alignment */
+.cart-item-price .price-block-grid {
+  margin-top: 0; /* Start at top */
+  margin-bottom: 0; /* Align exactly with quantity control */
+  padding-bottom: 0; /* Ensure no extra padding */
 }
 
 .price-input {

@@ -10,7 +10,26 @@
   text-align: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
-  display: inline-block;
+  display: inline-flex; /* Changed from inline-block to inline-flex */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  margin: 0; /* Reset margin */
+  vertical-align: bottom; /* Ensure bottom alignment */
+}
+
+/* Stock badge in cart items - exact alignment */
+.cart-item-stock .stock-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Ensure horizontal centering */
+  margin: 0;
+  padding: 0 12px; /* Horizontal padding */
+  height: 32px; /* Exact match with quantity controls including border */
+  line-height: 1; /* Reset line height */
+  text-align: center; /* Ensure text is centered */
+  box-sizing: border-box; /* Include border in height */
+  min-width: 100px;
+  max-width: 100px; /* Fixed width */
 }
 
 .stock-badge.in-stock {

@@ -66,11 +66,14 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
 
   // Update originalPrice when line.price changes (from external updates)
   useEffect(() => {
-    if (!isEditingPrice) {
+    if (!isEditingPrice && line.price !== originalPrice) {
       setOriginalPrice(line.price);
       setTempPrice(line.price.toString());
+      // Trigger price animation on external price changes
+      setPriceAnimating(true);
+      setTimeout(() => setPriceAnimating(false), 500);
     }
-  }, [line.price, isEditingPrice]);
+  }, [line.price, isEditingPrice, originalPrice]);
 
   // Memoize expensive calculations
   const originalProduct = useMemo(() => CATALOG.find(p => p.sku === line.sku), [line.sku]);
@@ -162,7 +165,12 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
   useEffect(() => {
     if (line.qty) {
       setQuantityAnimating(true);
-      setTimeout(() => setQuantityAnimating(false), 300);
+      // Also animate the total price when quantity changes
+      setPriceAnimating(true);
+      setTimeout(() => {
+        setQuantityAnimating(false);
+        setPriceAnimating(false);
+      }, 400);
     }
   }, [line.qty]);
 
@@ -253,25 +261,27 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
 
       {/* Column 2: Product Meta */}
       <div className="cart-item-meta">
-        <h4 className="cart-item-name" title={line.name}>
-          {line.name}
-        </h4>
-        <div className="product-info-row">
-          <span className="sku">{line.sku}</span>
-        </div>
-        <div className="cart-item-color-swatch">
-          {line.color ? (
-            <>
-              <div
-                className="color-dot"
-                style={{ backgroundColor: getColorValue(line.color, originalProduct) }}
-                title={line.color}
-              />
-              <span className="color-name">{line.color}</span>
-            </>
-          ) : (
-            <span className="color-placeholder">&nbsp;</span>
-          )}
+        <div className="cart-item-details">
+          <h4 className="cart-item-name" title={line.name}>
+            {line.name}
+          </h4>
+          <div className="product-info-row">
+            <span className="sku">{line.sku}</span>
+          </div>
+          <div className="cart-item-color-swatch">
+            {line.color ? (
+              <>
+                <div
+                  className="color-dot"
+                  style={{ backgroundColor: getColorValue(line.color, originalProduct) }}
+                  title={line.color}
+                />
+                <span className="color-name">{line.color}</span>
+              </>
+            ) : (
+              <span className="color-placeholder">&nbsp;</span>
+            )}
+          </div>
         </div>
         {product?.stock && (
           <div className="cart-item-stock">

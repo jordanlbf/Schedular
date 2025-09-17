@@ -263,11 +263,8 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
       <div className="cart-item-meta">
         <div className="cart-item-details">
           <h4 className="cart-item-name" title={line.name}>
-            {line.name}
+            {line.name} <span className="sku">{line.sku}</span>
           </h4>
-          <div className="product-info-row">
-            <span className="sku">{line.sku}</span>
-          </div>
           <div className="cart-item-color-swatch">
             {line.color ? (
               <>
@@ -294,7 +291,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
       <div className="cart-item-price">
         {isEditingPrice ? (
           <div className="price-block-grid">
-            <div className="price-grid-row">
+            <div className="price-grid-row price-grid-item-row">
               <span className="price-grid-label">Item Price</span>
               <div className={`price-grid-value ${priceAnimating ? 'price-updating' : ''}`}>
                 <input
@@ -309,6 +306,14 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
                   placeholder="Enter price"
                   autoFocus
                 />
+              </div>
+            </div>
+            <div className={`price-grid-row price-grid-rrp-row ${rrpPrice === originalPrice ? 'price-grid-row-hidden' : ''}`}>
+              <span className="price-grid-label">RRP</span>
+              <div className={`price-grid-value ${priceAnimating ? 'price-updating' : ''}`}>
+                <span className="price-grid-rrp">
+                  {rrpPrice !== originalPrice ? formatCurrency(rrpPrice) : '\u00A0'}
+                </span>
               </div>
             </div>
             <div className={`price-grid-row price-grid-save-row ${rrpPrice === originalPrice ? 'price-grid-row-hidden' : ''}`}>

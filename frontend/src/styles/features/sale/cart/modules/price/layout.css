@@ -3,34 +3,37 @@
 .price-block-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   min-width: 180px;
-  padding-top: 2px;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  position: relative;
 }
 
 .price-grid-row {
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: 80px minmax(110px, 1fr);
   gap: var(--spacing-lg);
   align-items: center;
   min-height: 24px;
+  margin: 0;
 }
 
 .price-grid-row-hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .price-grid-label {
-  font-size: 0.875rem;
+  font-size: var(--text-sm);
   color: var(--text-subtle);
-  font-weight: var(--font-normal);
+  font-weight: var(--font-medium);
   text-align: left;
   text-transform: none;
   letter-spacing: 0;
 }
 
 .price-grid-value {
-  font-size: 1.25rem;
+  font-size: var(--text-lg);
   font-weight: var(--font-semibold);
   color: var(--text);
   font-variant-numeric: tabular-nums;
@@ -40,21 +43,89 @@
   display: block;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  padding: 0;
+  margin: 0;
 }
 
-.price-grid-value span {
+.price-grid-value > * {
   display: block;
   text-align: right;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  font-variant-numeric: tabular-nums;
+  width: 100%;
 }
 
-/* Total row styling */
+/* First row - Item Price - anchored at top */
+.price-grid-item-row {
+  margin-top: 0;
+  align-items: flex-start;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Ensure Item Price value is aligned properly */
+.price-grid-item-row .price-grid-value {
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+/* RRP row - shows when discounted */
+.price-grid-rrp-row {
+  display: grid;
+  align-items: center;
+  flex: 0 1 auto;
+  margin-top: auto;
+}
+
+.price-grid-rrp-row.price-grid-row-hidden {
+  display: none;
+}
+
+/* Save row - shows when discounted */
+.price-grid-save-row {
+  display: grid;
+  align-items: center;
+  flex: 0 1 auto;
+  margin-bottom: auto;
+}
+
+.price-grid-save-row.price-grid-row-hidden {
+  display: none;
+}
+
+/* When RRP and Save are visible, they share the middle space evenly */
+.price-grid-rrp-row:not(.price-grid-row-hidden) ~ .price-grid-save-row:not(.price-grid-row-hidden) {
+  margin-top: 8px;
+}
+
+/* Total row styling - anchored at bottom */
 .price-grid-total-row {
   padding-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: 4px;
+  margin-top: auto;
+  flex-shrink: 0;
+  min-height: 38px;
+  display: grid;
+  align-items: flex-end;
+  padding-bottom: 2px;
 }
 
-.price-grid-total {
-  font-size: 1.375rem;
-  font-weight: var(--font-bold);
+/* Ensure all price values have the same styling and alignment */
+.price-grid-total,
+.price-grid-rrp,
+.price-grid-save,
+.price-grid-editable,
+.price-grid-value > span:not(.price-grid-total):not(.price-grid-rrp):not(.price-grid-save):not(.price-grid-editable) {
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-semibold) !important;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-align: right !important;
+  width: 100%;
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
 }

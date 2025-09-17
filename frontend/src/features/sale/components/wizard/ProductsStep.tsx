@@ -93,11 +93,6 @@ export default function ProductsStep({
                   <div className="cart-footer">
                     <div className="cart-totals">
                       <div className="totals-summary">
-                        <div className="summary-row">
-                          <span className="summary-label">Items ({itemCount})</span>
-                          <span className="summary-value">{formatPrice(subtotal)}</span>
-                        </div>
-
                         {(() => {
                           const rrpTotal = Math.round(lines.reduce((total, line) => {
                             const product = catalog.find(p => p.sku === line.sku);
@@ -106,22 +101,31 @@ export default function ProductsStep({
                           const currentTotal = Math.round(subtotal * 100) / 100;
                           const totalSavings = Math.round((rrpTotal - currentTotal) * 100) / 100;
 
-                          return totalSavings > 0 ? (
-                            <div className="summary-row">
-                              <span className="summary-label discount-label">
-                                Discount
-                              </span>
-                              <span className="summary-value discount-amount">
-                                -{formatSavings(totalSavings)}
-                              </span>
-                            </div>
-                          ) : null;
-                        })()}
+                          return (
+                            <>
+                              <div className="summary-row">
+                                <span className="summary-label">Items Sum ({itemCount})</span>
+                                <span className="summary-value">{formatPrice(rrpTotal)}</span>
+                              </div>
 
-                        <div className="summary-row summary-total">
-                          <span className="summary-label">Subtotal</span>
-                          <span className="summary-value summary-price">{formatPrice(subtotal)}</span>
-                        </div>
+                              {totalSavings > 0 && (
+                                <div className="summary-row">
+                                  <span className="summary-label discount-label">
+                                    Discount
+                                  </span>
+                                  <span className="summary-value discount-amount">
+                                    -{formatSavings(totalSavings)}
+                                  </span>
+                                </div>
+                              )}
+
+                              <div className="summary-row summary-total">
+                                <span className="summary-label">Subtotal</span>
+                                <span className="summary-value summary-price">{formatPrice(subtotal)}</span>
+                              </div>
+                            </>
+                          );
+                        })()}
                       </div>
                     </div>
                   </div>

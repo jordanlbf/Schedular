@@ -1,25 +1,25 @@
 /* Price Display Responsive Styles */
 
-/* Cart item specific sizing */
+/* Cart item specific sizing - now matching footer styles */
 .cart-item-price .price-grid-label {
-  font-size: 0.8125rem;
-  color: var(--muted);
-  opacity: 0.9;
-  font-weight: 500;
+  font-size: var(--text-sm);
+  color: var(--text-subtle);
+  opacity: 1;
+  font-weight: var(--font-medium);
 }
 
 .cart-item-price .price-grid-value {
-  font-size: 1.125rem;
+  font-size: var(--text-base);
   font-weight: var(--font-semibold);
 }
 
 .cart-item-price .price-grid-total {
-  font-size: 1.25rem;
+  font-size: var(--text-base);
   font-weight: var(--font-bold);
 }
 
 .cart-item-price .price-grid-save {
-  font-size: 1.125rem;
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
 }
 
@@ -33,15 +33,19 @@
     gap: var(--spacing-sm);
   }
 
+  .cart-item-price .price-grid-label {
+    font-size: 0.75rem;
+  }
+
   .cart-item-price .price-grid-value {
     font-size: 0.875rem;
   }
 
   .cart-item-price .price-grid-total {
-    font-size: 1rem;
+    font-size: var(--text-xl);
   }
 
   .cart-item-price .price-grid-save {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 }

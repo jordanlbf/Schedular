@@ -69,7 +69,7 @@ export function PriceBlock({
   return (
     <div className={`price-block-grid ${className}`}>
       {/* Row 1: Item Price - Always visible */}
-      <div className="price-grid-row">
+      <div className="price-grid-row price-grid-item-row">
         <span className="price-grid-label">Item Price</span>
         <div className={`price-grid-value ${priceAnimating ? 'price-updating' : ''}`}>
           <span 
@@ -82,7 +82,17 @@ export function PriceBlock({
         </div>
       </div>
       
-      {/* Row 2: Save - Always takes up space, but only visible if discounted */}
+      {/* Row 2: RRP - Only visible if discounted */}
+      <div className={`price-grid-row price-grid-rrp-row ${!hasDiscount ? 'price-grid-row-hidden' : ''}`}>
+        <span className="price-grid-label">RRP</span>
+        <div className={`price-grid-value ${priceAnimating ? 'price-updating' : ''}`}>
+          <span className="price-grid-rrp">
+            {hasDiscount ? formatCurrency(compareAtPrice) : '\u00A0'}
+          </span>
+        </div>
+      </div>
+      
+      {/* Row 3: Save - Only visible if discounted */}
       <div className={`price-grid-row price-grid-save-row ${!hasDiscount ? 'price-grid-row-hidden' : ''}`}>
         <span className="price-grid-label">Save</span>
         <div className={`price-grid-value ${saveAnimating ? 'price-updating' : ''}`}>
@@ -92,7 +102,7 @@ export function PriceBlock({
         </div>
       </div>
 
-      {/* Row 3: Total - Always visible */}
+      {/* Row 4: Total - Always visible */}
       <div className="price-grid-row price-grid-total-row">
         <span className="price-grid-label">Total</span>
         <div className={`price-grid-value ${totalAnimating ? 'price-updating' : ''}`}>

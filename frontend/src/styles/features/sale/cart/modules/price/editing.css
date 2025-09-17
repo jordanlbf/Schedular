@@ -2,30 +2,50 @@
 
 .price-grid-editable {
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 0;
   border-radius: 4px;
   transition: all 0.15s ease;
-  display: inline-block;
-  min-width: 80px;
+  display: block;
   text-align: right;
+  width: 100%;
+  /* Inherit font properties from parent */
+  font-size: inherit;
+  font-weight: inherit;
+  position: relative;
+}
+
+.price-grid-editable::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  bottom: -2px;
+  left: -6px;
+  background: transparent;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.price-grid-editable:hover::before {
+  background: rgba(14, 165, 233, 0.08);
 }
 
 .price-grid-editable:hover {
-  background: rgba(14, 165, 233, 0.08);
   color: var(--accent-secondary);
-  transform: translateX(-2px);
 }
 
 .price-input {
-  font-size: 1rem;
-  font-weight: var(--font-medium);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
   color: var(--accent-secondary);
   border: 1px solid rgba(14, 165, 233, 0.3);
   border-radius: var(--radius-sm);
   padding: 2px 6px;
-  width: auto;
+  width: 100%;
   min-width: 80px;
-  max-width: 100px;
+  max-width: 110px;
   outline: none;
   text-align: right;
   background: rgba(14, 165, 233, 0.05);
@@ -56,7 +76,7 @@
   border-color: var(--accent-secondary);
   background: rgba(14, 165, 233, 0.08);
   box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
-  font-weight: 700;
+  font-weight: var(--font-semibold);
   transform: scale(1.02);
 }
 

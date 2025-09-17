@@ -109,6 +109,16 @@ export default function PaymentStep({
 
           <div className="order-totals">
             <div className="total-row">
+              <span>Items Sum:</span>
+              <span>{fmt(totals.itemsSum)}</span>
+            </div>
+            {totals.lineDiscount > 0 && (
+              <div className="total-row discount">
+                <span>Line Discount:</span>
+                <span>-{fmt(totals.lineDiscount)}</span>
+              </div>
+            )}
+            <div className="total-row subtotal">
               <span>Subtotal:</span>
               <span>{fmt(totals.subtotal)}</span>
             </div>
@@ -126,14 +136,16 @@ export default function PaymentStep({
             )}
             {totals.discount > 0 && (
               <div className="total-row discount">
-                <span>Discount:</span>
+                <span>Discount ({discountPct}%):</span>
                 <span>-{fmt(totals.discount)}</span>
               </div>
             )}
-            <div className="total-row">
-              <span>Tax (10%):</span>
-              <span>{fmt(totals.tax)}</span>
-            </div>
+            {totals.tax > 0 && (
+              <div className="total-row">
+                <span>Tax (10%):</span>
+                <span>{fmt(totals.tax)}</span>
+              </div>
+            )}
             <div className="total-row total">
               <span><strong>Total:</strong></span>
               <span><strong>{fmt(totals.total)}</strong></span>

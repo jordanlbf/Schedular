@@ -19,6 +19,12 @@
   .cart-item-name {
     font-size: var(--text-base);
   }
+
+  .cart-item-meta .sku {
+    font-size: 9px;
+    padding: 1px 4px;
+    margin-left: 4px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -36,6 +42,12 @@
     width: 75px;
     height: 75px;
     border-radius: var(--radius-sm);
+  }
+
+  .cart-item-meta .sku {
+    font-size: 8px;
+    padding: 1px 3px;
+    margin-left: 3px;
   }
 
   .cart-item-price {

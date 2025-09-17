@@ -1,13 +1,25 @@
 /* Price Variants (Save, Discount, etc.) */
 
+/* RRP styling - only color and decoration differences */
+.price-grid-rrp-row .price-grid-label {
+  color: var(--text-subtle);
+  opacity: 0.8;
+}
+
+.price-grid-rrp {
+  color: var(--text-subtle);
+  text-decoration: line-through;
+  opacity: 0.65;
+  transition: all 0.3s ease;
+}
+
+/* Save styling - only color differences */
 .price-grid-save-row .price-grid-label {
   color: #10b981;
 }
 
 .price-grid-save {
   color: #10b981;
-  font-weight: var(--font-bold);
-  font-size: 1.25rem;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 

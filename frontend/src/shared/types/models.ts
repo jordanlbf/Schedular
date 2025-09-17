@@ -35,6 +35,7 @@ export interface Product {
   price: number;
   category?: string;
   inStock?: boolean;
+  image?: string;
 }
 
 export interface LineItem {

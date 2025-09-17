@@ -37,6 +37,7 @@ export default function DeliveryStep({
   return (
     <WizardStepLayout
       title={WIZARD_STEP_TITLES.delivery}
+      stepNumber="3"
       onNext={onNext}
       onPrev={onPrev}
       canProceed={canProceed}

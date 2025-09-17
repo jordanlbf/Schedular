@@ -1,7 +1,17 @@
 import type { Line } from "../types";
-import Button from "@/shared/ui/Button";
-import Qty from "@/shared/ui/Qty";
-import { fmt } from "@/shared/utils/money";
+
+function formatPrice(dollars: number) {
+  try {
+    return dollars.toLocaleString(undefined, { 
+      style: "currency", 
+      currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+  } catch {
+    return `$${Math.round(dollars)}`;
+  }
+}
 
 export default function CartTable({ lines, onChangeQty, onRemove }: {
   lines: Line[]; onChangeQty: (id: number, delta: number) => void; onRemove: (id: number) => void;
@@ -9,36 +19,55 @@ export default function CartTable({ lines, onChangeQty, onRemove }: {
   if (lines.length === 0) return null;
 
   return (
-    <>
-      <div className="divider" />
-      <div className="cart-wrap">
-        <table className="cart">
-          <colgroup>
-            <col className="w-sku" /><col /><col className="w-qty" />
-            <col className="w-money" /><col className="w-money" /><col className="w-actions" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>SKU</th><th>Item</th><th className="center">Qty</th>
-              <th className="right">Unit</th><th className="right">Line</th><th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {lines.map((l) => (
-              <tr key={l.id}>
-                <td className="mono nowrap">{l.sku}</td>
-                <td className="truncate">{l.name}</td>
-                <td className="center"><Qty value={l.qty} onDec={() => onChangeQty(l.id, -1)} onInc={() => onChangeQty(l.id, +1)} /></td>
-                <td className="right nowrap">{fmt(l.price)}</td>
-                <td className="right nowrap">{fmt(l.qty * l.price)}</td>
-                <td className="right">
-                  <Button variant="ghost" onClick={() => onRemove(l.id)}>Remove</Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+    <div className="cart-items-list">
+      {lines.map((line) => (
+        <div key={line.id} className="cart-item">
+          <div className="cart-item-main">
+            <div className="cart-item-info">
+              <div className="cart-item-name">{line.name}</div>
+              <div className="cart-item-sku">{line.sku}</div>
+            </div>
+            
+            <div className="cart-item-price">
+              <div className="cart-item-total-price">{formatPrice(line.qty * line.price)}</div>
+            </div>
+          </div>
+          
+          <div className="cart-item-controls">
+            <div className="cart-item-quantity">
+              <button 
+                className="qty-btn qty-btn-decrease"
+                onClick={() => {
+                  if (line.qty === 1) {
+                    onRemove(line.id);
+                  } else {
+                    onChangeQty(line.id, -1);
+                  }
+                }}
+                aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
+              >
+                −
+              </button>
+              <span className="qty-display">{line.qty}</span>
+              <button 
+                className="qty-btn qty-btn-increase"
+                onClick={() => onChangeQty(line.id, +1)}
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+            
+            <button 
+              className="cart-item-remove"
+              onClick={() => onRemove(line.id)}
+              aria-label={`Remove ${line.name} from cart`}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }

@@ -98,17 +98,45 @@ html.theme-dark .form-card-header.warning {
 
 .form-card-header h3 {
   margin: 0;
-  font-size: var(--text-3xl);
-  font-weight: var(--font-bold);
-  color: var(--text);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--accent-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-md);
   position: relative;
-  letter-spacing: var(--tracking-tight);
+  letter-spacing: var(--tracking-wide);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  line-height: var(--leading-tight);
+  text-wrap: balance;
+  text-transform: uppercase;
 }
+
+/* Item count badge for Selected Items header */
+.products-cart-section .form-card-header h3 {
+  position: relative;
+}
+
+
+/* Professional POS sale items styling */
+.sale-items .form-card-header {
+  background: var(--panel-hover);
+  border-bottom: 1px solid var(--border);
+  padding: var(--spacing-lg) var(--spacing-xl);
+}
+
+.sale-items .form-card-header h3 {
+  color: var(--text);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  margin: 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+
+
 
 
 .form-card-body {
@@ -145,6 +173,160 @@ html.theme-dark .form-card-header.warning {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/* Products layout - side by side with left section twice as wide */
+.products-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-4xl);
+  margin-bottom: var(--spacing-4xl);
+  width: min(99.5vw, 2200px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: stretch;
+  animation: slideUpLayout 0.5s ease-out;
+}
+
+@keyframes slideUpLayout {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.products-search-section {
+  height: 100%;
+}
+
+.products-search-section .form-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.products-search-section .form-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.products-cart-section {
+  height: 100%;
+  position: sticky;
+  top: var(--spacing-xl);
+}
+
+.products-cart-section .form-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 48px rgba(14, 165, 233, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(14, 165, 233, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+.products-cart-section .form-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  color: var(--text-subtle);
+  font-weight: var(--font-medium);
+  padding: var(--spacing-4xl);
+  background: linear-gradient(135deg, 
+    rgba(14, 165, 233, 0.02) 0%, 
+    rgba(14, 165, 233, 0.05) 100%
+  );
+  border: 2px dashed rgba(14, 165, 233, 0.15);
+  border-radius: var(--radius-xl);
+  margin: var(--spacing-lg);
+  position: relative;
+  min-height: 450px;
+}
+
+/* Professional empty sale state */
+.empty-sale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  color: var(--text-subtle);
+  font-weight: var(--font-medium);
+  padding: var(--spacing-4xl);
+  background: var(--panel-hover);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  margin: var(--spacing-lg);
+  min-height: 400px;
+}
+
+.empty-sale .empty-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.6;
+  display: block;
+}
+
+.empty-sale h4 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text);
+}
+
+.empty-sale p {
+  margin: 0;
+  color: var(--text-subtle);
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-base);
+}
+
+/* Enhanced cart items container */
+.products-cart-section .cart-items-container {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Scroll styling for cart */
+.cart-items-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items-container::-webkit-scrollbar-track {
+  background: var(--panel-hover);
+  border-radius: var(--radius-full);
+}
+
+.cart-items-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+
+.cart-items-container::-webkit-scrollbar-thumb:hover {
+  background: var(--text-subtle);
 }
 
 /* Form card animations */
@@ -655,6 +837,20 @@ select.form-input:hover:focus {
   margin-bottom: 0;
 }
 
+/* Subtle error messages */
+.subtle-error-message {
+  margin-top: var(--spacing-lg);
+  text-align: center;
+}
+
+.subtle-error-message p {
+  margin: 0;
+  color: var(--error);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-relaxed);
+}
+
 /* Summary form */
 .summary-form textarea.input { 
   width: 100%; 
@@ -680,6 +876,16 @@ select.form-input:hover:focus {
   .form-cards-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-xl);
+  }
+  
+  .products-layout {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .products-search-section,
+  .products-cart-section {
+    min-height: auto;
   }
   
   .field-row {

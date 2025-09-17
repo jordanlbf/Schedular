@@ -41,6 +41,7 @@ export default function PaymentStep({
   return (
     <WizardStepLayout
       title={WIZARD_STEP_TITLES.payment}
+      stepNumber="4"
       onPrev={onPrev}
       canProceed={canProceed}
       nextLabel="Complete Order"

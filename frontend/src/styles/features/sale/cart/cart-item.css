@@ -269,7 +269,19 @@
 /* Remove the borders for a cleaner look */
 .qty-btn:focus {
   outline: none;
+}
+
+/* Only show focus ring when using keyboard navigation */
+.qty-btn:focus-visible {
+  outline: none;
   background: rgba(14, 165, 233, 0.1);
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.3);
+}
+
+/* Remove focus after click */
+.qty-btn:focus:not(:focus-visible) {
+  outline: none;
+  background: transparent;
 }
 
 /* Product Meta */

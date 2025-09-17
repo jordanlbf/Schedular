@@ -128,7 +128,10 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     setTempPrice(''); // Clear the field when starting to edit
   };
 
-  const handleQuantityDecrease = useCallback((): void => {
+  const handleQuantityDecrease = useCallback((e: React.MouseEvent<HTMLButtonElement>): void => {
+    // Remove focus from button after click
+    e.currentTarget.blur();
+    
     if (line.qty === 1) {
       setIsRemoving(true);
       setTimeout(() => {
@@ -141,11 +144,19 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     }
   }, [line.qty, line.id, onRemove, onChangeQty]);
 
-  const handleQuantityIncrease = useCallback((): void => {
+  const handleQuantityIncrease = useCallback((e: React.MouseEvent<HTMLButtonElement>): void => {
+    // Remove focus from button after click
+    e.currentTarget.blur();
+    
+    // Check if we're at max stock
+    const maxStock = product?.stock?.quantity || 999; // Default to 999 if no stock info
+    if (line.qty >= maxStock) {
+      return; // Don't allow increase beyond stock
+    }
     setQuantityAnimating(true);
     setTimeout(() => setQuantityAnimating(false), 300);
     onChangeQty(line.id, +1);
-  }, [line.id, onChangeQty]);
+  }, [line.id, line.qty, product?.stock, onChangeQty]);
 
   // Add animation trigger for quantity changes
   useEffect(() => {
@@ -211,21 +222,32 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
         </div>
         
         <div className="cart-item-quantity">
-          <button
-            className="qty-btn qty-decrease"
-            onClick={handleQuantityDecrease}
-            aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
-          >
-            −
-          </button>
+          <div className="qty-btn-wrapper" title={line.qty === 1 ? "Remove item" : "Decrease quantity"}>
+            <button
+              className={`qty-btn qty-decrease ${line.qty === 1 ? 'at-minimum' : ''}`}
+              onClick={handleQuantityDecrease}
+              aria-label={line.qty === 1 ? "Remove item" : "Decrease quantity"}
+            >
+              {line.qty === 1 ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                </svg>
+              ) : (
+                '−'
+              )}
+            </button>
+          </div>
           <span className={`qty-value ${quantityAnimating ? 'updating' : ''}`}>{line.qty}</span>
-          <button
-            className="qty-btn qty-increase"
-            onClick={handleQuantityIncrease}
-            aria-label="Increase quantity"
-          >
-            +
-          </button>
+          <div className="qty-btn-wrapper" title={product?.stock?.quantity && line.qty >= product.stock.quantity ? `Maximum stock (${product.stock.quantity})` : "Increase quantity"}>
+            <button
+              className={`qty-btn qty-increase ${product?.stock?.quantity && line.qty >= product.stock.quantity ? 'at-maximum' : ''}`}
+              onClick={handleQuantityIncrease}
+              disabled={product?.stock?.quantity ? line.qty >= product.stock.quantity : false}
+              aria-label={product?.stock?.quantity && line.qty >= product.stock.quantity ? "At maximum stock" : "Increase quantity"}
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
 

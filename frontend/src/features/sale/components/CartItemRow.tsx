@@ -61,6 +61,8 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
   const [isRemoving, setIsRemoving] = useState(false);
   const [quantityAnimating, setQuantityAnimating] = useState(false);
   const [priceAnimating, setPriceAnimating] = useState(false);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // Update originalPrice when line.price changes (from external updates)
   useEffect(() => {
@@ -153,17 +155,51 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     }
   }, [line.qty]);
 
+  // Reset image loading state when image changes
+  useEffect(() => {
+    if (productImage) {
+      // Only set loading if image is not already cached
+      const img = new Image();
+      img.src = productImage;
+      if (!img.complete) {
+        setImageLoading(true);
+        setImageError(false);
+      } else {
+        setImageLoading(false);
+      }
+    }
+  }, [productImage]);
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+
+  const handleImageError = () => {
+    setImageLoading(false);
+    setImageError(true);
+  };
+
   return (
     <div className={`cart-item-grid ${isRemoving ? 'removing' : ''}`}>
       {/* Column 1: Stacked Image + Quantity Controls */}
       <div className="cart-item-media-stack">
-        <div className="cart-item-thumbnail">
-          {productImage ? (
+        <div className={`cart-item-thumbnail ${imageLoading ? 'loading' : ''}`}>
+          {imageLoading && productImage && (
+            <div className="cart-item-placeholder">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+              </svg>
+            </div>
+          )}
+          {productImage && !imageError ? (
             <img
               key={`cart-img-${line.sku}-${line.color || 'default'}-${productImage}`}
               src={productImage}
               alt={`${line.name}${line.color ? ` in ${line.color}` : ''}`}
               loading="lazy"
+              className={imageLoading ? 'loading' : 'loaded'}
+              onLoad={handleImageLoad}
+              onError={handleImageError}
             />
           ) : (
             <div className="cart-item-placeholder">

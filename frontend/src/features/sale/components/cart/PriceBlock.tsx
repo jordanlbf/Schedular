@@ -38,13 +38,15 @@ export function PriceBlock({
       {/* Row 1: Item Price - Always visible */}
       <div className="price-grid-row">
         <span className="price-grid-label">Item Price</span>
-        <span 
-          className={`price-grid-value ${isEditable ? 'price-grid-editable' : ''}`}
-          onClick={isEditable ? onPriceEdit : undefined}
-          title={isEditable ? 'Click to edit price' : undefined}
-        >
-          {formatCurrency(price)}
-        </span>
+        <div className="price-grid-value">
+          <span 
+            className={isEditable ? 'price-grid-editable' : ''}
+            onClick={isEditable ? onPriceEdit : undefined}
+            title={isEditable ? 'Click to edit price' : undefined}
+          >
+            {formatCurrency(price)}
+          </span>
+        </div>
       </div>
       
       {/* Row 2: Save - Always takes up space, but only visible if discounted */}

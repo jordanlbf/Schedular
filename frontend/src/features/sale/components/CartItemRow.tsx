@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import type { Line } from "../types";
 import { CATALOG } from "../catalog";
 import type { Product } from '@/shared/types';
@@ -57,6 +57,15 @@ const getColorValue = (colorName: string, originalProduct?: any): string => {
 export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChange }: CartItemRowProps) {
   const [isEditingPrice, setIsEditingPrice] = useState(false);
   const [tempPrice, setTempPrice] = useState(line.price.toString());
+  const [originalPrice, setOriginalPrice] = useState(line.price);
+
+  // Update originalPrice when line.price changes (from external updates)
+  useEffect(() => {
+    if (!isEditingPrice) {
+      setOriginalPrice(line.price);
+      setTempPrice(line.price.toString());
+    }
+  }, [line.price, isEditingPrice]);
 
   // Memoize expensive calculations
   const originalProduct = useMemo(() => CATALOG.find(p => p.sku === line.sku), [line.sku]);
@@ -74,12 +83,24 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     return selectedColor?.image || originalProduct.image;
   }, [originalProduct, line.color, product?.image]);
 
+  // Format currency helper
+  const formatCurrency = (amount: number) => {
+    return amount.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  };
+
   const handlePriceSubmit = (): void => {
     const newPrice = parseFloat(tempPrice);
     if (!isNaN(newPrice) && newPrice > 0 && onPriceChange) {
       onPriceChange(line.id, newPrice);
+      setOriginalPrice(newPrice);
     } else {
-      setTempPrice(line.price.toString());
+      // Revert to the original price if invalid
+      setTempPrice(originalPrice.toString());
     }
     setIsEditingPrice(false);
   };
@@ -88,9 +109,15 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     if (e.key === 'Enter') {
       handlePriceSubmit();
     } else if (e.key === 'Escape') {
-      setTempPrice(line.price.toString());
+      setTempPrice(originalPrice.toString());
       setIsEditingPrice(false);
     }
+  };
+
+  const handlePriceEditStart = (): void => {
+    setIsEditingPrice(true);
+    setOriginalPrice(line.price);
+    setTempPrice(''); // Clear the field when starting to edit
   };
 
   const handleQuantityDecrease = useCallback((): void => {
@@ -177,17 +204,37 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
       {/* Column 3: Price */}
       <div className="cart-item-price">
         {isEditingPrice ? (
-          <input
-            type="number"
-            className="price-input"
-            value={tempPrice}
-            onChange={(e) => setTempPrice(e.target.value)}
-            onBlur={handlePriceSubmit}
-            onKeyDown={handlePriceKeyDown}
-            step="0.01"
-            min="0"
-            autoFocus
-          />
+          <div className="price-block-grid">
+            <div className="price-grid-row">
+              <span className="price-grid-label">Item Price</span>
+              <div className="price-grid-value">
+                <input
+                  type="number"
+                  className="price-input"
+                  value={tempPrice}
+                  onChange={(e) => setTempPrice(e.target.value)}
+                  onBlur={handlePriceSubmit}
+                  onKeyDown={handlePriceKeyDown}
+                  step="0.01"
+                  min="0"
+                  placeholder="Enter price"
+                  autoFocus
+                />
+              </div>
+            </div>
+            <div className={`price-grid-row price-grid-save-row ${rrpPrice === originalPrice ? 'price-grid-row-hidden' : ''}`}>
+              <span className="price-grid-label">Save</span>
+              <span className="price-grid-value price-grid-save">
+                {rrpPrice !== originalPrice ? formatCurrency((rrpPrice - originalPrice) * line.qty) : '\u00A0'}
+              </span>
+            </div>
+            <div className="price-grid-row price-grid-total-row">
+              <span className="price-grid-label">Total</span>
+              <span className="price-grid-value price-grid-total">
+                {formatCurrency(originalPrice * line.qty)}
+              </span>
+            </div>
+          </div>
         ) : (
           <PriceBlock
             price={line.price}
@@ -195,7 +242,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
             quantity={line.qty}
             showLineTotal={true}
             isEditable={!!onPriceChange}
-            onPriceEdit={() => setIsEditingPrice(true)}
+            onPriceEdit={handlePriceEditStart}
           />
         )}
       </div>

@@ -1,0 +1,72 @@
+/* Price Editing Interface */
+
+.price-grid-editable {
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  display: inline-block;
+  min-width: 80px;
+  text-align: right;
+}
+
+.price-grid-editable:hover {
+  background: rgba(14, 165, 233, 0.08);
+  color: var(--accent-secondary);
+  transform: translateX(-2px);
+}
+
+.price-input {
+  font-size: 1rem;
+  font-weight: var(--font-medium);
+  color: var(--accent-secondary);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  width: auto;
+  min-width: 80px;
+  max-width: 100px;
+  outline: none;
+  text-align: right;
+  background: rgba(14, 165, 233, 0.05);
+  font-variant-numeric: tabular-nums;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  display: inline-block;
+  animation: priceSlide 0.2s ease-out;
+}
+
+.price-input::-webkit-inner-spin-button,
+.price-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  display: none;
+}
+
+.price-input::placeholder {
+  color: rgba(14, 165, 233, 0.5);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.price-input:focus {
+  border-color: var(--accent-secondary);
+  background: rgba(14, 165, 233, 0.08);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  font-weight: 700;
+  transform: scale(1.02);
+}
+
+@keyframes priceSlide {
+  from {
+    transform: translateX(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

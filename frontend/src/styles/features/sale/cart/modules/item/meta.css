@@ -1,0 +1,75 @@
+/* Product Meta Information */
+
+.cart-item-name {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text);
+  margin: 0;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.product-info-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  min-height: 20px;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.cart-item-meta .sku {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  opacity: 0.75;
+}
+
+.cart-item-color-swatch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: auto;
+  min-height: 18px;
+}
+
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.color-name {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.cart-item-stock {
+  margin-top: auto;
+  padding: 0;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: flex-end;
+  height: 38px;
+}

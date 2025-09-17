@@ -1,0 +1,64 @@
+/* Quantity Button Special States */
+
+/* Special styling when at minimum (qty = 1) */
+.qty-decrease.at-minimum {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.qty-decrease.at-minimum:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  transform: scale(1.15) rotate(-2deg);
+}
+
+.qty-decrease.at-minimum svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.qty-decrease.at-minimum:hover svg {
+  transform: scale(1.1);
+}
+
+/* Special styling when at maximum stock */
+.qty-increase.at-maximum {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.qty-increase.at-maximum:hover {
+  transform: scale(1);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-subtle);
+}
+
+.qty-increase.at-maximum::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Stock warning pulse for low stock */
+@keyframes lowStockWarning {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.cart-item-quantity:has(.qty-increase.at-maximum) {
+  animation: lowStockWarning 2s ease-in-out infinite;
+}

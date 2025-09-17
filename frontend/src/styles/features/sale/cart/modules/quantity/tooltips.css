@@ -1,0 +1,86 @@
+/* Quantity Button Tooltips */
+
+.qty-btn-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tooltip styles */
+.qty-btn-wrapper::before {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.qty-btn-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  border: 5px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
+.qty-btn-wrapper:hover::before,
+.qty-btn-wrapper:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* Dark mode adjustments for tooltips */
+html.theme-dark .qty-btn-wrapper::before {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1f2937;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+html.theme-dark .qty-btn-wrapper::after {
+  border-top-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Light mode adjustments */
+html:not(.theme-dark) .qty-btn-wrapper::before {
+  background: #1f2937;
+  color: white;
+}
+
+html:not(.theme-dark) .qty-btn-wrapper::after {
+  border-top-color: #1f2937;
+}
+
+/* Mobile adjustments - hide tooltips on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .qty-btn-wrapper::before,
+  .qty-btn-wrapper::after {
+    display: none;
+  }
+
+  .qty-btn:hover:not(:disabled) {
+    transform: scale(1);
+  }
+
+  .qty-btn:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+}

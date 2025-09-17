@@ -1,0 +1,47 @@
+/* Price Display Responsive Styles */
+
+/* Cart item specific sizing */
+.cart-item-price .price-grid-label {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.cart-item-price .price-grid-value {
+  font-size: 1.125rem;
+  font-weight: var(--font-semibold);
+}
+
+.cart-item-price .price-grid-total {
+  font-size: 1.25rem;
+  font-weight: var(--font-bold);
+}
+
+.cart-item-price .price-grid-save {
+  font-size: 1.125rem;
+  font-weight: var(--font-bold);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .price-block-grid {
+    min-width: 150px;
+  }
+
+  .price-grid-row {
+    gap: var(--spacing-sm);
+  }
+
+  .cart-item-price .price-grid-value {
+    font-size: 0.875rem;
+  }
+
+  .cart-item-price .price-grid-total {
+    font-size: 1rem;
+  }
+
+  .cart-item-price .price-grid-save {
+    font-size: 0.875rem;
+  }
+}

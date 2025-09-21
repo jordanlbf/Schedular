@@ -48,11 +48,42 @@ export default function DeliveryStep({
 }: DeliveryStepProps) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [feeInputValue, setFeeInputValue] = useState('');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   // Sync input value with deliveryFee prop
   useEffect(() => {
     setFeeInputValue(deliveryFee === 0 ? '' : (deliveryFee / 100).toString());
   }, [deliveryFee]);
+
+  // Validation function
+  const validateForm = () => {
+    const newErrors: string[] = [];
+
+    if (!deliveryDetails.preferredDate) {
+      newErrors.push('Please select a delivery date');
+    }
+
+    if (!deliveryDetails.timeSlot) {
+      newErrors.push('Please select a delivery time slot');
+    }
+
+    setValidationErrors(newErrors);
+    return newErrors.length === 0;
+  };
+
+  // Handle next button click with validation
+  const handleNext = () => {
+    if (validateForm()) {
+      onNext();
+    }
+  };
+
+  // Clear validation errors when selections are made
+  useEffect(() => {
+    if (validationErrors.length > 0 && deliveryDetails.preferredDate && deliveryDetails.timeSlot) {
+      setValidationErrors([]);
+    }
+  }, [deliveryDetails.preferredDate, deliveryDetails.timeSlot, validationErrors.length]);
   
   // Get minimum and suggested delivery dates
   const { minDate, suggestedDates, maxDate } = useMemo(() => {
@@ -101,11 +132,11 @@ export default function DeliveryStep({
     <WizardStepLayout
       title={WIZARD_STEP_TITLES.delivery}
       stepNumber="3"
-      onNext={onNext}
+      onNext={handleNext}
       onPrev={onPrev}
       canProceed={canProceed}
       nextLabel="Continue to Payment"
-      errors={errors}
+      errors={[...errors, ...validationErrors]}
     >
       {/* Two Column Layout */}
       <div className="delivery-layout-grid">
@@ -157,6 +188,9 @@ export default function DeliveryStep({
                     />
                   </div>
                 )}
+                <div className="form-helper-text">
+                  Choose a delivery date
+                </div>
               </div>
 
               {/* Time Slot Selection */}
@@ -175,6 +209,9 @@ export default function DeliveryStep({
                       <span className="slot-time">{slot.label.match(/\(([^)]+)\)/)?.[1] || ''}</span>
                     </button>
                   ))}
+                </div>
+                <div className="form-helper-text">
+                  Select a preferred delivery window
                 </div>
               </div>
             </div>

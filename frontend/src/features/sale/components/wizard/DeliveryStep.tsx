@@ -345,162 +345,164 @@ export default function DeliveryStep({
               <h3>Schedule Delivery</h3>
             </div>
             <div className="form-card-body">
-              {/* Delivery Choice Radiogroup */}
-              <div
-                className="delivery-choice-radiogroup"
-                role="radiogroup"
-                aria-labelledby="delivery-choice-legend"
-              >
-                <div id="delivery-choice-legend" className="sr-only">Choose when to schedule delivery</div>
-
-                <div
-                  className={`delivery-choice-card ${deliveryChoiceMode === 'later' ? 'selected' : ''}`}
-                  role="radio"
-                  aria-checked={deliveryChoiceMode === 'later'}
-                  aria-label="Choose delivery date and time later"
-                  tabIndex={deliveryChoiceMode === 'later' ? 0 : -1}
-                  onClick={() => handleDeliveryChoiceChange('later')}
-                  onKeyDown={(e) => handleKeyDown(e, 'later')}
-                >
-                  <div className="delivery-choice-content">
-                    <div className="delivery-choice-icon">📅</div>
-                    <div className="delivery-choice-text">
-                      <h4>Choose Later</h4>
+              {/* Delivery Choice Radio Cards - Redesigned */}
+              <div className="delivery-choice-container">
+                <label className={`delivery-radio-card ${deliveryChoiceMode === 'later' ? 'selected' : ''}`}>
+                  <input
+                    type="radio"
+                    name="deliveryTiming"
+                    value="later"
+                    checked={deliveryChoiceMode === 'later'}
+                    onChange={() => handleDeliveryChoiceChange('later')}
+                    className="delivery-radio-input"
+                    aria-label="Choose delivery date and time later"
+                  />
+                  <div className="radio-card-content">
+                    <span className="radio-indicator"></span>
+                    <div className="radio-text">
+                      <h4 className="radio-title">Choose Later</h4>
                     </div>
                   </div>
-                </div>
+                </label>
 
-                <div
-                  className={`delivery-choice-card ${deliveryChoiceMode === 'now' ? 'selected' : ''}`}
-                  role="radio"
-                  aria-checked={deliveryChoiceMode === 'now'}
-                  aria-label="Choose delivery date and time now"
-                  tabIndex={deliveryChoiceMode === 'now' ? 0 : -1}
-                  onClick={() => handleDeliveryChoiceChange('now')}
-                  onKeyDown={(e) => handleKeyDown(e, 'now')}
-                >
-                  <div className="delivery-choice-content">
-                    <div className="delivery-choice-icon">🚚</div>
-                    <div className="delivery-choice-text">
-                      <h4>Choose Now</h4>
+                <label className={`delivery-radio-card ${deliveryChoiceMode === 'now' ? 'selected' : ''}`}>
+                  <input
+                    type="radio"
+                    name="deliveryTiming"
+                    value="now"
+                    checked={deliveryChoiceMode === 'now'}
+                    onChange={() => handleDeliveryChoiceChange('now')}
+                    className="delivery-radio-input"
+                    aria-label="Choose delivery date and time now"
+                  />
+                  <div className="radio-card-content">
+                    <span className="radio-indicator"></span>
+                    <div className="radio-text">
+                      <h4 className="radio-title">Choose Now</h4>
                     </div>
                   </div>
-                </div>
+                </label>
               </div>
 
               {/* Helper Text for Later Choice */}
               {deliveryChoiceMode === 'later' && (
-                <div className="delivery-later-helper">
-                  You can select a date/time during Payment or after sale creation.
+                <div className="delivery-helper-text" role="status" aria-live="polite">
+                  <span className="helper-icon">ℹ️</span>
+                  You can select delivery date & time during Payment or later.
                 </div>
               )}
 
-              {/* Progressive Disclosure Section */}
+              {/* Collapsible Section with Smooth Animation */}
               <div
-                className={`delivery-scheduling-section ${deliveryChoiceMode === 'now' ? 'expanded' : 'collapsed'}`}
+                className={`delivery-collapsible ${deliveryChoiceMode === 'now' ? 'expanded' : ''}`}
                 aria-hidden={deliveryChoiceMode === 'later'}
               >
-                {/* Date Selection */}
-                <div className="scheduling-row">
-                  <h5 className="scheduling-label">Delivery Date *</h5>
-                  <div className="date-pills-container">
-                    <div className="suggested-dates compact">
+                <div className="collapsible-content">
+                  {/* Date Selection Section */}
+                  <div className="selection-section">
+                    <label className="section-label">
+                      Select Delivery Date
+                      <span className="required-indicator">*</span>
+                    </label>
+                    <div className="date-pills-row">
                       {pillDates.map((date, index) => (
                         <button
                           key={date}
                           type="button"
-                          className={`date-chip compact ${deliveryDetails.preferredDate === date ? 'selected' : ''}`}
+                          className={`date-pill ${deliveryDetails.preferredDate === date ? 'selected' : ''}`}
                           onClick={() => handleDatePillSelect(date)}
                           tabIndex={deliveryChoiceMode === 'later' ? -1 : 0}
                           disabled={deliveryChoiceMode === 'later'}
                           aria-pressed={deliveryDetails.preferredDate === date}
                           aria-label={`Select ${formatDate(date)} for delivery`}
                         >
-                          <span className="date-day">{getDayOfWeek(date)}</span>
-                          <span className="date-number">{new Date(date).getDate()}</span>
-                          {index === 0 && <span className="date-badge">Soon</span>}
+                          <span className="pill-day">{getDayOfWeek(date)}</span>
+                          <span className="pill-date">{new Date(date).getDate()}</span>
+                          {index === 0 && <span className="pill-badge">Soon</span>}
                         </button>
                       ))}
                       <button
                         type="button"
-                        className="date-chip compact date-chip-calendar"
+                        className="date-pill more-dates"
                         onClick={() => setShowCalendar(!showCalendar)}
                         tabIndex={deliveryChoiceMode === 'later' ? -1 : 0}
                         disabled={deliveryChoiceMode === 'later'}
-                        aria-label="Open calendar to select date"
+                        aria-label="More dates"
                         aria-expanded={showCalendar}
                       >
-                        <span className="calendar-icon">📅</span>
-                        <span className="date-text" style={{ display: 'none' }}>More</span>
+                        <span className="more-text">More</span>
                       </button>
                     </div>
 
+                    <p className="section-helper">Available weekdays only • Min 24 hours notice</p>
                   </div>
 
-                  <div className="form-helper-text">
-                    Choose a delivery date
-                  </div>
-                </div>
+                  {/* Time Slot Selection Section */}
+                  <div className="selection-section">
+                    <label className="section-label">
+                      Select Time Slot
+                      <span className="required-indicator">*</span>
+                    </label>
 
-                {/* Time Slot Selection */}
-                <div className="scheduling-row">
-                  <h5 className="scheduling-label">Time Slot *</h5>
+                    {!deliveryDetails.preferredDate ? (
+                      <div className="time-slots-row disabled">
+                        <div className="time-slot-placeholder">Morning</div>
+                        <div className="time-slot-placeholder">Afternoon</div>
+                        <div className="time-slot-placeholder">Evening</div>
+                      </div>
+                    ) : loadingTimeSlots ? (
+                      <div className="time-slots-row loading">
+                        <div className="time-slot-skeleton">Loading...</div>
+                        <div className="time-slot-skeleton">Loading...</div>
+                        <div className="time-slot-skeleton">Loading...</div>
+                      </div>
+                    ) : (
+                      <div className="time-slots-row">
+                        {timeSlots.map((slot, index) => (
+                          <button
+                            key={slot.id}
+                            type="button"
+                            data-slot-id={slot.id}
+                            className={`time-slot-card ${deliveryDetails.timeSlot === slot.id ? 'selected' : ''} ${!slot.available ? 'unavailable' : ''}`}
+                            onClick={() => slot.available && setDeliveryDetails({ ...deliveryDetails, timeSlot: slot.id })}
+                            onKeyDown={(e) => handleTimeSlotKeyDown(e, slot.id)}
+                            disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
+                            aria-disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
+                            tabIndex={deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate ? -1 : (slot.available && index === 0 ? 0 : -1)}
+                            title={!slot.available ? 'No capacity for this date' : ''}
+                            aria-label={`${slot.label} slot ${slot.timeRange}, ${slot.capacity === 'available' ? 'Available' : slot.capacity === 'few-left' ? 'Few slots left' : 'Full'}`}
+                          >
+                            <div className="slot-header">
+                              <span className="slot-title">{slot.label}</span>
+                              <span className="slot-range">{slot.timeRange}</span>
+                            </div>
+                            {slot.capacity === 'few-left' && (
+                              <span className="slot-status warning">FEW LEFT</span>
+                            )}
+                            {slot.capacity === 'full' && (
+                              <span className="slot-status unavailable">FULL</span>
+                            )}
+                            {deliveryDetails.timeSlot === slot.id && (
+                              <span className="slot-selected-indicator" aria-hidden="true">✓</span>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    )}
 
-                  {!deliveryDetails.preferredDate ? (
-                    <div className="time-slots-disabled">
-                      <div className="time-slot-placeholder">Morning</div>
-                      <div className="time-slot-placeholder">Afternoon</div>
-                      <div className="time-slot-placeholder">Evening</div>
-                    </div>
-                  ) : loadingTimeSlots ? (
-                    <div className="time-slots-loading">
-                      <div className="time-slot-loading">Loading...</div>
-                      <div className="time-slot-loading">Loading...</div>
-                      <div className="time-slot-loading">Loading...</div>
-                    </div>
-                  ) : (
-                    <div className="time-slots-compact">
-                      {timeSlots.map((slot, index) => (
-                        <button
-                          key={slot.id}
-                          type="button"
-                          data-slot-id={slot.id}
-                          className={`time-slot-compact ${deliveryDetails.timeSlot === slot.id ? 'selected' : ''} ${!slot.available ? 'unavailable' : ''}`}
-                          onClick={() => slot.available && setDeliveryDetails({ ...deliveryDetails, timeSlot: slot.id })}
-                          onKeyDown={(e) => handleTimeSlotKeyDown(e, slot.id)}
-                          disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
-                          aria-disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
-                          tabIndex={deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate ? -1 : (index === 0 ? 0 : -1)}
-                          title={!slot.available ? 'No capacity for this date' : ''}
-                          aria-label={`${slot.label} slot ${slot.timeRange}, ${slot.capacity === 'available' ? 'Available' : slot.capacity === 'few-left' ? 'Few slots left' : 'Full'}`}
-                        >
-                          <span className="slot-label">{slot.label}</span>
-                          <span className="slot-time">{slot.timeRange}</span>
-                          <span className={`slot-badge slot-badge-${slot.capacity}`}>
-                            {slot.capacity === 'available' ? '' :
-                             slot.capacity === 'few-left' ? 'Few left' : 'Full'}
-                          </span>
-                          {deliveryDetails.timeSlot === slot.id && (
-                            <span className="slot-checkmark" aria-hidden="true">✓</span>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                    <p className="section-helper">
+                      {!deliveryDetails.preferredDate ?
+                        'Select a date first to see available slots' :
+                        'Choose your preferred delivery window'}
+                    </p>
 
-                  {/* Fixed-height validation container to prevent layout shift */}
-                  <div className="validation-container">
+                    {/* Validation Messages */}
                     {deliveryChoiceMode === 'now' && validationErrors.length > 0 && (
-                      <div className="inline-error" role="alert">
+                      <div className="validation-message" role="alert" aria-live="assertive">
+                        <span className="validation-icon">⚠️</span>
                         {validationErrors[0]}
                       </div>
                     )}
-                  </div>
-
-                  <div className="form-helper-text">
-                    {!deliveryDetails.preferredDate ?
-                      'Select a date first to see available time slots' :
-                      'Select a preferred delivery window'}
                   </div>
                 </div>
               </div>

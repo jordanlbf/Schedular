@@ -1,5 +1,8 @@
 /* Delivery Step Modules Index */
 
+/* Progressive Disclosure Styles */
+@import 'progressive-delivery.css';
+
 /* Layout and animations */
 @import 'layout/index.css';
 

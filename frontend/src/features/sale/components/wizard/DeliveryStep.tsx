@@ -149,6 +149,9 @@ export default function DeliveryStep({
     }
   };
 
+  // Override canProceed when "Choose Later" is selected
+  const canActuallyProceed = deliveryChoiceMode === 'later' || canProceed;
+
   // Handle delivery choice mode change
   const handleDeliveryChoiceChange = (mode: 'later' | 'now') => {
     setDeliveryChoiceMode(mode);
@@ -331,7 +334,7 @@ export default function DeliveryStep({
       stepNumber="3"
       onNext={handleNext}
       onPrev={onPrev}
-      canProceed={canProceed}
+      canProceed={canActuallyProceed}
       nextLabel="Continue to Payment"
       errors={[...errors, ...validationErrors]}
     >
@@ -418,7 +421,6 @@ export default function DeliveryStep({
                         >
                           <span className="pill-day">{getDayOfWeek(date)}</span>
                           <span className="pill-date">{new Date(date).getDate()}</span>
-                          {index === 0 && <span className="pill-badge">Soon</span>}
                         </button>
                       ))}
                       <button
@@ -434,7 +436,6 @@ export default function DeliveryStep({
                       </button>
                     </div>
 
-                    <p className="section-helper">Available weekdays only • Min 24 hours notice</p>
                   </div>
 
                   {/* Time Slot Selection Section */}
@@ -490,11 +491,6 @@ export default function DeliveryStep({
                       </div>
                     )}
 
-                    <p className="section-helper">
-                      {!deliveryDetails.preferredDate ?
-                        'Select a date first to see available slots' :
-                        'Choose your preferred delivery window'}
-                    </p>
 
                     {/* Validation Messages */}
                     {deliveryChoiceMode === 'now' && validationErrors.length > 0 && (

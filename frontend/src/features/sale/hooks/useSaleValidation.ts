@@ -125,22 +125,16 @@ export function useSaleValidation(
   const deliveryValidation = useMemo((): ValidationResult => {
     const errors: string[] = [];
     const fieldErrors: { [key: string]: string } = {};
-    
-    if (!deliveryDetails.preferredDate) {
-      errors.push('Delivery date is required');
-      fieldErrors.preferredDate = 'Delivery date is required';
-    }
-    
-    if (!deliveryDetails.timeSlot) {
-      errors.push('Time slot is required');
-      fieldErrors.timeSlot = 'Time slot is required';
-    }
+
+    // For global validation, we'll be lenient and allow delivery to be valid
+    // The actual validation happens locally in the DeliveryStep component
+    // This allows "Choose Later" to be valid while still validating "Choose Now"
 
     if (deliveryDetails.preferredDate) {
       const selectedDate = new Date(deliveryDetails.preferredDate);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      
+
       if (selectedDate < today) {
         errors.push('Delivery date cannot be in the past');
         fieldErrors.preferredDate = 'Delivery date cannot be in the past';

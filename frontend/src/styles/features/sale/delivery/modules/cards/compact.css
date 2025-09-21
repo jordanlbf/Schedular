@@ -33,9 +33,44 @@
   margin-bottom: var(--spacing-xs);
 }
 
+
 /* Dark mode adjustments */
 html.theme-dark .compact-card {
   background: rgba(39, 39, 40, 0.6);
+}
+
+/* Delivery Instructions Card - fills vertical space */
+.delivery-instructions-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.delivery-instructions-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--spacing-4xl);
+}
+
+.delivery-instructions-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.delivery-instructions-textarea {
+  flex: 1;
+  resize: none;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.delivery-instructions-textarea::placeholder {
+  color: var(--text-subtle);
+  font-style: italic;
 }
 
 /* Responsive padding adjustments */
@@ -44,5 +79,9 @@ html.theme-dark .compact-card {
   .compact-card .form-card-body {
     padding-left: var(--spacing-xl);
     padding-right: var(--spacing-xl);
+  }
+
+  .delivery-instructions-body {
+    padding-bottom: var(--spacing-xl);
   }
 }

@@ -21,8 +21,8 @@
 
 /* Set consistent heights for delivery forms - matching standard form card heights */
 .delivery-layout-grid .form-card {
-  min-height: 500px;
-  max-height: 500px;
+  min-height: 420px;
+  max-height: 420px;
   height: 500px;
   display: flex;
   flex-direction: column;

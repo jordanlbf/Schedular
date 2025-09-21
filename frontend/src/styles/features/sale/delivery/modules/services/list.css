@@ -80,3 +80,40 @@ html.theme-dark .service-item-compact:hover {
   background: rgba(14, 165, 233, 0.05);
   border-color: rgba(14, 165, 233, 0.2);
 }
+
+/* No Additional Services Option */
+.service-item-compact.no-additional-services {
+  background: linear-gradient(135deg,
+    rgba(100, 116, 139, 0.05) 0%,
+    var(--panel-elev) 100%);
+  border-color: rgba(100, 116, 139, 0.15);
+  border-style: dashed;
+}
+
+.service-item-compact.no-additional-services:hover {
+  background: linear-gradient(135deg,
+    rgba(100, 116, 139, 0.08) 0%,
+    var(--panel-elev) 100%);
+  border-color: rgba(100, 116, 139, 0.25);
+}
+
+.service-item-compact.no-additional-services .service-name-compact {
+  color: var(--text-subtle);
+  font-style: italic;
+}
+
+.service-item-compact.no-additional-services .service-price-compact {
+  color: var(--text-subtle);
+  background: rgba(100, 116, 139, 0.1);
+}
+
+/* Dark mode for no additional services */
+html.theme-dark .service-item-compact.no-additional-services {
+  background: rgba(100, 116, 139, 0.05);
+  border-color: rgba(148, 163, 184, 0.15);
+}
+
+html.theme-dark .service-item-compact.no-additional-services:hover {
+  background: rgba(100, 116, 139, 0.08);
+  border-color: rgba(148, 163, 184, 0.25);
+}

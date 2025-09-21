@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import type { DeliveryDetails } from '../../types';
 import { TIME_SLOTS, SERVICE_OPTIONS, MIN_DELIVERY_DAYS } from '../../constants/wizard';
 import { WizardStepLayout } from './shared/WizardStepLayout';
@@ -47,6 +47,12 @@ export default function DeliveryStep({
   errors = []
 }: DeliveryStepProps) {
   const [showCalendar, setShowCalendar] = useState(false);
+  const [feeInputValue, setFeeInputValue] = useState('');
+
+  // Sync input value with deliveryFee prop
+  useEffect(() => {
+    setFeeInputValue(deliveryFee === 0 ? '' : (deliveryFee / 100).toString());
+  }, [deliveryFee]);
   
   // Get minimum and suggested delivery dates
   const { minDate, suggestedDates, maxDate } = useMemo(() => {
@@ -181,12 +187,37 @@ export default function DeliveryStep({
             </div>
             <div className="form-card-body">
               <div className="services-list-compact">
+                <label className="service-item-compact no-additional-services">
+                  <input
+                    type="checkbox"
+                    checked={!deliveryDetails.whiteGloveService && !deliveryDetails.oldMattressRemoval && !deliveryDetails.setupService}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setDeliveryDetails({
+                          ...deliveryDetails,
+                          whiteGloveService: false,
+                          oldMattressRemoval: false,
+                          setupService: false
+                        });
+                      }
+                    }}
+                    className="service-checkbox-compact"
+                  />
+                  <div className="service-info-compact">
+                    <div className="service-main">
+                      <span className="service-name-compact">No additional services</span>
+                      <span className="service-price-compact">$0</span>
+                    </div>
+                    <span className="service-desc-compact">Standard delivery only - no extra services needed</span>
+                  </div>
+                </label>
+
                 <label className="service-item-compact">
                   <input
                     type="checkbox"
                     checked={deliveryDetails.whiteGloveService}
                     onChange={(e) => setDeliveryDetails({
-                      ...deliveryDetails, 
+                      ...deliveryDetails,
                       whiteGloveService: e.target.checked
                     })}
                     className="service-checkbox-compact"
@@ -205,7 +236,7 @@ export default function DeliveryStep({
                     type="checkbox"
                     checked={deliveryDetails.oldMattressRemoval}
                     onChange={(e) => setDeliveryDetails({
-                      ...deliveryDetails, 
+                      ...deliveryDetails,
                       oldMattressRemoval: e.target.checked
                     })}
                     className="service-checkbox-compact"
@@ -224,7 +255,7 @@ export default function DeliveryStep({
                     type="checkbox"
                     checked={deliveryDetails.setupService}
                     onChange={(e) => setDeliveryDetails({
-                      ...deliveryDetails, 
+                      ...deliveryDetails,
                       setupService: e.target.checked
                     })}
                     className="service-checkbox-compact"
@@ -245,18 +276,17 @@ export default function DeliveryStep({
         {/* Right Column - Instructions & Summary */}
         <div className="delivery-right-column">
           {/* Special Instructions Card */}
-          <div className="form-card compact-card">
+          <div className="form-card compact-card delivery-instructions-card">
             <div className="form-card-header">
               <h3>Delivery Instructions</h3>
             </div>
-            <div className="form-card-body">
-              <div className="form-group">
+            <div className="form-card-body delivery-instructions-body">
+              <div className="form-group delivery-instructions-group">
                 <textarea
-                  className="form-input form-textarea"
-                  rows={3}
+                  className="form-input form-textarea delivery-instructions-textarea"
                   value={deliveryDetails.specialInstructions}
                   onChange={(e) => setDeliveryDetails({
-                    ...deliveryDetails, 
+                    ...deliveryDetails,
                     specialInstructions: e.target.value
                   })}
                   placeholder="Special requirements: gate codes, stairs, contact preferences, etc."
@@ -277,12 +307,58 @@ export default function DeliveryStep({
                 <div className="fee-input-wrapper">
                   <span className="fee-currency">$</span>
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="decimal"
                     className="form-input fee-input"
-                    min="0"
-                    step="0.01"
-                    value={(deliveryFee/100).toFixed(2)}
-                    onChange={(e) => setDeliveryFee(Math.round(parseFloat(e.target.value || '0') * 100))}
+                    value={feeInputValue}
+                    onChange={(e) => {
+                      let value = e.target.value;
+
+                      // Only allow numbers and one decimal point
+                      value = value.replace(/[^0-9.]/g, '');
+
+                      // Prevent multiple decimal points
+                      const decimalCount = (value.match(/\./g) || []).length;
+                      if (decimalCount > 1) {
+                        const firstDecimalIndex = value.indexOf('.');
+                        value = value.substring(0, firstDecimalIndex + 1) + value.substring(firstDecimalIndex + 1).replace(/\./g, '');
+                      }
+
+                      // Limit to 2 decimal places
+                      const decimalIndex = value.indexOf('.');
+                      if (decimalIndex !== -1 && value.length > decimalIndex + 3) {
+                        value = value.substring(0, decimalIndex + 3);
+                      }
+
+                      // Update local state immediately for smooth typing
+                      setFeeInputValue(value);
+
+                      // Update deliveryFee for valid numbers
+                      if (value === '' || value === '.') {
+                        setDeliveryFee(0);
+                      } else {
+                        const numValue = parseFloat(value);
+                        if (!isNaN(numValue)) {
+                          setDeliveryFee(Math.round(numValue * 100));
+                        }
+                      }
+                    }}
+                    onFocus={(e) => e.target.select()}
+                    onBlur={(e) => {
+                      const value = e.target.value;
+                      if (value === '' || value === '.') {
+                        setDeliveryFee(0);
+                        setFeeInputValue('');
+                      } else if (!isNaN(parseFloat(value))) {
+                        const numValue = parseFloat(value);
+                        setDeliveryFee(Math.round(numValue * 100));
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.target.blur();
+                      }
+                    }}
                     placeholder="0.00"
                   />
                 </div>
@@ -294,18 +370,14 @@ export default function DeliveryStep({
                   <span>Base Delivery</span>
                   <span>${(deliveryFee/100).toFixed(2)}</span>
                 </div>
-                {totalServiceCharges > 0 && (
-                  <>
-                    <div className="summary-row">
-                      <span>Additional Services</span>
-                      <span>+${(totalServiceCharges/100).toFixed(2)}</span>
-                    </div>
-                    <div className="summary-row summary-total">
-                      <span>Total Delivery</span>
-                      <span>${((deliveryFee + totalServiceCharges)/100).toFixed(2)}</span>
-                    </div>
-                  </>
-                )}
+                <div className="summary-row">
+                  <span>Additional Services</span>
+                  <span>{totalServiceCharges > 0 ? `+$${(totalServiceCharges/100).toFixed(2)}` : '$0.00'}</span>
+                </div>
+                <div className="summary-row summary-total">
+                  <span>Total Delivery</span>
+                  <span>${((deliveryFee + totalServiceCharges)/100).toFixed(2)}</span>
+                </div>
               </div>
 
               {/* Delivery Details */}

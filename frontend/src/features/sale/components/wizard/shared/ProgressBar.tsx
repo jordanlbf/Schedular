@@ -6,6 +6,7 @@ interface ProgressBarProps {
     icon: string;
     isActive: boolean;
     isCompleted: boolean;
+    isAccessible: boolean;
   }[];
   onStepClick?: (stepId: string) => void;
 }
@@ -21,8 +22,8 @@ export function ProgressBar({ steps, onStepClick }: ProgressBarProps) {
         {steps.map((step, index) => {
           const isFuture = !step.isActive && !step.isCompleted && activeStepIndex !== -1 && index > activeStepIndex;
           const stepClass = step.isActive ? 'active' : step.isCompleted ? 'completed' : isFuture ? 'future' : 'pending';
-          const isClickable = onStepClick && (step.isCompleted || step.isActive);
-          
+          const isClickable = onStepClick && step.isAccessible;
+
           const handleStepClick = () => {
             if (isClickable) {
               onStepClick(step.id);

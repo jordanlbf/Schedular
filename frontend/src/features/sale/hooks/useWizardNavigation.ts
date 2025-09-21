@@ -7,25 +7,29 @@ export function useWizardNavigation(
   setCurrentStep: (step: WizardStep) => void,
   validation: StepValidation,
   markStepAttempted: (step: string) => void,
-  resetStepAttempted: (step: string) => void
+  resetStepAttempted: (step: string) => void,
+  markStepCompleted?: (step: WizardStep) => void
 ) {
   const nextStep = useCallback(() => {
     switch (currentStep) {
       case 'customer':
         markStepAttempted('customerAttempted');
         if (validation.customer.isValid) {
+          markStepCompleted?.(currentStep);
           setCurrentStep('products');
         }
         break;
       case 'products':
         markStepAttempted('productsAttempted');
         if (validation.products.isValid) {
+          markStepCompleted?.(currentStep);
           setCurrentStep('delivery');
         }
         break;
       case 'delivery':
         markStepAttempted('deliveryAttempted');
         if (validation.delivery.isValid) {
+          markStepCompleted?.(currentStep);
           setCurrentStep('payment');
         }
         break;
@@ -33,7 +37,7 @@ export function useWizardNavigation(
         markStepAttempted('paymentAttempted');
         break;
     }
-  }, [currentStep, validation, setCurrentStep, markStepAttempted]);
+  }, [currentStep, validation, setCurrentStep, markStepAttempted, markStepCompleted]);
 
   const prevStep = useCallback(() => {
     switch (currentStep) {

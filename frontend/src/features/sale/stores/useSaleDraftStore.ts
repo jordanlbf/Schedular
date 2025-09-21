@@ -14,6 +14,7 @@ export interface SaleDraftState {
   paymentMethod: string;
   depositAmount: number;
   currentStep: WizardStep;
+  completedSteps: WizardStep[];
   savedAt: number;
 }
 
@@ -54,6 +55,7 @@ export function useSaleDraftStore() {
     paymentMethod: draftData.paymentMethod || '',
     depositAmount: draftData.depositAmount || 0,
     currentStep: draftData.currentStep || 'customer',
+    completedSteps: draftData.completedSteps || [],
     savedAt: draftData.savedAt || Date.now()
   });
 
@@ -92,6 +94,7 @@ export function useSaleDraftStore() {
       paymentMethod: '',
       depositAmount: 0,
       currentStep: 'customer',
+      completedSteps: [],
       savedAt: Date.now()
     });
     setDraftData({});

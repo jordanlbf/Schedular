@@ -49,6 +49,78 @@ export default function DeliveryStep({
   const [showCalendar, setShowCalendar] = useState(false);
   const [feeInputValue, setFeeInputValue] = useState('');
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [deliveryChoiceMode, setDeliveryChoiceMode] = useState<'later' | 'now'>('later');
+  const [availableDates, setAvailableDates] = useState<string[]>([]);
+  const [timeSlots, setTimeSlots] = useState<Array<{
+    id: string;
+    label: string;
+    timeRange: string;
+    capacity: 'available' | 'few-left' | 'full';
+    available: boolean;
+  }>>([]);
+  const [loadingTimeSlots, setLoadingTimeSlots] = useState(false);
+
+  // Stub API function to load time slots for a given date
+  const loadTimeSlotsForDate = async (dateStr: string) => {
+    setLoadingTimeSlots(true);
+
+    // Simulate API call with delay
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Stub data based on date (in real app, this would be an API call)
+    const mockCapacities = {
+      '0': ['available', 'few-left', 'full'], // Sunday
+      '1': ['available', 'available', 'few-left'], // Monday
+      '2': ['few-left', 'available', 'available'], // Tuesday
+      '3': ['available', 'full', 'available'], // Wednesday
+      '4': ['few-left', 'few-left', 'available'], // Thursday
+      '5': ['full', 'available', 'few-left'], // Friday
+      '6': ['available', 'available', 'available'], // Saturday
+    };
+
+    const dayOfWeek = new Date(dateStr).getDay().toString();
+    const capacities = mockCapacities[dayOfWeek as keyof typeof mockCapacities] || ['available', 'available', 'available'];
+
+    const slots = [
+      {
+        id: 'morning',
+        label: 'Morning',
+        timeRange: '8am-12pm',
+        capacity: capacities[0],
+        available: capacities[0] !== 'full'
+      },
+      {
+        id: 'afternoon',
+        label: 'Afternoon',
+        timeRange: '12pm-5pm',
+        capacity: capacities[1],
+        available: capacities[1] !== 'full'
+      },
+      {
+        id: 'evening',
+        label: 'Evening',
+        timeRange: '5pm-8pm',
+        capacity: capacities[2],
+        available: capacities[2] !== 'full'
+      }
+    ] as const;
+
+    setTimeSlots(slots);
+    setLoadingTimeSlots(false);
+  };
+
+  // Load time slots when date changes
+  useEffect(() => {
+    if (deliveryDetails.preferredDate && deliveryChoiceMode === 'now') {
+      loadTimeSlotsForDate(deliveryDetails.preferredDate);
+      // Clear time slot when date changes to ensure clean state transitions
+      if (deliveryDetails.timeSlot) {
+        setDeliveryDetails({ ...deliveryDetails, timeSlot: '' });
+      }
+    } else {
+      setTimeSlots([]);
+    }
+  }, [deliveryDetails.preferredDate, deliveryChoiceMode]);
 
   // Sync input value with deliveryFee prop
   useEffect(() => {
@@ -59,12 +131,11 @@ export default function DeliveryStep({
   const validateForm = () => {
     const newErrors: string[] = [];
 
-    if (!deliveryDetails.preferredDate) {
-      newErrors.push('Please select a delivery date');
-    }
-
-    if (!deliveryDetails.timeSlot) {
-      newErrors.push('Please select a delivery time slot');
+    // Only validate date/time if user chose to select now
+    if (deliveryChoiceMode === 'now') {
+      if (!deliveryDetails.preferredDate || !deliveryDetails.timeSlot) {
+        newErrors.push('Please select a delivery date and time.');
+      }
     }
 
     setValidationErrors(newErrors);
@@ -78,39 +149,172 @@ export default function DeliveryStep({
     }
   };
 
-  // Clear validation errors when selections are made
-  useEffect(() => {
-    if (validationErrors.length > 0 && deliveryDetails.preferredDate && deliveryDetails.timeSlot) {
+  // Handle delivery choice mode change
+  const handleDeliveryChoiceChange = (mode: 'later' | 'now') => {
+    setDeliveryChoiceMode(mode);
+    if (mode === 'later') {
+      // Clear date and time when switching to "later" and set to null
+      setDeliveryDetails({
+        ...deliveryDetails,
+        preferredDate: '',
+        timeSlot: ''
+      });
       setValidationErrors([]);
     }
-  }, [deliveryDetails.preferredDate, deliveryDetails.timeSlot, validationErrors.length]);
+  };
+
+  // Handle keyboard navigation for delivery choice cards
+  const handleKeyDown = (event: React.KeyboardEvent, currentMode: 'later' | 'now') => {
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        handleDeliveryChoiceChange(currentMode === 'later' ? 'now' : 'later');
+        break;
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        handleDeliveryChoiceChange(currentMode === 'later' ? 'now' : 'later');
+        break;
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        handleDeliveryChoiceChange(currentMode);
+        break;
+    }
+  };
+
+  // Handle keyboard navigation for time slots
+  const handleTimeSlotKeyDown = (event: React.KeyboardEvent, currentSlotId: string) => {
+    const availableSlots = timeSlots.filter(slot => slot.available);
+    const currentIndex = availableSlots.findIndex(slot => slot.id === currentSlotId);
+
+    let nextIndex = currentIndex;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        nextIndex = currentIndex > 0 ? currentIndex - 1 : availableSlots.length - 1;
+        break;
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        nextIndex = currentIndex < availableSlots.length - 1 ? currentIndex + 1 : 0;
+        break;
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        if (availableSlots[currentIndex]?.available) {
+          setDeliveryDetails({ ...deliveryDetails, timeSlot: currentSlotId });
+        }
+        return;
+    }
+
+    if (availableSlots[nextIndex]) {
+      // Focus the next slot
+      const nextSlotElement = document.querySelector(`[data-slot-id="${availableSlots[nextIndex].id}"]`) as HTMLElement;
+      nextSlotElement?.focus();
+    }
+  };
+
+  // Clear validation errors when selections are made or mode changes
+  useEffect(() => {
+    if (validationErrors.length > 0 && (deliveryChoiceMode === 'later' || (deliveryDetails.preferredDate && deliveryDetails.timeSlot))) {
+      setValidationErrors([]);
+    }
+  }, [deliveryDetails.preferredDate, deliveryDetails.timeSlot, validationErrors.length, deliveryChoiceMode]);
   
-  // Get minimum and suggested delivery dates
-  const { minDate, suggestedDates, maxDate } = useMemo(() => {
+  // Business rules configuration
+  const BLACKOUT_DAYS = ['2024-12-25', '2024-01-01']; // Example holidays
+  const MINIMUM_LEAD_HOURS = 24;
+  const MAX_PILLS_SHOWN = 4;
+
+  // Generate available dates with business rules
+  const { minDate, maxDate, pillDates } = useMemo(() => {
     const min = new Date();
-    min.setDate(min.getDate() + MIN_DELIVERY_DAYS);
-    
+    min.setHours(min.getHours() + MINIMUM_LEAD_HOURS);
+
     const max = new Date();
-    max.setMonth(max.getMonth() + 3); // Max 3 months out
-    
-    // Generate suggested dates (weekdays preferred)
-    const suggested = [];
+    max.setMonth(max.getMonth() + 3);
+
+    // Generate dates for pills (next available days)
+    const pills = [];
     const current = new Date(min);
-    while (suggested.length < 5 && current <= max) {
+
+    while (pills.length < MAX_PILLS_SHOWN && current <= max) {
+      const dateStr = current.toISOString().split('T')[0];
       const dayOfWeek = current.getDay();
-      // Prefer weekdays (Mon-Fri)
-      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-        suggested.push(current.toISOString().split('T')[0]);
+
+      // Skip weekends and blackout days
+      if (dayOfWeek !== 0 && dayOfWeek !== 6 && !BLACKOUT_DAYS.includes(dateStr)) {
+        pills.push(dateStr);
       }
       current.setDate(current.getDate() + 1);
     }
-    
+
+    // Add selected date if it's not in the default pills
+    if (deliveryDetails.preferredDate && !pills.includes(deliveryDetails.preferredDate)) {
+      // Insert selected date and trim to max pills
+      pills.push(deliveryDetails.preferredDate);
+      pills.sort();
+      if (pills.length > MAX_PILLS_SHOWN) {
+        pills.splice(0, 1); // Remove oldest date
+      }
+    }
+
     return {
       minDate: min.toISOString().split('T')[0],
       maxDate: max.toISOString().split('T')[0],
-      suggestedDates: suggested
+      pillDates: pills
     };
-  }, []);
+  }, [deliveryDetails.preferredDate]);
+
+  // Check if a date is valid for selection
+  const isDateValid = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const minDateTime = new Date();
+    minDateTime.setHours(minDateTime.getHours() + MINIMUM_LEAD_HOURS);
+
+    return date >= minDateTime &&
+           date.getDay() !== 0 && date.getDay() !== 6 && // No weekends
+           !BLACKOUT_DAYS.includes(dateStr);
+  };
+
+  // Handle calendar date selection
+  const handleCalendarDateSelect = (selectedDate: string) => {
+    if (isDateValid(selectedDate)) {
+      setDeliveryDetails({ ...deliveryDetails, preferredDate: selectedDate, timeSlot: '' });
+      setShowCalendar(false);
+    }
+  };
+
+  // Handle date pill selection
+  const handleDatePillSelect = (selectedDate: string) => {
+    setDeliveryDetails({ ...deliveryDetails, preferredDate: selectedDate, timeSlot: '' });
+  };
+
+  // Handle ESC key to close calendar
+  const handleCalendarKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setShowCalendar(false);
+    }
+  };
+
+  // Close calendar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (showCalendar && !target.closest('.calendar-popover') && !target.closest('.date-chip-calendar')) {
+        setShowCalendar(false);
+      }
+    };
+
+    if (showCalendar) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showCalendar]);
 
   // Calculate total service charges
   const totalServiceCharges = useMemo(() => {
@@ -120,13 +324,6 @@ export default function DeliveryStep({
     if (deliveryDetails.setupService) total += SERVICE_OPTIONS.setupService.price;
     return total;
   }, [deliveryDetails]);
-
-  // Enhanced time slots with availability indicators
-  const enhancedTimeSlots = TIME_SLOTS.map(slot => ({
-    ...slot,
-    available: slot.value !== 'morning' || !deliveryDetails.preferredDate || new Date(deliveryDetails.preferredDate).getDay() !== 0, // Example: morning not available on Sundays
-    popular: slot.value === 'afternoon'
-  }));
 
   return (
     <WizardStepLayout
@@ -148,70 +345,163 @@ export default function DeliveryStep({
               <h3>Schedule Delivery</h3>
             </div>
             <div className="form-card-body">
-              {/* Date Selection */}
-              <div className="form-group">
-                <label className="form-label">Delivery Date *</label>
-                <div className="suggested-dates compact">
-                  {suggestedDates.slice(0, 4).map((date, index) => (
-                    <button
-                      key={date}
-                      type="button"
-                      className={`date-chip compact ${deliveryDetails.preferredDate === date ? 'selected' : ''}`}
-                      onClick={() => setDeliveryDetails({ ...deliveryDetails, preferredDate: date })}
-                    >
-                      <span className="date-day">{getDayOfWeek(date)}</span>
-                      <span className="date-number">{new Date(date).getDate()}</span>
-                      {index === 0 && <span className="date-badge">Soon</span>}
-                    </button>
-                  ))}
-                  <button
-                    type="button"
-                    className="date-chip compact date-chip-custom"
-                    onClick={() => setShowCalendar(!showCalendar)}
-                  >
-                    <span className="date-text">More</span>
-                  </button>
-                </div>
-                
-                {showCalendar && (
-                  <div className="custom-date-picker compact">
-                    <input
-                      type="date"
-                      className="form-input"
-                      value={deliveryDetails.preferredDate}
-                      onChange={(e) => {
-                        setDeliveryDetails({ ...deliveryDetails, preferredDate: e.target.value });
-                        setShowCalendar(false);
-                      }}
-                      min={minDate}
-                      max={maxDate}
-                    />
+              {/* Delivery Choice Radiogroup */}
+              <div
+                className="delivery-choice-radiogroup"
+                role="radiogroup"
+                aria-labelledby="delivery-choice-legend"
+              >
+                <div id="delivery-choice-legend" className="sr-only">Choose when to schedule delivery</div>
+
+                <div
+                  className={`delivery-choice-card ${deliveryChoiceMode === 'later' ? 'selected' : ''}`}
+                  role="radio"
+                  aria-checked={deliveryChoiceMode === 'later'}
+                  aria-label="Choose delivery date and time later"
+                  tabIndex={deliveryChoiceMode === 'later' ? 0 : -1}
+                  onClick={() => handleDeliveryChoiceChange('later')}
+                  onKeyDown={(e) => handleKeyDown(e, 'later')}
+                >
+                  <div className="delivery-choice-content">
+                    <div className="delivery-choice-icon">📅</div>
+                    <div className="delivery-choice-text">
+                      <h4>Choose Later</h4>
+                    </div>
                   </div>
-                )}
-                <div className="form-helper-text">
-                  Choose a delivery date
+                </div>
+
+                <div
+                  className={`delivery-choice-card ${deliveryChoiceMode === 'now' ? 'selected' : ''}`}
+                  role="radio"
+                  aria-checked={deliveryChoiceMode === 'now'}
+                  aria-label="Choose delivery date and time now"
+                  tabIndex={deliveryChoiceMode === 'now' ? 0 : -1}
+                  onClick={() => handleDeliveryChoiceChange('now')}
+                  onKeyDown={(e) => handleKeyDown(e, 'now')}
+                >
+                  <div className="delivery-choice-content">
+                    <div className="delivery-choice-icon">🚚</div>
+                    <div className="delivery-choice-text">
+                      <h4>Choose Now</h4>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Time Slot Selection */}
-              <div className="form-group">
-                <label className="form-label">Time Slot *</label>
-                <div className="time-slots-compact">
-                  {enhancedTimeSlots.filter(slot => slot.value).map((slot) => (
-                    <button
-                      key={slot.value}
-                      type="button"
-                      className={`time-slot-compact ${deliveryDetails.timeSlot === slot.value ? 'selected' : ''} ${!slot.available ? 'unavailable' : ''}`}
-                      onClick={() => slot.available && setDeliveryDetails({ ...deliveryDetails, timeSlot: slot.value })}
-                      disabled={!slot.available}
-                    >
-                      <span className="slot-label">{slot.label.split(' ')[0]}</span>
-                      <span className="slot-time">{slot.label.match(/\(([^)]+)\)/)?.[1] || ''}</span>
-                    </button>
-                  ))}
+              {/* Helper Text for Later Choice */}
+              {deliveryChoiceMode === 'later' && (
+                <div className="delivery-later-helper">
+                  You can select a date/time during Payment or after sale creation.
                 </div>
-                <div className="form-helper-text">
-                  Select a preferred delivery window
+              )}
+
+              {/* Progressive Disclosure Section */}
+              <div
+                className={`delivery-scheduling-section ${deliveryChoiceMode === 'now' ? 'expanded' : 'collapsed'}`}
+                aria-hidden={deliveryChoiceMode === 'later'}
+              >
+                {/* Date Selection */}
+                <div className="scheduling-row">
+                  <h5 className="scheduling-label">Delivery Date *</h5>
+                  <div className="date-pills-container">
+                    <div className="suggested-dates compact">
+                      {pillDates.map((date, index) => (
+                        <button
+                          key={date}
+                          type="button"
+                          className={`date-chip compact ${deliveryDetails.preferredDate === date ? 'selected' : ''}`}
+                          onClick={() => handleDatePillSelect(date)}
+                          tabIndex={deliveryChoiceMode === 'later' ? -1 : 0}
+                          disabled={deliveryChoiceMode === 'later'}
+                          aria-pressed={deliveryDetails.preferredDate === date}
+                          aria-label={`Select ${formatDate(date)} for delivery`}
+                        >
+                          <span className="date-day">{getDayOfWeek(date)}</span>
+                          <span className="date-number">{new Date(date).getDate()}</span>
+                          {index === 0 && <span className="date-badge">Soon</span>}
+                        </button>
+                      ))}
+                      <button
+                        type="button"
+                        className="date-chip compact date-chip-calendar"
+                        onClick={() => setShowCalendar(!showCalendar)}
+                        tabIndex={deliveryChoiceMode === 'later' ? -1 : 0}
+                        disabled={deliveryChoiceMode === 'later'}
+                        aria-label="Open calendar to select date"
+                        aria-expanded={showCalendar}
+                      >
+                        <span className="calendar-icon">📅</span>
+                        <span className="date-text" style={{ display: 'none' }}>More</span>
+                      </button>
+                    </div>
+
+                  </div>
+
+                  <div className="form-helper-text">
+                    Choose a delivery date
+                  </div>
+                </div>
+
+                {/* Time Slot Selection */}
+                <div className="scheduling-row">
+                  <h5 className="scheduling-label">Time Slot *</h5>
+
+                  {!deliveryDetails.preferredDate ? (
+                    <div className="time-slots-disabled">
+                      <div className="time-slot-placeholder">Morning</div>
+                      <div className="time-slot-placeholder">Afternoon</div>
+                      <div className="time-slot-placeholder">Evening</div>
+                    </div>
+                  ) : loadingTimeSlots ? (
+                    <div className="time-slots-loading">
+                      <div className="time-slot-loading">Loading...</div>
+                      <div className="time-slot-loading">Loading...</div>
+                      <div className="time-slot-loading">Loading...</div>
+                    </div>
+                  ) : (
+                    <div className="time-slots-compact">
+                      {timeSlots.map((slot, index) => (
+                        <button
+                          key={slot.id}
+                          type="button"
+                          data-slot-id={slot.id}
+                          className={`time-slot-compact ${deliveryDetails.timeSlot === slot.id ? 'selected' : ''} ${!slot.available ? 'unavailable' : ''}`}
+                          onClick={() => slot.available && setDeliveryDetails({ ...deliveryDetails, timeSlot: slot.id })}
+                          onKeyDown={(e) => handleTimeSlotKeyDown(e, slot.id)}
+                          disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
+                          aria-disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
+                          tabIndex={deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate ? -1 : (index === 0 ? 0 : -1)}
+                          title={!slot.available ? 'No capacity for this date' : ''}
+                          aria-label={`${slot.label} slot ${slot.timeRange}, ${slot.capacity === 'available' ? 'Available' : slot.capacity === 'few-left' ? 'Few slots left' : 'Full'}`}
+                        >
+                          <span className="slot-label">{slot.label}</span>
+                          <span className="slot-time">{slot.timeRange}</span>
+                          <span className={`slot-badge slot-badge-${slot.capacity}`}>
+                            {slot.capacity === 'available' ? '' :
+                             slot.capacity === 'few-left' ? 'Few left' : 'Full'}
+                          </span>
+                          {deliveryDetails.timeSlot === slot.id && (
+                            <span className="slot-checkmark" aria-hidden="true">✓</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Fixed-height validation container to prevent layout shift */}
+                  <div className="validation-container">
+                    {deliveryChoiceMode === 'now' && validationErrors.length > 0 && (
+                      <div className="inline-error" role="alert">
+                        {validationErrors[0]}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="form-helper-text">
+                    {!deliveryDetails.preferredDate ?
+                      'Select a date first to see available time slots' :
+                      'Select a preferred delivery window'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -417,20 +707,52 @@ export default function DeliveryStep({
                 </div>
               </div>
 
-              {/* Delivery Details */}
-              {deliveryDetails.preferredDate && deliveryDetails.timeSlot && (
-                <div className="delivery-confirmation">
-                  <div className="confirmation-label">Scheduled For:</div>
-                  <div className="confirmation-date">{formatDate(deliveryDetails.preferredDate)}</div>
-                  <div className="confirmation-time">
-                    {enhancedTimeSlots.find(s => s.value === deliveryDetails.timeSlot)?.label}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Calendar Popover - positioned outside normal flow */}
+      {showCalendar && (
+        <div
+          className="calendar-popover-overlay"
+          onClick={() => setShowCalendar(false)}
+        >
+          <div
+            className="calendar-popover"
+            onClick={(e) => e.stopPropagation()}
+            onKeyDown={handleCalendarKeyDown}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Date selection calendar"
+          >
+            <div className="calendar-header">
+              <h6>Select Delivery Date</h6>
+              <button
+                type="button"
+                className="calendar-close"
+                onClick={() => setShowCalendar(false)}
+                aria-label="Close calendar"
+              >
+                ×
+              </button>
+            </div>
+            <div className="calendar-body">
+              <input
+                type="date"
+                className="calendar-input"
+                value={deliveryDetails.preferredDate}
+                onChange={(e) => handleCalendarDateSelect(e.target.value)}
+                min={minDate}
+                max={maxDate}
+                tabIndex={0}
+                aria-label="Select delivery date from calendar"
+                autoFocus
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </WizardStepLayout>
   );
 }

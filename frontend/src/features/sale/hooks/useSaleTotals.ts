@@ -36,14 +36,15 @@ export function useSaleTotals(
     });
     
     const lineDiscount = itemsSum - actualSum; // Total saved from RRP
-    const subtotal = actualSum; // Actual prices after line-item discounts
-    
+    const subtotal = actualSum; // Actual prices after line-item discounts (in dollars)
+
     let calculatedDeliveryFee = deliveryFee;
     if (deliveryDetails.whiteGloveService) calculatedDeliveryFee += 15000;
     if (deliveryDetails.oldMattressRemoval) calculatedDeliveryFee += 5000;
     if (deliveryDetails.setupService) calculatedDeliveryFee += 7500;
-    
-    const beforeDiscount = subtotal + calculatedDeliveryFee;
+
+    // Convert subtotal to cents to match delivery fee format
+    const beforeDiscount = (subtotal * 100) + calculatedDeliveryFee;
     const discount = Math.round(beforeDiscount * (discountPct / 100));
     const total = beforeDiscount - discount;
     

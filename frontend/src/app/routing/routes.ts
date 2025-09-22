@@ -16,22 +16,22 @@ export const routeConfig: RouteConfig[] = [
   },
   {
     path: "/pos",
-    component: lazy(() => import("../../features/frontdesk/components/FrontDesk")),
+    component: lazy(() => import("../../pages/front-desk")),
     name: "Front Desk"
   },
   {
     path: "/pos/sale",
-    component: lazy(() => import("../../features/sale/CreateSaleWizard")),
+    component: lazy(() => import("../../pages/create-sale")),
     name: "Create Sale"
   },
   {
     path: "/pos/stock",
-    component: lazy(() => import("../../features/stock/components/CheckStock")),
+    component: lazy(() => import("../../pages/check-stock")),
     name: "Check Stock"
   },
   {
     path: "/pos/customer",
-    component: lazy(() => import("../../features/customers/components/SearchCustomer")),
+    component: lazy(() => import("../../pages/search-customer")),
     name: "Search Customer"
   },
   {

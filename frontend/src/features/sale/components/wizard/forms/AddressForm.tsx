@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import type { Address } from '@/entities';
+import type { Address } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField';
 
 interface AddressFormProps {

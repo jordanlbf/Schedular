@@ -1,0 +1,764 @@
+/* Progressive Disclosure Delivery Styles - Compact Height Optimized */
+
+/* ====================== */
+/* Radio Card Selection - More Compact */
+/* ====================== */
+.delivery-choice-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.delivery-radio-card {
+  display: block;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.delivery-radio-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 48px;
+  backdrop-filter: blur(10px);
+}
+
+.delivery-radio-card:hover .radio-card-content {
+  border-color: rgba(0, 212, 255, 0.4);
+  background: rgba(0, 212, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
+.delivery-radio-card.selected .radio-card-content {
+  border-color: #00d4ff;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.12) 0%, rgba(0, 212, 255, 0.06) 100%);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.25), 0 0 0 1px rgba(0, 212, 255, 0.15);
+}
+
+.radio-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  margin-right: 14px;
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.delivery-radio-card:hover .radio-indicator {
+  border-color: rgba(0, 212, 255, 0.6);
+}
+
+.delivery-radio-card.selected .radio-indicator {
+  border-color: #00d4ff;
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.delivery-radio-card.selected .radio-indicator::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00d4ff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: radioSelect 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.radio-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
+.delivery-radio-card:hover .radio-title {
+  color: #ffffff;
+}
+
+.delivery-radio-card.selected .radio-title {
+  color: #ffffff;
+}
+
+/* ====================== */
+/* Helper Text - Minimal */
+/* ====================== */
+.delivery-helper-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(0, 212, 255, 0.04) 100%);
+  border-left: 3px solid #00d4ff;
+  border-radius: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0;
+  animation: slideDown 0.3s ease;
+  letter-spacing: 0.2px;
+}
+
+.helper-icon {
+  font-size: 14px;
+  color: #00d4ff;
+}
+
+/* ====================== */
+/* Collapsible Section - Minimal Height */
+/* ====================== */
+.delivery-collapsible {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.delivery-collapsible.expanded {
+  max-height: 240px;
+  opacity: 1;
+  margin-top: 12px;
+}
+
+.collapsible-content {
+  padding: 16px 18px;
+  background: linear-gradient(135deg, 
+    rgba(22, 27, 37, 0.98) 0%, 
+    rgba(27, 32, 42, 0.95) 100%);
+  border: 1px solid rgba(0, 212, 255, 0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(25px);
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.collapsible-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 212, 255, 0.15) 20%, 
+    rgba(0, 212, 255, 0.15) 80%, 
+    transparent);
+}
+
+/* ====================== */
+/* Section Styling - Tighter */
+/* ====================== */
+.selection-section {
+  margin-bottom: 16px;
+}
+
+.selection-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), transparent);
+  margin-left: 12px;
+}
+
+.required-indicator {
+  color: #00d4ff;
+  margin-left: 1px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Remove section helper text completely */
+
+/* ====================== */
+/* Date Pills - Compact Height */
+/* ====================== */
+.date-pills-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.date-pills-row::-webkit-scrollbar {
+  display: none;
+}
+
+.date-pill {
+  position: relative;
+  min-width: 72px;
+  padding: 10px 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  backdrop-filter: blur(15px);
+  overflow: hidden;
+}
+
+.date-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.date-pill:hover:not(:disabled) {
+  border-color: rgba(0, 212, 255, 0.5);
+  background: rgba(0, 212, 255, 0.14);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px rgba(0, 212, 255, 0.25),
+    0 0 0 1px rgba(0, 212, 255, 0.15);
+}
+
+.date-pill:hover:not(:disabled)::before {
+  opacity: 1;
+  animation: shimmer 1s ease-in-out;
+}
+
+.date-pill.selected {
+  border-color: #00d4ff;
+  background: linear-gradient(135deg, 
+    rgba(0, 212, 255, 0.28) 0%, 
+    rgba(0, 212, 255, 0.18) 100%);
+  box-shadow: 
+    0 0 30px rgba(0, 212, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 0 0 1.5px rgba(0, 212, 255, 0.25);
+}
+
+.date-pill:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  filter: grayscale(0.7);
+}
+
+.pill-day {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.date-pill:hover .pill-day {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.date-pill.selected .pill-day {
+  color: #ffffff;
+  opacity: 1;
+  font-weight: 700;
+}
+
+.pill-date {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.date-pill.selected .pill-date {
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0, 212, 255, 0.5);
+}
+
+/* Remove the pill-badge styles completely since we don't want the 'Soon' tag */
+
+.date-pill.more-dates {
+  background: rgba(0, 212, 255, 0.03);
+  border: 1.5px dashed rgba(0, 212, 255, 0.3);
+  justify-content: center;
+  min-width: 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.date-pill.more-dates::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.date-pill.more-dates:hover::before {
+  transform: translate(-50%, -50%) scale(2);
+}
+
+.date-pill.more-dates:hover {
+  border-color: rgba(0, 212, 255, 0.6);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.more-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(0, 212, 255, 0.9);
+  letter-spacing: 0.8px;
+  transition: all 0.2s ease;
+}
+
+.date-pill.more-dates:hover .more-text {
+  color: #00d4ff;
+  transform: scale(1.05);
+}
+
+/* ====================== */
+/* Time Slots - Minimal Height */
+/* ====================== */
+.time-slots-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.time-slot-card {
+  position: relative;
+  padding: 14px 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 64px;
+  backdrop-filter: blur(15px);
+  text-align: center;
+  overflow: visible;
+}
+
+
+.time-slot-card:hover:not(:disabled):not(.unavailable) {
+  border-color: rgba(0, 212, 255, 0.5);
+  background: rgba(0, 212, 255, 0.14);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+}
+
+.time-slot-card.selected {
+  border-color: #00d4ff;
+  background: linear-gradient(135deg, 
+    rgba(0, 212, 255, 0.28) 0%, 
+    rgba(0, 212, 255, 0.18) 100%);
+  box-shadow: 
+    0 0 30px rgba(0, 212, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 0 0 1.5px rgba(0, 212, 255, 0.25);
+}
+
+.time-slot-card.unavailable {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.time-slot-card.unavailable::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.03) 10px,
+    rgba(255, 255, 255, 0.03) 20px
+  );
+  pointer-events: none;
+}
+
+.time-slot-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
+  filter: grayscale(0.7);
+}
+
+.slot-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.slot-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+}
+
+.time-slot-card:hover .slot-title {
+  color: #ffffff;
+}
+
+.time-slot-card.selected .slot-title {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 212, 255, 0.5);
+}
+
+.slot-range {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+  letter-spacing: 0.3px;
+}
+
+.time-slot-card:hover .slot-range {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.time-slot-card.selected .slot-range {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.slot-status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 7px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  backdrop-filter: blur(15px);
+  z-index: 2;
+}
+
+.slot-status.warning {
+  background: linear-gradient(135deg, 
+    rgba(255, 193, 7, 0.3), 
+    rgba(255, 193, 7, 0.2));
+  color: #ffdb4d;
+  border: 1px solid rgba(255, 193, 7, 0.6);
+  box-shadow: 0 3px 10px rgba(255, 193, 7, 0.4);
+  animation: warningPulse 2s ease-in-out infinite;
+}
+
+.slot-status.unavailable {
+  background: linear-gradient(135deg, 
+    rgba(255, 68, 68, 0.3), 
+    rgba(255, 68, 68, 0.2));
+  color: #ff8888;
+  border: 1px solid rgba(255, 68, 68, 0.6);
+  box-shadow: 0 3px 10px rgba(255, 68, 68, 0.4);
+}
+
+.slot-selected-indicator {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #00d4ff, #0099cc);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  animation: scaleIn 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.6);
+  border: 2px solid rgba(22, 27, 37, 0.98);
+  z-index: 3;
+}
+
+/* Disabled/Loading States */
+.time-slots-row.disabled,
+.time-slots-row.loading {
+  pointer-events: none;
+}
+
+.time-slot-placeholder,
+.time-slot-skeleton {
+  padding: 14px 10px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.time-slot-skeleton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.08), transparent);
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+/* ====================== */
+/* Validation Message - Compact */
+/* ====================== */
+.validation-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, 
+    rgba(255, 68, 68, 0.12) 0%, 
+    rgba(255, 68, 68, 0.08) 100%);
+  border-left: 3px solid #ff4444;
+  border-radius: 6px;
+  color: #ff9999;
+  font-size: 11px;
+  animation: slideDown 0.2s ease;
+  letter-spacing: 0.2px;
+}
+
+.validation-icon {
+  font-size: 14px;
+  color: #ff7777;
+}
+
+/* ====================== */
+/* Animations */
+/* ====================== */
+@keyframes radioSelect {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 200%;
+  }
+}
+
+@keyframes warningPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
+}
+
+@keyframes skeleton-loading {
+  to {
+    left: 100%;
+  }
+}
+
+/* ====================== */
+/* Responsive Design - Height Aware */
+/* ====================== */
+@media (max-width: 1200px) {
+  .date-pills-row {
+    gap: 10px;
+  }
+  
+  .date-pill {
+    min-width: 70px;
+    padding: 10px 8px;
+  }
+  
+  .time-slots-row {
+    gap: 10px;
+  }
+  
+  .time-slot-card {
+    padding: 14px 10px;
+    min-height: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .delivery-choice-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .time-slots-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .date-pills-row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  
+  .collapsible-content {
+    padding: 16px;
+  }
+  
+  .delivery-collapsible.expanded {
+    max-height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .collapsible-content {
+    padding: 14px;
+  }
+  
+  .radio-card-content {
+    padding: 10px 14px;
+    min-height: 46px;
+  }
+  
+  .date-pill {
+    min-width: 66px;
+    padding: 10px 8px;
+  }
+  
+  .pill-date {
+    font-size: 20px;
+  }
+  
+  .time-slot-card {
+    padding: 14px 10px;
+    min-height: 60px;
+  }
+  
+  .slot-title {
+    font-size: 13px;
+  }
+}

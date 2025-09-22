@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import type { Product } from '@/entities';
+import type { Product } from '@/shared/types';
 import { formatPrice } from '@/shared/lib/price';
 import { StockBadge } from '@/shared/ui/StockBadge';
 import { ColorSelector } from '@/shared/ui/ColorSelector';

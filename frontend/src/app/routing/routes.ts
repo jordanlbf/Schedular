@@ -11,7 +11,7 @@ export interface RouteConfig {
 export const routeConfig: RouteConfig[] = [
   {
     path: "/",
-    component: lazy(() => import("../pages/Home")),
+    component: lazy(() => import("../../pages/HomePage")),
     name: "Home"
   },
   {
@@ -36,7 +36,7 @@ export const routeConfig: RouteConfig[] = [
   },
   {
     path: "/admin",
-    component: lazy(() => import("../pages/Admin")),
+    component: lazy(() => import("../../pages/AdminPage")),
     name: "Admin"
   }
 ];

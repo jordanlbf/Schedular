@@ -16,12 +16,12 @@ npm run dev
 
 | Path | Page | Area | Component | Status |
 |:-----|:-----|:-----|:----------|:-------|
-| `/` | **Home** | App | `src/app/pages/Home.tsx` | 🟡 In progress |
+| `/` | **Index** | App | `src/app/pages/index.tsx` | 🟡 In progress |
 | `/pos` | **Front Desk** | POS | `src/features/frontdesk/FrontDesk.tsx` | 🟡 In progress |
 | `/pos/sale` | **Create Sale** | POS | `src/features/sale/CreateSale.tsx` | ⚪ Planned |
 | `/pos/stock` | **Check Stock** | POS | `src/features/stock/CheckStock.tsx` | ⚪ Planned |
 | `/pos/customer` | **Search Customer** | POS | `src/features/customers/SearchCustomer.tsx` | 🟢 Ready |
-| `/admin` | **Admin** | App | `src/app/pages/Admin.tsx` | ⚪ Planned |
+| `/admin` | **Index** | App | `src/app/pages/index.tsx` | ⚪ Planned |
 
 </details>
 <!-- ROUTES_TABLE_END -->

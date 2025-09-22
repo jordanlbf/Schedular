@@ -1,0 +1,177 @@
+/* Button Components */
+
+/* Base button styles with enhanced hierarchy */
+.btn { 
+  padding: var(--spacing-md) var(--spacing-xl); 
+  border-radius: var(--radius-lg); 
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-tight);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: grayscale(50%);
+}
+
+.btn:not(:disabled):hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+/* Button variants */
+.btn-primary { 
+  background: linear-gradient(135deg, var(--accent-secondary) 0%, #0284c7 100%);
+  color: white;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25), 0 2px 4px rgba(14, 165, 233, 0.15);
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.3), 0 3px 6px rgba(14, 165, 233, 0.2);
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+.btn-soft { 
+  background: var(--panel-elev); 
+  border: 1px solid var(--border); 
+  color: var(--text);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.btn-soft:hover:not(:disabled) {
+  background: var(--panel-hover);
+  border-color: var(--accent-secondary);
+  color: var(--accent-secondary);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.btn-ghost { 
+  background: transparent; 
+  border: 1px solid transparent; 
+}
+
+.btn-complete {
+  background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%) !important;
+  border-color: var(--success) !important;
+  color: white !important;
+  font-weight: var(--font-bold) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25), 0 2px 4px rgba(16, 185, 129, 0.15) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-complete:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--success-dark) 0%, #047857 100%) !important;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3), 0 3px 6px rgba(16, 185, 129, 0.2) !important;
+  filter: brightness(1.1) !important;
+}
+
+/* Enhanced button styles for wizard */
+.btn {
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+}
+
+/* Restart button */
+.btn-restart {
+  background: var(--warning);
+  color: white;
+  border: 1px solid var(--warning);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.15);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-restart:hover {
+  background: var(--warning-dark);
+  border-color: var(--warning-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25), 0 2px 4px rgba(245, 158, 11, 0.15);
+  filter: brightness(1.1);
+}
+
+.btn-restart:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+}
+
+/* Enhanced focus states for accessibility */
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus-visible {
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25), 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.btn-complete:focus-visible {
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25), 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+.btn-restart:focus-visible {
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.15), 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+/* Active states for better feedback */
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+  transition-duration: 0.1s;
+}
+
+.btn-primary:active:not(:disabled) {
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
+}
+
+/* Loading states */
+.btn-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,31 @@
+/* Quantity Selector Component */
+
+.qty { 
+  display: inline-grid; 
+  grid-template-columns: 28px 40px 28px; 
+  align-items: center; 
+  gap: 6px; 
+}
+
+.qty button { 
+  height: 32px; 
+  border: 1px solid var(--border); 
+  border-radius: var(--radius-sm); 
+}
+
+.qty input { 
+  height: 32px; 
+  width: 40px; 
+  text-align: center; 
+  border: 1px solid var(--border); 
+  background: transparent; 
+  border-radius: var(--radius-sm); 
+  color: inherit; 
+}
+
+/* Help text */
+.help { 
+  opacity: .6; 
+  font-style: normal; 
+  cursor: help; 
+}

@@ -12,10 +12,10 @@
 @import url('./components/utilities.css');
 
 /* Feature-specific styles */
-@import url('./features/sale/products/index.css');
-@import url('./features/sale/cart/index.css');
-@import url('./features/sale/wizard.css');
-@import url('./features/sale/products-layout.css');
+@import url('../../styles/features/sale/products/index.css');
+@import url('../../styles/features/sale/cart/index.css');
+@import url('../../styles/features/sale/wizard.css');
+@import url('../../styles/features/sale/products-layout.css');
 
 /* Utilities */
 @import url('./utilities/responsive.css');

@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import type { Product } from '@/shared/types';
-import { formatPrice } from '@/shared/utils/price';
-import { StockBadge } from '@/shared/components/StockBadge';
-import { ColorSelector } from '@/shared/components/ColorSelector';
+import type { Product } from '@/entities';
+import { formatPrice } from '@/shared/lib/price';
+import { StockBadge } from '@/shared/ui/StockBadge';
+import { ColorSelector } from '@/shared/ui/ColorSelector';
 
 type CatalogItem = Product;
 

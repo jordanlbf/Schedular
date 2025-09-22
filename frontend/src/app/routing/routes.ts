@@ -11,32 +11,32 @@ export interface RouteConfig {
 export const routeConfig: RouteConfig[] = [
   {
     path: "/",
-    component: lazy(() => import("@/app/pages/Home")),
+    component: lazy(() => import("../pages/Home")),
     name: "Home"
   },
   {
     path: "/pos",
-    component: lazy(() => import("@/features/frontdesk/FrontDesk")),
+    component: lazy(() => import("../../features/frontdesk/components/FrontDesk")),
     name: "Front Desk"
   },
   {
     path: "/pos/sale",
-    component: lazy(() => import("@/features/sale/CreateSaleWizard")),
+    component: lazy(() => import("../../features/sale/CreateSaleWizard")),
     name: "Create Sale"
   },
   {
     path: "/pos/stock",
-    component: lazy(() => import("@/features/stock/CheckStock")),
+    component: lazy(() => import("../../features/stock/components/CheckStock")),
     name: "Check Stock"
   },
   {
     path: "/pos/customer",
-    component: lazy(() => import("@/features/customers/SearchCustomer")),
+    component: lazy(() => import("../../features/customers/components/SearchCustomer")),
     name: "Search Customer"
   },
   {
     path: "/admin",
-    component: lazy(() => import("@/app/pages/Admin")),
+    component: lazy(() => import("../pages/Admin")),
     name: "Admin"
   }
 ];

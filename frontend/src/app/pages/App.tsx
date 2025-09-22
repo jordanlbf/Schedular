@@ -1,4 +1,4 @@
-import { AppRouter } from "@/core/router";
+import { AppRouter } from "../routing";
 import { useSessionManager } from "@/shared/hooks";
 
 export default function App() {

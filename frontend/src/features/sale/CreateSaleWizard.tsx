@@ -5,7 +5,7 @@ import { useSaleWizard } from "./hooks/useSaleWizard";
 import { usePageReloadHandler } from "./hooks/usePageReloadHandler";
 import { ProgressBar } from "./components/wizard/shared/ProgressBar";
 import { WizardSteps } from "./components/wizard/WizardSteps";
-import { ToastContainer } from "@/shared/components/ToastContainer";
+import { ToastContainer } from "@/shared/ui/ToastContainer";
 import { useToast, useBeforeUnload } from "@/shared/hooks";
 
 export default function CreateSaleWizard() {

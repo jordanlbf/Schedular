@@ -1,6 +1,6 @@
 import type { Customer, Line, DeliveryDetails } from '../../types';
 import type { SaleTotals } from '../../hooks/useSaleTotals';
-import { fmt } from '../../../../shared/utils/money';
+import { fmt } from '@/shared/lib/money';
 import { PAYMENT_METHODS } from '../../constants/wizard';
 import { WizardStepLayout } from './shared/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';

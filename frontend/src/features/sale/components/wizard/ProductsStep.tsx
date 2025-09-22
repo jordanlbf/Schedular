@@ -4,7 +4,7 @@ import ProductPicker from '../ProductPicker';
 import CartTable from '../CartTable';
 import { WizardStepLayout } from './shared/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
-import { formatPrice, formatSavings } from '@/shared/utils/price';
+import { formatPrice, formatSavings } from '@/shared/lib/price';
 
 interface ProductsStepProps {
   lines: Line[];

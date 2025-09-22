@@ -1,5 +1,5 @@
-import type { Customer, Address } from '@/shared/types';
-import { AUSTRALIAN_STATES } from '@/shared/constants';
+import type { Customer, Address } from '@/entities';
+import { AUSTRALIAN_STATES } from '@/shared/lib/constants';
 import { WizardStepLayout } from './shared/WizardStepLayout';
 import { ContactDetailsForm } from './forms/ContactDetailsForm';
 import { AddressForm } from './forms/AddressForm';

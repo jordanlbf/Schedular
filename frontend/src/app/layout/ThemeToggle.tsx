@@ -1,4 +1,4 @@
-import { Theme } from "@/shared/theme/useTheme";
+import { Theme } from "@/shared/hooks/useTheme";
 
 export default function ThemeToggle({
   theme,

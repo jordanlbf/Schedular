@@ -1,9 +1,9 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import type { Line } from "../types";
 import { CATALOG } from "../catalog";
-import type { Product } from '@/shared/types';
+import type { Product } from '@/entities';
 
-import { StockBadge } from '@/shared/components/StockBadge';
+import { StockBadge } from '@/shared/ui/StockBadge';
 import { PriceBlock } from './cart/PriceBlock';
 
 interface CartItemRowProps {

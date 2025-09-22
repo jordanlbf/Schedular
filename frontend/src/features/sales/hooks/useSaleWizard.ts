@@ -79,7 +79,7 @@ export function useSaleWizard(state: any, updateField: (field: string, value: an
         label: WIZARD_STEP_TITLES.products,
         detail: validation.products.isValid
           ? `${state.lines.length} item${state.lines.length !== 1 ? 's' : ''}`
-          : 'Choose products',
+          : 'Choose product-picker',
         icon: '2',
         isActive: state.currentStep === 'products',
         isCompleted: isStepCompleted('products'),

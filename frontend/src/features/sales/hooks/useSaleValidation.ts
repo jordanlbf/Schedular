@@ -111,8 +111,8 @@ export function useSaleValidation(
     
     const invalidLines = lines.filter(line => line.qty <= 0);
     if (invalidLines.length > 0) {
-      errors.push('All products must have a quantity greater than 0');
-      fieldErrors.quantities = 'All products must have a quantity greater than 0';
+      errors.push('All product-picker must have a quantity greater than 0');
+      fieldErrors.quantities = 'All product-picker must have a quantity greater than 0';
     }
 
     return {

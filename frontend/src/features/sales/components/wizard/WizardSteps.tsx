@@ -70,7 +70,7 @@ export function WizardSteps({
     updateField('lines', newLines);
   };
 
-  // Calculate subtotal for products step  
+  // Calculate subtotal for product-picker step
   const subtotal = state.lines.reduce((sum: number, line) => sum + (line.price * line.qty), 0);
 
   const stepComponents = {

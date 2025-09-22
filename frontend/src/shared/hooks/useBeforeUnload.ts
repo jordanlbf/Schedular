@@ -17,7 +17,7 @@ export function useBeforeUnload({ when, message }: UseBeforeUnloadOptions) {
     if (when) {
       event.preventDefault();
       // Modern browsers ignore the custom message and show their own
-      // But we still set it for compatibility
+      // But still set it for compatibility
       event.returnValue = message || defaultMessage;
       return message || defaultMessage;
     }

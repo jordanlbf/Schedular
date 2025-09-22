@@ -14,10 +14,10 @@
 @import url('../ui/styles/utilities.css');
 
 /* Feature-specific styles */
-@import url('../../features/products/styles/index.css');
+@import url('../../features/sales/product-picker/styles/index.css');
 @import url('../../features/cart/styles/index.css');
-@import url('../../features/sale/wizard.css');
-@import url('../../features/sale/styles/products-layout.css');
+@import url('../../features/sales/wizard.css');
+@import url('../../features/sales/styles/products-layout.css');
 
 /* Utilities */
 @import url('./utilities/responsive.css');

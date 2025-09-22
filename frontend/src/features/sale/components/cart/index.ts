@@ -1,1 +1,0 @@
-export { PriceBlock } from './PriceBlock';

@@ -3,7 +3,7 @@ import { AUSTRALIAN_STATES } from '@/shared/lib/constants';
 import { WizardStepLayout } from './shared/WizardStepLayout';
 import { ContactDetailsForm } from './forms/ContactDetailsForm';
 import { AddressForm } from './forms/AddressForm';
-import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizardTitles';
 
 interface CustomerStepProps {
   customer: Customer;

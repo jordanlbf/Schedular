@@ -1,9 +1,9 @@
 import { MutableRefObject } from 'react';
 import type { Line, CatalogItem } from '../../types';
-import ProductPicker from '../ProductPicker';
-import CartTable from '../CartTable';
+import ProductPicker from '../ProductPicker/ProductPicker.tsx';
+import CartTable from '../Cart/CartTable.tsx';
 import { WizardStepLayout } from './shared/WizardStepLayout';
-import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizardTitles';
 import { formatPrice, formatSavings } from '@/shared/lib/price';
 
 interface ProductsStepProps {

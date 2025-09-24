@@ -1,6 +1,6 @@
 // Component exports
-export { default as ProductPicker } from './ProductPicker';
-export { default as CartTable } from './CartTable';
+export { default as ProductPicker } from './product-picker/ProductPicker.tsx';
+export { default as CartTable } from './cart/CartTable.tsx';
 export { default as CustomerForm } from './CustomerForm';
 export { default as PricingSummary } from './PricingSummary';
 

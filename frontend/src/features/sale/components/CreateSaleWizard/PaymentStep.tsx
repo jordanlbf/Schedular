@@ -1,9 +1,9 @@
 import type { Customer, Line, DeliveryDetails } from '../../types';
 import type { SaleTotals } from '../../hooks/useSaleTotals';
 import { fmt } from '@/shared/lib/money';
-import { PAYMENT_METHODS } from '../../constants/wizard';
+import { PAYMENT_METHODS } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 import { WizardStepLayout } from './shared/WizardStepLayout';
-import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizardTitles';
 
 interface PaymentStepProps {
   paymentMethod: string;

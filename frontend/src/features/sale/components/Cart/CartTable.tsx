@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import type { Line } from "../types";
-import { CATALOG } from "../catalog";
-import { CartItemRow } from './CartItemRow';
+import type { Line } from "../../types.ts";
+import { CATALOG } from "../../catalog.ts";
+import { CartItemRow } from './CartItemRow.tsx';
 
 interface CartTableProps {
   lines: Line[];

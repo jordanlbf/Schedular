@@ -1,4 +1,4 @@
-import type { WizardStep } from '../hooks/useSaleDraft';
+import type { WizardStep } from '../../../hooks/useSaleDraft.ts';
 
 export const WIZARD_STEPS: WizardStep[] = ['customer', 'products', 'delivery', 'payment'];
 

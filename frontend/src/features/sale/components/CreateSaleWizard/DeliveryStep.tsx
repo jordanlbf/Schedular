@@ -1,8 +1,8 @@
 import { useMemo, useState, useEffect } from 'react';
 import type { DeliveryDetails } from '../../types';
-import { TIME_SLOTS, SERVICE_OPTIONS, MIN_DELIVERY_DAYS } from '../../constants/wizard';
+import { TIME_SLOTS, SERVICE_OPTIONS, MIN_DELIVERY_DAYS } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 import { WizardStepLayout } from './shared/WizardStepLayout';
-import { WIZARD_STEP_TITLES } from '../../constants/wizardTitles';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizardTitles';
 
 interface DeliveryStepProps {
   deliveryDetails: DeliveryDetails;

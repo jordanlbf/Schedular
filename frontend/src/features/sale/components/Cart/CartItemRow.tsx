@@ -1,10 +1,10 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import type { Line } from "../types";
-import { CATALOG } from "../catalog";
+import type { Line } from "../../types.ts";
+import { CATALOG } from "../../catalog.ts";
 import type { Product } from '@/shared/types';
 
-import { StockBadge } from '@/shared/ui/StockBadge';
-import { PriceBlock } from './cart/PriceBlock';
+import { StockBadge } from '@/shared/ui/StockBadge.tsx';
+import { PriceBlock } from './PriceBlock';
 
 interface CartItemRowProps {
   line: Line;

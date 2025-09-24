@@ -1,7 +1,7 @@
 /* Wizard Styling */
 
 /* Import delivery step styles */
-@import url('../ScheduleDelivery/styles/delivery/delivery-step.css');
+@import url('../../ScheduleDelivery/styles/delivery/delivery-step.css');
 
 /* Main wizard container */
 .wizard-container {

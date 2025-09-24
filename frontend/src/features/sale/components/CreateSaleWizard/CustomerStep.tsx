@@ -1,8 +1,8 @@
 import type { Customer, Address } from '@/shared/types';
 import { AUSTRALIAN_STATES } from '@/shared/lib/constants';
 import { WizardStepLayout } from './shared/WizardStepLayout';
-import { ContactDetailsForm } from './forms/ContactDetailsForm';
-import { AddressForm } from './forms/AddressForm';
+import { ContactDetailsForm } from '@/features/sale/components/CreateCustomer/forms/ContactDetailsForm';
+import { AddressForm } from '@/features/sale/components/CreateCustomer/forms/AddressForm';
 import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizardTitles';
 
 interface CustomerStepProps {

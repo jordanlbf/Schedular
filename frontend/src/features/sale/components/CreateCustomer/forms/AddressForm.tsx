@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import type { Address } from '@/shared/types';
-import { FormField } from '@/shared/ui/FormField';
+import { FormField } from '@/shared/ui/FormField.tsx';
 
 interface AddressFormProps {
   address?: Address;

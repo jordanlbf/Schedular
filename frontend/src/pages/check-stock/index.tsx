@@ -1,5 +1,5 @@
 import Header from "@/app/layout/Header";
-import CheckStock from "@/features/stock/components/CheckStock";
+import CheckStock from "@/features/inventory/components/CheckStock";
 
 export default function CheckStockPage() {
   return (

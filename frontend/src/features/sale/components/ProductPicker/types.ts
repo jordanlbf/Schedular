@@ -54,11 +54,3 @@ export interface ProductFilter {
   maxPrice?: number;
   inStock?: boolean;
 }
-
-export interface ProductsState {
-  products: Product[];
-  selectedProduct: Product | null;
-  filters: ProductFilter;
-  isLoading: boolean;
-  error: string | null;
-}

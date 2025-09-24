@@ -25,17 +25,3 @@ export enum CartStatus {
   ABANDONED = 'abandoned',
   CONVERTED = 'converted',
 }
-
-export interface CartTotals {
-  subtotal: number;
-  discount: number;
-  tax: number;
-  shipping: number;
-  total: number;
-}
-
-export interface CartState {
-  cart: Cart | null;
-  isLoading: boolean;
-  error: string | null;
-}

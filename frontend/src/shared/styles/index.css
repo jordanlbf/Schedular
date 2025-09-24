@@ -16,8 +16,8 @@
 /* Feature-specific styles */
 @import url('../../features/sale/components/ProductPicker/styles/index.css');
 @import url('../../features/sale/components/Cart/styles/index.css');
-@import url('../../features/sale/components/CreateSaleWizard/wizard.css');
-@import url('../../features/sale/components/ProductPicker/products-layout.css');
+@import url('../../features/sale/components/CreateSaleWizard/styles/wizard.css');
+@import url('../../features/sale/components/ProductPicker/styles/products-layout.css');
 
 /* Utilities */
 @import url('./utilities/responsive.css');

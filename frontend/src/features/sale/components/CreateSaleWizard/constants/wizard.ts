@@ -1,14 +1,3 @@
-import type { WizardStep } from '../../../hooks/useSaleDraft.ts';
-
-export const WIZARD_STEPS: WizardStep[] = ['customer', 'products', 'delivery', 'payment'];
-
-export const STEP_LABELS = {
-  customer: 'Customer Details',
-  products: 'Product Selection', 
-  delivery: 'Delivery Details',
-  payment: 'Payment'
-} as const;
-
 export const TIME_SLOTS = [
   { value: '', label: 'Select time slot' },
   { value: 'morning', label: 'Morning (8am-12pm)' },
@@ -39,8 +28,6 @@ export const SERVICE_OPTIONS = {
     price: 7500, // $75 in cents
   },
 } as const;
-
-export const DEFAULT_TAX_RATE = 0.10; // 10%
 
 export const MANUFACTURING_DAYS = 14;
 export const MIN_DELIVERY_DAYS = 7;

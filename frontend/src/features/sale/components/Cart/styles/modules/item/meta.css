@@ -54,7 +54,7 @@
 
 .color-name {
   font-size: var(--text-xs);
-  color: var(--muted);
+  color: var(--text-subtle);
   font-style: italic;
   opacity: 0.8;
 }

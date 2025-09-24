@@ -1,12 +1,5 @@
 export { AUSTRALIAN_STATES, CURRENCIES, DEFAULT_CURRENCY } from './geography';
 
-export const TIME_SLOTS = [
-  { value: "", label: "Select time slot" },
-  { value: "morning", label: "Morning (8 AM - 12 PM)" },
-  { value: "afternoon", label: "Afternoon (12 PM - 5 PM)" },
-  { value: "evening", label: "Evening (5 PM - 8 PM)" }
-];
-
 export const DELIVERY_OPTIONS = {
   whiteGlove: {
     label: "White Glove Service",

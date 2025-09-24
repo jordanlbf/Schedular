@@ -39,7 +39,7 @@
 }
 
 .cart-item-placeholder {
-  color: var(--muted-light);
+  color: var(--text-subtle);
   opacity: 0.25;
   display: flex;
   align-items: center;

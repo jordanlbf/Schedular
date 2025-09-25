@@ -3,7 +3,7 @@ import type { Line } from "../../types.ts";
 import { CATALOG } from "../../catalog.ts";
 import type { Product } from '@/shared/types';
 
-import { StockBadge } from '@/shared/ui/StockBadge.tsx';
+import { StockBadge } from '../ui/StockBadge.tsx';
 import { PriceBlock } from './PriceBlock';
 
 interface CartItemRowProps {

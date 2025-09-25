@@ -1,17 +1,10 @@
 /* Sale Feature Styles - Modular Import */
 
 /* Base styles */
-@import url('./base/variables.css');
+@import url('./base/');
 
-/* Component styles - moved to ui/ui/styles */
-@import url('../ui/styles/panels.css');
-@import url('../ui/styles/buttons.css');
-
-/* @import url('../ui/styles/forms.css'); */ /* Temporarily disabled - using comprehensive forms.css */
-@import url('./components/forms.css'); /* Using larger, more comprehensive forms.css */
-@import url('../ui/styles/toast.css');
-@import url('../ui/styles/progress.css');
-@import url('../ui/styles/utilities.css');
+/* Component styles */
+@import url('./components/');
 
 /* Feature-specific styles */
 @import url('../../features/sale/components/ProductPicker/styles/index.css');
@@ -22,4 +15,4 @@
 @import url('../../features/sale/components/ProductPicker/styles/products-layout.css');
 
 /* Utilities */
-@import url('./utilities/responsive.css');
+@import url('./utilities/');

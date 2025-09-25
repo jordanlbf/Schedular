@@ -1,0 +1,100 @@
+/* Financing and Input Controls */
+
+/* Discount Controls */
+.discount-input-wrapper {
+  position: relative;
+  max-width: 120px;
+}
+
+.discount-input {
+  padding-right: var(--spacing-2xl) !important;
+}
+
+.input-suffix {
+  position: absolute;
+  right: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-sm);
+  color: var(--text-subtle);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-prefix {
+  position: absolute;
+  left: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-sm);
+  color: var(--text-subtle);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Deposit Controls */
+.deposit-input-wrapper {
+  position: relative;
+  max-width: 160px;
+}
+
+.deposit-input {
+  padding-left: var(--spacing-xl) !important;
+}
+
+/* Financing Details - Compact for 390px height */
+.financing-details {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--panel-elev);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.financing-details .form-group {
+  margin-bottom: var(--spacing-sm);
+}
+
+.financing-details .form-label {
+  font-size: var(--text-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.financing-summary {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.financing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.financing-row:last-child {
+  margin-bottom: 0;
+  font-weight: var(--font-semibold);
+}
+
+.financing-row .amount {
+  font-weight: var(--font-medium);
+}
+
+/* Utility Classes */
+.amount {
+  font-family: var(--font-mono);
+  font-weight: var(--font-medium);
+}
+
+.discount {
+  color: var(--success);
+}
+
+.total {
+  font-weight: var(--font-bold);
+}

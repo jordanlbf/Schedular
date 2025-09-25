@@ -3,7 +3,7 @@ import { useSaleTotals } from './useSaleTotals';
 import { useSaleValidation } from './useSaleValidation';
 import { useWizardNavigation } from './useWizardNavigation';
 import type { WizardStep } from '../stores/useSaleDraftStore';
-import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizardTitles';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 
 export function useSaleWizard(state: any, updateField: (field: string, value: any) => void) {
   const totals = useSaleTotals(

@@ -1,0 +1,224 @@
+/* Payment Step Layout */
+
+/* Payment Method Card - Optimized for 390px height */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.payment-option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--panel);
+  min-height: auto;
+}
+
+.payment-option:hover {
+  border-color: rgba(14, 165, 233, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.payment-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0 0;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+
+.payment-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.payment-name {
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  color: var(--text);
+  margin: 0 0 var(--spacing-xs) 0;
+  line-height: var(--leading-tight);
+}
+
+.payment-description {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+  line-height: var(--leading-normal);
+  margin: 0;
+}
+
+/* Payment Step Layout - extending form-cards-grid */
+
+/* Main layout grid - Order Summary left, Info & Payment right */
+.payment-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: calc(80px + var(--spacing-lg));
+}
+
+/* Left column - Order Summary (spans full height) */
+.payment-order-summary {
+  /* This will naturally take the height it needs */
+}
+
+/* Right column - Stacked cards with increased gap for exact alignment */
+.payment-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 42px; /* Increased from 32px to 42px for exact 822px total */
+  height: fit-content;
+}
+
+/* Set heights for payment forms - Order Summary taller, right cards shorter */
+.payment-layout-grid .form-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0; /* Override default form-card margin to prevent alignment issues */
+}
+
+.payment-layout-grid .form-card .form-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Right column cards - Increased by 10px each */
+.payment-right-column .form-card {
+  height: 390px;
+  min-height: 330px;
+  max-height: 390px;
+  flex: 1;
+}
+
+/* Order Summary - Exact height match for removed margins */
+.payment-order-summary .form-card {
+  height: 822px; /* Two 390px cards + 32px gap = 822px total right column height */
+  min-height: 822px;
+  max-height: 822px;
+}
+
+/* Order Summary - Pin pricing to bottom */
+.payment-order-summary .form-card .form-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Group top content (items + discount controls) */
+.payment-order-summary .order-content-top {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Pin pricing breakdown to bottom */
+.payment-order-summary .order-totals {
+  flex-shrink: 0;
+  border-top: 2px solid var(--border);
+  background: var(--panel-elev);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg));
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Payment Step Animations - matching form-cards-grid pattern */
+.payment-layout-grid .payment-order-summary .form-card {
+  animation: slideUpForm 0.4s ease-out;
+}
+
+.payment-layout-grid .payment-right-column .form-card:nth-child(1) {
+  animation: slideUpForm 0.4s ease-out;
+  animation-delay: 0.1s;
+  animation-fill-mode: backwards;
+}
+
+.payment-layout-grid .payment-right-column .form-card:nth-child(2) {
+  animation: slideUpForm 0.4s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: backwards;
+}
+
+/* Order Information Card - Optimized for fixed height */
+.payment-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+  height: 100%;
+}
+
+.payment-info-grid .info-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.payment-info-grid .info-section h4 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  margin: 0 0 var(--spacing-md) 0;
+  flex-shrink: 0;
+}
+
+.payment-info-grid .info-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+/* Responsive Payment Layout */
+@media (max-width: 768px) {
+  .wizard-content {
+    padding: var(--spacing-md) var(--spacing-lg) calc(80px + var(--spacing-4xl));
+  }
+
+  .step-content {
+    gap: var(--spacing-xl);
+  }
+
+  .payment-layout-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  /* Reset heights on mobile */
+  .payment-layout-grid .form-card,
+  .payment-order-summary .form-card,
+  .payment-right-column .form-card {
+    min-height: auto;
+    max-height: none;
+    height: auto;
+  }
+
+  .payment-right-column .form-card {
+    flex: none;
+  }
+
+  .payment-info-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+
+  .step-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md);
+    text-align: left;
+  }
+}

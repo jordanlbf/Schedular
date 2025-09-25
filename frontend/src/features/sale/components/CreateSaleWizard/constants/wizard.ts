@@ -1,9 +1,13 @@
-export const TIME_SLOTS = [
-  { value: '', label: 'Select time slot' },
-  { value: 'morning', label: 'Morning (8am-12pm)' },
-  { value: 'afternoon', label: 'Afternoon (12pm-5pm)' },
-  { value: 'evening', label: 'Evening (5pm-8pm)' },
-] as const;
+/**
+ * Centralized wizard step titles - these must match exactly with progress bar labels
+ * in useSaleWizard.ts to ensure consistency across the interface
+ */
+export const WIZARD_STEP_TITLES = {
+  customer: 'Customer Details',
+  products: 'Product Selection',
+  delivery: 'Delivery Details',
+  payment: 'Payment'
+} as const;
 
 export const PAYMENT_METHODS = [
   { value: 'cash', label: 'Cash', description: 'Full payment today' },
@@ -29,5 +33,6 @@ export const SERVICE_OPTIONS = {
   },
 } as const;
 
-export const MANUFACTURING_DAYS = 14;
 export const MIN_DELIVERY_DAYS = 7;
+
+export type WizardStepTitle = typeof WIZARD_STEP_TITLES[keyof typeof WIZARD_STEP_TITLES];

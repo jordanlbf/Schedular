@@ -3,7 +3,7 @@
 /* Base styles */
 @import url('./base/variables.css');
 
-/* Component styles - moved to shared/ui/styles */
+/* Component styles - moved to ui/ui/styles */
 @import url('../ui/styles/panels.css');
 @import url('../ui/styles/buttons.css');
 
@@ -16,7 +16,9 @@
 /* Feature-specific styles */
 @import url('../../features/sale/components/ProductPicker/styles/index.css');
 @import url('../../features/sale/components/Cart/styles/index.css');
-@import url('../../features/sale/components/CreateSaleWizard/styles/wizard.css');
+@import url('../../features/sale/components/CreateSaleWizard/styles/index.css');
+@import url('../../features/sale/components/OrderCheckout/styles/index.css');
+@import url('../../features/sale/components/ScheduleDelivery/styles/delivery/delivery-step.css');
 @import url('../../features/sale/components/ProductPicker/styles/products-layout.css');
 
 /* Utilities */

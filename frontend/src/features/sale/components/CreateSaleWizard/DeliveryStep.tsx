@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { DeliveryDetails } from '../../types';
-import { WizardStepLayout } from './shared/WizardStepLayout';
-import { WIZARD_STEP_TITLES } from './constants/wizardTitles';
+import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/ui/WizardStepLayout';
+import { WIZARD_STEP_TITLES } from './constants/wizard';
 import ScheduleDelivery from '../ScheduleDelivery/ScheduleDelivery';
 
 interface DeliveryStepProps {

@@ -1,0 +1,67 @@
+/* Customer and Delivery Information Display */
+
+/* Info Grid Layout */
+.info-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.info-section h4 {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  margin: 0 0 var(--spacing-md) 0;
+  flex-shrink: 0;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+/* Customer Information */
+.customer-name {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text);
+}
+
+.customer-contact {
+  color: var(--text-subtle);
+  font-size: var(--text-base);
+}
+
+.delivery-address {
+  margin-top: var(--spacing-md);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-subtle);
+}
+
+/* Delivery Information */
+.delivery-date {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text);
+}
+
+.delivery-time {
+  color: var(--text-subtle);
+  font-size: var(--text-base);
+}
+
+.delivery-services {
+  margin-top: var(--spacing-sm);
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.delivery-services div {
+  margin-bottom: var(--spacing-xs);
+}

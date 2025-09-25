@@ -135,9 +135,6 @@ html.theme-dark .form-card-header.warning {
   letter-spacing: normal;
 }
 
-
-
-
 .form-card-body {
   padding: var(--spacing-4xl);
   background: var(--panel);
@@ -155,12 +152,6 @@ html.theme-dark .form-card-header.warning {
   left: 50%;
   transform: translateX(-50%);
 }
-
-
-
-
-
-
 
 /* Form card animations */
 .form-cards-grid .form-card:first-child {

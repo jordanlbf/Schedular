@@ -6,7 +6,7 @@ import PaymentStep from './PaymentStep';
 import { CATALOG } from '../../catalog';
 import { addLineToCart, updateLineQuantity, removeLine, getEstimatedDeliveryDate } from '../../utils/saleUtils';
 import type { WizardStep, SaleDraftState } from '../../stores/useSaleDraftStore';
-import type { StepValidation } from '../../hooks/useSaleValidation';
+import type { StepValidation } from './hooks/useSaleValidation';
 
 interface WizardStepsProps {
   currentStep: WizardStep;

@@ -12,7 +12,6 @@ interface TimeSlot {
 export function useDeliveryScheduling(selectedDate: string, deliveryChoiceMode: 'later' | 'now') {
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [loadingTimeSlots, setLoadingTimeSlots] = useState(false);
-  const [availableDates, setAvailableDates] = useState<string[]>([]);
 
   // Business rules configuration
   const BLACKOUT_DAYS = ['2024-12-25', '2024-01-01']; // Example holidays
@@ -131,7 +130,6 @@ export function useDeliveryScheduling(selectedDate: string, deliveryChoiceMode: 
   return {
     timeSlots,
     loadingTimeSlots,
-    availableDates,
     minDate,
     maxDate,
     pillDates,

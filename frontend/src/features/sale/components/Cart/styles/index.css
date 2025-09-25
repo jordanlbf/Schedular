@@ -11,6 +11,9 @@
 /* Cart footer & summary */
 @import url('./cart-footer.css');
 
+/* Stock badge cart-specific styles */
+@import url('./stock-badge.css');
+
 /* Global cart animations */
 @keyframes cartItemFadeIn {
   from {

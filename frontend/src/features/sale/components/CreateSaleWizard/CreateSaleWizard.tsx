@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import Header from "@/app/layout/Header.tsx";
 import { useSaleDraftStore, type WizardStep } from "../../stores/useSaleDraftStore.ts";
-import { useSaleWizard } from "../../hooks/useSaleWizard.ts";
-import { usePageReloadHandler } from "../../hooks/usePageReloadHandler.ts";
+import { useSaleWizard } from "./hooks/useSaleWizard.ts";
+import { usePageReloadHandler } from "./hooks/usePageReloadHandler.ts";
 import { ProgressBar } from "@/features/sale/components/CreateSaleWizard/ui/ProgressBar.tsx";
 import { WizardSteps } from "./WizardSteps.tsx";
 import { ToastContainer } from "@/shared/ui/ToastContainer.tsx";

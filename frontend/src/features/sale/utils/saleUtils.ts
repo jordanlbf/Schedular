@@ -89,39 +89,8 @@ export function removeLine(lines: Line[], id: number): Line[] {
   return lines.filter(line => line.id !== id);
 }
 
-/**
- * Date utilities
- */
+// Re-export date utilities for backwards compatibility
+export { getMinDeliveryDate, getEstimatedDeliveryDate } from './date';
 
-export function getMinDeliveryDate(daysFromNow: number = 7): string {
-  const date = new Date();
-  date.setDate(date.getDate() + daysFromNow);
-  return date.toISOString().split('T')[0];
-}
-
-export function getEstimatedDeliveryDate(daysFromNow: number = 14): string {
-  const date = new Date();
-  date.setDate(date.getDate() + daysFromNow);
-  return date.toLocaleDateString();
-}
-
-/**
- * Validation utilities
- */
-
-export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-export function isValidPhone(phone: string): boolean {
-  // Basic Australian phone validation
-  const phoneRegex = /^(\+?61|0)[2-478](?:[0-9]){8}$/;
-  return phoneRegex.test(phone.replace(/\s/g, ''));
-}
-
-export function isValidPostcode(postcode: string): boolean {
-  // Australian postcode validation
-  const postcodeRegex = /^[0-9]{4}$/;
-  return postcodeRegex.test(postcode);
-}
+// Re-export validation utilities for backwards compatibility
+export { isValidEmail, isValidPhone, isValidPostcode } from './validation';

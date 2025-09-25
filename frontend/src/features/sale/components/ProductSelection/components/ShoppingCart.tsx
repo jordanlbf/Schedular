@@ -1,6 +1,6 @@
 import type { Line, CatalogItem } from '../../../types';
 import CartTable from '../../Cart/CartTable';
-import { formatPrice, formatSavings } from '@/shared/lib/price';
+import { formatPrice, formatSavings } from '../../../utils/price';
 
 interface ShoppingCartProps {
   lines: Line[];

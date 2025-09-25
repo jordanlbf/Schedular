@@ -1,6 +1,6 @@
 import type { Line } from '../../../types';
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
-import { fmt } from '@/shared/lib/money';
+import { fmt } from '../../../utils/money';
 
 interface OrderSummaryProps {
   lines: Line[];

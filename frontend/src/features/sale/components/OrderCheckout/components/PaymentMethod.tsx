@@ -1,5 +1,5 @@
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
-import { fmt } from '@/shared/lib/money';
+import { fmt } from '../../../utils/money';
 import { PAYMENT_METHODS } from '../../CreateSaleWizard/constants/wizard';
 
 interface PaymentMethodProps {

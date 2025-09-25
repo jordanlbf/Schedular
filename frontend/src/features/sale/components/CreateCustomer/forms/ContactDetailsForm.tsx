@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { Customer, SecondPerson } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField.tsx';
-import { formatPhone } from '@/shared/lib/phone.ts';
+import { formatPhone } from '../../../utils/validation';
 
 interface ContactDetailsFormProps {
   customer: Customer;

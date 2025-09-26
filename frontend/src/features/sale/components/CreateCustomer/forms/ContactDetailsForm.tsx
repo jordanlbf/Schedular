@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import type { Customer, SecondPerson } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField.tsx';
 import { formatPhone } from '../../../utils/validation';
+import { Card } from '@/features/sale/ui';
 
 interface ContactDetailsFormProps {
   customer: Customer;
@@ -44,8 +45,9 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
   };
 
   return (
-    <div 
-      className={`form-card ${isComplete && !hasFocus ? 'complete' : ''}`}
+    <Card
+      title="Contact Details"
+      className={`${isComplete && !hasFocus ? 'complete' : ''}`}
       onFocusCapture={() => setHasFocus(true)}
       onBlurCapture={(e) => {
         // Only set hasFocus to false if focus is leaving the entire form card
@@ -54,10 +56,6 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
         }
       }}
     >
-      <div className="form-card-header">
-        <h3>Contact Details</h3>
-      </div>
-      <div className="form-card-body">
         <div className="form-grid-2">
           <FormField
             label="First Name"
@@ -219,7 +217,6 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
             <span>Complete</span>
           </div>
         )}
-      </div>
-    </div>
+    </Card>
   );
 }

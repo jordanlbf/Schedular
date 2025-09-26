@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { Address } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField.tsx';
+import { Card } from '@/features/sale/ui';
 
 interface AddressFormProps {
   address?: Address;
@@ -18,8 +19,9 @@ export function AddressForm({ address, onChange, states, fieldErrors = {} }: Add
   }, [address?.street, address?.city, address?.state, address?.zip]);
 
   return (
-    <div 
-      className={`form-card ${isComplete && !hasFocus ? 'complete' : ''}`}
+    <Card
+      title="Delivery Address"
+      className={`${isComplete && !hasFocus ? 'complete' : ''}`}
       onFocusCapture={() => setHasFocus(true)}
       onBlurCapture={(e) => {
         // Only set hasFocus to false if focus is leaving the entire form card
@@ -28,10 +30,6 @@ export function AddressForm({ address, onChange, states, fieldErrors = {} }: Add
         }
       }}
     >
-      <div className="form-card-header">
-        <h3>Delivery Address</h3>
-      </div>
-      <div className="form-card-body">
         <div className="form-group">
           <label className="form-label form-label-optional">Unit / Apartment / Suite</label>
           <input
@@ -144,7 +142,6 @@ export function AddressForm({ address, onChange, states, fieldErrors = {} }: Add
             <span>Complete</span>
           </div>
         )}
-      </div>
-    </div>
+    </Card>
   );
 }

@@ -7,6 +7,7 @@ import { DeliverySummary } from './components/DeliverySummary';
 import { CalendarPopover } from './components/CalendarPopover';
 import { useDeliveryScheduling } from './hooks/useDeliveryScheduling';
 import { useServiceCalculations } from './hooks/useServiceCalculations';
+import { Card } from '@/features/sale/ui';
 
 interface ScheduleDeliveryProps {
   deliveryDetails: DeliveryDetails;
@@ -90,11 +91,7 @@ export default function ScheduleDelivery({
       {/* Left Column - Schedule & Services */}
       <div className="delivery-left-column">
         {/* Delivery Schedule Card */}
-        <div className="form-card compact-card">
-          <div className="form-card-header">
-            <h3>Schedule Delivery</h3>
-          </div>
-          <div className="form-card-body">
+        <Card title="Schedule Delivery" size="compact">
             {/* Delivery Choice Radio Cards */}
             <div className="delivery-choice-container">
               <label className={`delivery-radio-card ${deliveryChoiceMode === 'later' ? 'selected' : ''}`}>
@@ -167,8 +164,7 @@ export default function ScheduleDelivery({
                 />
               </div>
             </div>
-          </div>
-        </div>
+        </Card>
 
         {/* Premium Services Card */}
         <ServiceSelector
@@ -180,11 +176,7 @@ export default function ScheduleDelivery({
       {/* Right Column - Instructions & Summary */}
       <div className="delivery-right-column">
         {/* Special Instructions Card */}
-        <div className="form-card compact-card delivery-instructions-card">
-          <div className="form-card-header">
-            <h3>Delivery Instructions</h3>
-          </div>
-          <div className="form-card-body delivery-instructions-body">
+        <Card title="Delivery Instructions" size="compact" className="delivery-instructions-card">
             <div className="form-group delivery-instructions-group">
               <textarea
                 className="form-input form-textarea delivery-instructions-textarea"
@@ -196,8 +188,7 @@ export default function ScheduleDelivery({
                 placeholder="Special requirements: gate codes, stairs, contact preferences, etc."
               />
             </div>
-          </div>
-        </div>
+        </Card>
 
         {/* Delivery Summary Card */}
         <DeliverySummary

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Card } from '@/features/sale/ui';
 
 interface DeliverySummaryProps {
   deliveryFee: number;
@@ -19,11 +20,7 @@ export function DeliverySummary({
   }, [deliveryFee]);
 
   return (
-    <div className="form-card compact-card summary-card">
-      <div className="form-card-header">
-        <h3>Delivery Summary</h3>
-      </div>
-      <div className="form-card-body">
+    <Card title="Delivery Summary" size="compact" variant="summary">
         {/* Base Delivery Fee */}
         <div className="form-group">
           <label className="form-label">Base Delivery Fee</label>
@@ -102,7 +99,6 @@ export function DeliverySummary({
             <span>${((deliveryFee + totalServiceCharges) / 100).toFixed(2)}</span>
           </div>
         </div>
-      </div>
-    </div>
+    </Card>
   );
 }

@@ -1,4 +1,5 @@
 import type { Customer, DeliveryDetails } from '../../../types';
+import { Card } from '@/features/sale/ui';
 
 interface OrderInformationProps {
   customer: Customer;
@@ -10,11 +11,7 @@ export function OrderInformation({
   deliveryDetails
 }: OrderInformationProps) {
   return (
-    <div className="form-card">
-      <div className="form-card-header">
-        <h3>Order Information</h3>
-      </div>
-      <div className="form-card-body">
+    <Card title="Order Information">
         <div className="payment-info-grid">
           <div className="info-section">
             <h4>Customer</h4>
@@ -44,7 +41,6 @@ export function OrderInformation({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </Card>
   );
 }

@@ -1,6 +1,7 @@
 import type { Line } from '../../../types';
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
 import { fmt } from '../../../utils/money';
+import { Card } from '@/features/sale/ui';
 
 interface OrderSummaryProps {
   lines: Line[];
@@ -16,11 +17,7 @@ export function OrderSummary({
   setDiscountPct
 }: OrderSummaryProps) {
   return (
-    <div className="form-card">
-      <div className="form-card-header">
-        <h3>Order Summary ({lines.length} {lines.length === 1 ? 'item' : 'items'})</h3>
-      </div>
-      <div className="form-card-body">
+    <Card title={`Order Summary (${lines.length} ${lines.length === 1 ? 'item' : 'items'})`}>
         {/* Top Content - Items and Controls */}
         <div className="order-content-top">
           {/* Order Items */}
@@ -89,7 +86,6 @@ export function OrderSummary({
             <span><strong>{fmt(totals.total)}</strong></span>
           </div>
         </div>
-      </div>
-    </div>
+    </Card>
   );
 }

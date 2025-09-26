@@ -178,7 +178,12 @@ body {
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: all var(--transition-slow);
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+
+/* Smooth theme transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Ambient background overlay */
@@ -219,8 +224,18 @@ body::before {
 .brand { 
   font-weight: var(--font-bold); 
   font-size: var(--text-2xl); 
-  color: var(--accent-secondary) !important; /* Keep blue in both light and dark mode */
+  color: var(--accent-secondary) !important; /* Blue in dark mode, purple in light mode */
   letter-spacing: var(--tracking-tight);
+}
+
+/* Keep original blue color in dark mode */
+html.theme-dark .brand {
+  color: #0ea5e9 !important;
+}
+
+/* Purple color in light mode */
+html.theme-light .brand {
+  color: #6366f1 !important;
 }
 .header-title {
   font-size: var(--text-3xl);
@@ -250,7 +265,7 @@ body::before {
 }
 .theme-label.active { color: var(--text); }
 
-/* Minimalist light blue theme toggle */
+/* Minimalist purple theme toggle */
 .switch {
   width: 52px;
   height: 26px;
@@ -263,7 +278,7 @@ body::before {
 }
 
 html.theme-light .switch {
-  background: #bfdbfe; /* Light blue for light mode */
+  background: #ddd6fe; /* Light purple for light mode */
 }
 
 .switch:hover {
@@ -272,7 +287,7 @@ html.theme-light .switch {
 
 .switch:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(147, 197, 253, 0.5);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
 }
 
 .knob {
@@ -330,7 +345,11 @@ html.theme-light .switch .knob {
   padding: 20px;
 }
 .home-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   background: var(--panel);
   backdrop-filter: var(--blur);
   -webkit-backdrop-filter: var(--blur);
@@ -345,6 +364,17 @@ html.theme-light .switch .knob {
   box-shadow: var(--shadow-glass);
   position: relative;
   overflow: hidden;
+}
+
+/* Light theme specific card styling */
+html.theme-light .home-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gray-200);
+}
+
+html.theme-light .home-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--border-hover);
 }
 
 /* Strategic accent border */
@@ -371,29 +401,76 @@ html.theme-light .switch .knob {
   transform: scaleX(1);
 }
 
-/* Strategic accent colors for different cards */
+/* Strategic accent colors for different cards with gradients */
 .home-card:nth-child(1)::before {
-  background: var(--accent-primary);
+  background: linear-gradient(90deg, var(--accent-warm), var(--accent-warning));
 }
 
 .home-card:nth-child(2)::before {
-  background: var(--accent-cyan);
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
 }
 
 .home-card:nth-child(3)::before {
-  background: var(--accent-secondary);
+  background: var(--accent-cyan);
 }
 
-/* Clean emoji - no effects */
-.emoji { 
-  font-size: 52px; 
-  display: block; 
-  margin-bottom: 20px; 
+/* Icon shapes - geometric designs */
+.card-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 24px;
+  position: relative;
   transition: transform var(--transition-normal);
 }
-.home-card:hover .emoji {
-  transform: scale(1.05);
+
+.home-card:hover .card-icon {
+  transform: scale(1.1);
 }
+
+/* Front Desk Icon - Simple orange square */
+.front-desk-icon {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-radius: 8px;
+}
+
+/* Backend Icon - Gear shape with defined teeth */
+.backend-icon {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  position: relative;
+}
+
+.backend-icon::before,
+.backend-icon::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+  border-radius: 24%;
+  top: 0;
+  left: 0;
+}
+
+.backend-icon::before {
+  transform: rotate(0deg);
+}
+
+.backend-icon::after {
+  transform: rotate(45deg);
+}
+
+/* Dark mode adjustments */
+html.theme-dark .front-desk-icon {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+html.theme-dark .backend-icon::before,
+html.theme-dark .backend-icon::after {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+}
+
 .home-card h2 { 
   margin: 0; 
   font-size: var(--text-2xl); 
@@ -401,6 +478,8 @@ html.theme-light .switch .knob {
   letter-spacing: var(--tracking-normal);
   line-height: var(--leading-snug);
 }
+
+/* Remove card descriptions styles */
 
 /* Glass-morphism footer */
 .home-footer {
@@ -428,15 +507,28 @@ a:focus-visible {
 }
 
 /* Responsive */
-@media (max-width: 640px), (max-height: 700px) {
+@media (max-width: 768px) {
   .home-hero { transform: none; }
-  .home-cards { max-width: 560px; grid-template-columns: 1fr; gap: 20px; }
-  .home-card { min-height: 180px; padding: 32px; border-radius: 16px; }
-  .emoji { font-size: 38px; }
-  .home-card h2 { font-size: 22px; }
+  .home-cards { 
+    max-width: 560px; 
+    grid-template-columns: 1fr; 
+    gap: 20px; 
+  }
+  .home-card { 
+    min-height: 180px; 
+    padding: 32px 24px; 
+    border-radius: var(--radius-2xl); 
+  }
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  .home-card h2 { 
+    font-size: var(--text-xl); 
+  }
 }
 
-/* Panel styles moved to components/panels.css */
-
-/* Component styles moved to respective files in components/ directory */
-
+@media (max-height: 700px) {
+  .home-hero { transform: none; }
+}

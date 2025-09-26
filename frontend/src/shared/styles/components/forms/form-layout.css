@@ -1,0 +1,133 @@
+/* Form Layout - Grid systems and layout utilities */
+
+/* Form cards grid layout */
+.form-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-bottom: var(--spacing-4xl);
+  width: min(99.5vw, 2200px);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Form layout grids */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--spacing-2xl);
+  align-items: end;
+}
+
+.form-grid-3 .form-group {
+  margin-bottom: 0;
+}
+
+/* Form sections and organization */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.field-small {
+  max-width: 140px;
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Section dividers */
+.section-divider {
+  margin: var(--spacing-4xl) 0 var(--spacing-3xl) 0;
+  padding-top: var(--spacing-3xl);
+  border-top: 2px solid var(--border);
+}
+
+.section-divider h4 {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--text);
+}
+
+/* Form card animations */
+.form-cards-grid .form-card:first-child {
+  animation: slideUpForm 0.4s ease-out;
+}
+
+.form-cards-grid .form-card:last-child {
+  animation: slideUpForm 0.4s ease-out;
+  animation-delay: 0.1s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes slideUpForm {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form sections and organization with subtle accents */
+.form-section-divider {
+  position: relative;
+  margin: var(--spacing-4xl) 0;
+  text-align: center;
+}
+
+.form-section-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(14, 165, 233, 0.1) 25%,
+    rgba(14, 165, 233, 0.2) 50%,
+    rgba(14, 165, 233, 0.1) 75%,
+    transparent 100%
+  );
+  z-index: 0;
+}
+
+.form-section-divider span {
+  background: var(--panel);
+  padding: 0 var(--spacing-lg);
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  position: relative;
+  z-index: 1;
+}

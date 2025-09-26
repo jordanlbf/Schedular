@@ -1,0 +1,9 @@
+/* Form Legacy - Legacy and compatibility styles */
+
+/* Summary form */
+.summary-form textarea.input {
+  width: 100%;
+  min-height: 120px;
+  font-family: inherit;
+  line-height: var(--leading-relaxed);
+}

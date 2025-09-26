@@ -10,11 +10,11 @@ export default function Index() {
         <p className="home-subtitle">Choose a workspace to get started.</p>
         <div className="home-cards">
           <Link to="/pos" className="home-card" aria-label="Open Front Desk workspace">
-            <span className="emoji" aria-hidden>💳</span>
+            <div className="card-icon front-desk-icon"></div>
             <h2>Front Desk</h2>
           </Link>
           <Link to="/admin" className="home-card" aria-label="Open Backend workspace">
-            <span className="emoji" aria-hidden>🛠️</span>
+            <div className="card-icon backend-icon"></div>
             <h2>Backend</h2>
           </Link>
         </div>

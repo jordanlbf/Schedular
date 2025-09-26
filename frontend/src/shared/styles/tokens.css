@@ -1,186 +1,48 @@
 /* ===========================
-   Design Tokens (Single Source)
+   Design Tokens (Migrated)
    ===========================
-   Shared tokens live in :root.
-   Theme-specific tokens live under html.theme-light / html.theme-dark.
+   This file now imports from the modular theme system.
+   All variables have been moved to:
+   - themes/_base.css (non-themed variables)
+   - themes/light.css (light theme colors)
+   - themes/dark.css (dark theme colors)
 */
 
-/* Shared, theme-agnostic tokens */
+@import './themes/index.css';
+
+/* ===========================
+   Legacy Support & Migrations
+   ===========================
+   These variables are kept for backward compatibility.
+   They will be removed in future updates.
+*/
+
 :root {
-  /* Brand scale (kept for possible use elsewhere) */
-  --brand-50:#f2f7f6; --brand-100:#d9ebe8; --brand-200:#b6d8d3;
-  --brand-300:#8dc1ba; --brand-400:#62a8a0; --brand-500:#3b8f86;
-  --brand-600:#2f766e; --brand-700:#275f59; --brand-800:#1f4a45; --brand-900:#173835;
-
-  /* Enhanced spacing scale for better rhythm */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 20px;
-  --spacing-2xl: 24px;
-  --spacing-3xl: 32px;
-  --spacing-4xl: 40px;
-  --spacing-5xl: 48px;
-  --spacing-6xl: 56px;
-  --spacing-8xl: 72px;
-
-  /* Type scale */
-  --text-xs: 11px;
-  --text-sm:12px;
-  --text-base:14px;
-  --text-md:14px;   /* alias for base */
-  --text-lg:16px;
-  --text-xl:18px;
-  --text-2xl:22px;
-  --text-3xl:26px;
-  --text-4xl:32px;
-  
-  /* Legacy font size aliases for backward compatibility */
-  --font-size-sm: var(--text-sm);
-  --font-size-md: var(--text-base);
-  --font-size-lg: var(--text-lg);
-  --font-size-xl: var(--text-xl);
-  
-  /* Font weights */
-  --font-normal: 400;
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
-  
-  /* Letter spacing */
-  --tracking-tight: -0.02em;
-  --tracking-normal: 0;
-  --tracking-wide: 0.03em;
-  --tracking-wider: 0.05em;
-  
-  /* Line heights */
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.75;
-
-  /* Shape & layout */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl:16px;
-  --radius-2xl:20px;
-  --container-padding:24px;
-  --container-max-width:1200px;
-
-  /* Blur primitives (base) */
-  --blur: blur(8px);
-  --blur-strong: blur(16px);
-
-  /* Accent colours that don’t change between themes */
-  --accent-primary: #ef4444;  /* vibrant red */
-  --accent-cyan:    #06b6d4;
-  --accent-warm:    #f39c12;
-  --accent-solid:   #ef4444;
-
-  /* Enhanced semantic colors for better UX */
-  --success: #10b981;        /* Modern green */
-  --success-light: #d1fae5;  /* Light success background */
-  --success-dark: #047857;   /* Dark success variant */
-  
-  --warning: #f59e0b;        /* Modern amber */
-  --warning-light: #fef3c7;  /* Light warning background */
-  --warning-dark: #d97706;   /* Dark warning variant */
-  
-  --error: #ef4444;          /* Modern red */
-  --error-light: #fee2e2;    /* Light error background */
-  --error-dark: #dc2626;     /* Dark error variant */
-  
-  --info: #3b82f6;           /* Modern blue for info */
-  --info-light: #dbeafe;     /* Light info background */
-  --info-dark: #1d4ed8;      /* Dark info variant */
+  /* Brand colors - kept for potential use, but should migrate to theme files */
+  --brand-50: #f2f7f6;
+  --brand-100: #d9ebe8;
+  --brand-200: #b6d8d3;
+  --brand-300: #8dc1ba;
+  --brand-400: #62a8a0;
+  --brand-500: #3b8f86;
+  --brand-600: #2f766e;
+  --brand-700: #275f59;
+  --brand-800: #1f4a45;
+  --brand-900: #173835;
 }
 
-/* Light theme (colours, shadows, borders, focus ring) */
-:root,
-html.theme-light {
-  color-scheme: light;
-
-  /* Backgrounds */
-  --bg: #f8f9fa;                 /* slightly darker app background for better contrast */
-  --bg-overlay: rgba(0, 0, 0, 0.05);
-
-  /* Panels */
-  --panel: #ffffff;              /* main panels/cards */
-  --panel-rgb: 255, 255, 255;    /* RGB values for panel */
-  --panel-elev: #f1f3f4;         /* more contrast for elevated surfaces */
-  --panel-hover: #f5f7fa;        /* subtle hover surfaces */
-  --panel-border: rgba(0, 0, 0, 0.15);       /* stronger panel borders for better definition */
-
-  /* Text */
-  --text: #0f172a;               /* much darker primary text for high contrast */
-  --text-subtle: #334155;        /* darker secondary text for better readability */
-  --muted: #64748b;              /* better contrast for muted text */
-  --muted-light: #94a3b8;        /* lighter muted but still accessible */
-
-  /* Borders */
-  --border: rgba(0, 0, 0, 0.18);             /* stronger borders for better visibility */
-  --border-strong: rgba(0, 0, 0, 0.25);      /* even stronger borders */
-  --border-hover: rgba(14, 165, 233, 0.35);   /* more visible accent hover borders */
-  --border-gradient: rgba(239, 68, 68, 0.3);
-
-  /* Accents (light-specific where different) */
-  --accent-secondary: #0369a1;   /* even darker blue for maximum contrast */
-
-  /* Shadows */
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-ambient: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --shadow-glass:   0 2px 8px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  --shadow-float:   0 4px 16px rgba(0, 0, 0, 0.18);
-  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.4);
-
-  /* Focus ring */
-  --ring: rgba(239, 68, 68, 0.35);
-  --ring-glow: 0 0 0 3px rgba(239, 68, 68, 0.25);
-}
-
-/* Dark theme (overrides that differ from light) */
-html.theme-dark {
-  color-scheme: dark;
-
-  /* Backgrounds */
-  --bg: #202123;
-  --bg-overlay: rgba(0, 0, 0, 0.1);
-
-  /* Panels */
-  --panel: #272728;
-  --panel-rgb: 39, 39, 40;    /* RGB values for panel */
-  --panel-elev: #565E63;
-  --panel-hover: #282C2E;
-  --panel-border: rgba(255, 255, 255, 0.04); /* ultra-subtle panel borders */
-
-  /* Text */
-  --text: #EBF3F7;
-  --text-subtle: #AAB6BE;
-  --muted: #AAB6BE;
-  --muted-light: #565E63;
-
-  /* Borders */
-  --border: rgba(255, 255, 255, 0.06);       /* very light borders */
-  --border-strong: rgba(255, 255, 255, 0.12); /* stronger borders */
-  --border-hover: rgba(14, 165, 233, 0.3);   /* accent hover borders */
-  --border-gradient: rgba(255, 255, 255, 0.05);
-
-  /* Accents (dark-specific where different) */
-  --accent-secondary: #0ea5e9;   /* keep blue in dark mode too */
-
-  /* Shadows */
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
-  --shadow-ambient: 0 4px 12px rgba(0, 0, 0, 0.35);
-  --shadow-glass:   0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  --shadow-float:   0 8px 24px rgba(0, 0, 0, 0.45);
-  --shadow-glow:    0 0 16px rgba(239, 68, 68, 0.4);
-
-  /* Focus ring */
-  --ring: rgba(239, 68, 68, 0.4);
-  --ring-glow: 0 0 0 3px rgba(239, 68, 68, 0.3);
-}
+/* ===========================
+   Migration Notes
+   ===========================
+   
+   To update colors:
+   1. Light theme: Edit themes/light.css
+   2. Dark theme: Edit themes/dark.css
+   3. Add new themes: Create themes/[name].css
+   
+   To add new non-themed variables:
+   - Add to themes/_base.css
+   
+   Component-specific theme adjustments:
+   - Add to the respective theme file under "Component-Specific Variables"
+*/

@@ -1,0 +1,249 @@
+/* Form Base - Core input styling and base form components */
+
+/* Form inputs */
+.form-input {
+  width: 100%;
+  min-width: 0;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--panel-elev);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  color: var(--text);
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  transition: all var(--transition-normal);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-input:hover {
+  border-color: var(--border-hover);
+  background: var(--panel);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  background: var(--panel);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
+  transform: translateY(-1px);
+}
+
+/* Form input interaction states */
+.form-input:focus-visible {
+  outline: none;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
+}
+
+.form-input:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--error);
+  box-shadow: 0 0 0 1px var(--error);
+}
+
+/* Override invalid styling for required fields that haven't been touched yet */
+.form-input[required]:invalid:not(:focus):not(.attempted) {
+  border-color: var(--border);
+  box-shadow: none;
+  background: var(--panel-elev);
+}
+
+/* Only show error state when form submission has been attempted */
+.form-input[required]:invalid:not(:focus).attempted {
+  border-color: var(--error);
+  box-shadow: 0 0 0 1px var(--error);
+}
+
+/* Error state for fields when validation fails */
+.form-input.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+  background: rgba(254, 242, 242, 0.5);
+}
+
+html.theme-dark .form-input.error {
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.form-input.error:focus {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
+}
+
+/* Only show success styling when field has actual content */
+.form-input:valid:not(:placeholder-shown):not(:focus):not([value=""]) {
+  border-color: var(--success);
+  border-width: 2px;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15), 0 2px 8px rgba(16, 185, 129, 0.1);
+  background: linear-gradient(135deg,
+    var(--panel) 0%,
+    rgba(16, 185, 129, 0.03) 100%
+  );
+}
+
+/* Specifically for select dropdowns - only show success when a real option is selected */
+select.form-input:valid:not(:focus):not([value=""]) {
+  border-color: var(--success);
+  border-width: 2px;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15), 0 2px 8px rgba(16, 185, 129, 0.1);
+  background: linear-gradient(135deg,
+    var(--panel-elev) 0%,
+    rgba(16, 185, 129, 0.03) 100%
+  );
+}
+
+/* Keep select dropdowns neutral when no selection made - but not when there's an error */
+select.form-input[value=""]:not(:focus):not(.error):not(.attempted) {
+  border-color: var(--border);
+  border-width: 1px;
+  box-shadow: none;
+  background: var(--panel-elev);
+}
+
+/* Ensure error styling works for select dropdowns */
+select.form-input.error,
+select.form-input.attempted:invalid {
+  border-color: var(--error) !important;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1) !important;
+  background: rgba(254, 242, 242, 0.5) !important;
+}
+
+html.theme-dark select.form-input.error,
+html.theme-dark select.form-input.attempted:invalid {
+  background: rgba(239, 68, 68, 0.05) !important;
+}
+
+/* Style empty select to show muted placeholder text */
+select.form-input:invalid {
+  color: var(--muted);
+}
+
+/* When a state is actually selected, show normal text color */
+select.form-input:valid {
+  color: var(--text);
+}
+
+/* Override for error state */
+select.form-input.error:invalid {
+  color: var(--muted);
+}
+
+/* Ensure placeholder option appears muted in dropdown */
+select.form-input option[value=""] {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.form-input:disabled {
+  background: var(--panel-hover);
+  color: var(--muted);
+  border-color: var(--border);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.form-input:disabled::placeholder {
+  color: var(--muted);
+  opacity: 0.2;
+}
+
+/* Light mode specific adjustments */
+html:not(.theme-dark) .form-input:disabled {
+  background: rgba(0, 0, 0, 0.02);
+  color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+html:not(.theme-dark) .form-input:disabled::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode specific adjustments */
+html.theme-dark .form-input:disabled {
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+html.theme-dark .form-input:disabled::placeholder {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.form-input::placeholder {
+  color: var(--muted);
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+/* Better contrast for dark mode placeholders */
+html.theme-dark .form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+}
+
+/* Ensure light mode has good contrast too */
+html:not(.theme-dark) .form-input::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+  opacity: 1;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.6;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-family: inherit;
+  transition: min-height 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-textarea:focus {
+  min-height: 120px;
+}
+
+/* Select dropdown styling */
+select.form-input {
+  cursor: pointer;
+  background-color: var(--panel-elev);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.2' d='m7 9 3 3 3-3'/%3e%3c/svg%3e");
+  background-position: right 14px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  padding-right: 40px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all var(--transition-normal);
+}
+
+/* Remove any browser-specific dropdown arrows */
+select.form-input::-ms-expand {
+  display: none;
+}
+
+select.form-input:hover {
+  background-color: var(--panel-hover);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.2' d='m7 9 3 3 3-3'/%3e%3c/svg%3e");
+  background-position: right 14px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+}
+
+select.form-input:focus {
+  background-color: var(--panel);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.2' d='m7 9 3 3 3-3'/%3e%3c/svg%3e");
+  background-position: right 14px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+}
+
+/* Ensure arrow stays in place during all states */
+select.form-input:hover:focus {
+  background-color: var(--panel);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.2' d='m7 9 3 3 3-3'/%3e%3c/svg%3e");
+  background-position: right 14px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+}

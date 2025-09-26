@@ -1,0 +1,27 @@
+/* Form Buttons - Form-related button styles */
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--text-subtle);
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.btn-link:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}

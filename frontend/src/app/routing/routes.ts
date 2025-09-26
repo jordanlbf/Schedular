@@ -38,5 +38,10 @@ export const routeConfig: RouteConfig[] = [
     path: "/admin",
     component: lazy(() => import("../../pages/admin")),
     name: "Admin"
+  },
+  {
+    path: "/theme-preview",
+    component: lazy(() => import("../../pages/theme-preview")),
+    name: "Theme Preview"
   }
 ];

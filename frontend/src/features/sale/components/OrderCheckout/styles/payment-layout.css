@@ -55,16 +55,21 @@
   margin: 0;
 }
 
-/* Payment Step Layout - extending form-cards-grid */
+/* Payment Step Layout - Full width alignment with wizard container */
 
 /* Main layout grid - Order Summary left, Info & Payment right */
 .payment-layout-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: min(99.5vw, 2200px);
+  max-width: none;  /* Remove max-width constraint */
+  margin: 0;
+  padding: 0;
   padding-bottom: calc(80px + var(--spacing-lg));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Left column - Order Summary (spans full height) */
@@ -72,11 +77,11 @@
   /* This will naturally take the height it needs */
 }
 
-/* Right column - Stacked cards with increased gap for exact alignment */
+/* Right column - Stacked cards with proper spacing */
 .payment-right-column {
   display: flex;
   flex-direction: column;
-  gap: 42px; /* Increased from 32px to 42px for exact 822px total */
+  gap: var(--spacing-2xl);  /* Consistent gap */
   height: fit-content;
 }
 
@@ -94,19 +99,17 @@
   overflow: hidden;
 }
 
-/* Right column cards - Increased by 10px each */
+/* Right column cards - Auto-sized for content */
 .payment-right-column .form-card {
-  height: 390px;
-  min-height: 330px;
-  max-height: 390px;
+  min-height: 360px;
   flex: 1;
 }
 
-/* Order Summary - Exact height match for removed margins */
+/* Order Summary - Dynamic height to match right column */
 .payment-order-summary .form-card {
-  height: 822px; /* Two 390px cards + 32px gap = 822px total right column height */
-  min-height: 822px;
-  max-height: 822px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Order Summary - Pin pricing to bottom */
@@ -151,35 +154,72 @@
   animation-fill-mode: backwards;
 }
 
-/* Order Information Card - Optimized for fixed height */
+/* Payment Info Grid - Better space utilization */
 .payment-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-xl);
   height: 100%;
 }
 
 .payment-info-grid .info-section {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
 .payment-info-grid .info-section h4 {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   font-weight: var(--font-bold);
-  color: var(--text);
+  color: var(--text-subtle);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wider);
-  margin: 0 0 var(--spacing-md) 0;
-  flex-shrink: 0;
+  margin: 0 0 var(--spacing-sm) 0;
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border);
 }
 
 .payment-info-grid .info-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  flex: 1;
+  gap: var(--spacing-xs);
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.customer-name {
+  font-weight: var(--font-semibold);
+  font-size: var(--text-base);
+  color: var(--text);
+}
+
+.customer-contact {
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+}
+
+.delivery-address {
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--spacing-xs);
+}
+
+.delivery-date {
+  font-weight: var(--font-semibold);
+  color: var(--text);
+}
+
+.delivery-time {
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+}
+
+.delivery-services {
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-sm);
+  color: var(--text-subtle);
 }
 
 /* Responsive Payment Layout */

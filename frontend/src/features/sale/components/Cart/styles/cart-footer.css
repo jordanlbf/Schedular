@@ -2,12 +2,14 @@
 
 .cart-footer {
   margin-top: auto;
-  padding-top: var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl);
   border-top: 1px solid var(--border);
+  background: var(--panel);
 }
 
 .cart-totals {
-  padding: 0 var(--spacing-lg);
+  padding: 0;
 }
 
 .totals-summary {

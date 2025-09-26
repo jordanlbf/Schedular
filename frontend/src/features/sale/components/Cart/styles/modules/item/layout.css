@@ -9,15 +9,15 @@
 
 .cart-item-grid {
   display: grid;
-  grid-template-columns: 100px 1fr auto;
-  gap: var(--spacing-xl);
+  grid-template-columns: 90px 1fr auto;
+  gap: var(--spacing-2xl);
   align-items: stretch;
-  padding: var(--spacing-2xl) var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-2xl);
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.2s ease;
-  min-height: 140px;
+  min-height: 110px;
   animation: cartItemFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation-fill-mode: both;
 }
@@ -40,12 +40,11 @@
 .cart-item-media-stack {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  width: 100px;
-  justify-content: space-between;
-  height: 100%;
+  gap: 8px;
+  width: 90px;
+  justify-content: center;
   align-items: stretch;
-  min-height: 138px;
+  min-height: 90px;
 }
 
 .cart-item-meta {

@@ -1,8 +1,8 @@
 /* Product Thumbnail Styling */
 
 .cart-item-thumbnail {
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);

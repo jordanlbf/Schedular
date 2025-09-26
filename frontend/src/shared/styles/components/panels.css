@@ -32,25 +32,34 @@
 }
 
 .form-card-header {
-  background: linear-gradient(135deg, var(--panel-elev) 0%, #171d32 100%);
+  background: var(--card-header-bg, linear-gradient(135deg, rgba(14, 165, 233, 0.03) 0%, rgba(147, 197, 253, 0.01) 100%));
   border-bottom: 1px solid var(--border);
-  padding: 20px var(--spacing-2xl);
+  padding: var(--card-header-padding, var(--spacing-xl) var(--spacing-2xl));
+  position: relative;
+  overflow: visible;
 }
 
 .form-card-header h3 {
   margin: 0;
-  font-size: var(--font-size-xl);
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: var(--card-header-font-size, var(--text-lg));
+  font-weight: var(--card-header-font-weight, var(--font-semibold));
+  color: var(--card-header-color, var(--accent-secondary));
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  letter-spacing: var(--card-header-letter-spacing, var(--tracking-wide));
+  text-transform: var(--card-header-text-transform, uppercase);
 }
 
 .form-card-body {
   padding: var(--spacing-2xl);
 }
 
+.form-card-footer {
+  border-top: 1px solid var(--border);
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  background: rgba(var(--panel-rgb), 0.5);
+}
 
 .section-help {
   color: var(--muted);

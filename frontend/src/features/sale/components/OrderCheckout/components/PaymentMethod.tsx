@@ -1,6 +1,7 @@
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
 import { fmt } from '../../../utils/money';
 import { PAYMENT_METHODS } from '../../CreateSaleWizard/constants/wizard';
+import { Card } from '@/features/sale/ui';
 
 interface PaymentMethodProps {
   paymentMethod: string;
@@ -18,11 +19,7 @@ export function PaymentMethod({
   totals
 }: PaymentMethodProps) {
   return (
-    <div className="form-card">
-      <div className="form-card-header">
-        <h3>Payment Method</h3>
-      </div>
-      <div className="form-card-body">
+    <Card title="Payment Method">
         <div className="payment-methods">
           {PAYMENT_METHODS.map((method) => (
             <label key={method.value} className="payment-option">
@@ -72,7 +69,6 @@ export function PaymentMethod({
             </div>
           </div>
         )}
-      </div>
-    </div>
+    </Card>
   );
 }

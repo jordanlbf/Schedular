@@ -1,5 +1,6 @@
 import type { DeliveryDetails } from '../../../types';
 import { SERVICE_OPTIONS } from '../../CreateSaleWizard/constants/wizard';
+import { Card } from '@/features/sale/ui';
 
 interface ServiceSelectorProps {
   deliveryDetails: DeliveryDetails;
@@ -11,11 +12,7 @@ export function ServiceSelector({
   setDeliveryDetails
 }: ServiceSelectorProps) {
   return (
-    <div className="form-card compact-card">
-      <div className="form-card-header">
-        <h3>Additional Services</h3>
-      </div>
-      <div className="form-card-body">
+    <Card title="Additional Services" size="compact">
         <div className="services-list-compact">
           <label className="service-item-compact no-additional-services">
             <input
@@ -99,7 +96,6 @@ export function ServiceSelector({
             </div>
           </label>
         </div>
-      </div>
-    </div>
+    </Card>
   );
 }

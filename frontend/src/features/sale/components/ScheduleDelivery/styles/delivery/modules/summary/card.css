@@ -1,10 +1,6 @@
 /* Summary Card and Fee Input */
 
-.summary-card {
-  background: linear-gradient(135deg,
-    rgba(14, 165, 233, 0.02) 0%,
-    var(--panel) 100%);
-}
+/* Summary card uses the unified card styles from panels.css */
 
 .fee-input-wrapper {
   position: relative;

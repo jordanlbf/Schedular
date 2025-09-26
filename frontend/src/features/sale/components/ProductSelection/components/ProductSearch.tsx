@@ -1,6 +1,7 @@
 import { MutableRefObject } from 'react';
 import type { CatalogItem } from '../../../types';
 import ProductPicker from '../../ProductPicker/ProductPicker';
+import { Card } from '@/features/sale/ui';
 
 interface ProductSearchProps {
   catalog: CatalogItem[];
@@ -17,19 +18,14 @@ export function ProductSearch({
 }: ProductSearchProps) {
   return (
     <div className="products-search-section">
-      <div className="form-card">
-        <div className="form-card-header">
-          <h3>Add Products</h3>
-        </div>
-        <div className="form-card-body">
+      <Card title="Add Products">
           <ProductPicker
             catalog={catalog}
             onAdd={onAddLine}
             inputRef={searchRef}
             onAddSuccess={onAddSuccess}
           />
-        </div>
-      </div>
+      </Card>
     </div>
   );
 }

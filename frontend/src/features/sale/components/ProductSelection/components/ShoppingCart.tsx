@@ -1,6 +1,7 @@
 import type { Line, CatalogItem } from '../../../types';
 import CartTable from '../../Cart/CartTable';
 import { formatPrice, formatSavings } from '../../../utils/price';
+import { Card } from '@/features/sale/ui';
 
 interface ShoppingCartProps {
   lines: Line[];
@@ -23,18 +24,19 @@ export function ShoppingCart({
 
   return (
     <div className="products-cart-section">
-      <div className="shopping-cart-section">
-        <div className="shopping-cart-header">
-          <h3>
+      <Card
+        title={
+          <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)'}}>
             Shopping Cart
             {itemCount > 0 && (
               <span className="cart-item-badge">
                 {itemCount}
               </span>
             )}
-          </h3>
-        </div>
-        <div className="shopping-cart-body">
+          </div>
+        }
+        className="shopping-cart-section"
+      >
           {lines.length > 0 ? (
             <>
               <div className="cart-items-section">
@@ -95,8 +97,7 @@ export function ShoppingCart({
               </div>
             </div>
           )}
-        </div>
-      </div>
+      </Card>
     </div>
   );
 }

@@ -23,47 +23,8 @@
   border-color: rgba(14, 165, 233, 0.08);
 }
 
-.products-cart-section .shopping-cart-header {
-  padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
-  background: linear-gradient(135deg,
-    rgba(219, 234, 254, 0.4) 0%,
-    rgba(147, 197, 253, 0.2) 100%
-  );
-  position: relative;
-  border-bottom: none;
-  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-html.theme-dark .shopping-cart-header {
-  background: linear-gradient(135deg,
-    rgba(14, 165, 233, 0.08) 0%,
-    rgba(59, 130, 246, 0.04) 100%
-  );
-}
-
-.products-cart-section .shopping-cart-header h3 {
-  margin: 0;
-  font-size: var(--text-xl);
-  font-weight: var(--font-semibold);
-  color: var(--accent-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-md);
-  position: relative;
-  letter-spacing: var(--tracking-wide);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  line-height: var(--leading-tight);
-  text-wrap: balance;
-  text-transform: uppercase;
-  box-sizing: border-box;
-}
-
-.shopping-cart-header h3 .cart-item-badge {
+/* Cart item badge styling - used in shopping cart header */
+.cart-item-badge {
   background: var(--accent-secondary);
   color: white;
   padding: var(--spacing-xs) var(--spacing-sm);
@@ -78,15 +39,6 @@ html.theme-dark .shopping-cart-header {
   justify-content: center;
 }
 
-.shopping-cart-body {
-  padding: var(--spacing-4xl);
-  background: var(--panel);
-  border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-}
 
 
 .cart-items-section {

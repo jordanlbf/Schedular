@@ -119,21 +119,6 @@ html.theme-dark .form-card-header.warning {
 }
 
 
-/* Professional POS sale items styling */
-.sale-items .form-card-header {
-  background: var(--panel-hover);
-  border-bottom: 1px solid var(--border);
-  padding: var(--spacing-lg) var(--spacing-xl);
-}
-
-.sale-items .form-card-header h3 {
-  color: var(--text);
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  margin: 0;
-  text-transform: none;
-  letter-spacing: normal;
-}
 
 
 

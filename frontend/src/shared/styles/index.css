@@ -11,6 +11,3 @@
 @import url('../../features/sale/components/OrderCheckout/styles/index.css');
 @import url('../../features/sale/components/ScheduleDelivery/styles/delivery/delivery-step.css');
 @import url('../../features/sale/components/ProductPicker/styles/products-layout.css');
-
-/* Utilities */
-@import url('./utilities/');

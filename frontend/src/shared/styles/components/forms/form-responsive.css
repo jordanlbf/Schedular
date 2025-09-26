@@ -1,26 +1,62 @@
-/* Form Responsive - Mobile and responsive adjustments */
+/* Form Component Responsive Styles */
+/* Generic form responsive breakpoints that apply across features */
 
-/* Responsive form adjustments */
-@media (max-width: 768px) {
-  .form-card-header,
-  .form-card-body {
-    padding-left: var(--spacing-xl);
-    padding-right: var(--spacing-xl);
+@media (max-width: 1023px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .form-grid-2,
   .form-grid-3 {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: end;
   }
 
-  .form-cards-grid {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
+  .form-grid-3 > .form-group:first-child {
+    flex: 2;
+  }
+
+  .form-grid-3 > .form-group:nth-child(2),
+  .form-grid-3 > .form-group:nth-child(3) {
+    flex: 1;
+  }
+
+  .form-card-body {
+    padding: var(--spacing-xl);
+  }
+
+  .form-card-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
   }
 
   .field-row {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 767px) {
+  .form-grid-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-grid-3 > .form-group:first-child,
+  .form-grid-3 > .form-group:nth-child(2),
+  .form-grid-3 > .form-group:nth-child(3) {
+    flex: none;
+  }
+
+  .form-card-body {
+    padding: 20px;
+  }
+
+  .form-card-header {
+    padding: var(--spacing-lg) 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
   }
 }

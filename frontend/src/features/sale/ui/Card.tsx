@@ -40,7 +40,7 @@ export function Card({
     >
       {title !== undefined && (
         <header className="form-card-header">
-          {typeof title === 'string' ? <h3>{title}</h3> : title}
+          <h3>{title}</h3>
         </header>
       )}
       <div className="form-card-body">{children}</div>

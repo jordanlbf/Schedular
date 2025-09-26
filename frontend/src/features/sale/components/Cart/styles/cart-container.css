@@ -1,3 +1,9 @@
+/* Shopping cart wrapper for badge positioning */
+.shopping-cart-wrapper {
+  position: relative;
+  height: 100%;
+}
+
 /* Shopping Cart Container */
 .products-cart-section .shopping-cart-section {
   background: var(--panel);
@@ -23,20 +29,54 @@
   border-color: rgba(14, 165, 233, 0.08);
 }
 
-/* Cart item badge styling - used in shopping cart header */
-.cart-item-badge {
-  background: var(--accent-secondary);
+/* Cart header badge styling - displays item count */
+.cart-header-badge {
+  background: linear-gradient(135deg, #0ea5e9, #0369a1);
   color: white;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-lg);
-  font-size: var(--text-xs);
-  font-weight: var(--font-semibold);
+  padding: 3px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
   min-width: 24px;
+  height: 24px;
   text-align: center;
-  margin-left: var(--spacing-md);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
+  position: absolute;
+  top: 18px;  /* Align with header vertically */
+  right: var(--spacing-2xl);
+  z-index: 10;
+  animation: badge-appear 0.3s ease-out;
+  letter-spacing: normal;
+  line-height: 1;
+}
+
+/* Center the Shopping Cart header text */
+.shopping-cart-section .form-card-header h3 {
+  justify-content: center;
+}
+
+/* Badge animation on appear/update */
+@keyframes badge-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Dark mode adjustments */
+html.theme-dark .cart-header-badge {
+  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
 }
 
 

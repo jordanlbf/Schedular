@@ -24,19 +24,11 @@ export function ShoppingCart({
 
   return (
     <div className="products-cart-section">
-      <Card
-        title={
-          <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)'}}>
-            Shopping Cart
-            {itemCount > 0 && (
-              <span className="cart-item-badge">
-                {itemCount}
-              </span>
-            )}
-          </div>
-        }
-        className="shopping-cart-section"
-      >
+      <div className="shopping-cart-wrapper">
+        <Card
+          title="Shopping Cart"
+          className="shopping-cart-section"
+        >
           {lines.length > 0 ? (
             <>
               <div className="cart-items-section">
@@ -97,7 +89,14 @@ export function ShoppingCart({
               </div>
             </div>
           )}
-      </Card>
+        </Card>
+        {/* Item count badge positioned absolutely */}
+        {itemCount > 0 && (
+          <span className="cart-header-badge">
+            {itemCount}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

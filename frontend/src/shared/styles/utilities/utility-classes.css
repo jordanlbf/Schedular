@@ -1,0 +1,7 @@
+/* Generic Utility Classes */
+
+.help {
+  opacity: .6;
+  font-style: normal;
+  cursor: help;
+}

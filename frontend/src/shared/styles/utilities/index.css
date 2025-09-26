@@ -1,3 +1,4 @@
 /* Utility Styles */
-@import './responsive.css';
-@import './utilities.css';
+
+@import './utility-classes.css';
+@import './form-responsive.css';

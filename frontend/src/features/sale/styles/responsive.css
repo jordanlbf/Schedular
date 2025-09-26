@@ -1,6 +1,4 @@
-/* Responsive Utilities */
-
-/* Responsive breakpoints */
+/* Responsive breakpoints for sale feature */
 @media (max-width: 1279px) {
   .product-grid {
     grid-template-columns: repeat(2, minmax(0,1fr));
@@ -12,39 +10,7 @@
     padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-2xl) var(--spacing-xl);
   }
 
-  .form-grid-2 {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .form-grid-3 {
-    display: flex;
-    gap: var(--spacing-lg);
-    align-items: end;
-  }
-
-  .form-grid-3 > .form-group:first-child {
-    flex: 2;
-  }
-
-  .form-grid-3 > .form-group:nth-child(2),
-  .form-grid-3 > .form-group:nth-child(3) {
-    flex: 1;
-  }
-
-  .form-card-body {
-    padding: var(--spacing-xl);
-  }
-
-  .form-card-header {
-    padding: var(--spacing-lg) var(--spacing-xl);
-  }
-
   .order-summary-card {
-    grid-template-columns: 1fr;
-  }
-
-  .field-row {
     grid-template-columns: 1fr;
   }
 
@@ -73,30 +39,6 @@
 
   .wizard-page-header h2 {
     font-size: var(--font-size-3xl);
-  }
-
-  .form-grid-3 {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .form-grid-3 > .form-group:first-child,
-  .form-grid-3 > .form-group:nth-child(2),
-  .form-grid-3 > .form-group:nth-child(3) {
-    flex: none;
-  }
-
-  .form-card-body {
-    padding: 20px;
-  }
-
-  .form-card-header {
-    padding: var(--spacing-lg) 20px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
   }
 
   .progress-bar {

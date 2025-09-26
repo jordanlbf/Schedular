@@ -1,7 +1,6 @@
 /* Sale Feature Styles - Modular Import */
 
-/* Base styles */
-@import url('./base/');
+/* Base variables now included in themes system */
 
 /* Component styles */
 @import url('./components/');

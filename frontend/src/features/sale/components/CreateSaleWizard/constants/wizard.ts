@@ -9,11 +9,6 @@ export const WIZARD_STEP_TITLES = {
   payment: 'Payment'
 } as const;
 
-export const PAYMENT_METHODS = [
-  { value: 'cash', label: 'Cash', description: 'Full payment today' },
-  { value: 'card', label: 'Credit/Debit Card', description: 'Full payment today' },
-  { value: 'financing', label: 'Financing', description: 'Deposit today, balance on delivery' },
-] as const;
 
 export const SERVICE_OPTIONS = {
   whiteGlove: {

@@ -1,7 +1,8 @@
 import type { Line } from '../../../types';
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
-import { fmt } from '../utils/paymentUtils';
+import { fmt } from '@/shared/utils';
 import { Card } from '@/features/sale/ui';
+import { useOrderSummary } from '../hooks/useOrderSummary';
 
 interface OrderSummaryProps {
   lines: Line[];
@@ -16,8 +17,14 @@ export function OrderSummary({
   discountPct,
   setDiscountPct
 }: OrderSummaryProps) {
+  const { itemCountLabel, handleDiscountChange, formatDiscountValue } = useOrderSummary({
+    lines,
+    discountPct,
+    setDiscountPct
+  });
+
   return (
-    <Card title={`Order Summary (${lines.length} ${lines.length === 1 ? 'item' : 'items'})`}>
+    <Card title={`Order Summary (${itemCountLabel})`}>
         {/* Top Content - Items and Controls */}
         <div className="order-content-top">
           {/* Order Items */}
@@ -47,8 +54,8 @@ export function OrderSummary({
                   min="0"
                   max="100"
                   step="0.1"
-                  value={discountPct || ''}
-                  onChange={(e) => setDiscountPct(Number(e.target.value || 0))}
+                  value={formatDiscountValue()}
+                  onChange={(e) => handleDiscountChange(e.target.value)}
                   placeholder="0"
                 />
                 <span className="input-suffix">%</span>

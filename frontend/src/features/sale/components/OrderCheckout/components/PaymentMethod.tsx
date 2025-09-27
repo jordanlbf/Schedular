@@ -1,7 +1,8 @@
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
-import { fmt } from '../utils/paymentUtils';
-import { PAYMENT_METHODS } from '../../CreateSaleWizard/constants/wizard';
+import { fmt } from '@/shared/utils';
+import { PAYMENT_METHODS } from '../constants/payment';
 import { Card } from '@/features/sale/ui';
+import { usePaymentMethod } from '../hooks/usePaymentMethod';
 
 interface PaymentMethodProps {
   paymentMethod: string;
@@ -18,6 +19,19 @@ export function PaymentMethod({
   setDepositAmount,
   totals
 }: PaymentMethodProps) {
+  const {
+    isFinancing,
+    handlePaymentMethodChange,
+    handleDepositChange,
+    formatDepositValue,
+    financingCalculations
+  } = usePaymentMethod({
+    paymentMethod,
+    setPaymentMethod,
+    depositAmount,
+    setDepositAmount,
+    totals
+  });
   return (
     <Card title="Payment Method">
         <div className="payment-methods">
@@ -28,7 +42,7 @@ export function PaymentMethod({
                 name="payment"
                 value={method.value}
                 checked={paymentMethod === method.value}
-                onChange={(e) => setPaymentMethod(e.target.value)}
+                onChange={(e) => handlePaymentMethodChange(e.target.value)}
               />
               <div className="payment-details">
                 <div className="payment-name">{method.label}</div>
@@ -38,7 +52,7 @@ export function PaymentMethod({
           ))}
         </div>
 
-        {paymentMethod === 'financing' && (
+        {isFinancing && (
           <div className="financing-details">
             <div className="form-group">
               <label className="form-label" htmlFor="deposit-input">Deposit Amount *</label>
@@ -49,10 +63,10 @@ export function PaymentMethod({
                   type="number"
                   className="form-input deposit-input"
                   min="0"
-                  max={totals.total / 100}
+                  max={financingCalculations?.maxDeposit}
                   step="0.01"
-                  value={(depositAmount/100).toFixed(2)}
-                  onChange={(e) => setDepositAmount(Math.round(Number(e.target.value || 0) * 100))}
+                  value={formatDepositValue()}
+                  onChange={(e) => handleDepositChange(e.target.value)}
                   placeholder="0.00"
                 />
               </div>
@@ -60,11 +74,11 @@ export function PaymentMethod({
             <div className="financing-summary">
               <div className="financing-row">
                 <span>Deposit Today:</span>
-                <span className="amount">{fmt(depositAmount)}</span>
+                <span className="amount">{fmt(financingCalculations?.depositToday || 0)}</span>
               </div>
               <div className="financing-row">
                 <span>Balance on Delivery:</span>
-                <span className="amount">{fmt(totals.total - depositAmount)}</span>
+                <span className="amount">{fmt(financingCalculations?.balanceOnDelivery || 0)}</span>
               </div>
             </div>
           </div>

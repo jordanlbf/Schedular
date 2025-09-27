@@ -1,9 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import type { Product } from '@/shared/types';
-import { formatPrice } from '../ProductSelection/utils/priceUtils';
+import { formatPrice } from '@/shared/utils';
 import { StockBadge } from '../ui/StockBadge.tsx';
 import { ColorSelector } from '../ui/ColorSelector.tsx';
+import { useProductSearch } from './hooks/useProductSearch';
+import { useProductColors } from './hooks/useProductColors';
+import { useProductActions } from './hooks/useProductActions';
+import { useProductKeyboard } from './hooks/useProductKeyboard';
 
 type CatalogItem = Product;
 
@@ -14,66 +18,38 @@ type Props = {
   inputRef?: React.RefObject<HTMLInputElement> | React.MutableRefObject<HTMLInputElement | null>;
 };
 
-
-export default function ProductPicker({ catalog, onAdd, onAddSuccess: _onAddSuccess, inputRef }: Props) {
-  const [q, setQ] = useState("");
-  const [addingProduct, setAddingProduct] = useState<string | null>(null);
-  const [selectedColors, setSelectedColors] = useState<Record<string, string>>({});
+export default function ProductPicker({ catalog, onAdd, onAddSuccess, inputRef }: Props) {
   const internalInputRef = useRef<HTMLInputElement>(null);
   const finalInputRef = inputRef || internalInputRef;
+
+  const { searchQuery, setSearchQuery, filteredProducts, clearSearch, isSearching } = useProductSearch({
+    catalog,
+    defaultLimit: 3
+  });
+
+  const { handleColorSelect, getSelectedColor, getProductImage } = useProductColors({
+    catalog
+  });
+
+  const { handleAddProduct, isProductAdding, getButtonText, isProductDisabled } = useProductActions({
+    catalog,
+    onAdd,
+    onAddSuccess,
+    getSelectedColor
+  });
+
+  const focusInput = () => finalInputRef.current?.focus();
+
+  const { handleKeyDown } = useProductKeyboard({
+    filteredProducts,
+    handleAddProduct,
+    clearSearch,
+    focusInput
+  });
 
   useEffect(() => {
     finalInputRef.current?.focus();
   }, [finalInputRef]);
-
-  useEffect(() => {
-    const defaultColors: Record<string, string> = {};
-    catalog.forEach(product => {
-      if (product.colors && product.colors.length > 0) {
-        defaultColors[String(product.sku)] = product.colors[0].value;
-      }
-    });
-    setSelectedColors(defaultColors);
-  }, [catalog]);
-
-  const filtered = useMemo(() => {
-    const term = q.trim().toLowerCase();
-    if (!term) {
-      return catalog.slice(0, 3);
-    }
-    return catalog.filter((p) => {
-      const skuStr = String(p.sku).toLowerCase();
-      return (
-        skuStr.includes(term) ||
-        p.name.toLowerCase().includes(term)
-      );
-    });
-  }, [catalog, q]);
-
-  const handleAddProduct = async (sku: string | number) => {
-    const product = catalog.find(p => p.sku === sku);
-    if (!product) return;
-    
-    setAddingProduct(String(sku));
-    
-    const selectedColor = selectedColors[String(sku)];
-    const colorName = selectedColor && product.colors ? 
-      product.colors.find(c => c.value === selectedColor)?.name : undefined;
-    
-    onAdd(String(sku), colorName);
-    
-    setTimeout(() => {
-      setAddingProduct(null);
-    }, 600);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && filtered.length > 0) {
-      handleAddProduct(filtered[0].sku);
-      setQ("");
-      finalInputRef.current?.focus();
-    }
-  };
 
   return (
     <div className="product-picker">
@@ -83,41 +59,25 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess: _onAddSucc
           ref={finalInputRef}
           className="form-input"
           placeholder="Search products..."
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           onKeyDown={handleKeyDown}
         />
       </div>
 
-      {q === "" && (
+      {!isSearching && (
         <div className="product-hint">
           Popular
         </div>
       )}
 
       <div className="product-grid">
-        {filtered.map((p) => {
+        {filteredProducts.map((p) => {
           const isOutOfStock = p.stock.status === 'out-of-stock' || p.stock.status === 'discontinued';
-          const isAdding = addingProduct === String(p.sku);
-          
-          // Get the correct image based on selected color
-          const getProductImage = () => {
-            const selectedColor = selectedColors[String(p.sku)];
-            if (!selectedColor || !p.colors) return p.image;
-            
-            const selectedColorObj = p.colors.find(color => color.value === selectedColor);
-            return selectedColorObj?.image || p.image;
-          };
-          
-          const productImage = getProductImage();
-          
-          const getButtonText = () => {
-            if (isAdding) return 'Added ✓';
-            if (p.stock.status === 'discontinued') return 'Unavailable';
-            if (p.stock.status === 'out-of-stock') return 'Pre-order';
-            return 'Add';
-          };
-          
+          const isAdding = isProductAdding(p.sku);
+          const productImage = getProductImage(p);
+          const selectedColor = getSelectedColor(p.sku);
+
           return (
             <div key={p.sku} className={`product-card ${isOutOfStock ? 'out-of-stock' : ''} ${isAdding ? 'adding' : ''}`}>
               <div className="product-header">
@@ -138,10 +98,10 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess: _onAddSucc
               </div>
               {productImage && (
                 <div className="product-image">
-                  <img 
-                    key={`product-img-${p.sku}-${selectedColors[String(p.sku)] || 'default'}`}
-                    src={productImage} 
-                    alt={p.name} 
+                  <img
+                    key={`product-img-${p.sku}-${selectedColor || 'default'}`}
+                    src={productImage}
+                    alt={p.name}
                   />
                 </div>
               )}
@@ -153,11 +113,8 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess: _onAddSucc
                 <div className="product-colors">
                   <ColorSelector
                     colors={p.colors}
-                    selectedColor={selectedColors[String(p.sku)]}
-                    onColorSelect={(color) => setSelectedColors(prev => ({
-                      ...prev,
-                      [String(p.sku)]: color
-                    }))}
+                    selectedColor={selectedColor}
+                    onColorSelect={(color) => handleColorSelect(p.sku, color)}
                   />
                 </div>
               )}
@@ -167,18 +124,18 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess: _onAddSucc
                   type="button"
                   className={`btn btn-primary ${isAdding ? 'adding' : ''}`}
                   onClick={() => handleAddProduct(p.sku)}
-                  disabled={p.stock.status === 'discontinued' || isAdding}
+                  disabled={isProductDisabled(p)}
                 >
-                  {getButtonText()}
+                  {getButtonText(p)}
                 </button>
               </div>
             </div>
           );
         })}
 
-        {filtered.length === 0 && q.trim() && (
+        {filteredProducts.length === 0 && isSearching && (
           <div className="product-empty">
-            No products match "{q}"
+            No products match "{searchQuery}"
           </div>
         )}
       </div>

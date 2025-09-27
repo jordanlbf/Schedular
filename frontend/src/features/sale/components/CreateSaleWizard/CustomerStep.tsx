@@ -1,9 +1,10 @@
-import type { Customer, Address } from '@/shared/types';
+import type { Customer } from '@/shared/types';
 import { AUSTRALIAN_STATES } from '../CreateCustomer/utils/customerUtils';
 import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/ui/WizardStepLayout';
 import { ContactDetailsForm } from '@/features/sale/components/CreateCustomer/components/ContactDetailsForm';
 import { AddressForm } from '@/features/sale/components/CreateCustomer/components/AddressForm';
 import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
+import { useCustomerStepForm } from '../CreateCustomer/hooks/useCustomerStepForm';
 
 interface CustomerStepProps {
   customer: Customer;
@@ -14,30 +15,15 @@ interface CustomerStepProps {
   fieldErrors?: { [key: string]: string };
 }
 
-export default function CustomerStep({ 
-  customer, 
-  setCustomer, 
-  onNext, 
+export default function CustomerStep({
+  customer,
+  setCustomer,
+  onNext,
   canProceed,
   errors = [],
   fieldErrors = {}
 }: CustomerStepProps) {
-  
-  const updateDeliveryAddress = (updates: Partial<Address>) => {
-    const current = customer.deliveryAddress || { 
-      unit: "",
-      street: "", 
-      street2: "",
-      city: "", 
-      state: "", 
-      zip: "", 
-      notes: "" 
-    };
-    setCustomer({
-      ...customer,
-      deliveryAddress: { ...current, ...updates }
-    });
-  };
+  const { updateDeliveryAddress } = useCustomerStepForm({ customer, setCustomer });
 
   return (
     <WizardStepLayout

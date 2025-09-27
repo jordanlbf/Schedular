@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
 import type { DeliveryDetails } from '../../types';
 import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/ui/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from './constants/wizard';
 import ScheduleDelivery from '../ScheduleDelivery/ScheduleDelivery';
+import { useScheduleDeliveryForm } from '../ScheduleDelivery/hooks/useScheduleDeliveryForm';
 
 interface DeliveryStepProps {
   deliveryDetails: DeliveryDetails;
@@ -27,12 +27,7 @@ export default function DeliveryStep({
   canProceed,
   errors = []
 }: DeliveryStepProps) {
-  const [isFormValid, setIsFormValid] = useState(true);
-
-  // Handle validation state from ScheduleDelivery component
-  const handleValidationChange = useCallback((isValid: boolean) => {
-    setIsFormValid(isValid);
-  }, []);
+  const { isFormValid, handleValidationChange } = useScheduleDeliveryForm();
 
   // Handle next button click with validation
   const handleNext = () => {

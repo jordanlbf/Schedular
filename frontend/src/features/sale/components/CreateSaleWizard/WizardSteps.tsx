@@ -4,10 +4,10 @@ import ProductsStep from './ProductsStep';
 import DeliveryStep from './DeliveryStep';
 import PaymentStep from './PaymentStep';
 import { CATALOG } from '../../catalog';
-import { addLineToCart, updateLineQuantity, removeLine } from '../Cart/utils/cartUtils';
 import { getEstimatedDeliveryDate } from './utils/dateUtils';
 import type { WizardStep, SaleDraftState } from '../../stores/useSaleDraftStore';
 import type { StepValidation } from './hooks/useSaleValidation';
+import { useWizardCartManagement } from './hooks/useWizardCartManagement';
 
 interface WizardStepsProps {
   currentStep: WizardStep;
@@ -36,43 +36,19 @@ export function WizardSteps({
 }: WizardStepsProps) {
   const searchRef = useRef<HTMLInputElement | null>(null);
 
-  // Product management functions
-  const addLine = (sku: string | number, color?: string) => {
-    const result = addLineToCart(state.lines, sku, state.nextId, color);
-    updateField('lines', result.lines);
-    updateField('nextId', result.nextId);
-  };
-
-  const changeQty = (id: number, delta: number) => {
-    const newLines = updateLineQuantity(state.lines, id, delta);
-    updateField('lines', newLines);
-    // Reset validation state if no valid items remain
-    if (currentStep === 'products') {
-      const validItems = newLines.filter(line => line.qty > 0);
-      if (validItems.length === 0) {
-        validation.resetStepAttempted('productsAttempted');
-      }
-    }
-  };
-
-  const removeLineFromCart = (id: number) => {
-    const newLines = removeLine(state.lines, id);
-    updateField('lines', newLines);
-    // Reset validation state if cart becomes empty
-    if (newLines.length === 0 && currentStep === 'products') {
-      validation.resetStepAttempted('productsAttempted');
-    }
-  };
-
-  const changePriceForLine = (id: number, newPrice: number) => {
-    const newLines = state.lines.map(line => 
-      line.id === id ? { ...line, price: newPrice } : line
-    );
-    updateField('lines', newLines);
-  };
-
-  // Calculate subtotal for product-picker step
-  const subtotal = state.lines.reduce((sum: number, line) => sum + (line.price * line.qty), 0);
+  const {
+    addLine,
+    changeQty,
+    removeLineFromCart,
+    changePriceForLine,
+    subtotal,
+  } = useWizardCartManagement({
+    lines: state.lines,
+    nextId: state.nextId,
+    currentStep,
+    updateField,
+    validation
+  });
 
   const stepComponents = {
     customer: (

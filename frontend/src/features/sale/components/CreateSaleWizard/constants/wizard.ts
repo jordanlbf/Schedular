@@ -34,5 +34,3 @@ export const SERVICE_OPTIONS = {
 } as const;
 
 export const MIN_DELIVERY_DAYS = 7;
-
-export type WizardStepTitle = typeof WIZARD_STEP_TITLES[keyof typeof WIZARD_STEP_TITLES];

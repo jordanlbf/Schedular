@@ -3,6 +3,7 @@ import Header from "@/app/layout/Header.tsx";
 import { useSaleDraftStore, type WizardStep } from "../../stores/useSaleDraftStore.ts";
 import { useSaleWizard } from "./hooks/useSaleWizard.ts";
 import { usePageReloadHandler } from "./hooks/usePageReloadHandler.ts";
+import { useWizardCompletion } from "./hooks/useWizardCompletion.ts";
 import { ProgressBar } from "@/features/sale/components/CreateSaleWizard/ui/ProgressBar.tsx";
 import { WizardSteps } from "./WizardSteps.tsx";
 import { ToastContainer } from "@/shared/ui/ToastContainer.tsx";
@@ -20,18 +21,11 @@ export default function CreateSaleWizard() {
 
   usePageReloadHandler(clearDraft, toast);
 
-  const handleComplete = () => {
-    if (wizard.validation.isValid) {
-      toast.success("Order submitted for processing!");
-      setTimeout(() => {
-        clearDraft();
-      }, 2000);
-    }
-  };
-
-  const handleAddSuccess = (productName: string) => {
-    toast.success(`${productName} added to cart!`);
-  };
+  const { handleComplete, handleAddSuccess } = useWizardCompletion({
+    clearDraft,
+    toast,
+    isValid: wizard.validation.isValid
+  });
 
   // Add totals to navigation for payment step
   const navigationWithTotals = {

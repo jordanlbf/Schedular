@@ -126,7 +126,7 @@ export function useSaleValidation(
     const errors: string[] = [];
     const fieldErrors: { [key: string]: string } = {};
 
-    // For global validation, we'll be lenient and allow delivery to be valid
+    // For global validation, be lenient and allow delivery to be valid
     // The actual validation happens locally in the DeliveryStep component
     // This allows "Choose Later" to be valid while still validating "Choose Now"
 

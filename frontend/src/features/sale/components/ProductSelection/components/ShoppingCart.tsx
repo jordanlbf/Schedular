@@ -2,6 +2,7 @@ import type { Line, CatalogItem } from '../../../types';
 import CartTable from '../../Cart/CartTable';
 import { formatPrice, formatSavings } from '@/shared/utils';
 import { Card } from '@/features/sale/ui';
+import { useShoppingCart } from '../hooks/useShoppingCart';
 
 interface ShoppingCartProps {
   lines: Line[];
@@ -20,7 +21,11 @@ export function ShoppingCart({
   onPriceChange,
   subtotal
 }: ShoppingCartProps) {
-  const itemCount = lines.reduce((total, line) => total + line.qty, 0);
+  const { itemCount, totalsCalculation, isEmpty } = useShoppingCart({
+    lines,
+    catalog,
+    subtotal
+  });
 
   return (
     <div className="products-cart-section">
@@ -29,7 +34,7 @@ export function ShoppingCart({
           title="Shopping Cart"
           className="shopping-cart-section"
         >
-          {lines.length > 0 ? (
+          {!isEmpty ? (
             <>
               <div className="cart-items-section">
                 <CartTable
@@ -43,39 +48,26 @@ export function ShoppingCart({
               <div className="cart-footer">
                 <div className="cart-totals">
                   <div className="totals-summary">
-                    {(() => {
-                      const rrpTotal = Math.round(lines.reduce((total, line) => {
-                        const product = catalog.find(p => p.sku === line.sku);
-                        return total + ((product?.price || line.price) * line.qty);
-                      }, 0) * 100) / 100;
-                      const currentTotal = Math.round(subtotal * 100) / 100;
-                      const totalSavings = Math.round((rrpTotal - currentTotal) * 100) / 100;
+                    <div className="summary-row">
+                      <span className="summary-label">Items Sum ({itemCount})</span>
+                      <span className="summary-value">{formatPrice(totalsCalculation.rrpTotal)}</span>
+                    </div>
 
-                      return (
-                        <>
-                          <div className="summary-row">
-                            <span className="summary-label">Items Sum ({itemCount})</span>
-                            <span className="summary-value">{formatPrice(rrpTotal)}</span>
-                          </div>
+                    {totalsCalculation.hasSavings && (
+                      <div className="summary-row">
+                        <span className="summary-label discount-label">
+                          Discount
+                        </span>
+                        <span className="summary-value discount-amount">
+                          -{formatSavings(totalsCalculation.totalSavings)}
+                        </span>
+                      </div>
+                    )}
 
-                          {totalSavings > 0 && (
-                            <div className="summary-row">
-                              <span className="summary-label discount-label">
-                                Discount
-                              </span>
-                              <span className="summary-value discount-amount">
-                                -{formatSavings(totalSavings)}
-                              </span>
-                            </div>
-                          )}
-
-                          <div className="summary-row summary-total">
-                            <span className="summary-label">Subtotal</span>
-                            <span className="summary-value summary-price">{formatPrice(subtotal)}</span>
-                          </div>
-                        </>
-                      );
-                    })()}
+                    <div className="summary-row summary-total">
+                      <span className="summary-label">Subtotal</span>
+                      <span className="summary-value summary-price">{formatPrice(subtotal)}</span>
+                    </div>
                   </div>
                 </div>
               </div>

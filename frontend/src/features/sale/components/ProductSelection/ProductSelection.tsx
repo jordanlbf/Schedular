@@ -1,7 +1,8 @@
 import { MutableRefObject } from 'react';
 import type { Line, CatalogItem } from '../../types';
-import { ProductSearch } from './components/ProductSearch';
+import ProductPicker from '../ProductPicker/ProductPicker';
 import { ShoppingCart } from './components/ShoppingCart';
+import { Card } from '@/features/sale/ui';
 
 interface ProductSelectionProps {
   lines: Line[];
@@ -28,12 +29,16 @@ export default function ProductSelection({
 }: ProductSelectionProps) {
   return (
     <div className="products-layout">
-      <ProductSearch
-        catalog={catalog}
-        onAddLine={onAddLine}
-        searchRef={searchRef}
-        onAddSuccess={onAddSuccess}
-      />
+      <div className="products-search-section">
+        <Card title="Add Products">
+          <ProductPicker
+            catalog={catalog}
+            onAdd={onAddLine}
+            inputRef={searchRef}
+            onAddSuccess={onAddSuccess}
+          />
+        </Card>
+      </div>
 
       <ShoppingCart
         lines={lines}

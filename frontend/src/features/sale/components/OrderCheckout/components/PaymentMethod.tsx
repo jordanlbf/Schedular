@@ -1,5 +1,5 @@
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
-import { fmt } from '../../../utils/money';
+import { fmt } from '../utils/paymentUtils';
 import { PAYMENT_METHODS } from '../../CreateSaleWizard/constants/wizard';
 import { Card } from '@/features/sale/ui';
 

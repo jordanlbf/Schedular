@@ -1,5 +1,5 @@
 import type { Customer, Address } from '@/shared/types';
-import { AUSTRALIAN_STATES } from '../../utils/constants';
+import { AUSTRALIAN_STATES } from '../CreateCustomer/utils/customerUtils';
 import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/ui/WizardStepLayout';
 import { ContactDetailsForm } from '@/features/sale/components/CreateCustomer/forms/ContactDetailsForm';
 import { AddressForm } from '@/features/sale/components/CreateCustomer/forms/AddressForm';

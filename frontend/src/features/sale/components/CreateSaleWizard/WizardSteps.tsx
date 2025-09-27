@@ -4,7 +4,8 @@ import ProductsStep from './ProductsStep';
 import DeliveryStep from './DeliveryStep';
 import PaymentStep from './PaymentStep';
 import { CATALOG } from '../../catalog';
-import { addLineToCart, updateLineQuantity, removeLine, getEstimatedDeliveryDate } from '../../utils/saleUtils';
+import { addLineToCart, updateLineQuantity, removeLine } from '../Cart/utils/cartUtils';
+import { getEstimatedDeliveryDate } from './utils/dateUtils';
 import type { WizardStep, SaleDraftState } from '../../stores/useSaleDraftStore';
 import type { StepValidation } from './hooks/useSaleValidation';
 

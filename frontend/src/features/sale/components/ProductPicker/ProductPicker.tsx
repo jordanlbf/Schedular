@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import type { Product } from '@/shared/types';
-import { formatPrice } from '../../utils/price';
+import { formatPrice } from '../ProductSelection/utils/priceUtils';
 import { StockBadge } from '../ui/StockBadge.tsx';
 import { ColorSelector } from '../ui/ColorSelector.tsx';
 

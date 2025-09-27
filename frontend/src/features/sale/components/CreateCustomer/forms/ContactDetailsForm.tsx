@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { Customer, SecondPerson } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField.tsx';
-import { formatPhone } from '../../../utils/validation';
+import { formatPhone, isValidEmail, isValidPhone } from '../utils/customerUtils';
 import { Card } from '@/features/sale/ui';
 
 interface ContactDetailsFormProps {
@@ -14,9 +14,14 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
   const [isSecondPersonExpanded, setIsSecondPersonExpanded] = useState(!!customer.secondPerson);
   const [hasFocus, setHasFocus] = useState(false);
 
-  // Check if all required fields are completed
+  // Check if all required fields are completed and valid
   const isComplete = useMemo(() => {
-    return !!(customer.firstName?.trim() && customer.lastName?.trim() && customer.phone?.trim());
+    return !!(
+      customer.firstName?.trim() &&
+      customer.lastName?.trim() &&
+      customer.phone?.trim() &&
+      isValidPhone(customer.phone)
+    );
   }, [customer.firstName, customer.lastName, customer.phone]);
 
   // Compute full name for backwards compatibility
@@ -88,10 +93,10 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
           <FormField
             label="Primary Phone"
             required
-            error={fieldErrors.phone}
+            error={fieldErrors.phone || (customer.phone && !isValidPhone(customer.phone) ? 'Please enter a valid Australian phone number' : '')}
           >
             <input
-              className={`form-input ${fieldErrors.phone ? 'error' : ''}`}
+              className={`form-input ${(fieldErrors.phone || (customer.phone && !isValidPhone(customer.phone))) ? 'error' : ''}`}
               placeholder="0412 345 678"
               value={customer.phone}
               onChange={(e) => updateCustomer({ phone: formatPhone(e.target.value) })}
@@ -113,17 +118,19 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
           </div>
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Email Address</label>
+        <FormField
+          label="Email Address"
+          error={customer.email && !isValidEmail(customer.email) ? 'Please enter a valid email address' : ''}
+        >
           <input
-            className="form-input"
+            className={`form-input ${(customer.email && !isValidEmail(customer.email)) ? 'error' : ''}`}
             placeholder="john.smith@example.com"
             type="email"
             value={customer.email}
             onChange={(e) => updateCustomer({ email: e.target.value })}
             inputMode="email"
           />
-        </div>
+        </FormField>
 
         {/* Optional Second Person Section */}
         <div className="second-person-section">

@@ -1,6 +1,6 @@
 import type { Line } from '../../../types';
 import type { SaleTotals } from '../../../hooks/useSaleTotals';
-import { fmt } from '../../../utils/money';
+import { fmt } from '../utils/paymentUtils';
 import { Card } from '@/features/sale/ui';
 
 interface OrderSummaryProps {

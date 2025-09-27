@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import type { Address } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField.tsx';
 import { Card } from '@/features/sale/ui';
+import { isValidPostcode } from '../utils/customerUtils';
 
 interface AddressFormProps {
   address?: Address;
@@ -13,9 +14,15 @@ interface AddressFormProps {
 export function AddressForm({ address, onChange, states, fieldErrors = {} }: AddressFormProps) {
   const [hasFocus, setHasFocus] = useState(false);
 
-  // Check if all required fields are completed
+  // Check if all required fields are completed and valid
   const isComplete = useMemo(() => {
-    return !!(address?.street?.trim() && address?.city?.trim() && address?.state?.trim() && address?.zip?.trim());
+    return !!(
+      address?.street?.trim() &&
+      address?.city?.trim() &&
+      address?.state?.trim() &&
+      address?.zip?.trim() &&
+      isValidPostcode(address.zip)
+    );
   }, [address?.street, address?.city, address?.state, address?.zip]);
 
   return (
@@ -101,10 +108,10 @@ export function AddressForm({ address, onChange, states, fieldErrors = {} }: Add
           <FormField
             label="Postcode"
             required
-            error={fieldErrors.zip}
+            error={fieldErrors.zip || (address?.zip && !isValidPostcode(address.zip) ? 'Please enter a valid 4-digit postcode' : '')}
           >
             <input
-              className={`form-input ${fieldErrors.zip ? 'error' : ''}`}
+              className={`form-input ${(fieldErrors.zip || (address?.zip && !isValidPostcode(address.zip))) ? 'error' : ''}`}
               placeholder="4000"
               maxLength={4}
               value={address?.zip || ""}

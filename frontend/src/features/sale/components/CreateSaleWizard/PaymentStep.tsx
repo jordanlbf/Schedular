@@ -1,6 +1,6 @@
 import type { Customer, Line, DeliveryDetails } from '../../types';
 import type { SaleTotals } from '../../hooks/useSaleTotals';
-import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/ui/WizardStepLayout';
+import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/components/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 import OrderCheckout from '../OrderCheckout/OrderCheckout';
 

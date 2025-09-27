@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 import type { Line, CatalogItem } from '../../types';
-import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/ui/WizardStepLayout';
+import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/components/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 import ProductSelection from '../ProductSelection/ProductSelection';
 

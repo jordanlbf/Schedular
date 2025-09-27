@@ -1,5 +1,5 @@
 import type { DeliveryDetails } from '../../types';
-import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/ui/WizardStepLayout';
+import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/components/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from './constants/wizard';
 import ScheduleDelivery from '../ScheduleDelivery/ScheduleDelivery';
 import { useScheduleDeliveryForm } from '../ScheduleDelivery/hooks/useScheduleDeliveryForm';

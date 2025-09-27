@@ -14,8 +14,6 @@ interface WizardStepLayoutProps {
 }
 
 export function WizardStepLayout({
-  title,
-  stepNumber = '1',
   children,
   onNext,
   onPrev,

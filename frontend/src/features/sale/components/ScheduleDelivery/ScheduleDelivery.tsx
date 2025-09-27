@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import type { DeliveryDetails } from '../../types';
 import { DateSelector } from './components/DateSelector';
 import { TimeSlotPicker } from './components/TimeSlotPicker';
@@ -7,6 +6,7 @@ import { DeliverySummary } from './components/DeliverySummary';
 import { CalendarPopover } from './components/CalendarPopover';
 import { useDeliveryScheduling } from './hooks/useDeliveryScheduling';
 import { useServiceCalculations } from './hooks/useServiceCalculations';
+import { useDeliveryForm } from './hooks/useDeliveryForm';
 import { Card } from '@/features/sale/ui';
 
 interface ScheduleDeliveryProps {
@@ -30,61 +30,31 @@ export default function ScheduleDelivery({
   errors = [],
   onValidationChange
 }: ScheduleDeliveryProps) {
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [deliveryChoiceMode, setDeliveryChoiceMode] = useState<'later' | 'now'>('later');
-  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   // Custom hooks for business logic
   const {
+    showCalendar,
+    setShowCalendar,
+    deliveryChoiceMode,
+    validationErrors,
+    handleDeliveryChoiceChange,
+    handleSpecialInstructionsChange,
+  } = useDeliveryForm({
+    deliveryDetails,
+    setDeliveryDetails,
+    onValidationChange
+  });
+
+  const {
     timeSlots,
     loadingTimeSlots,
-    availableDates,
     minDate,
     maxDate,
     pillDates,
-    loadTimeSlotsForDate,
     isDateValid
   } = useDeliveryScheduling(deliveryDetails.preferredDate, deliveryChoiceMode);
 
   const { totalServiceCharges } = useServiceCalculations(deliveryDetails);
-
-  // Validation logic
-  const validateForm = () => {
-    const newErrors: string[] = [];
-    if (deliveryChoiceMode === 'now') {
-      if (!deliveryDetails.preferredDate || !deliveryDetails.timeSlot) {
-        newErrors.push('Please select a delivery date and time.');
-      }
-    }
-    setValidationErrors(newErrors);
-    return newErrors.length === 0;
-  };
-
-  // Handle delivery choice mode change
-  const handleDeliveryChoiceChange = (mode: 'later' | 'now') => {
-    setDeliveryChoiceMode(mode);
-    if (mode === 'later') {
-      setDeliveryDetails({
-        ...deliveryDetails,
-        preferredDate: '',
-        timeSlot: ''
-      });
-      setValidationErrors([]);
-    }
-  };
-
-  // Clear validation errors when selections are made
-  useEffect(() => {
-    if (validationErrors.length > 0 && (deliveryChoiceMode === 'later' || (deliveryDetails.preferredDate && deliveryDetails.timeSlot))) {
-      setValidationErrors([]);
-    }
-  }, [deliveryDetails.preferredDate, deliveryDetails.timeSlot, validationErrors.length, deliveryChoiceMode]);
-
-  // Notify parent of validation state
-  useEffect(() => {
-    const isValid = deliveryChoiceMode === 'later' || validateForm();
-    onValidationChange?.(isValid);
-  }, [deliveryChoiceMode, deliveryDetails.preferredDate, deliveryDetails.timeSlot, onValidationChange]);
 
   return (
     <div className="delivery-layout-grid">
@@ -181,10 +151,7 @@ export default function ScheduleDelivery({
               <textarea
                 className="form-input form-textarea delivery-instructions-textarea"
                 value={deliveryDetails.specialInstructions}
-                onChange={(e) => setDeliveryDetails({
-                  ...deliveryDetails,
-                  specialInstructions: e.target.value
-                })}
+                onChange={(e) => handleSpecialInstructionsChange(e.target.value)}
                 placeholder="Special requirements: gate codes, stairs, contact preferences, etc."
               />
             </div>

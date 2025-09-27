@@ -1,5 +1,5 @@
 /**
- * Date utilities for sale wizard
+ * Date utilities
  */
 
 export function getEstimatedDeliveryDate(daysFromNow: number = 14): string {

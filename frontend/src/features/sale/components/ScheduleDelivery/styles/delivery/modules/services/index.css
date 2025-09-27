@@ -1,2 +1,5 @@
-/* Services Module Index */
-@import 'list.css';
+/* Services Module - Modular Structure */
+
+@import './service-items.css';
+@import './service-content.css';
+@import './theme-variants.css';

@@ -1,0 +1,27 @@
+/* Time Slot Validation Styling */
+
+.validation-message {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--error);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  width: 100%;
+  margin-top: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.validation-icon {
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+}
+
+/* Dark mode adjustments */
+html.theme-dark .validation-message {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}

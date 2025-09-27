@@ -1,0 +1,23 @@
+/* Compact Card Layout */
+
+.compact-card .form-card-header {
+  padding: var(--spacing-xl) var(--spacing-2xl);
+  z-index: 1; /* Ensure header stays above popover content */
+}
+
+.compact-card .form-card-body {
+  padding: var(--spacing-lg) var(--spacing-4xl);
+}
+
+/* Compact form groups with tighter spacing */
+.compact-card .form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.compact-card .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.compact-card .form-label {
+  margin-bottom: var(--spacing-xs);
+}

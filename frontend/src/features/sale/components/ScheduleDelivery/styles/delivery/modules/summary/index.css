@@ -1,3 +1,6 @@
-/* Summary Module Index */
-@import 'card.css';
-@import 'confirmation.css';
+/* Summary Module - Modular Structure */
+
+@import './fee-input.css';
+@import './breakdown.css';
+@import './theme-variants.css';
+@import './confirmation.css';

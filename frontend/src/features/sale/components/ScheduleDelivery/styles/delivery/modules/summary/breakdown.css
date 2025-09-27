@@ -1,0 +1,29 @@
+/* Summary Breakdown Styling */
+
+.summary-breakdown {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 2px solid var(--border);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.summary-row:not(:last-child) {
+  margin-bottom: var(--spacing-xs);
+}
+
+.summary-row.summary-total {
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border);
+  margin-top: var(--spacing-sm);
+  color: var(--accent-secondary);
+}

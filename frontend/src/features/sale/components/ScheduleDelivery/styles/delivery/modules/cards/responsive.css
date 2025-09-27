@@ -1,0 +1,40 @@
+/* Compact Cards Responsive Design */
+
+/* Responsive design for radiogroup */
+@media (max-width: 768px) {
+  .delivery-choice-radiogroup {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .compact-card .form-card-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+
+  .compact-card .form-card-body {
+    padding: var(--spacing-md) var(--spacing-xl);
+  }
+
+  .delivery-instructions-textarea {
+    min-height: 100px;
+  }
+}
+
+/* Responsive padding adjustments */
+@media (max-width: 480px) {
+  .compact-card .form-card-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .compact-card .form-card-body {
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .compact-card .form-group {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .delivery-instructions-textarea {
+    min-height: 80px;
+  }
+}

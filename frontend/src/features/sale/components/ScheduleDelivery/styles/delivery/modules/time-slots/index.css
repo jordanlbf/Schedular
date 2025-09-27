@@ -1,2 +1,8 @@
-/* Time Slots Module Index */
-@import 'slots.css';
+/* Time Slots Module - Modular Structure */
+
+@import './grid-layout.css';
+@import './slot-cards.css';
+@import './slot-content.css';
+@import './placeholder-states.css';
+@import './validation.css';
+@import './theme-variants.css';

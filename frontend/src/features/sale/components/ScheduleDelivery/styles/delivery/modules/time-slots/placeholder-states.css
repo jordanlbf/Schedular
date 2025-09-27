@@ -1,0 +1,51 @@
+/* Time Slot Placeholder and Loading States */
+
+.time-slot-placeholder,
+.time-slot-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-xs);
+  background: rgba(100, 116, 139, 0.05);
+  border: 2px dashed rgba(100, 116, 139, 0.2);
+  border-radius: var(--radius-md);
+  min-height: 80px;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-subtle);
+  opacity: 0.6;
+}
+
+.time-slot-skeleton {
+  background: rgba(100, 116, 139, 0.08);
+  border-style: solid;
+  opacity: 0.8;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+/* Dark mode adjustments */
+html.theme-dark .time-slot-placeholder,
+html.theme-dark .time-slot-skeleton {
+  background: rgba(100, 116, 139, 0.08);
+  border-color: rgba(148, 163, 184, 0.15);
+}
+
+html.theme-dark .time-slot-skeleton {
+  background: rgba(100, 116, 139, 0.12);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .time-slot-placeholder,
+  .time-slot-skeleton {
+    padding: var(--spacing-sm) var(--spacing-xs);
+    min-height: 70px;
+  }
+}

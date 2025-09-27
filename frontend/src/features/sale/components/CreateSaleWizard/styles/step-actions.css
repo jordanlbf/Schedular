@@ -1,0 +1,29 @@
+/* Step Actions - Bottom Navigation */
+
+.step-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-2xl);  /* Match wizard content padding */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 -4px 20px rgba(0, 0, 0, 0.08),
+    0 -1px 4px rgba(0, 0, 0, 0.04);
+  z-index: 100;
+}
+
+html.theme-dark .step-actions {
+  background: rgba(39, 39, 40, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 -4px 20px rgba(0, 0, 0, 0.2),
+    0 -1px 4px rgba(0, 0, 0, 0.1);
+}

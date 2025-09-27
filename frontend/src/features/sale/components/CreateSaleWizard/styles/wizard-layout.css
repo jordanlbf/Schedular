@@ -1,0 +1,80 @@
+/* Wizard Layout Structure */
+
+/* Main wizard container */
+.wizard-container {
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 0%, var(--bg) 0%);
+  padding: var(--spacing-lg) 0 0 0;
+  position: relative;
+}
+
+/* Gradient background overlay */
+.wizard-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(147, 197, 253, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+html.theme-dark .wizard-container::before {
+  background:
+    radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(147, 197, 253, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(96, 165, 250, 0.01) 0%, transparent 50%);
+}
+
+.wizard-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Wizard content area */
+.wizard-content {
+  min-height: 60vh;
+  padding: var(--spacing-lg) var(--spacing-2xl) var(--spacing-5xl);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.wizard-step {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4xl);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Payment step needs full width */
+.wizard-step:has(.payment-layout-grid) .step-content {
+  max-width: none;
+  margin: 0;
+}
+
+.step-main {
+  flex: 1;
+}

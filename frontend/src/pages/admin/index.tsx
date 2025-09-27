@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-// @ts-ignore
-import Header from "@/app/layout/Header.tsx";
+import Header from "@/app/layout/Header";
 
 export default function Index() {
   return (

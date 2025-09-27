@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { formatCurrency } from '@/shared/utils/currency';
 
 interface PriceBlockProps {
   price: number;               // current unit price
@@ -56,15 +57,6 @@ export function PriceBlock({
   const lineTotal = price * quantity;
   const totalSave = hasDiscount ? (compareAtPrice - price) * quantity : 0;
 
-  // Format currency using toLocaleString for proper formatting
-  const formatCurrency = (amount: number) => {
-    return amount.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-  };
 
   return (
     <div className={`price-block-grid ${className}`}>

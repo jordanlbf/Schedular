@@ -10,7 +10,7 @@ interface CartTableProps {
   onPriceChange?: (id: number, newPrice: number) => void;
 }
 
-export default function CartTable({ lines, onChangeQty, onRemove, onPriceChange }: CartTableProps) {
+export function CartTable({ lines, onChangeQty, onRemove, onPriceChange }: CartTableProps) {
   // Memoize the product lookup to prevent unnecessary re-renders
   const productMap = useMemo(() => {
     const map = new Map();

@@ -10,5 +10,5 @@
   animation-fill-mode: backwards;
 }
 
-/* Animation is already defined in forms.css, no need to duplicate */
-/* @keyframes slideUpForm is inherited from ui forms */
+/* Animation is already defined in components.css, no need to duplicate */
+/* @keyframes slideUpForm is inherited from ui components */

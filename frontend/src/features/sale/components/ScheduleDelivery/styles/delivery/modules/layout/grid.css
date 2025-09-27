@@ -19,7 +19,7 @@
   height: 100%;
 }
 
-/* Set consistent heights for delivery forms - matching standard form card heights */
+/* Set consistent heights for delivery components - matching standard form card heights */
 .delivery-layout-grid .form-card {
   min-height: 420px;
   max-height: 420px;

@@ -85,7 +85,7 @@
   height: fit-content;
 }
 
-/* Set heights for payment forms - Order Summary taller, right cards shorter */
+/* Set heights for payment components - Order Summary taller, right cards shorter */
 .payment-layout-grid .form-card {
   display: flex;
   flex-direction: column;

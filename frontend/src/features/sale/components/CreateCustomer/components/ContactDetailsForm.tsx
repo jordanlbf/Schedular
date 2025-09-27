@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react';
-import type { Customer, SecondPerson } from '@/shared/types';
+import type { Customer } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField.tsx';
 import { formatPhone, isValidEmail, isValidPhone } from '../utils/customerUtils';
 import { Card } from '@/features/sale/ui';
+import { useContactDetailsForm } from '../hooks/useContactDetailsForm';
 
 interface ContactDetailsFormProps {
   customer: Customer;
@@ -11,55 +11,24 @@ interface ContactDetailsFormProps {
 }
 
 export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: ContactDetailsFormProps) {
-  const [isSecondPersonExpanded, setIsSecondPersonExpanded] = useState(!!customer.secondPerson);
-  const [hasFocus, setHasFocus] = useState(false);
-
-  // Check if all required fields are completed and valid
-  const isComplete = useMemo(() => {
-    return !!(
-      customer.firstName?.trim() &&
-      customer.lastName?.trim() &&
-      customer.phone?.trim() &&
-      isValidPhone(customer.phone)
-    );
-  }, [customer.firstName, customer.lastName, customer.phone]);
-
-  // Compute full name for backwards compatibility
-  const updateCustomer = (updates: Partial<Customer>) => {
-    const newCustomer = { ...customer, ...updates };
-    // Auto-compute full name
-    newCustomer.name = `${newCustomer.firstName || ''} ${newCustomer.lastName || ''}`.trim();
-    onChange(newCustomer);
-  };
-
-  const updateSecondPerson = (updates: Partial<SecondPerson>) => {
-    const currentSecondPerson = customer.secondPerson || {
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-      relationship: ''
-    };
-    updateCustomer({
-      secondPerson: { ...currentSecondPerson, ...updates }
-    });
-  };
-
-  const clearSecondPerson = () => {
-    updateCustomer({ secondPerson: undefined });
-  };
+  const {
+    isSecondPersonExpanded,
+    hasFocus,
+    isComplete,
+    updateCustomer,
+    updateSecondPerson,
+    toggleSecondPersonExpanded,
+    handleSecondPersonRemove,
+    handleFocusEnter,
+    handleFocusLeave,
+  } = useContactDetailsForm({ customer, onChange });
 
   return (
     <Card
       title="Contact Details"
       className={`${isComplete && !hasFocus ? 'complete' : ''}`}
-      onFocusCapture={() => setHasFocus(true)}
-      onBlurCapture={(e) => {
-        // Only set hasFocus to false if focus is leaving the entire form card
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-          setHasFocus(false);
-        }
-      }}
+      onFocusCapture={handleFocusEnter}
+      onBlurCapture={handleFocusLeave}
     >
         <div className="form-grid-2">
           <FormField
@@ -137,7 +106,7 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
           <button
             type="button"
             className="add-second-person-btn"
-            onClick={() => setIsSecondPersonExpanded(!isSecondPersonExpanded)}
+            onClick={toggleSecondPersonExpanded}
             aria-expanded={isSecondPersonExpanded}
           >
             <div className="add-person-content">
@@ -153,8 +122,7 @@ export function ContactDetailsForm({ customer, onChange, fieldErrors = {} }: Con
                 className="btn-link btn-sm remove-person-btn"
                 onClick={(e) => {
                   e.stopPropagation();
-                  clearSecondPerson();
-                  setIsSecondPersonExpanded(false);
+                  handleSecondPersonRemove();
                 }}
                 title="Remove second person"
               >

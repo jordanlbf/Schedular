@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react';
 import type { Address } from '@/shared/types';
 import { FormField } from '@/shared/ui/FormField.tsx';
 import { Card } from '@/features/sale/ui';
 import { isValidPostcode } from '../utils/customerUtils';
+import { useAddressForm } from '../hooks/useAddressForm';
 
 interface AddressFormProps {
   address?: Address;
@@ -12,30 +12,20 @@ interface AddressFormProps {
 }
 
 export function AddressForm({ address, onChange, states, fieldErrors = {} }: AddressFormProps) {
-  const [hasFocus, setHasFocus] = useState(false);
-
-  // Check if all required fields are completed and valid
-  const isComplete = useMemo(() => {
-    return !!(
-      address?.street?.trim() &&
-      address?.city?.trim() &&
-      address?.state?.trim() &&
-      address?.zip?.trim() &&
-      isValidPostcode(address.zip)
-    );
-  }, [address?.street, address?.city, address?.state, address?.zip]);
+  const {
+    hasFocus,
+    isComplete,
+    handlePostcodeChange,
+    handleFocusEnter,
+    handleFocusLeave,
+  } = useAddressForm({ address, onChange });
 
   return (
     <Card
       title="Delivery Address"
       className={`${isComplete && !hasFocus ? 'complete' : ''}`}
-      onFocusCapture={() => setHasFocus(true)}
-      onBlurCapture={(e) => {
-        // Only set hasFocus to false if focus is leaving the entire form card
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-          setHasFocus(false);
-        }
-      }}
+      onFocusCapture={handleFocusEnter}
+      onBlurCapture={handleFocusLeave}
     >
         <div className="form-group">
           <label className="form-label form-label-optional">Unit / Apartment / Suite</label>
@@ -115,11 +105,7 @@ export function AddressForm({ address, onChange, states, fieldErrors = {} }: Add
               placeholder="4000"
               maxLength={4}
               value={address?.zip || ""}
-              onChange={(e) => {
-                // Only allow numbers
-                const value = e.target.value.replace(/\D/g, '');
-                onChange({ zip: value });
-              }}
+              onChange={(e) => handlePostcodeChange(e.target.value)}
               inputMode="numeric"
             />
           </FormField>

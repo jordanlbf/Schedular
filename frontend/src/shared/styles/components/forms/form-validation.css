@@ -114,7 +114,7 @@
   font-weight: var(--font-medium);
 }
 
-/* Error messages below forms in content flow */
+/* Error messages below components in content flow */
 .form-errors-bottom-content {
   background: var(--panel);
   backdrop-filter: var(--blur);

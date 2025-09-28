@@ -1,0 +1,51 @@
+/* Header Component Styles */
+
+/* Glass-morphism topbar */
+.home-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  background: var(--panel);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 20;
+  box-shadow: var(--shadow-glass);
+}
+
+.brand {
+  font-weight: var(--font-bold);
+  font-size: var(--text-2xl);
+  color: var(--accent-secondary) !important; /* Blue in dark mode, purple in light mode */
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Keep original blue color in dark mode */
+html.theme-dark .brand {
+  color: #0ea5e9 !important;
+}
+
+/* Purple color in light mode */
+html.theme-light .brand {
+  color: #6366f1 !important;
+}
+
+.header-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--text);
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}

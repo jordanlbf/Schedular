@@ -1,0 +1,63 @@
+/* Theme Toggle Component Styles */
+
+/* Elegant DARK/LIGHT toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+
+.theme-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--muted);
+  transition: color .2s ease;
+}
+
+.theme-label.active {
+  color: var(--text);
+}
+
+/* Minimalist purple theme toggle */
+.switch {
+  width: 52px;
+  height: 26px;
+  padding: 3px;
+  border-radius: 100px;
+  background: #e2e8f0; /* Light grey for dark mode position */
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+html.theme-light .switch {
+  background: #ddd6fe; /* Light purple for light mode */
+}
+
+.switch:hover {
+  opacity: 0.85;
+}
+
+.switch:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+}
+
+.knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+}
+
+html.theme-light .switch .knob {
+  transform: translateX(26px);
+}

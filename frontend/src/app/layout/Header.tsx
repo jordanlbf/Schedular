@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { useTheme } from "@/shared/hooks/useTheme";
+import './Header.css';
 
 export default function Header({ right, title }: { right?: ReactNode; title?: string }) {
   const { theme, toggle } = useTheme();

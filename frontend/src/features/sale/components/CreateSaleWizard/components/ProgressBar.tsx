@@ -1,4 +1,5 @@
 import { useProgressBar } from '../hooks/useProgressBar';
+import './ProgressBar.css';
 
 interface ProgressBarProps {
   steps: {

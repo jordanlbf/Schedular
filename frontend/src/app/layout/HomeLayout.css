@@ -1,0 +1,44 @@
+/* HomeLayout Component Styles */
+
+/* Layout: header | main | footer */
+.home-wrap {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Glass-morphism footer */
+.home-footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  background: var(--panel);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-top: 1px solid var(--border);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Utility pages */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.back-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Enhanced focus states with glow */
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-glow);
+  border-radius: var(--radius-lg);
+}

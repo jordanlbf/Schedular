@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { HomeLayout } from "@/app/layout";
+import './Home.css';
 
 export default function Index() {
   return (

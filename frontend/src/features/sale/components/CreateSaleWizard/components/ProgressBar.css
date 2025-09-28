@@ -92,7 +92,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: 
+  background:
     linear-gradient(to right,
       transparent 0%,
       transparent 12.5%,
@@ -116,7 +116,7 @@
 
 /* Connection lines turn green as steps are completed */
 .progress-steps-container[data-completed-steps="1"]::before {
-  background: 
+  background:
     linear-gradient(to right,
       transparent 0%,
       transparent 12.5%,
@@ -136,7 +136,7 @@
 }
 
 .progress-steps-container[data-completed-steps="2"]::before {
-  background: 
+  background:
     linear-gradient(to right,
       transparent 0%,
       transparent 12.5%,
@@ -156,7 +156,7 @@
 }
 
 .progress-steps-container[data-completed-steps="3"]::before {
-  background: 
+  background:
     linear-gradient(to right,
       transparent 0%,
       transparent 12.5%,
@@ -283,17 +283,17 @@
     gap: var(--spacing-xl);
     padding: var(--spacing-2xl);
   }
-  
+
   .progress-step {
     flex-direction: column;
     text-align: center;
     gap: var(--spacing-md);
   }
-  
+
   .progress-step:not(:last-child)::after {
     display: none;
   }
-  
+
   .step-detail {
     text-align: center;
   }

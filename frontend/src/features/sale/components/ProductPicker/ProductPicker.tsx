@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 
 import type { Product } from '@/shared/types';
 import { formatPrice } from '@/shared/utils';
-import { StockBadge } from '../ui/StockBadge.tsx';
-import { ColorSelector } from '../ui/ColorSelector.tsx';
+import { StockBadge } from '@/shared/components/StockBadge';
+import { ColourSelector } from './components/ColourSelector';
 import { useProductSearch } from './hooks/useProductSearch';
 import { useProductColors } from './hooks/useProductColors';
 import { useProductActions } from './hooks/useProductActions';
@@ -111,7 +111,7 @@ export default function ProductPicker({ catalog, onAdd, onAddSuccess, inputRef }
 
               {p.colors && p.colors.length > 0 && (
                 <div className="product-colors">
-                  <ColorSelector
+                  <ColourSelector
                     colors={p.colors}
                     selectedColor={selectedColor}
                     onColorSelect={(color) => handleColorSelect(p.sku, color)}

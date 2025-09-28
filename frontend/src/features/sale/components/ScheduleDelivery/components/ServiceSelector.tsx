@@ -1,6 +1,6 @@
 import type { DeliveryDetails } from '../../../types';
 import { SERVICE_OPTIONS } from '../../CreateSaleWizard/constants/wizard';
-import { Card } from '@/features/sale/ui';
+import { Card } from '@/shared/components';
 
 interface ServiceSelectorProps {
   deliveryDetails: DeliveryDetails;

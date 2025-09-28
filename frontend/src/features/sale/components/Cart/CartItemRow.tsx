@@ -1,8 +1,8 @@
-import type { Line } from "../../types.ts";
+import type { Line } from "@/features/sale/types";
 import type { Product } from '@/shared/types';
 import { getColorValue } from '@/shared/utils/colors';
 import { formatCurrency } from '@/shared/utils/currency';
-import { StockBadge } from '../ui/StockBadge.tsx';
+import { StockBadge } from '@/shared/components/StockBadge';
 import { PriceBlock } from './PriceBlock';
 import {
   useCartItemPrice,

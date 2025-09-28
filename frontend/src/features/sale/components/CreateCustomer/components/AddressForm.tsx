@@ -1,6 +1,6 @@
 import type { Address } from '@/shared/types';
-import { FormField } from '@/shared/ui/FormField.tsx';
-import { Card } from '@/features/sale/ui';
+import { FormField } from '@/shared/ui/FormField';
+import { Card } from '@/shared/components';
 import { isValidPostcode } from '../utils/customerUtils';
 import { useAddressForm } from '../hooks/useAddressForm';
 

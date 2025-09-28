@@ -1,8 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useLocalStorage } from '../../../shared/hooks/useLocalStorage';
-import type { Customer, Line, DeliveryDetails } from '../types';
+import type { Customer, Line, DeliveryDetails, WizardStep } from '@/features/sale/types';
 
-export type WizardStep = 'customer' | 'products' | 'delivery' | 'payment';
 
 export interface SaleDraft {
   customer: Customer;
@@ -20,7 +19,8 @@ export interface SaleDraft {
 const DRAFT_KEY = "schedular.saleWizardDraft.v1";
 
 const defaultCustomer: Customer = {
-  name: "",
+  firstName: "",
+  lastName: "",
   phone: "",
   email: "",
   billingAddress: { street: "", city: "", state: "", zip: "", notes: "" },

@@ -1,7 +1,7 @@
-import type { Line, CatalogItem } from '../../../types';
+import type { Line, CatalogItem } from '@/features/sale/types';
 import CartTable from '../../Cart/CartTable';
 import { formatPrice, formatSavings } from '@/shared/utils';
-import { Card } from '@/features/sale/ui';
+import { Card } from '@/shared/components';
 import { useShoppingCart } from '../hooks/useShoppingCart';
 
 interface ShoppingCartProps {

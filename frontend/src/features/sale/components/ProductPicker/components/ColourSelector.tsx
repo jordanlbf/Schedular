@@ -6,7 +6,7 @@ interface ColorSelectorProps {
   onColorSelect: (color: string) => void;
 }
 
-export function ColorSelector({ colors, selectedColor, onColorSelect }: ColorSelectorProps) {
+export function ColourSelector({ colors, selectedColor, onColorSelect }: ColorSelectorProps) {
   if (!colors || colors.length === 0) return null;
 
   return (

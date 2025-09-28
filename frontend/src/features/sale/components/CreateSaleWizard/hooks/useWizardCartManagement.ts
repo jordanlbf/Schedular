@@ -1,5 +1,5 @@
 import { addLineToCart, updateLineQuantity, removeLine } from '../../Cart/utils/cartUtils';
-import type { Line, WizardStep } from '../../../types';
+import type { Line, WizardStep } from '@/features/sale/types';
 
 interface UseWizardCartManagementProps {
   lines: Line[];

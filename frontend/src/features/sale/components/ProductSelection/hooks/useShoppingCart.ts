@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Line, CatalogItem } from '../../../types';
+import type { Line, CatalogItem } from '@/features/sale/types';
 
 interface UseShoppingCartProps {
   lines: Line[];

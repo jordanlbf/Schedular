@@ -1,8 +1,8 @@
 import { MutableRefObject } from 'react';
-import type { Line, CatalogItem } from '../../types';
+import type { Line, CatalogItem } from '@/features/sale/types';
 import ProductPicker from '../ProductPicker/ProductPicker';
 import { ShoppingCart } from './components/ShoppingCart';
-import { Card } from '@/features/sale/ui';
+import { Card } from '@/shared/components';
 
 interface ProductSelectionProps {
   lines: Line[];

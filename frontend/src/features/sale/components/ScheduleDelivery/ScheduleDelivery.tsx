@@ -7,7 +7,7 @@ import { CalendarPopover } from './components/CalendarPopover';
 import { useDeliveryScheduling } from './hooks/useDeliveryScheduling';
 import { useServiceCalculations } from './hooks/useServiceCalculations';
 import { useDeliveryForm } from './hooks/useDeliveryForm';
-import { Card } from '@/features/sale/ui';
+import { Card } from '@/shared/components';
 
 interface ScheduleDeliveryProps {
   deliveryDetails: DeliveryDetails;

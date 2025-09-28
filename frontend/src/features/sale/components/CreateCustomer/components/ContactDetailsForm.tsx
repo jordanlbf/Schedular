@@ -1,7 +1,7 @@
 import type { Customer } from '@/shared/types';
-import { FormField } from '@/shared/ui/FormField.tsx';
+import { FormField } from '@/shared/ui/FormField';
 import { formatPhone, isValidEmail, isValidPhone } from '../utils/customerUtils';
-import { Card } from '@/features/sale/ui';
+import { Card } from '@/shared/components';
 import { useContactDetailsForm } from '../hooks/useContactDetailsForm';
 
 interface ContactDetailsFormProps {

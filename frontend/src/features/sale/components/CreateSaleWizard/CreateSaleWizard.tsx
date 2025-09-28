@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import Header from "@/app/layout/Header.tsx";
-import { useSaleDraftStore, type WizardStep } from "../../stores/useSaleDraftStore.ts";
-import { useSaleWizard } from "./hooks/useSaleWizard.ts";
-import { usePageReloadHandler } from "./hooks/usePageReloadHandler.ts";
-import { useWizardCompletion } from "./hooks/useWizardCompletion.ts";
-import { ProgressBar } from "@/features/sale/components/CreateSaleWizard/components/ProgressBar.tsx";
-import { WizardSteps } from "./WizardSteps.tsx";
-import { ToastContainer } from "@/shared/ui/ToastContainer.tsx";
+import Header from "@/app/layout/Header";
+import { useSaleDraftStore, type WizardStep } from "../../stores/useSaleDraftStore";
+import { useSaleWizard } from "./hooks/useSaleWizard";
+import { usePageReloadHandler } from "./hooks/usePageReloadHandler";
+import { useWizardCompletion } from "./hooks/useWizardCompletion";
+import { ProgressBar } from "@/features/sale/components/CreateSaleWizard/components/ProgressBar";
+import { WizardSteps } from "./WizardSteps";
+import { ToastContainer } from "@/shared/ui/ToastContainer";
 import { useToast, useBeforeUnload } from "@/shared/hooks";
 
 export default function CreateSaleWizard() {

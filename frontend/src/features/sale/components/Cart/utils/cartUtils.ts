@@ -1,4 +1,4 @@
-import type { Line } from '../../../types';
+import type { Line } from '@/features/sale/types';
 import { CATALOG } from '../../../catalog';
 
 /**

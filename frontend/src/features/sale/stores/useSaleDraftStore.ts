@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useLocalStorage } from '@/shared/hooks';
-import type { Customer, LineItem, DeliveryDetails } from '@/shared/types';
+import type { Customer, Line, DeliveryDetails, WizardStep } from '@/features/sale/types';
 
-export type WizardStep = 'customer' | 'products' | 'delivery' | 'payment';
+export type { WizardStep } from '@/features/sale/types';
 
 export interface SaleDraftState {
   customer: Customer;
-  lines: LineItem[];
+  lines: Line[];
   nextId: number;
   deliveryDetails: DeliveryDetails;
   deliveryFee: number;

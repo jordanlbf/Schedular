@@ -41,7 +41,6 @@ export function useSaleWizard(
 
   const progressSteps = useMemo(() => {
     const stepOrder = ['customer', 'products', 'delivery', 'payment'];
-    const currentStepIndex = stepOrder.indexOf(state.currentStep);
 
     // Helper function to determine if a step is completed
     const isStepCompleted = (stepId: string) => {

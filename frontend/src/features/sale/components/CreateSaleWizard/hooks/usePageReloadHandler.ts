@@ -1,6 +1,13 @@
 import { useEffect } from 'react';
 
-export function usePageReloadHandler(clearDraft: () => void, toast: any) {
+interface ToastMethods {
+  success: (message: string, duration?: number) => string;
+  error: (message: string, duration?: number) => string;
+  warning: (message: string, duration?: number) => string;
+  info: (message: string, duration?: number) => string;
+}
+
+export function usePageReloadHandler(clearDraft: () => void, toast: ToastMethods) {
   useEffect(() => {
     const handlePageReload = () => {
       sessionStorage.setItem('schedulerPageReloaded', 'true');

@@ -25,9 +25,6 @@ export default function ScheduleDelivery({
   setDeliveryDetails,
   deliveryFee,
   setDeliveryFee,
-  estimatedDelivery,
-  canProceed,
-  errors = [],
   onValidationChange
 }: ScheduleDeliveryProps) {
 

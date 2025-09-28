@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Header from "@/app/layout/Header";
 import { useSaleDraftStore, type WizardStep } from "@/features/sale/stores/useSaleDraftStore";
 import { useSaleWizard } from "../hooks/useSaleWizard";

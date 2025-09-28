@@ -8,10 +8,14 @@
  * @param originalProduct - Optional product object with color definitions
  * @returns The hex color value
  */
-export function getColorValue(colorName: string, originalProduct?: any): string {
+interface ProductWithColors {
+  colors?: Array<{ name: string; value: string }>;
+}
+
+export function getColorValue(colorName: string, originalProduct?: ProductWithColors): string {
   // First try to get the color from the actual product catalog
   if (originalProduct?.colors) {
-    const catalogColor = originalProduct.colors.find((color: { name: string; value: string }) => color.name === colorName);
+    const catalogColor = originalProduct.colors.find(color => color.name === colorName);
     if (catalogColor?.value) {
       return catalogColor.value;
     }

@@ -9,6 +9,13 @@ import type { WizardStep, SaleDraftState } from '@/features/sale/stores/useSaleD
 import type { StepValidation } from '../hooks/useSaleValidation';
 import { useWizardCartManagement } from '../hooks/useWizardCartManagement';
 
+interface WizardNavigation {
+  nextStep: () => void;
+  prevStep: () => void;
+  goToStep: (step: WizardStep) => void;
+  canProceed: boolean;
+}
+
 interface WizardStepsProps {
   currentStep: WizardStep;
   state: Omit<SaleDraftState, 'savedAt'>;
@@ -16,7 +23,7 @@ interface WizardStepsProps {
     field: K,
     value: SaleDraftState[K]
   ) => void;
-  navigation: any; // Navigation interface - contains nextStep, prevStep, goToStep, canProceed
+  navigation: WizardNavigation;
   validation: StepValidation & {
     markStepAttempted: (step: string) => void;
     resetStepAttempted: (step: string) => void;

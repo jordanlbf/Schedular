@@ -15,7 +15,6 @@ export function PriceBlock({
   price,
   compareAtPrice,
   quantity = 1,
-  showLineTotal = false,
   isEditable = false,
   onPriceEdit,
   className = ''

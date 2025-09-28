@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { routeConfig } from "./routes";
 import { LoadingFallback } from "./LoadingFallback";

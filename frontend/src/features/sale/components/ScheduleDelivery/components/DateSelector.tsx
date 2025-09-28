@@ -48,7 +48,7 @@ export function DateSelector({
         <span className="required-indicator">*</span>
       </label>
       <div className="date-pills-row">
-        {pillDates.map((date, index) => (
+        {pillDates.map((date) => (
           <button
             key={date}
             type="button"

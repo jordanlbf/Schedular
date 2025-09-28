@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "@/app/layout/Header";
-import "./frontdesk.css";
+import "../styles/index.css";
 
 export default function FrontDesk() {
   return (

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Line } from '@/features/sale/types';
+import type { Line, CatalogItem } from '@/features/sale/types';
 import { CATALOG } from '@/features/sale/catalog';
 
 interface UseCartItemHelpersProps {
@@ -7,7 +7,7 @@ interface UseCartItemHelpersProps {
 }
 
 interface UseCartItemHelpersReturn {
-  originalProduct: any;
+  originalProduct: CatalogItem | undefined;
   rrpPrice: number;
 }
 

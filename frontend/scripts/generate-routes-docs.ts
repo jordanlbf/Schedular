@@ -1,12 +1,12 @@
 // frontend/scripts/generate-routes-docs.ts
-// @ts-ignore
+// @ts-expect-error - Node.js modules don't have TS types in this context
 import fs from "node:fs";
-// @ts-ignore
+// @ts-expect-error - Node.js modules don't have TS types in this context
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ROUTE_DOCS } from "../src/app/routeDocs";
 
-// @ts-ignore
+// @ts-expect-error - ESM __filename replacement pattern
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

@@ -1,4 +1,4 @@
-import type { SaleOrder } from '@/shared/types';
+import type { SaleOrder, LineItem } from '@/shared/types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
@@ -73,7 +73,7 @@ export class SaleAPI {
     return data.available;
   }
 
-  static async calculateDeliveryFee(postcode: string, items: any[]): Promise<number> {
+  static async calculateDeliveryFee(postcode: string, items: LineItem[]): Promise<number> {
     const response = await fetch(`${API_BASE_URL}/delivery/calculate`, {
       method: 'POST',
       headers: {

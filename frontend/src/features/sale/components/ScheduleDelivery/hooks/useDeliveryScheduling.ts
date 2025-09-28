@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from 'react';
-import { MIN_DELIVERY_DAYS } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 
 interface TimeSlot {
   id: string;
@@ -9,12 +8,12 @@ interface TimeSlot {
   available: boolean;
 }
 
+// Business rules configuration - moved outside component to avoid dependency issues
+const BLACKOUT_DAYS = ['2024-12-25', '2024-01-01']; // Example holidays
+
 export function useDeliveryScheduling(selectedDate: string, deliveryChoiceMode: 'later' | 'now') {
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [loadingTimeSlots, setLoadingTimeSlots] = useState(false);
-
-  // Business rules configuration
-  const BLACKOUT_DAYS = ['2024-12-25', '2024-01-01']; // Example holidays
   const MINIMUM_LEAD_HOURS = 24;
   const MAX_PILLS_SHOWN = 4;
 
@@ -114,7 +113,7 @@ export function useDeliveryScheduling(selectedDate: string, deliveryChoiceMode: 
       maxDate: max.toISOString().split('T')[0],
       pillDates: pills
     };
-  }, [selectedDate, BLACKOUT_DAYS, MINIMUM_LEAD_HOURS, MAX_PILLS_SHOWN]);
+  }, [selectedDate, MINIMUM_LEAD_HOURS, MAX_PILLS_SHOWN]);
 
   // Check if a date is valid for selection
   const isDateValid = (dateStr: string) => {

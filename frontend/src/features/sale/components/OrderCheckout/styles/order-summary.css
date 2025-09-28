@@ -1,36 +1,5 @@
 /* Order Summary Components */
 
-/* Order Summary Card */
-.order-summary-card {
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
-  margin-bottom: var(--spacing-lg);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-3xl);
-}
-
-.summary-customer h4,
-.summary-items h4 {
-  margin: 0 0 var(--spacing-lg) 0;
-  font-size: var(--text-sm);
-  font-weight: var(--font-bold);
-  color: var(--text);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wider);
-}
-
-.delivery-address {
-  margin-top: var(--spacing-md);
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-  color: var(--text-subtle);
-}
-
 /* Order totals */
 .order-totals {
   margin-top: var(--spacing-xl);

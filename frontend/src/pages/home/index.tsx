@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import Header from "@/app/layout/Header.tsx";
+import { HomeLayout } from "@/app/layout";
 
 export default function Index() {
   return (
-    <div className="home-wrap">
-      <Header />
+    <HomeLayout>
       <main className="home-hero">
         <h1 className="home-title">Welcome to Schedular</h1>
         <p className="home-subtitle">Choose a workspace to get started.</p>
@@ -19,7 +18,6 @@ export default function Index() {
           </Link>
         </div>
       </main>
-      <footer className="home-footer">© {new Date().getFullYear()} Schedular</footer>
-    </div>
+    </HomeLayout>
   );
 }

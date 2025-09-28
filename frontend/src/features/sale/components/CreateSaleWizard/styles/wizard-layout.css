@@ -78,3 +78,10 @@ html.theme-dark .wizard-container::before {
 .step-main {
   flex: 1;
 }
+
+/* Form Elements */
+.step-help {
+  color: var(--text-subtle);
+  font-size: var(--text-sm);
+  font-style: italic;
+}

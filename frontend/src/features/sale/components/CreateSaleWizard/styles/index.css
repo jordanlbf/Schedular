@@ -1,2 +1,4 @@
-/* Wizard Styling - Modular Import */
-@import './wizard-core.css';
+/* Wizard Styling - Consolidated Architecture (2024 Best Practice) */
+
+@import './wizard-layout.css';
+@import './step-actions.css';

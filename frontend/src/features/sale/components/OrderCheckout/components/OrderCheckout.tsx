@@ -1,8 +1,8 @@
-import type { Customer, Line, DeliveryDetails } from '../../types';
-import type { SaleTotals } from '../../hooks/useSaleTotals';
-import { OrderSummary } from './components/OrderSummary';
-import { OrderInformation } from './components/OrderInformation';
-import { PaymentMethod } from './components/PaymentMethod';
+import type { Customer, Line, DeliveryDetails } from '../../../types';
+import type { SaleTotals } from '../../../hooks/useSaleTotals';
+import { OrderSummary } from './OrderSummary';
+import { OrderInformation } from './OrderInformation';
+import { PaymentMethod } from './PaymentMethod';
 
 interface OrderCheckoutProps {
   paymentMethod: string;

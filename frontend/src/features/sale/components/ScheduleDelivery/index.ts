@@ -1,1 +1,1 @@
-export { default } from './ScheduleDelivery';
+export { default } from './components/ScheduleDelivery';

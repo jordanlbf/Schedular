@@ -1,5 +1,3 @@
-import './ToastContainer.css';
-
 interface Toast {
   id: string;
   message: string;

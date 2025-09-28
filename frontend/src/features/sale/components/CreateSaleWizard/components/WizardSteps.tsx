@@ -3,11 +3,11 @@ import CustomerStep from './CustomerStep';
 import ProductsStep from './ProductsStep';
 import DeliveryStep from './DeliveryStep';
 import PaymentStep from './PaymentStep';
-import { CATALOG } from '../../catalog';
+import { CATALOG } from '../../../catalog';
 import { getEstimatedDeliveryDate } from '@/shared/utils';
-import type { WizardStep, SaleDraftState } from '../../stores/useSaleDraftStore';
-import type { StepValidation } from './hooks/useSaleValidation';
-import { useWizardCartManagement } from './hooks/useWizardCartManagement';
+import type { WizardStep, SaleDraftState } from '../../../stores/useSaleDraftStore';
+import type { StepValidation } from '../hooks/useSaleValidation';
+import { useWizardCartManagement } from '../hooks/useWizardCartManagement';
 
 interface WizardStepsProps {
   currentStep: WizardStep;

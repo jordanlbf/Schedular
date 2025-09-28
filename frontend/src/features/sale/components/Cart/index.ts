@@ -1,4 +1,4 @@
 // Cart feature exports
-export { CartItemRow } from './CartItemRow';
-export { default as CartTable } from './CartTable';
-export { PriceBlock } from './PriceBlock';
+export { CartItemRow } from './components/CartItemRow';
+export { CartTable } from './components/CartTable';
+export { PriceBlock } from './components/PriceBlock';

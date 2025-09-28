@@ -4,12 +4,12 @@ import type { Line, CatalogItem } from '@/features/sale/types';
 import { formatPrice } from '@/shared/utils';
 import { StockBadge } from '@/shared/components/StockBadge';
 import { Card } from '@/shared/components';
-import { ColourSelector } from './components/ColourSelector';
-import { ShoppingCart } from './components/ShoppingCart';
-import { useProductSearch } from './hooks/useProductSearch';
-import { useProductColors } from './hooks/useProductColors';
-import { useProductActions } from './hooks/useProductActions';
-import { useProductKeyboard } from './hooks/useProductKeyboard';
+import { ColourSelector } from './ColourSelector';
+import { ShoppingCart } from './ShoppingCart';
+import { useProductSearch } from '../hooks/useProductSearch';
+import { useProductColors } from '../hooks/useProductColors';
+import { useProductActions } from '../hooks/useProductActions';
+import { useProductKeyboard } from '../hooks/useProductKeyboard';
 
 interface ProductSelectionProps {
   lines: Line[];

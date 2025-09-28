@@ -9,7 +9,7 @@ import {
   useCartItemQuantity,
   useCartItemImage,
   useCartItemHelpers
-} from './hooks';
+} from '../hooks';
 
 interface CartItemRowProps {
   line: Line;

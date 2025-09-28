@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { Line } from "@/features/sale/types";
-import { CATALOG } from "../../catalog";
+import { CATALOG } from "../../../catalog";
 import { CartItemRow } from './CartItemRow';
 
 interface CartTableProps {
@@ -10,7 +10,7 @@ interface CartTableProps {
   onPriceChange?: (id: number, newPrice: number) => void;
 }
 
-export default function CartTable({ lines, onChangeQty, onRemove, onPriceChange }: CartTableProps) {
+export function CartTable({ lines, onChangeQty, onRemove, onPriceChange }: CartTableProps) {
   // Memoize the product lookup to prevent unnecessary re-renders
   const productMap = useMemo(() => {
     const map = new Map();

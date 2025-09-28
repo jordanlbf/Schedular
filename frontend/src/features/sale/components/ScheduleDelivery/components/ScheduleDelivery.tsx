@@ -1,12 +1,12 @@
-import type { DeliveryDetails } from '../../types';
-import { DateSelector } from './components/DateSelector';
-import { TimeSlotPicker } from './components/TimeSlotPicker';
-import { ServiceSelector } from './components/ServiceSelector';
-import { DeliverySummary } from './components/DeliverySummary';
-import { CalendarPopover } from './components/CalendarPopover';
-import { useDeliveryScheduling } from './hooks/useDeliveryScheduling';
-import { useServiceCalculations } from './hooks/useServiceCalculations';
-import { useDeliveryForm } from './hooks/useDeliveryForm';
+import type { DeliveryDetails } from '../../../types';
+import { DateSelector } from './DateSelector';
+import { TimeSlotPicker } from './TimeSlotPicker';
+import { ServiceSelector } from './ServiceSelector';
+import { DeliverySummary } from './DeliverySummary';
+import { CalendarPopover } from './CalendarPopover';
+import { useDeliveryScheduling } from '../hooks/useDeliveryScheduling';
+import { useServiceCalculations } from '../hooks/useServiceCalculations';
+import { useDeliveryForm } from '../hooks/useDeliveryForm';
 import { Card } from '@/shared/components';
 
 interface ScheduleDeliveryProps {

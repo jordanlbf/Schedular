@@ -6,7 +6,7 @@ import {
   ContactDetailsForm,
   AddressForm,
   useCustomerStepForm
-} from '../CreateCustomer';
+} from '../../CreateCustomer';
 
 interface CustomerStepProps {
   customer: Customer;

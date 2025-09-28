@@ -1,17 +1,15 @@
-/* Product Components - Modular Structure */
+/* Product Components - Consolidated Architecture (2024 Best Practice) */
 
-/* Core layout and search */
+/* Layout and grid system */
+@import './product-layout.css';
+
+/* Search functionality */
 @import './product-search.css';
-@import './product-grid.css';
 
-/* Product cards and styling */
+/* Product card and variants */
 @import './product-card.css';
 @import './product-stock.css';
 @import './product-colors.css';
 
-/* Interactions and states */
+/* Animations and effects */
 @import './product-animations.css';
-@import './product-empty-state.css';
-
-/* Responsive design */
-@import './product-responsive.css';

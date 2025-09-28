@@ -1,13 +1,12 @@
 /* Sale Feature Styles - Modular Import */
 
 /* Component styles */
-@import url('./components/');
+@import url('./components');
 
 /* Feature-specific styles */
-@import url('../../features/sale/styles/');
+@import url('../../features/sale/styles');
 @import url('../../features/sale/components/ProductPicker/styles/index.css');
 @import url('../../features/sale/components/Cart/styles/index.css');
 @import url('../../features/sale/components/CreateSaleWizard/styles/index.css');
 @import url('../../features/sale/components/OrderCheckout/styles/index.css');
 @import url('../../features/sale/components/ScheduleDelivery/styles/delivery/delivery-step.css');
-@import url('../../features/sale/components/ProductPicker/styles/products-layout.css');

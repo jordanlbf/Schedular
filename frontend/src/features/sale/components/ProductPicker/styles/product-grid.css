@@ -1,7 +1,0 @@
-/* Product grid layout */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-2xl);
-  margin-top: var(--spacing-xl);
-}

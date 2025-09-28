@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { MIN_DELIVERY_DAYS } from '../../CreateSaleWizard/constants/wizard';
+import { MIN_DELIVERY_DAYS } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 
 interface TimeSlot {
   id: string;

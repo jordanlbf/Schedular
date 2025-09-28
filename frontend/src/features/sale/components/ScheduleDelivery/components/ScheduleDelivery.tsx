@@ -1,4 +1,4 @@
-import type { DeliveryDetails } from '../../../types';
+import type { DeliveryDetails } from '@/features/sale/types';
 import { DateSelector } from './DateSelector';
 import { TimeSlotPicker } from './TimeSlotPicker';
 import { ServiceSelector } from './ServiceSelector';

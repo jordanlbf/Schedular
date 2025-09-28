@@ -2,7 +2,7 @@ import { MutableRefObject } from 'react';
 import type { Line, CatalogItem } from '@/features/sale/types';
 import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/components/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
-import ProductSelection from '../../ProductPicker/components/ProductPicker';
+import ProductSelection from '@/features/sale/components/ProductPicker/components/ProductPicker';
 
 interface ProductsStepProps {
   lines: Line[];

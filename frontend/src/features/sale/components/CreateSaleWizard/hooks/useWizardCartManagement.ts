@@ -1,4 +1,4 @@
-import { addLineToCart, updateLineQuantity, removeLine } from '../../Cart/utils/cartUtils';
+import { addLineToCart, updateLineQuantity, removeLine } from '@/features/sale/components/Cart/utils/cartUtils';
 import type {Line, LineItem, WizardStep} from '@/features/sale/types';
 import type { SaleDraftState } from '@/features/sale/stores/useSaleDraftStore';
 

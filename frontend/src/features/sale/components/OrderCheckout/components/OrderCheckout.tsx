@@ -1,5 +1,5 @@
-import type { Customer, Line, DeliveryDetails } from '../../../types';
-import type { SaleTotals } from '../../../hooks/useSaleTotals';
+import type { Customer, Line, DeliveryDetails } from '@/features/sale/types';
+import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { OrderSummary } from './OrderSummary';
 import { OrderInformation } from './OrderInformation';
 import { PaymentMethod } from './PaymentMethod';

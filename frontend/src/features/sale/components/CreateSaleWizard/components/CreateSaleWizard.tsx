@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Header from "@/app/layout/Header";
-import { useSaleDraftStore, type WizardStep } from "../../../stores/useSaleDraftStore";
+import { useSaleDraftStore, type WizardStep } from "@/features/sale/stores/useSaleDraftStore";
 import { useSaleWizard } from "../hooks/useSaleWizard";
 import { usePageReloadHandler } from "../hooks/usePageReloadHandler";
 import { useWizardCompletion } from "../hooks/useWizardCompletion";

@@ -1,0 +1,380 @@
+/* ==========================================================================
+   CART QUANTITY STYLES - Consolidated Module
+   ========================================================================== */
+
+/* ==========  BASE LAYOUT & CONTROLS  ========== */
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  height: 32px;
+  width: 100px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-item-quantity:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.qty-value {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 13px;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  min-width: 32px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.qty-value.updating {
+  animation: quantityBounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ==========  QUANTITY BUTTONS  ========== */
+
+.qty-btn {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-subtle);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  border-radius: var(--radius-full);
+  transform: scale(1);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.qty-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  transform: scale(1.15);
+  z-index: 1;
+}
+
+.qty-btn:active:not(:disabled) {
+  transform: scale(0.95);
+  animation: qtyButtonPulse 0.3s ease-out;
+}
+
+.qty-btn:focus {
+  outline: none;
+}
+
+.qty-btn:focus-visible {
+  outline: 2px solid rgba(14, 165, 233, 0.5);
+  outline-offset: 2px;
+}
+
+/* Decrease button */
+.qty-decrease {
+  margin-left: -1px;
+}
+
+.qty-decrease:hover {
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--error);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+}
+
+.qty-decrease:active {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* Increase button */
+.qty-increase {
+  margin-right: -1px;
+}
+
+.qty-increase:hover {
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--success);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.qty-increase:active {
+  background: rgba(16, 185, 129, 0.12);
+}
+
+/* Disabled state */
+.qty-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: scale(1) !important;
+  background: transparent !important;
+}
+
+.qty-btn:disabled:hover {
+  background: transparent;
+  color: var(--text-subtle);
+  transform: scale(1);
+}
+
+/* Ripple effect on button click */
+.qty-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.qty-btn:active:not(:disabled)::after {
+  width: 40px;
+  height: 40px;
+}
+
+/* ==========  SPECIAL BUTTON STATES  ========== */
+
+/* Special styling when at minimum (qty = 1) */
+.qty-decrease.at-minimum {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.qty-decrease.at-minimum:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  transform: scale(1.15) rotate(-2deg);
+}
+
+.qty-decrease.at-minimum svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.qty-decrease.at-minimum:hover svg {
+  transform: scale(1.1);
+}
+
+/* Special styling when at maximum stock */
+.qty-increase.at-maximum {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.qty-increase.at-maximum:hover {
+  transform: scale(1);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-subtle);
+}
+
+.qty-increase.at-maximum::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Stock warning pulse for low stock */
+.cart-item-quantity:has(.qty-increase.at-maximum) {
+  animation: lowStockWarning 2s ease-in-out infinite;
+}
+
+/* ==========  TOOLTIPS  ========== */
+
+.qty-btn-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tooltip styles */
+.qty-btn-wrapper::before {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.qty-btn-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  border: 5px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
+.qty-btn-wrapper:hover::before,
+.qty-btn-wrapper:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ==========  ANIMATIONS  ========== */
+
+@keyframes quantityBounce {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.25);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes qtyButtonPulse {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes lowStockWarning {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ==========  THEME SPECIFIC STYLES  ========== */
+
+/* Dark mode adjustments */
+html.theme-dark .cart-item-quantity {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+html.theme-dark .cart-item-quantity:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dark mode adjustments for tooltips */
+html.theme-dark .qty-btn-wrapper::before {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1f2937;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+html.theme-dark .qty-btn-wrapper::after {
+  border-top-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Light mode adjustments */
+html:not(.theme-dark) .qty-btn-wrapper::before {
+  background: #1f2937;
+  color: white;
+}
+
+html:not(.theme-dark) .qty-btn-wrapper::after {
+  border-top-color: #1f2937;
+}
+
+/* ==========  RESPONSIVE STYLES  ========== */
+
+@media (max-width: 768px) {
+  .cart-item-quantity {
+    width: 85px;
+    height: 30px;
+  }
+
+  .qty-btn {
+    width: 28px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cart-item-quantity {
+    width: 75px;
+    height: 28px;
+  }
+
+  .qty-btn {
+    width: 26px;
+    font-size: 12px;
+  }
+
+  .qty-value {
+    font-size: 12px;
+  }
+}
+
+/* Mobile adjustments - hide tooltips on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .qty-btn-wrapper::before,
+  .qty-btn-wrapper::after {
+    display: none;
+  }
+
+  .qty-btn:hover:not(:disabled) {
+    transform: scale(1);
+  }
+
+  .qty-btn:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+}

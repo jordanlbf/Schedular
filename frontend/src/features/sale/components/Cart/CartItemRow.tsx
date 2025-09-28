@@ -1,7 +1,7 @@
 import type { Line } from "@/features/sale/types";
 import type { Product } from '@/shared/types';
 import { getColorValue } from '@/shared/utils/colors';
-import { formatCurrency } from '@/shared/utils/currency';
+import { formatPrice } from '@/shared/utils';
 import { StockBadge } from '@/shared/components/StockBadge';
 import { PriceBlock } from './PriceBlock';
 import {
@@ -48,7 +48,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
     <div className={`cart-item-grid ${quantityHook.isRemoving ? 'removing' : ''}`}>
       {/* Column 1: Stacked Image + Quantity Controls */}
       <div className="cart-item-media-stack">
-        <div className={`cart-item-thumbnail ${imageHook.imageLoading ? 'loading' : ''}`}>
+        <div className="cart-item-thumbnail">
           {imageHook.imageLoading && imageHook.productImage && (
             <div className="cart-item-placeholder">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -62,7 +62,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
               src={imageHook.productImage}
               alt={`${line.name}${line.color ? ` in ${line.color}` : ''}`}
               loading="lazy"
-              className={imageHook.imageLoading ? 'loading' : 'loaded'}
+              className="cart-item-image"
               onLoad={imageHook.handleImageLoad}
               onError={imageHook.handleImageError}
             />
@@ -122,7 +122,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
                 <span className="color-name">{line.color}</span>
               </>
             ) : (
-              <span className="color-placeholder">&nbsp;</span>
+              <span>&nbsp;</span>
             )}
           </div>
         </div>
@@ -158,7 +158,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
               <span className="price-grid-label">RRP</span>
               <div className={`price-grid-value ${priceHook.priceAnimating ? 'price-updating' : ''}`}>
                 <span className="price-grid-rrp">
-                  {rrpPrice !== priceHook.originalPrice ? formatCurrency(rrpPrice) : '\u00A0'}
+                  {rrpPrice !== priceHook.originalPrice ? formatPrice(rrpPrice) : '\u00A0'}
                 </span>
               </div>
             </div>
@@ -166,7 +166,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
               <span className="price-grid-label">Save</span>
               <div className={`price-grid-value ${priceHook.priceAnimating ? 'price-updating' : ''}`}>
                 <span className={`price-grid-save ${priceHook.priceAnimating ? 'save-updating' : ''}`}>
-                  {rrpPrice !== priceHook.originalPrice ? formatCurrency(rrpPrice - priceHook.originalPrice) : '\u00A0'}
+                  {rrpPrice !== priceHook.originalPrice ? formatPrice(rrpPrice - priceHook.originalPrice) : '\u00A0'}
                 </span>
               </div>
             </div>
@@ -174,7 +174,7 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
               <span className="price-grid-label">Total</span>
               <div className={`price-grid-value ${priceHook.priceAnimating || quantityHook.quantityAnimating ? 'price-updating' : ''}`}>
                 <span className={`price-grid-total ${priceHook.priceAnimating || quantityHook.quantityAnimating ? 'total-updating' : ''}`}>
-                  {formatCurrency(priceHook.originalPrice * line.qty)}
+                  {formatPrice(priceHook.originalPrice * line.qty)}
                 </span>
               </div>
             </div>

@@ -1,5 +1,25 @@
 /* Cart Animation Effects */
 
+/* CSS Custom Properties for consistent timing and easing */
+:root {
+  /* Animation Easing Functions */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-out: ease-out;
+
+  /* Animation Durations */
+  --duration-fast: 0.2s;
+  --duration-standard: 0.3s;
+  --duration-slow: 0.4s;
+  --duration-extra-slow: 0.6s;
+
+  /* Overlay Opacity Tokens */
+  --overlay-subtle: rgba(255, 255, 255, 0.03);
+  --overlay-light: rgba(255, 255, 255, 0.05);
+  --overlay-medium: rgba(255, 255, 255, 0.08);
+  --overlay-strong: rgba(255, 255, 255, 0.12);
+}
+
 /* Global cart animations */
 @keyframes cartItemFadeIn {
   from {
@@ -9,6 +29,21 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Badge bounce animation */
+@keyframes badge-appear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 

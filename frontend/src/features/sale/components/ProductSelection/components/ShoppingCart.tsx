@@ -66,7 +66,7 @@ export function ShoppingCart({
 
                     <div className="summary-row summary-total">
                       <span className="summary-label">Subtotal</span>
-                      <span className="summary-value summary-price">{formatPrice(subtotal)}</span>
+                      <span className="summary-value">{formatPrice(subtotal)}</span>
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { formatCurrency } from '@/shared/utils/currency';
+import { formatPrice } from '@/shared/utils';
 
 interface PriceBlockProps {
   price: number;               // current unit price
@@ -69,7 +69,7 @@ export function PriceBlock({
             onClick={isEditable ? onPriceEdit : undefined}
             title={isEditable ? 'Click to edit price' : undefined}
           >
-            {formatCurrency(price)}
+            {formatPrice(price)}
           </span>
         </div>
       </div>
@@ -79,7 +79,7 @@ export function PriceBlock({
         <span className="price-grid-label">RRP</span>
         <div className={`price-grid-value ${priceAnimating ? 'price-updating' : ''}`}>
           <span className="price-grid-rrp">
-            {hasDiscount ? formatCurrency(compareAtPrice) : '\u00A0'}
+            {hasDiscount ? formatPrice(compareAtPrice) : '\u00A0'}
           </span>
         </div>
       </div>
@@ -89,7 +89,7 @@ export function PriceBlock({
         <span className="price-grid-label">Save</span>
         <div className={`price-grid-value ${saveAnimating ? 'price-updating' : ''}`}>
           <span className={`price-grid-save ${saveAnimating ? 'save-updating' : ''}`}>
-            {hasDiscount ? formatCurrency(totalSave / quantity) : '\u00A0'}
+            {hasDiscount ? formatPrice(totalSave / quantity) : '\u00A0'}
           </span>
         </div>
       </div>
@@ -99,7 +99,7 @@ export function PriceBlock({
         <span className="price-grid-label">Total</span>
         <div className={`price-grid-value ${totalAnimating ? 'price-updating' : ''}`}>
           <span className={`price-grid-total ${totalAnimating ? 'total-updating' : ''}`}>
-            {formatCurrency(lineTotal)}
+            {formatPrice(lineTotal)}
           </span>
         </div>
       </div>

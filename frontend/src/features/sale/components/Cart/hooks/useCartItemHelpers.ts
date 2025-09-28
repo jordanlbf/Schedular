@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import type { Line } from '@/features/sale/types';
 import { CATALOG } from '@/features/sale/catalog';
-import { formatCurrency } from '@/shared/utils/currency';
 
 interface UseCartItemHelpersProps {
   line: Line;

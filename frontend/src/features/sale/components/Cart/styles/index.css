@@ -1,18 +1,15 @@
-/* Cart Components - Modular Architecture */
+/* Cart Components - Consolidated Architecture (2024 Best Practice) */
 
 /* Core cart container */
 @import url('./cart-container.css');
 
-/* Modular components */
-@import url('./modules/item/index.css');
-@import url('./modules/quantity/index.css');
-@import url('./modules/price/index.css');
+/* Consolidated component modules */
+@import url('./cart-item.css');
+@import url('./cart-quantity.css');
+@import url('./cart-price.css');
 
 /* Cart footer & summary */
 @import url('./cart-footer.css');
-
-/* Stock badge cart-specific styles */
-@import url('./stock-badge.css');
 
 /* Cart animations and effects */
 @import url('./cart-animations.css');

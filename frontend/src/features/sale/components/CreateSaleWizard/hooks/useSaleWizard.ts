@@ -2,10 +2,13 @@ import { useMemo } from 'react';
 import { useSaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { useSaleValidation } from './useSaleValidation';
 import { useWizardNavigation } from './useWizardNavigation';
-import type { WizardStep } from '@/features/sale/stores/useSaleDraftStore';
+import type { WizardStep, SaleDraftState } from '@/features/sale/stores/useSaleDraftStore';
 import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
 
-export function useSaleWizard(state: any, updateField: (field: string, value: any) => void) {
+export function useSaleWizard(
+  state: SaleDraftState,
+  updateField: <K extends keyof SaleDraftState>(field: K, value: SaleDraftState[K]) => void
+) {
   const totals = useSaleTotals(
     state.lines,
     state.deliveryDetails,

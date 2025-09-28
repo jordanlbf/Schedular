@@ -93,6 +93,12 @@
 }
 
 /* Responsive Order Summary */
+@media (max-width: 1023px) {
+  .order-summary-card {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .order-summary-card {
     grid-template-columns: 1fr;

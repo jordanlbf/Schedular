@@ -1,4 +1,4 @@
-/* Sale Feature Styles */
+/* Sale Feature Styles - Entry Point */
 
-/* Responsive breakpoints */
-@import './responsive.css';
+/* All sale-specific styles are now consolidated within individual component directories */
+/* This file serves as a placeholder for any future sale-wide styles */

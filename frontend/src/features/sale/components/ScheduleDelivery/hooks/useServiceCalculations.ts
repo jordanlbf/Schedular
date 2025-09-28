@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { DeliveryDetails } from '../../../types';
+import type { DeliveryDetails } from '@/features/sale/types';
 import { SERVICE_OPTIONS } from '../../CreateSaleWizard/constants/wizard';
 
 export function useServiceCalculations(deliveryDetails: DeliveryDetails) {

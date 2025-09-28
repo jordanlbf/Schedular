@@ -1,4 +1,4 @@
-import type { Customer, DeliveryDetails } from '../../../types';
+import type { Customer, DeliveryDetails } from '@/features/sale/types';
 import { Card } from '@/shared/components';
 
 interface OrderInformationProps {

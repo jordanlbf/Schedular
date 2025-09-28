@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { DeliveryDetails } from '../../../types';
+import type { DeliveryDetails } from '@/features/sale/types';
 
 interface UseDeliveryFormProps {
   deliveryDetails: DeliveryDetails;

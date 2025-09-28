@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import type { DeliveryDetails } from '../../../types';
+import type { DeliveryDetails } from '@/features/sale/types';
 
 interface CalendarPopoverProps {
   deliveryDetails: DeliveryDetails;

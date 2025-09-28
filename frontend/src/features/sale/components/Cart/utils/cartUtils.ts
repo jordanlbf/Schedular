@@ -1,5 +1,5 @@
 import type { Line } from '@/features/sale/types';
-import { CATALOG } from '../../../catalog';
+import { CATALOG } from '@/features/sale/catalog';
 
 /**
  * Cart management utilities

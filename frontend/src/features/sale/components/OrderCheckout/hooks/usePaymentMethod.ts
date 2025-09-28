@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import type { SaleTotals } from '../../../hooks/useSaleTotals';
+import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
 
 interface UsePaymentMethodProps {
   paymentMethod: string;

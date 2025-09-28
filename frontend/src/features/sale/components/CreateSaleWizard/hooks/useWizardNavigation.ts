@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import type { WizardStep } from '../../../stores/useSaleDraftStore';
+import type { WizardStep } from '@/features/sale/stores/useSaleDraftStore';
 import type { StepValidation } from './useSaleValidation';
 
 export function useWizardNavigation(

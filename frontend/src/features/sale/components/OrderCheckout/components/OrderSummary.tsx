@@ -1,5 +1,5 @@
-import type { Line } from '../../../types';
-import type { SaleTotals } from '../../../hooks/useSaleTotals';
+import type { Line } from '@/features/sale/types';
+import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { fmt } from '@/shared/utils';
 import { Card } from '@/shared/components';
 import { useOrderSummary } from '../hooks/useOrderSummary';

@@ -1,4 +1,4 @@
-import type { DeliveryDetails } from '../../../types';
+import type { DeliveryDetails } from '@/features/sale/types';
 import { SERVICE_OPTIONS } from '../../CreateSaleWizard/constants/wizard';
 import { Card } from '@/shared/components';
 

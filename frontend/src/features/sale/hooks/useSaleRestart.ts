@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useBeforeUnload } from '../../../shared/hooks/useBeforeUnload';
-import { useToast } from '../../../shared';
+import { useBeforeUnload, useToast } from '@/shared/hooks';
 
 interface UseSaleRestartOptions {
   hasUnsavedData: boolean;

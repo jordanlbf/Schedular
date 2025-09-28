@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { useLocalStorage } from '../../../shared/hooks/useLocalStorage';
+import { useLocalStorage } from '@/shared/hooks';
 import type { Customer, Line, DeliveryDetails, WizardStep } from '@/features/sale/types';
 
 

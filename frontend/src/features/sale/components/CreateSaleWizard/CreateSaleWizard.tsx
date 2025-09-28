@@ -24,7 +24,7 @@ export default function CreateSaleWizard() {
   const { handleComplete, handleAddSuccess } = useWizardCompletion({
     clearDraft,
     toast,
-    isValid: wizard.validation.isValid
+    isValid: wizard.validation.isValid ?? false
   });
 
   // Add totals to navigation for payment step

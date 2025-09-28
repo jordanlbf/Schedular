@@ -1,15 +1,12 @@
 import { addLineToCart, updateLineQuantity, removeLine } from '../../Cart/utils/cartUtils';
 import type {Line, LineItem, WizardStep} from '@/features/sale/types';
+import type { SaleDraftState } from '@/features/sale/stores/useSaleDraftStore';
 
-interface CartState {
-  lines: Line[];
-  nextId: number;
-}
-interface UseWizardCartManagementProps<T = CartState> {
+interface UseWizardCartManagementProps {
   lines: Line[];
   nextId: number;
   currentStep: WizardStep;
-  updateField: <K extends keyof T>(field: K, value: T[K]) => void;
+  updateField: <K extends keyof SaleDraftState>(field: K, value: SaleDraftState[K]) => void;
   validation: {
     resetStepAttempted: (step: string) => void;
   };
@@ -21,7 +18,7 @@ export function useWizardCartManagement({
   currentStep,
   updateField,
   validation
-}: UseWizardCartManagementProps<CartState>) {
+}: UseWizardCartManagementProps) {
 
   // Product management functions
   const addLine = (sku: string | number, color?: string) => {

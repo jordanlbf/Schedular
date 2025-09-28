@@ -71,7 +71,7 @@ export function useSaleWizard(
       {
         id: 'customer',
         label: WIZARD_STEP_TITLES.customer,
-        detail: validation.customer.isValid ? state.customer.name : 'Name & delivery address',
+        detail: validation.customer.isValid ? (state.customer.name || 'Customer details') : 'Name & delivery address',
         icon: '1',
         isActive: state.currentStep === 'customer',
         isCompleted: isStepCompleted('customer'),

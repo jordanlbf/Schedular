@@ -76,7 +76,7 @@ export function DeliverySummary({
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  e.target.blur();
+                  (e.target as HTMLInputElement).blur();
                 }
               }}
               placeholder="0.00"

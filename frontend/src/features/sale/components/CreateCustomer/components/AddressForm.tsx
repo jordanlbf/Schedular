@@ -6,7 +6,7 @@ import { useAddressForm } from '../hooks/useAddressForm';
 interface AddressFormProps {
   address?: Address;
   onChange: (updates: Partial<Address>) => void;
-  states: { code: string; name: string }[];
+  states: readonly { code: string; name: string }[];
   fieldErrors?: { [key: string]: string };
 }
 

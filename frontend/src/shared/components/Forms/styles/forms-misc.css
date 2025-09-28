@@ -1,0 +1,283 @@
+/* Forms Miscellaneous - Consolidated form utilities and components */
+
+/* ========== Form Groups - Form group structure and labels ========== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 6px 0;
+  letter-spacing: normal;
+  text-transform: none;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.form-label-optional {
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.form-group:focus-within .form-label {
+  opacity: 1;
+  color: #0ea5e9;
+}
+
+.form-group.error .form-label {
+  color: var(--error);
+  opacity: 1;
+}
+
+/* Required field indicators */
+.form-label[data-required="true"]::after,
+.form-label:has(+ input[required])::after,
+.form-label:has(+ select[required])::after {
+  content: ' *';
+  color: var(--error);
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+/* Subtle glow on required field focus */
+.form-input[required]:focus {
+  box-shadow: var(--ring-glow), 0 0 0 3px var(--info-light);
+  border-color: var(--info);
+}
+
+/* Legacy compatibility - deprecated, use .form-input instead */
+.input {
+  width: 100%;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--panel-elev);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  color: var(--text);
+  transition: all var(--transition-normal);
+}
+
+.input:hover {
+  border-color: var(--border-hover);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15), 0 0 0 1px var(--accent-secondary);
+  background: var(--panel);
+}
+
+.input.prefix {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-md);
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.input.prefix .prefix {
+  color: var(--muted);
+  font-weight: var(--font-medium);
+}
+
+/* ========== Form Controls - Specialized form controls ========== */
+
+/* Note: qty and checkbox-field classes removed - unused in codebase */
+
+/* ========== Form Sections - Advanced form organization ========== */
+
+/* Second person section - prominent add button */
+.second-person-section {
+  margin: var(--spacing-2xl) 0 0 0;
+  position: relative;
+}
+
+.add-second-person-btn {
+  width: 100%;
+  padding: var(--spacing-lg);
+  background: rgba(14, 165, 233, 0.05);
+  border: 2px dashed rgba(14, 165, 233, 0.2);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+  color: var(--text);
+  font-family: inherit;
+}
+
+.add-second-person-btn:hover {
+  background: rgba(14, 165, 233, 0.08);
+  border-color: rgba(14, 165, 233, 0.3);
+  transform: translateY(-1px);
+}
+
+.add-person-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.add-person-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0ea5e9;
+  color: white;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.add-person-text {
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: #0ea5e9;
+}
+
+.optional-badge {
+  font-size: var(--text-base);
+  padding: 8px 16px;
+  background: rgba(14, 165, 233, 0.15);
+  color: #0ea5e9;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-section-content {
+  padding-top: var(--spacing-lg);
+  display: none;
+  animation: slideDown 0.3s ease-out;
+}
+
+.form-section-content.expanded {
+  display: block;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Form Buttons - Form-related button styles ========== */
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--text-subtle);
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.btn-link:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.btn-link:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* ========== Form Responsive - Responsive breakpoints ========== */
+
+@media (max-width: 1023px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .form-grid-3 {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: end;
+  }
+
+  .form-grid-3 > .form-group:first-child {
+    flex: 2;
+  }
+
+  .form-grid-3 > .form-group:nth-child(2),
+  .form-grid-3 > .form-group:nth-child(3) {
+    flex: 1;
+  }
+
+  .form-card-body {
+    padding: var(--spacing-xl);
+  }
+
+  .form-card-header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .form-grid-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-grid-3 > .form-group:first-child,
+  .form-grid-3 > .form-group:nth-child(2),
+  .form-grid-3 > .form-group:nth-child(3) {
+    flex: none;
+  }
+
+  .form-card-body {
+    padding: 20px;
+  }
+
+  .form-card-header {
+    padding: var(--spacing-lg) 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+}
+
+/* ========== Form Legacy - Legacy and compatibility styles ========== */
+
+/* Note: summary-form class removed - unused in codebase */

@@ -60,19 +60,7 @@
   letter-spacing: var(--tracking-wide);
 }
 
-/* Section dividers */
-.section-divider {
-  margin: var(--spacing-4xl) 0 var(--spacing-3xl) 0;
-  padding-top: var(--spacing-3xl);
-  border-top: 2px solid var(--border);
-}
-
-.section-divider h4 {
-  margin: 0;
-  font-size: var(--text-xl);
-  font-weight: var(--font-semibold);
-  color: var(--text);
-}
+/* Section dividers - removed unused section-divider class */
 
 /* Form card animations */
 .form-cards-grid .form-card:first-child {
@@ -96,38 +84,4 @@
   }
 }
 
-/* Form sections and organization with subtle accents */
-.form-section-divider {
-  position: relative;
-  margin: var(--spacing-4xl) 0;
-  text-align: center;
-}
-
-.form-section-divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(14, 165, 233, 0.1) 25%,
-    rgba(14, 165, 233, 0.2) 50%,
-    rgba(14, 165, 233, 0.1) 75%,
-    transparent 100%
-  );
-  z-index: 0;
-}
-
-.form-section-divider span {
-  background: var(--panel);
-  padding: 0 var(--spacing-lg);
-  color: var(--text-subtle);
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  position: relative;
-  z-index: 1;
-}
+/* Form sections - removed unused form-section-divider class */

@@ -1,0 +1,44 @@
+/* Form Validation - Validation states and error handling */
+
+.completion-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--success);
+  background: var(--success-bg);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  animation: fadeInComplete 0.3s ease;
+  opacity: 1 !important;
+  white-space: nowrap;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.completion-indicator svg {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+@keyframes fadeInComplete {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Form field wrapper - removed unused form-field-wrapper class */
+
+/* Error handling classes removed - using visual-only validation states
+   Note: All form-errors classes were intentionally hidden (display: none !important)
+   and the audit confirmed they are not actively used for visible error display. */

@@ -1,6 +1,31 @@
-/* Compact Cards Responsive Design */
+/* Cards Module - Consolidated */
 
-/* Responsive design for radiogroup */
+/* Delivery Instructions Card */
+.delivery-instructions-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-instructions-card .form-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-instructions-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-instructions-textarea {
+  flex: 1;
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .delivery-choice-radiogroup {
     grid-template-columns: 1fr;

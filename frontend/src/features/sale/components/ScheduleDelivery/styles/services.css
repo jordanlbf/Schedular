@@ -1,0 +1,120 @@
+/* Services Selection - Ultra Consolidated */
+
+/* Service Items Layout */
+.services-list-compact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.service-item-compact {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--panel-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.service-item-compact:hover {
+  background: linear-gradient(135deg,
+    rgba(14, 165, 233, 0.03) 0%,
+    var(--panel-elev) 100%);
+  border-color: rgba(14, 165, 233, 0.2);
+}
+
+.service-checkbox-compact {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--accent-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.service-info-compact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.service-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Service Content Styling */
+.service-name-compact {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.service-price-compact {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--accent-secondary);
+  flex-shrink: 0;
+}
+
+.service-desc-compact {
+  font-size: var(--text-xs);
+  color: var(--text-subtle);
+  line-height: 1.4;
+}
+
+/* Special styling for "no additional services" option */
+.service-item-compact.no-additional-services {
+  background: linear-gradient(135deg,
+    rgba(100, 116, 139, 0.05) 0%,
+    var(--panel-elev) 100%);
+  border-color: rgba(100, 116, 139, 0.15);
+}
+
+.service-item-compact.no-additional-services:hover {
+  background: linear-gradient(135deg,
+    rgba(100, 116, 139, 0.08) 0%,
+    var(--panel-elev) 100%);
+  border-color: rgba(100, 116, 139, 0.25);
+}
+
+/* Dark Mode Theme Variants */
+html.theme-dark .service-item-compact {
+  background: rgba(39, 39, 40, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.theme-dark .service-item-compact:hover {
+  background: linear-gradient(135deg,
+    rgba(14, 165, 233, 0.05) 0%,
+    rgba(39, 39, 40, 0.8) 100%);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+html.theme-dark .service-name-compact {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+html.theme-dark .service-desc-compact {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+html.theme-dark .service-item-compact.no-additional-services {
+  background: linear-gradient(135deg,
+    rgba(100, 116, 139, 0.08) 0%,
+    rgba(39, 39, 40, 0.6) 100%);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+html.theme-dark .service-item-compact.no-additional-services:hover {
+  background: linear-gradient(135deg,
+    rgba(100, 116, 139, 0.12) 0%,
+    rgba(39, 39, 40, 0.8) 100%);
+  border-color: rgba(148, 163, 184, 0.3);
+}

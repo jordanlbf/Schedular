@@ -1,0 +1,116 @@
+/* Summary Module - Consolidated */
+
+/* Fee Input Styling */
+.fee-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--panel-elev);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+}
+
+.fee-input-wrapper:focus-within {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  background: var(--panel);
+}
+
+.fee-currency {
+  position: absolute;
+  left: var(--spacing-md);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--text);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fee-input {
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-3xl);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  border: none;
+  background: transparent;
+  color: var(--text);
+  width: 100%;
+  text-align: left;
+}
+
+.fee-input:focus {
+  outline: none;
+  background: transparent;
+}
+
+.fee-input::placeholder {
+  color: var(--text-subtle);
+  font-weight: var(--font-medium);
+}
+
+/* Summary Breakdown Styling */
+.summary-breakdown {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 2px solid var(--border);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.summary-row:not(:last-child) {
+  margin-bottom: var(--spacing-xs);
+}
+
+.summary-row.summary-total {
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border);
+  margin-top: var(--spacing-sm);
+  color: var(--accent-secondary);
+}
+
+
+/* Dark Mode Theme Variants */
+html.theme-dark .fee-input-wrapper {
+  background: rgba(39, 39, 40, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.theme-dark .fee-input-wrapper:focus-within {
+  border-color: rgba(14, 165, 233, 0.6);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.08);
+  background: rgba(39, 39, 40, 0.8);
+}
+
+html.theme-dark .fee-currency {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+html.theme-dark .fee-input {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+html.theme-dark .fee-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+html.theme-dark .summary-breakdown {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html.theme-dark .summary-row {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+html.theme-dark .summary-row.summary-total {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(14, 165, 233, 0.9);
+}

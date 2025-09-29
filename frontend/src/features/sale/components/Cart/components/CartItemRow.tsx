@@ -41,9 +41,6 @@ export function CartItemRow({ line, product, onChangeQty, onRemove, onPriceChang
   const { originalProduct, rrpPrice } = useCartItemHelpers({ line });
 
 
-
-
-
   return (
     <div className={`cart-item-grid ${quantityHook.isRemoving ? 'removing' : ''}`}>
       {/* Column 1: Stacked Image + Quantity Controls */}

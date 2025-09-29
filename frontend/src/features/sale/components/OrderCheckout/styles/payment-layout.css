@@ -17,7 +17,6 @@
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s ease;
-  background: var(--panel);
   min-height: auto;
 }
 

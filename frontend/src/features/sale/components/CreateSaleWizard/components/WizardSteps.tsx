@@ -7,6 +7,7 @@ import { CATALOG } from '@/features/sale/catalog';
 import { getEstimatedDeliveryDate } from '@/shared/utils';
 import type { WizardStep, SaleDraftState } from '@/features/sale/stores/useSaleDraftStore';
 import type { StepValidation } from '../hooks/useSaleValidation';
+import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { useWizardCartManagement } from '../hooks/useWizardCartManagement';
 
 interface WizardNavigation {
@@ -14,7 +15,7 @@ interface WizardNavigation {
   prevStep: () => void;
   goToStep: (step: WizardStep) => void;
   canProceed: boolean;
-  totals?: any; // TODO: Define proper SaleTotals interface
+  totals: SaleTotals;
 }
 
 interface WizardStepsProps {

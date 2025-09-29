@@ -3,13 +3,15 @@ interface UseWizardCompletionProps {
   toast: {
     success: (message: string) => void;
   };
+  unblock: () => void;
   isValid: boolean;
 }
 
-export function useWizardCompletion({ clearDraft, toast, isValid }: UseWizardCompletionProps) {
+export function useWizardCompletion({ clearDraft, toast, unblock, isValid }: UseWizardCompletionProps) {
   const handleComplete = () => {
     if (isValid) {
       toast.success("Order submitted for processing!");
+      unblock(); // Unblock navigation immediately when sale is completed
       setTimeout(() => {
         clearDraft();
       }, 2000);

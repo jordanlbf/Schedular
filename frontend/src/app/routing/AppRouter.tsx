@@ -1,5 +1,4 @@
-import { Suspense } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { paths } from "./paths";
 
 // Import pages with entity-based naming
@@ -15,10 +14,10 @@ export function AppRouter() {
   return (
     <Routes>
       <Route path={paths.home()} element={<HomePage />} />
-      <Route path={paths.frontDesk()} element={<DashboardPage />} />
-      <Route path={paths.sale.create()} element={<SalesPage />} />
-      <Route path={paths.customers.search()} element={<CustomersPage />} />
-      <Route path={paths.inventory.checkStock()} element={<InventoryPage />} />
+      <Route path={paths.dashboard()} element={<DashboardPage />} />
+      <Route path={paths.sales.root()} element={<SalesPage />} />
+      <Route path={paths.customers.root()} element={<CustomersPage />} />
+      <Route path={paths.inventory.root()} element={<InventoryPage />} />
       <Route path={paths.admin()} element={<AdminPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

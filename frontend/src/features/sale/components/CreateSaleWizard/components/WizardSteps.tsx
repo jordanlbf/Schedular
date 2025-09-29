@@ -14,6 +14,7 @@ interface WizardNavigation {
   prevStep: () => void;
   goToStep: (step: WizardStep) => void;
   canProceed: boolean;
+  totals?: any; // TODO: Define proper SaleTotals interface
 }
 
 interface WizardStepsProps {

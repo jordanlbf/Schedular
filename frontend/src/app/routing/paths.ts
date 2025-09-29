@@ -9,30 +9,31 @@ export const paths = {
 
   // Front desk dashboard
   dashboard: () => "/pos",
-  // Legacy alias for backward compatibility
-  frontDesk: () => "/pos",
 
   // Sales module
   sales: {
     root: () => "/pos/sale",
-    create: () => "/pos/sale",
-  },
-  // Legacy alias for backward compatibility
-  sale: {
-    root: () => "/pos/sale",
-    create: () => "/pos/sale",
   },
 
   // Customer management
   customers: {
-    search: () => "/pos/customer",
+    root: () => "/pos/customer",
   },
 
   // Inventory management
   inventory: {
-    checkStock: () => "/pos/stock",
+    root: () => "/pos/stock",
   },
-
-  // Utility
-  notFound: () => "*",
 } as const;
+
+// Type helper for extracting path types
+export type AppPaths = typeof paths;
+
+// Helper for getting all possible route paths
+export type RoutePath =
+  | ReturnType<typeof paths.home>
+  | ReturnType<typeof paths.dashboard>
+  | ReturnType<typeof paths.sales.root>
+  | ReturnType<typeof paths.customers.root>
+  | ReturnType<typeof paths.inventory.root>
+  | ReturnType<typeof paths.admin>;

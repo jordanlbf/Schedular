@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { paths } from "./paths";
 
-// Stubbed auth hook - no real auth implementation found
+// Stubbed auth hook
 const useAuth = () => ({ user: null, loading: false });
 
 export function RequireAuth() {

@@ -63,20 +63,27 @@ html.theme-light {
   --border-hover: #6C63FF;                    /* periwinkle on hover */
   --border-gradient: linear-gradient(90deg, #6C63FF, #4F7BFF);
 
-  /* ===== Header / Footer (solid periwinkle chrome) ===== */
-  --nav-bg: #6C63FF;
-  --nav-text: #FFFFFF;
-  --nav-muted: #E7E9FF;
-  --nav-border: #5B54D6;
+  /* ===== Header (white chrome) ===== */
+  --header-bg: #FFFFFF;
+  --header-text: #1F2937;          /* dark slate for nav links */
+  --header-muted: #6B7280;
+  --header-border: #E3E8EF;
 
+  /* Brand wordmark in LIGHT mode: periwinkle */
+  --brand-color: #6C63FF;          /* periwinkle */
+  --brand-color-hover: #4F7BFF;    /* brighter blue on hover */
+
+  /* ===== Nav (keep for backward compatibility) ===== */
+  --nav-bg: var(--header-bg);
+  --nav-text: var(--header-text);
+  --nav-muted: var(--header-muted);
+  --nav-border: var(--header-border);
+
+  /* ===== Footer (keep existing purple) ===== */
   --footer-bg: #6C63FF;
   --footer-text: #F3F4FF;
   --footer-muted: #E0E4FF;
   --footer-border: #5B54D6;
-
-  /* Brand wordmark (white in light mode; blue is defined only in dark mode) */
-  --brand-color: var(--nav-text);
-  --brand-color-hover: color-mix(in oklab, var(--nav-text) 85%, white);
 
   /* Theme toggle (optional helper used by some UIs) */
   --toggle-light-bg: #DDD6FE;

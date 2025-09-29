@@ -2,7 +2,7 @@
 .app-footer {
   text-align: center;
   padding: 24px;
-  color: var(--nav-text);                    /* theme token - matches header */
+  color: var(--brand-color);                 /* same purple as header brand */
   font-size: var(--text-sm);
   background: var(--nav-bg);                 /* theme token - matches header */
   backdrop-filter: var(--blur);

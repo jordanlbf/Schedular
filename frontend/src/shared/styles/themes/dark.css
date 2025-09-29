@@ -78,18 +78,26 @@ html.theme-dark {
   --info-light: rgba(59, 130, 246, 0.1);
   --info-dark: #1d4ed8;
 
-  /* ===== Header / Footer (tokens to match light API) ===== */
---nav-bg: #2B2C2E;
---nav-text: #EBF3F7;
---nav-border: #1F2124;
+  /* ===== Header (neutral gray chrome in DARK) ===== */
+  --header-bg: #2B2C2E;
+  --header-text: #EBF3F7;
+  --header-muted: #AAB6BE;
+  --header-border: #1F2124;
 
   /* Brand wordmark — blue only in DARK mode */
---brand-color: #0EA5E9;          /* blue */
---brand-color-hover: #38BDF8;    /* blue hover */
+  --brand-color: #0EA5E9;
+  --brand-color-hover: #38BDF8;
 
---footer-bg: #2B2C2E;
---footer-text: #CBD5E1;
---footer-border: #1F2124;
+  /* ===== Nav (keep for backward compatibility) ===== */
+  --nav-bg: var(--header-bg);
+  --nav-text: var(--header-text);
+  --nav-muted: var(--header-muted);
+  --nav-border: var(--header-border);
+
+  /* Footer stays neutral gray in dark mode (already defined) */
+  --footer-bg: #2B2C2E;
+  --footer-text: #CBD5E1;
+  --footer-border: #1F2124;
 
   /* ===== Buttons (tokens to match light API) ===== */
   --btn-primary-bg: var(--accent-secondary);

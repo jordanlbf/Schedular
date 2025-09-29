@@ -1,4 +1,4 @@
-/* Header Component Styles (token-compliant) */
+/* Header Component Styles (token-compliant, header/footer decoupled) */
 
 /* Base topbar */
 .home-topbar {
@@ -7,44 +7,38 @@
   justify-content: space-between;
 
   padding: 20px 32px;
-  background: var(--nav-bg);                 /* theme token */
-  color: var(--nav-text);                    /* theme token */
+  background: var(--header-bg);
+  color: var(--header-text);
 
-  border-bottom: 1px solid var(--nav-border);/* theme token */
+  border-bottom: 1px solid var(--header-border);
   position: relative;
   z-index: 20;
   box-shadow: var(--shadow-glass);
 }
 
-/* Optional glass/frosted variant:
-   <header class="home-topbar" data-variant="glass"> */
+/* Optional glass/frosted variant */
 .home-topbar[data-variant="glass"] {
-  /* Slight translucency while still honoring nav tokens */
-  background: color-mix(in oklab, var(--nav-bg) 85%, transparent);
+  background: color-mix(in oklab, var(--header-bg) 92%, transparent);
   backdrop-filter: var(--blur);
   -webkit-backdrop-filter: var(--blur);
-  /* Slightly lighten the divider on glass */
-  border-bottom-color: color-mix(in oklab, var(--nav-border) 70%, white);
+  border-bottom-color: color-mix(in oklab, var(--header-border) 70%, white);
 }
 
 /* Brand / product name */
 .brand {
   font-weight: var(--font-bold);
   font-size: var(--text-2xl);
-  color: var(--brand-color);                 /* from theme (blue in dark, white in light) */
+  color: var(--brand-color);                 /* per-theme brand color */
   letter-spacing: var(--tracking-tight);
   text-decoration: none;
 }
 .brand:hover { color: var(--brand-color-hover); }
 
-/* Optional colored mark inside brand */
-.brand .mark { color: var(--accent-primary); }
-
 /* Header Title (centered) */
 .header-title {
   font-size: var(--text-3xl);
   font-weight: var(--font-bold);
-  color: var(--nav-text);
+  color: var(--header-text);
   margin: 0;
   text-align: center;
   position: absolute;
@@ -59,23 +53,19 @@
   align-items: center;
 }
 
-/* Make links/icons inside the header inherit on-dark tokens,
-   but DO NOT override the .brand link color */
+/* Header links/icons inherit header text color, but not the .brand */
 .home-topbar a:not(.brand),
 .home-topbar button,
 .home-topbar .icon {
-  color: var(--nav-text);
+  color: var(--header-text);
 }
-
 .home-topbar a:not(.brand):hover,
 .home-topbar button:hover {
-  color: color-mix(in oklab, var(--nav-text) 85%, white);
+  color: color-mix(in oklab, var(--header-text) 85%, black);
 }
 
-/* Respect reduced motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .home-topbar,
-  .home-topbar * {
-    transition: none !important;
-  }
+  .home-topbar * { transition: none !important; }
 }

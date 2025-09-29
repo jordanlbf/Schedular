@@ -7,7 +7,6 @@ html.theme-dark {
   color-scheme: dark;
 
   /* ===== Core Palette ===== */
-  /* Grays */
   --gray-50: #0f0f10;
   --gray-100: #1a1a1c;
   --gray-200: #202123;
@@ -18,7 +17,7 @@ html.theme-dark {
   --gray-700: #9ca3af;
   --gray-800: #AAB6BE;
   --gray-900: #EBF3F7;
-  
+
   /* Blues (Primary) */
   --blue-50: #0c1e2b;
   --blue-100: #0d2847;
@@ -30,59 +29,76 @@ html.theme-dark {
   --blue-700: #7dd3fc;
   --blue-800: #bae6fd;
   --blue-900: #e0f2fe;
-  
+
   /* ===== Semantic Colors ===== */
-  
-  /* Backgrounds */
   --bg: #202123;
   --bg-overlay: rgba(0, 0, 0, 0.1);
-  
-  /* Panel/Surface Colors */
+
   --panel: #272728;
   --panel-rgb: 39, 39, 40;
   --panel-elev: #565E63;
   --panel-hover: #282C2E;
   --panel-border: rgba(255, 255, 255, 0.04);
-  
-  /* Text Colors */
+
+  /* Text */
   --text: #EBF3F7;
-  --text-primary: var(--text);  /* Alias */
+  --text-primary: var(--text);
   --text-subtle: #AAB6BE;
-  --text-muted: var(--text-subtle);  /* Alias */
+  --text-muted: var(--text-subtle);
   --muted: #AAB6BE;
   --muted-light: #565E63;
-  
-  /* Border Colors */
+
+  /* Borders */
   --border: rgba(255, 255, 255, 0.06);
   --border-strong: rgba(255, 255, 255, 0.12);
   --border-hover: rgba(14, 165, 233, 0.3);
   --border-gradient: rgba(255, 255, 255, 0.05);
-  
-  /* ===== Accent Colors ===== */
-  --accent-primary: #ef4444;     /* Red accent */
-  --accent-secondary: #0ea5e9;   /* Blue accent */
+
+  /* ===== Accents ===== */
+  --accent-primary: #ef4444;     /* red accent */
+  --accent-secondary: #0ea5e9;   /* blue accent */
   --accent-cyan: #06b6d4;
   --accent-warm: #f39c12;
   --accent-solid: #ef4444;
-  
-  /* ===== State Colors ===== */
+
+  /* ===== States ===== */
   --success: #10b981;
   --success-light: rgba(16, 185, 129, 0.1);
   --success-dark: #047857;
-  
+
   --warning: #f59e0b;
   --warning-light: rgba(245, 158, 11, 0.1);
   --warning-dark: #d97706;
-  
+
   --error: #ef4444;
   --error-light: rgba(239, 68, 68, 0.1);
   --error-dark: #dc2626;
-  
+
   --info: #3b82f6;
   --info-light: rgba(59, 130, 246, 0.1);
   --info-dark: #1d4ed8;
-  
-  /* ===== Shadow Definitions ===== */
+
+  /* ===== Header / Footer (tokens to match light API) ===== */
+  --nav-bg: #0B122A;             /* deep slate */
+  --nav-text: #E5E7EB;
+  --nav-border: #0F172A;
+
+  --footer-bg: #0B122A;
+  --footer-text: #CBD5E1;
+  --footer-border: #0F172A;
+
+  /* ===== Buttons (tokens to match light API) ===== */
+  --btn-primary-bg: var(--accent-secondary);
+  --btn-primary-color: #0B1220;
+  --btn-primary-hover-bg: #0284c7;
+  --btn-primary-border: transparent;
+
+  --btn-secondary-bg: transparent;
+  --btn-secondary-color: #A5B4FC;
+  --btn-secondary-hover-bg: rgba(255, 255, 255, 0.06);
+  --btn-secondary-border: rgba(255, 255, 255, 0.18);
+
+  /* ===== Shadows ===== */
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.25);
@@ -92,10 +108,8 @@ html.theme-dark {
   --shadow-glass: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.45);
   --shadow-glow: 0 0 16px rgba(239, 68, 68, 0.4);
-  
-  /* ===== Component-Specific Variables ===== */
-  
-  /* Card Headers */
+
+  /* ===== Component-Specific ===== */
   --card-header-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.03) 0%, rgba(147, 197, 253, 0.01) 100%);
   --card-header-color: var(--accent-secondary);
   --card-header-font-size: var(--text-lg);
@@ -103,26 +117,24 @@ html.theme-dark {
   --card-header-letter-spacing: var(--tracking-wide);
   --card-header-text-transform: uppercase;
   --card-header-padding: var(--spacing-xl) var(--spacing-2xl);
-  
-  /* Buttons */
-  --btn-primary-bg: var(--accent-secondary);
-  --btn-primary-color: white;
-  --btn-primary-hover-bg: #0284c7;
-  --btn-secondary-bg: var(--panel-elev);
-  --btn-secondary-color: var(--text);
-  --btn-secondary-hover-bg: var(--panel-hover);
-  
+
+  /* Card tokens parity with light (map to existing surfaces) */
+  --card-bg: var(--panel);
+  --card-border: var(--panel-border);
+  --card-hover-bg: var(--panel-hover);
+  --card-hover-border: var(--border-strong);
+
   /* Forms */
   --input-bg: var(--panel-elev);
   --input-border: var(--border);
   --input-focus-border: var(--accent-secondary);
   --input-text: var(--text);
   --input-placeholder: var(--text-subtle);
-  
-  /* Focus States */
+
+  /* Focus */
   --ring: rgba(239, 68, 68, 0.4);
   --ring-glow: 0 0 0 3px rgba(239, 68, 68, 0.3);
-  
+
   /* Overlays */
   --overlay-bg: rgba(0, 0, 0, 0.5);
   --overlay-backdrop: blur(4px);

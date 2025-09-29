@@ -1,0 +1,6 @@
+/* Home Page Styles */
+
+@import './home-hero.css';
+@import './home-cards.css';
+@import './home-icons.css';
+@import './home-responsive.css';

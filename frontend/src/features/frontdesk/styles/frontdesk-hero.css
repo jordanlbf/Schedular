@@ -1,0 +1,30 @@
+/* Frontdesk Hero Section Styles */
+
+.frontdesk .home-hero {
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  text-align: center;
+  transform: translateY(-6vh);
+  position: relative;
+}
+
+.frontdesk .home-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-extrabold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 12px;
+}
+
+.frontdesk .home-subtitle {
+  margin: 0 0 12px;
+  color: var(--text-subtle);
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  line-height: var(--leading-relaxed);
+}

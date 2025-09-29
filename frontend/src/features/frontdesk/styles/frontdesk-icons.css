@@ -1,0 +1,23 @@
+/* Frontdesk Icon Styles */
+
+/* Icon System */
+.frontdesk .card-icon {
+  grid-row: 2;                      /* dead-centre of the card */
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin: 0;                        /* no bottom margin to keep true centering */
+  position: relative;
+  transition: transform var(--transition-normal);
+}
+
+.frontdesk .home-card:hover .card-icon {
+  transform: scale(1.1);
+}
+
+/* SVG Icon Polish */
+.create-sale,
+.check-stock,
+.search-customer {
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}

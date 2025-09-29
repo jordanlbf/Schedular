@@ -1,2 +1,6 @@
-/* Frontdesk feature styles */
-@import './frontdesk.css';
+/* Frontdesk Styles */
+
+@import './frontdesk-hero.css';
+@import './frontdesk-cards.css';
+@import './frontdesk-icons.css';
+@import './frontdesk-responsive.css';

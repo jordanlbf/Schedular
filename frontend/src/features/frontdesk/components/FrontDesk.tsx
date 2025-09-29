@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "@/app/layout/Header";
+import { CreateSaleIcon, CheckStockIcon, SearchCustomerIcon } from "./icons";
 import "../styles/index.css";
 
 export default function FrontDesk() {
@@ -11,15 +12,15 @@ export default function FrontDesk() {
         <p className="home-subtitle">Choose an action to begin.</p>
         <div className="home-cards" role="list">
           <Link to="/pos/sale" className="home-card" role="listitem" aria-label="Create Sale">
-            <span className="emoji" aria-hidden>🧾</span>
+            <CreateSaleIcon />
             <h2>Create Sale</h2>
           </Link>
           <Link to="/pos/stock" className="home-card" role="listitem" aria-label="Check Stock">
-            <span className="emoji" aria-hidden>📦</span>
+            <CheckStockIcon />
             <h2>Check Stock</h2>
           </Link>
           <Link to="/pos/customer" className="home-card" role="listitem" aria-label="Search Customer">
-            <span className="emoji" aria-hidden>🧍</span>
+            <SearchCustomerIcon />
             <h2>Search Customer</h2>
           </Link>
         </div>

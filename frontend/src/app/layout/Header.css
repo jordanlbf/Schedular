@@ -1,42 +1,50 @@
-/* Header Component Styles */
+/* Header Component Styles (token-compliant) */
 
-/* Glass-morphism topbar */
+/* Base topbar */
 .home-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding: 20px 32px;
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border: 1px solid var(--panel-border);
-  border-bottom: 1px solid var(--border);
+  background: var(--nav-bg);                 /* theme token */
+  color: var(--nav-text);                    /* theme token */
+
+  border-bottom: 1px solid var(--nav-border);/* theme token */
   position: relative;
   z-index: 20;
   box-shadow: var(--shadow-glass);
 }
 
+/* Optional glass/frosted variant:
+   <header class="home-topbar" data-variant="glass"> */
+.home-topbar[data-variant="glass"] {
+  /* Slight translucency while still honoring nav tokens */
+  background: color-mix(in oklab, var(--nav-bg) 85%, transparent);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  /* Slightly lighten the divider on glass */
+  border-bottom-color: color-mix(in oklab, var(--nav-border) 70%, white);
+}
+
+/* Brand / product name */
 .brand {
   font-weight: var(--font-bold);
   font-size: var(--text-2xl);
-  color: var(--accent-secondary) !important; /* Blue in dark mode, purple in light mode */
+  color: var(--brand-color);                 /* from theme (blue in dark, white in light) */
   letter-spacing: var(--tracking-tight);
+  text-decoration: none;
 }
+.brand:hover { color: var(--brand-color-hover); }
 
-/* Keep original blue color in dark mode */
-html.theme-dark .brand {
-  color: #0ea5e9 !important;
-}
+/* Optional colored mark inside brand */
+.brand .mark { color: var(--accent-primary); }
 
-/* Purple color in light mode */
-html.theme-light .brand {
-  color: #6366f1 !important;
-}
-
+/* Header Title (centered) */
 .header-title {
   font-size: var(--text-3xl);
   font-weight: var(--font-bold);
-  color: var(--text);
+  color: var(--nav-text);
   margin: 0;
   text-align: center;
   position: absolute;
@@ -44,8 +52,30 @@ html.theme-light .brand {
   transform: translateX(-50%);
 }
 
+/* Actions (right side controls) */
 .actions {
   display: flex;
   gap: 16px;
   align-items: center;
+}
+
+/* Make links/icons inside the header inherit on-dark tokens,
+   but DO NOT override the .brand link color */
+.home-topbar a:not(.brand),
+.home-topbar button,
+.home-topbar .icon {
+  color: var(--nav-text);
+}
+
+.home-topbar a:not(.brand):hover,
+.home-topbar button:hover {
+  color: color-mix(in oklab, var(--nav-text) 85%, white);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .home-topbar,
+  .home-topbar * {
+    transition: none !important;
+  }
 }

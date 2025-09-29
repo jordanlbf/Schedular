@@ -7,18 +7,7 @@
   grid-template-rows: auto 1fr auto;
 }
 
-/* Glass-morphism footer */
-.home-footer {
-  text-align: center;
-  padding: 24px;
-  color: var(--muted);
-  font-size: var(--text-sm);
-  background: var(--panel);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  border-top: 1px solid var(--border);
-  box-shadow: var(--shadow-glass);
-}
+/* Footer styles moved to Footer.css */
 
 /* Utility pages */
 .page {

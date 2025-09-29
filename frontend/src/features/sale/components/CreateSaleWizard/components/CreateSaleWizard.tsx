@@ -1,5 +1,4 @@
-import Header from "@/app/layout/Header";
-import { ActionBar } from "@/app/layout/navigation";
+import { Header, ActionBar } from "@/app/layout";
 import { useSaleDraftStore, type WizardStep } from "@/features/sale/stores/useSaleDraftStore";
 import { useSaleWizard } from "../hooks/useSaleWizard";
 import { usePageReloadHandler } from "../hooks/usePageReloadHandler";

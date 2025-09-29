@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import Header from '../Header';
+import { Header, Footer } from '../components';
 import './HomeLayout.css';
 
 interface HomeLayoutProps {
@@ -19,9 +19,7 @@ export default function HomeLayout({ children, headerProps }: HomeLayoutProps) {
     <div className="home-wrap">
       <Header {...headerProps} />
       {children}
-      <footer className="home-footer">
-        © {new Date().getFullYear()} Schedular
-      </footer>
+      <Footer />
     </div>
   );
 }

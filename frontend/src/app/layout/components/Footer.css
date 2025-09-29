@@ -1,0 +1,12 @@
+/* Footer Component Styles (token-compliant) */
+.app-footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--nav-text);                    /* theme token - matches header */
+  font-size: var(--text-sm);
+  background: var(--nav-bg);                 /* theme token - matches header */
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-top: 1px solid var(--nav-border);   /* theme token - matches header */
+  box-shadow: var(--shadow-glass);
+}

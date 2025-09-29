@@ -1,7 +1,7 @@
-export { default as Header } from './Header';
-export { default as ThemeToggle } from './ThemeToggle';
+// Core layout components
+export * from './components';
 export { default as AppLayout } from './AppLayout';
 export { default as HomeLayout } from './home/HomeLayout';
 
 // Navigation components
-export { ActionBar } from './navigation';
+export * from './navigation';

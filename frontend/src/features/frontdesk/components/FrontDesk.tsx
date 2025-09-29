@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import Header from "@/app/layout/Header";
-import { ActionBar } from "@/app/layout";
+import { Header, Footer, ActionBar } from "@/app/layout";
 import { CreateSaleIcon, CheckStockIcon, SearchCustomerIcon } from "./icons";
 import "../styles/index.css";
 
@@ -26,7 +25,7 @@ export default function FrontDesk() {
           </Link>
         </div>
       </main>
-      <footer className="home-footer">© {new Date().getFullYear()} Schedular</footer>
+      <Footer />
       <ActionBar />
     </div>
   );

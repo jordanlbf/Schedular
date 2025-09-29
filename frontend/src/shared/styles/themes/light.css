@@ -1,5 +1,6 @@
 /* ===========================
-   Light Theme — Lavender/Periwinkle UI (final)
+   Light Theme — Periwinkle + Slate
+   Inspired by Linear & Figma
    ===========================
 */
 
@@ -7,60 +8,59 @@ html.theme-light {
   color-scheme: light;
 
   /* ===== Canvas & Surfaces ===== */
-  --bg: #EEF1F7;                 /* cool, soft page canvas */
+  --bg: #EEF1F7;                              /* cool soft background */
   --bg-overlay: rgba(28, 33, 53, 0.03);
 
-  --panel: #FFFFFF;              /* cards, sheets */
+  --panel: #FFFFFF;                           /* cards, sheets */
   --panel-rgb: 255,255,255;
   --panel-elev: #FFFFFF;
-  --panel-hover: #F8FAFF;        /* faint blue tint on hover */
-  --panel-border: #E3E8EF;       /* crisp, not chalky */
+  --panel-hover: #F9FAFF;                     /* neutral hover for generic panels */
+  --panel-border: #E3E8EF;                    /* light periwinkle-tinted gray */
 
-  /* Cards (tiles) — darker separation + periwinkle hover */
-  --card-bg: #FFFFFF;            /* pure white for punch */
-  --card-border: #D9DEE8;
-  --card-hover-bg: #F3F4FE;      /* subtle periwinkle hover */
-  --card-hover-border: #C5CFE0;
+  /* Cards (tiles) */
+  --card-bg: #FFFFFF;
+  --card-border: #E3E8EF;
+  --card-hover-bg: #F3F4FE;                   /* subtle periwinkle tint */
+  --card-hover-border: #6C63FF;               /* periwinkle on hover */
 
   /* ===== Typography ===== */
-  --text: #1F2937;               /* slate-800 */
+  --text: #1F2937;                            /* dark slate */
   --text-primary: var(--text);
-  --text-subtle: #4B5563;        /* slate-600 */
-  --text-muted: #6B7280;         /* slate-500 */
+  --text-subtle: #4B5563;                     /* medium slate */
+  --text-muted: #6B7280;                      /* light slate */
   --muted: var(--text-muted);
   --muted-light: #9CA3AF;
 
   /* ===== Brand / Accents ===== */
-  /* primary = periwinkle; secondary = brighter blue */
-  --accent-primary: #6C63FF;     /* periwinkle 500 */
+  --accent-primary: #6C63FF;                  /* Periwinkle */
   --accent-primary-contrast: #FFFFFF;
-  --accent-secondary: #4F7BFF;   /* blue 500 */
-  --accent-cyan: #62B2FF;        /* used in charts/highlights */
-  --accent-warm: #FF8FA3;        /* coral for warm tags */
+  --accent-secondary: #4F7BFF;                /* brighter blue for hover/focus */
+  --accent-cyan: #62B2FF;                     /* optional highlight */
+  --accent-warm: #FF8FA3;                     /* warm/coral tags */
   --accent-solid: var(--accent-primary);
 
-  /* Info is cooler blue to separate from primary purple */
+  /* Info uses cooler blue to separate from purple primary */
   --info: #4F7BFF;
   --info-light: #EDF3FF;
   --info-dark: #2E5DFF;
 
-  /* States */
-  --success: #22C55E;            /* green 500 */
+  /* States (kept professional & consistent) */
+  --success: #22C55E;
   --success-light: #ECFDF5;
   --success-dark: #16A34A;
 
-  --warning: #F7B267;            /* warm amber */
+  --warning: #F7B267;
   --warning-light: #FFF6EA;
   --warning-dark: #D48C2A;
 
-  --error: #FF6B6B;              /* coral red */
+  --error: #FF6B6B;
   --error-light: #FFF0F0;
   --error-dark: #E54848;
 
   /* ===== Borders ===== */
   --border: #E3E8EF;
-  --border-strong: #CBD5E1;
-  --border-hover: #6C63FF;       /* accent on hover */
+  --border-strong: #D1D5DB;
+  --border-hover: #6C63FF;                    /* periwinkle on hover */
   --border-gradient: linear-gradient(90deg, #6C63FF, #4F7BFF);
 
   /* ===== Header / Footer (solid periwinkle chrome) ===== */
@@ -74,14 +74,21 @@ html.theme-light {
   --footer-muted: #E0E4FF;
   --footer-border: #5B54D6;
 
+  /* Brand wordmark (white in light mode; blue is defined only in dark mode) */
+  --brand-color: var(--nav-text);
+  --brand-color-hover: color-mix(in oklab, var(--nav-text) 85%, white);
+
+  /* Theme toggle (optional helper used by some UIs) */
+  --toggle-light-bg: #DDD6FE;
+
   /* ===== Buttons ===== */
-  --btn-primary-bg: #6C63FF;     /* filled purple button */
+  --btn-primary-bg: #6C63FF;
   --btn-primary-color: #FFFFFF;
   --btn-primary-hover-bg: #5B54D6;
   --btn-primary-border: transparent;
 
   --btn-secondary-bg: #FFFFFF;
-  --btn-secondary-color: #4F7BFF;   /* blue text on ghost button */
+  --btn-secondary-color: #4F7BFF;
   --btn-secondary-hover-bg: #F3F4FE;
   --btn-secondary-border: #CDD6F6;
 
@@ -90,13 +97,13 @@ html.theme-light {
 
   /* ===== Forms ===== */
   --input-bg: #FFFFFF;
-  --input-border: #D9DEEA;
+  --input-border: #E3E8EF;
   --input-focus-border: #6C63FF;
-  --input-focus-shadow: 0 0 0 3px rgba(108, 99, 255, 0.18);
+  --input-focus-shadow: 0 0 0 3px rgba(108, 99, 255, 0.22); /* periwinkle glow */
   --input-text: var(--text);
   --input-placeholder: #9CA3AF;
 
-  /* ===== Shadows (softer, larger; lift on hover) ===== */
+  /* ===== Shadows (subtle, modern) ===== */
   --shadow: 0 2px 6px rgba(17, 24, 39, 0.08), 0 1px 2px rgba(17, 24, 39, 0.06);
   --shadow-soft: 0 1px 3px rgba(17, 24, 39, 0.08);
   --shadow-md: 0 6px 14px rgba(17, 24, 39, 0.10);
@@ -105,7 +112,7 @@ html.theme-light {
   --shadow-ambient: 0 10px 20px rgba(17, 24, 39, 0.10);
   --shadow-glass: 0 6px 12px rgba(17, 24, 39, 0.08), inset 0 1px 0 rgba(255,255,255,0.9);
   --shadow-float: 0 12px 24px rgba(17, 24, 39, 0.12);
-  --shadow-glow: 0 0 0 3px rgba(108, 99, 255, 0.22);
+  --shadow-glow: 0 0 0 3px rgba(108, 99, 255, 0.22);       /* focus ring */
 
   /* ===== Card Headers (optional) ===== */
   --card-header-bg: linear-gradient(180deg, #F8FAFF 0%, #EEF1F7 100%);
@@ -122,6 +129,10 @@ html.theme-light {
   --badge-danger-color: #D95C6A;
   --badge-info-bg: #ECF2FF;
   --badge-info-color: #3757FF;
+
+  /* ===== Optional gradients for your home card strips ===== */
+  --card-strip-front: linear-gradient(90deg, #6C63FF, #8B80FF);
+  --card-strip-back:  linear-gradient(90deg, #4F7BFF, #6C63FF);
 
   /* Stock status (kept for your app) */
   --stock-low-bg: #FFF7E6;

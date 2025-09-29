@@ -1,3 +1,4 @@
 export { AppRouter } from './AppRouter';
-export { routeConfig } from './routes';
-export type { RouteConfig } from './routes';
+export { paths } from './paths';
+export type { AppPaths, RoutePath } from './paths';
+export { RequireAuth, RequireRole } from './guards';

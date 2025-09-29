@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppLayout } from "@/app/layout";
 
-export default function Index() {
+export default function AdminPage() {
   return (
     <AppLayout>
       <h1>Backend</h1>

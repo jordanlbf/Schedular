@@ -1,4 +1,5 @@
 import Header from "@/app/layout/Header";
+import { ActionBar } from "@/app/layout/navigation";
 import { useSaleDraftStore, type WizardStep } from "@/features/sale/stores/useSaleDraftStore";
 import { useSaleWizard } from "../hooks/useSaleWizard";
 import { usePageReloadHandler } from "../hooks/usePageReloadHandler";
@@ -6,7 +7,7 @@ import { useWizardCompletion } from "../hooks/useWizardCompletion";
 import { ProgressBar } from "./ProgressBar";
 import { WizardSteps } from "./WizardSteps";
 import { ToastContainer } from "./ToastContainer";
-import { useToast, useBeforeUnload, useNavigationBlocker } from "@/shared/hooks";
+import { useToast, useBeforeUnload } from "@/shared/hooks";
 
 export default function CreateSaleWizard() {
   const { state, updateField, hasUnsavedData, clearDraft } = useSaleDraftStore();
@@ -18,21 +19,11 @@ export default function CreateSaleWizard() {
     message: 'You have unsaved sale data. Are you sure you want to leave?'
   });
 
-  const { unblock } = useNavigationBlocker({
-    when: hasUnsavedData(),
-    message: 'You have unsaved sale data. Are you sure you want to leave this page?',
-    onUnblock: () => {
-      clearDraft();
-      toast.addToast('Sale draft cleared', 'info');
-    }
-  });
-
   usePageReloadHandler(clearDraft, toast);
 
   const { handleComplete, handleAddSuccess } = useWizardCompletion({
     clearDraft,
     toast,
-    unblock,
     isValid: wizard.validation.isValid ?? false
   });
 
@@ -68,6 +59,7 @@ export default function CreateSaleWizard() {
 
         <ToastContainer toasts={toast.toasts} onRemove={toast.removeToast} />
       </main>
+      <ActionBar />
     </>
   );
 }

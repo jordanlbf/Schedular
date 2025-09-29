@@ -34,17 +34,34 @@ function DefaultBackButton({ fallbackTo = '/' }: { fallbackTo?: string }) {
     return null;
   }
 
+  // Determine appropriate label based on current route
+  const getBackButtonLabel = () => {
+    const path = location.pathname;
+
+    if (path === '/pos') {
+      return 'Return to Home';
+    } else if (path.startsWith('/pos/')) {
+      return 'Return to Dashboard';
+    } else if (path === '/admin') {
+      return 'Return to Home';
+    } else if (path.startsWith('/admin/')) {
+      return 'Return to Back Office';
+    }
+
+    return 'Back';
+  };
+
   return (
     <button
       onClick={handleBack}
       className="action-bar__back-btn"
-      aria-label="Go back"
+      aria-label={getBackButtonLabel()}
       type="button"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
-      Back
+      {getBackButtonLabel()}
     </button>
   );
 }

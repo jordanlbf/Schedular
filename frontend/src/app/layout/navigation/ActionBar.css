@@ -11,10 +11,15 @@
   pointer-events: none; /* Allow clicks through empty areas */
 }
 
+/* When step-actions footer is present, move action bar higher */
+body:has(.step-actions) .action-bar {
+  bottom: 100px; /* Adjusted for consistent spacing above wizard footer */
+}
+
 .action-bar__container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* Center the content */
   /* Remove background for minimal look */
   background: transparent;
   backdrop-filter: none;
@@ -35,8 +40,14 @@
   min-width: 0; /* Allow content to shrink */
 }
 
+/* Center the left slot when it's the only content */
+.action-bar__left:only-child {
+  justify-content: center;
+  width: 100%;
+}
+
 .action-bar__left {
-  justify-content: flex-start;
+  justify-content: center; /* Center content in left slot */
   flex: 0 0 auto;
 }
 
@@ -171,6 +182,11 @@ html.theme-dark .action-bar__back-btn:hover {
     bottom: 70px;
     width: calc(100% - 24px);
   }
+  
+  /* Adjust for wizard on mobile */
+  body:has(.step-actions) .action-bar {
+    bottom: 120px;
+  }
 
   .action-bar__container {
     padding: 12px 16px;
@@ -202,14 +218,17 @@ html.theme-dark .action-bar__back-btn:hover {
   }
 }
 
-/* Adjust positioning for wizard pages with step-actions footer */
-.wizard-container ~ .action-bar {
-  bottom: 56px;
-}
-
-@media (max-width: 768px) {
-  .wizard-container ~ .action-bar {
-    bottom: 46px;
+/* Fallback for browsers that don't support :has() */
+@supports not selector(:has(*)) {
+  /* Use class-based approach as fallback */
+  .wizard-active .action-bar {
+    bottom: 140px;
+  }
+  
+  @media (max-width: 768px) {
+    .wizard-active .action-bar {
+      bottom: 120px;
+    }
   }
 }
 
@@ -219,7 +238,7 @@ html.theme-dark .action-bar__back-btn:hover {
     bottom: calc(80px + env(safe-area-inset-bottom));
   }
 
-  .wizard-container ~ .action-bar {
-    bottom: calc(56px + env(safe-area-inset-bottom));
+  body:has(.step-actions) .action-bar {
+    bottom: calc(140px + env(safe-area-inset-bottom));
   }
 }

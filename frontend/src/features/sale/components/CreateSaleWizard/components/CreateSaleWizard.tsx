@@ -7,7 +7,7 @@ import { useWizardCompletion } from "../hooks/useWizardCompletion";
 import { ProgressBar } from "./ProgressBar";
 import { WizardSteps } from "./WizardSteps";
 import { ToastContainer } from "./ToastContainer";
-import { useToast, useBeforeUnload } from "@/shared/hooks";
+import { useToast, useBeforeUnload, useNavigationPrompt } from "@/shared/hooks";
 
 export default function CreateSaleWizard() {
   const { state, updateField, hasUnsavedData, clearDraft } = useSaleDraftStore();
@@ -17,6 +17,15 @@ export default function CreateSaleWizard() {
   useBeforeUnload({
     when: hasUnsavedData(),
     message: 'You have unsaved sale data. Are you sure you want to leave?'
+  });
+
+  useNavigationPrompt({
+    when: hasUnsavedData(),
+    message: 'You have unsaved sale data. Are you sure you want to leave this page?',
+    onProceed: () => {
+      clearDraft();
+      toast.addToast('Sale draft cleared', 'info');
+    }
   });
 
   usePageReloadHandler(clearDraft, toast);

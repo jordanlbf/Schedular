@@ -20,12 +20,20 @@ function DefaultBackButton({ fallbackTo = '/' }: { fallbackTo?: string }) {
   const location = useLocation();
 
   const handleBack = () => {
-    // Check if there's history to go back to
-    if (window.history.length > 1) {
-      navigate(-1);
+    // Navigate based on route hierarchy, not browser history
+    const path = location.pathname;
+
+    if (path === '/pos') {
+      navigate('/');
+    } else if (path.startsWith('/pos/')) {
+      navigate('/pos');
+    } else if (path === '/admin') {
+      navigate('/');
+    } else if (path.startsWith('/admin/')) {
+      navigate('/admin');
     } else {
-      // Fallback to specified route or home
-      navigate(fallbackTo);
+      // Fallback to home for any other routes
+      navigate('/');
     }
   };
 
@@ -85,20 +93,26 @@ export default function ActionBar({
   return (
     <div className={`action-bar ${className}`}>
       <div className="action-bar__container">
-        {/* Left: Back button */}
-        <div className="action-bar__left">
-          {BackComponent}
-        </div>
+        {/* Only render slots that have content */}
+        {BackComponent && (
+          <div className="action-bar__left">
+            {BackComponent}
+          </div>
+        )}
 
         {/* Center: Optional middle content */}
-        <div className="action-bar__middle">
-          {middle}
-        </div>
+        {middle && (
+          <div className="action-bar__middle">
+            {middle}
+          </div>
+        )}
 
         {/* Right: Primary action */}
-        <div className="action-bar__right">
-          {primaryAction}
-        </div>
+        {primaryAction && (
+          <div className="action-bar__right">
+            {primaryAction}
+          </div>
+        )}
       </div>
     </div>
   );

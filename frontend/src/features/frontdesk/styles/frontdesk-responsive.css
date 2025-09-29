@@ -7,7 +7,7 @@
   }
 
   .frontdesk .home-card {
-    --icon-size: 70px;
+    --icon-size: 84px;
   }
 }
 
@@ -16,6 +16,7 @@
     transform: none;
   }
 
+
   .frontdesk .home-cards {
     max-width: 560px;
     grid-template-columns: 1fr;
@@ -23,10 +24,10 @@
   }
 
   .frontdesk .home-card {
-    min-height: 160px;
-    padding: 28px 20px;
+    min-height: 180px;
+    padding: 32px 24px;
     border-radius: var(--radius-2xl);
-    --icon-size: 60px; /* compact screens */
+    --icon-size: 72px; /* compact screens - scaled up 1.2x */
     grid-template-rows: 1fr auto 1.6fr; /* still push text lower on mobile */
   }
 

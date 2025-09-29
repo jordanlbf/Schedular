@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "@/app/layout/Header";
+import { ActionBar } from "@/app/layout";
 import { CreateSaleIcon, CheckStockIcon, SearchCustomerIcon } from "./icons";
 import "../styles/index.css";
 
@@ -8,7 +9,7 @@ export default function FrontDesk() {
     <div className="home-wrap frontdesk">
       <Header />
       <main className="home-hero">
-        <h1 className="home-title">Front Desk</h1>
+        <h1 className="home-title">Dashboard</h1>
         <p className="home-subtitle">Choose an action to begin.</p>
         <div className="home-cards" role="list">
           <Link to="/pos/sale" className="home-card" role="listitem" aria-label="Create Sale">
@@ -26,6 +27,7 @@ export default function FrontDesk() {
         </div>
       </main>
       <footer className="home-footer">© {new Date().getFullYear()} Schedular</footer>
+      <ActionBar />
     </div>
   );
 }

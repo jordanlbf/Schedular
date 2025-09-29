@@ -3,8 +3,8 @@
 /* Icon System */
 .frontdesk .card-icon {
   grid-row: 2;                      /* dead-centre of the card */
-  width: var(--icon-size);
-  height: var(--icon-size);
+  width: calc(var(--icon-size) * 1.2);   /* 1.2x larger */
+  height: calc(var(--icon-size) * 1.2);  /* 1.2x larger */
   margin: 0;                        /* no bottom margin to keep true centering */
   position: relative;
   transition: transform var(--transition-normal);

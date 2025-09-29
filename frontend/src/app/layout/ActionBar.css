@@ -1,0 +1,142 @@
+/* Action Bar Component Styles */
+
+.action-bar {
+  position: fixed;
+  bottom: 80px; /* Position above footer */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: calc(100% - 32px);
+  max-width: 1200px;
+  pointer-events: none; /* Allow clicks through empty areas */
+}
+
+.action-bar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-2xl);
+  padding: 16px 24px;
+  box-shadow: var(--shadow-float);
+  pointer-events: auto; /* Re-enable clicks on the bar itself */
+}
+
+/* Layout slots */
+.action-bar__left,
+.action-bar__middle,
+.action-bar__right {
+  display: flex;
+  align-items: center;
+  min-width: 0; /* Allow content to shrink */
+}
+
+.action-bar__left {
+  justify-content: flex-start;
+  flex: 0 0 auto;
+}
+
+.action-bar__middle {
+  justify-content: center;
+  flex: 1 1 auto;
+  margin: 0 16px;
+}
+
+.action-bar__right {
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+/* Back Button */
+.action-bar__back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.action-bar__back-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.action-bar__back-btn:active {
+  transform: translateY(0);
+}
+
+.action-bar__back-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-normal);
+}
+
+.action-bar__back-btn:hover svg {
+  transform: translateX(-2px);
+}
+
+/* Light theme specific styling */
+html.theme-light .action-bar__container {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--gray-200);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+html.theme-light .action-bar__back-btn {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  color: var(--gray-700);
+}
+
+html.theme-light .action-bar__back-btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+  color: var(--gray-900);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .action-bar {
+    bottom: 70px; /* Position above footer on mobile */
+    width: calc(100% - 24px);
+  }
+
+  .action-bar__container {
+    padding: 12px 16px;
+    border-radius: var(--radius-xl);
+  }
+
+  .action-bar__middle {
+    margin: 0 12px;
+  }
+
+  .action-bar__back-btn {
+    padding: 10px 14px;
+    font-size: var(--text-xs);
+    gap: 6px;
+  }
+
+  .action-bar__back-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Safe area for devices with bottom notches */
+@media (max-height: 700px) {
+  .action-bar {
+    bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}

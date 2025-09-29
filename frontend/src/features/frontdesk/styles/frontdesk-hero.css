@@ -1,4 +1,4 @@
-/* Frontdesk Hero Section Styles */
+/* Frontdesk Hero Section Styles - matches home page positioning */
 
 .frontdesk .home-hero {
   height: 100%;
@@ -28,3 +28,4 @@
   font-weight: var(--font-medium);
   line-height: var(--leading-relaxed);
 }
+

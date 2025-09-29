@@ -12,8 +12,8 @@
 
 /* Frontdesk cards - slightly smaller than home cards */
 .frontdesk .home-card {
-  /* icon sizing variable (smaller for 3-card layout) */
-  --icon-size: 78px;
+  /* icon sizing variable (increased by 1.2x for better visibility) */
+  --icon-size: 94px;
 
   display: grid;
   grid-template-rows: 1fr auto 2fr;  /* bigger bottom zone to push text lower */
@@ -25,8 +25,8 @@
   -webkit-backdrop-filter: var(--blur);
   border: 1px solid var(--panel-border);
   border-radius: var(--radius-3xl);
-  padding: 40px 32px;
-  min-height: 200px;
+  padding: 48px 40px;
+  min-height: 240px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;

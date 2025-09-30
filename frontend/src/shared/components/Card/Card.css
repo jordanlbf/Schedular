@@ -1,12 +1,12 @@
-/* Card Component - Consolidated Styles */
+/* Card Component */
 
 .form-card {
   background: var(--panel);
   backdrop-filter: var(--blur);
   -webkit-backdrop-filter: var(--blur);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--form-card-border);
   border-radius: var(--radius-2xl);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--form-card-shadow);
   margin-bottom: var(--spacing-3xl);
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -14,37 +14,27 @@
 
 .form-card:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08), 0 6px 24px rgba(0, 0, 0, 0.06);
-  border-color: rgba(14, 165, 233, 0.08);
+  box-shadow: var(--form-card-shadow-hover);
+  border-color: var(--form-card-border-hover);
 }
 
 .form-card:active {
   transform: translateY(0);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
-  border-color: rgba(14, 165, 233, 0.4) !important;
+  box-shadow: var(--form-card-shadow-active);
+  border-color: var(--form-card-border-active);
 }
 
 .form-card:focus-within {
-  border-color: rgba(14, 165, 233, 0.3) !important;
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  border-color: var(--form-card-border-focus);
+  box-shadow: var(--form-card-focus-shadow);
 }
 
 .form-card-header {
   padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
-  background: linear-gradient(135deg,
-    rgba(219, 234, 254, 0.4) 0%,
-    rgba(147, 197, 253, 0.2) 100%
-  );
+  background: var(--card-header-bg);
   position: relative;
   border-bottom: none;
   border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
-}
-
-html.theme-dark .form-card-header {
-  background: linear-gradient(135deg,
-    rgba(14, 165, 233, 0.08) 0%,
-    rgba(59, 130, 246, 0.04) 100%
-  );
 }
 
 /* Semantic header variations */
@@ -55,13 +45,6 @@ html.theme-dark .form-card-header {
   );
 }
 
-html.theme-dark .form-card-header.success {
-  background: linear-gradient(135deg,
-    rgba(16, 185, 129, 0.08) 0%,
-    rgba(5, 150, 105, 0.04) 100%
-  );
-}
-
 .form-card-header.warning {
   background: linear-gradient(135deg,
     var(--warning-light) 0%,
@@ -69,18 +52,11 @@ html.theme-dark .form-card-header.success {
   );
 }
 
-html.theme-dark .form-card-header.warning {
-  background: linear-gradient(135deg,
-    rgba(245, 158, 11, 0.08) 0%,
-    rgba(217, 119, 6, 0.04) 100%
-  );
-}
-
 .form-card-header h3 {
   margin: 0;
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
-  color: var(--accent-secondary);
+  color: var(--card-header-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +69,6 @@ html.theme-dark .form-card-header.warning {
   text-transform: uppercase;
 }
 
-/* Item count badge for Selected Items header */
 .products-cart-section .form-card-header h3 {
   position: relative;
 }
@@ -112,7 +87,7 @@ html.theme-dark .form-card-header.warning {
 }
 
 .form-card.complete {
-  border: 2px solid rgba(34, 197, 94, 0.5);
+  border: 2px solid var(--form-complete-border);
   transition: all 0.2s ease;
 }
 

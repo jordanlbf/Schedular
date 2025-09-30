@@ -1,6 +1,6 @@
-/* Clean Progress Bar Components */
+/* Progress Bar Components */
 
-/* Progress Bar - Professional styling */
+/* Progress bar container */
 .progress-bar {
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
   overflow: hidden;
 }
 
-/* Container for centered progress steps */
+/* Steps container */
 .progress-steps-container {
   display: flex;
   align-items: center;
@@ -30,7 +30,7 @@
   position: relative;
 }
 
-/* Clean step design */
+/* Step design */
 .progress-step {
   display: flex;
   flex-direction: column;
@@ -56,35 +56,35 @@
 
 .progress-step.clickable:hover .step-icon {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  box-shadow: 0 4px 12px var(--wizard-hover-shadow);
 }
 
 .progress-step.clickable:hover .step-label {
-  color: #ffffff;
+  color: var(--wizard-text-active);
 }
 
 .progress-step.clickable:hover .step-detail {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--wizard-text-active-detail);
 }
 
 .progress-step.clickable:active {
   transform: translateY(0);
 }
 
-/* Enhanced visual feedback for accessible but not completed steps */
+/* Accessible step visual feedback */
 .progress-step.clickable:not(.completed):not(.active) .step-icon {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--wizard-step-accessible-border);
 }
 
 .progress-step.clickable:not(.completed):not(.active) .step-label {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--wizard-text-accessible);
 }
 
 .progress-step.clickable:not(.completed):not(.active) .step-detail {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--wizard-text-accessible-detail);
 }
 
-/* Connection lines between steps - default inactive state */
+/* Connection lines - inactive state */
 .progress-steps-container::before {
   content: '';
   position: absolute;
@@ -96,16 +96,16 @@
     linear-gradient(to right,
       transparent 0%,
       transparent 12.5%,
-      rgba(255, 255, 255, 0.1) 12.5%,
-      rgba(255, 255, 255, 0.1) 29.16%,
+      var(--wizard-line-inactive) 12.5%,
+      var(--wizard-line-inactive) 29.16%,
       transparent 29.16%,
       transparent 41.67%,
-      rgba(255, 255, 255, 0.1) 41.67%,
-      rgba(255, 255, 255, 0.1) 58.33%,
+      var(--wizard-line-inactive) 41.67%,
+      var(--wizard-line-inactive) 58.33%,
       transparent 58.33%,
       transparent 70.84%,
-      rgba(255, 255, 255, 0.1) 70.84%,
-      rgba(255, 255, 255, 0.1) 87.5%,
+      var(--wizard-line-inactive) 70.84%,
+      var(--wizard-line-inactive) 87.5%,
       transparent 87.5%,
       transparent 100%
     );
@@ -114,7 +114,7 @@
   transition: background 0.3s ease;
 }
 
-/* Connection lines turn green as steps are completed */
+/* Connection lines turn green as steps complete */
 .progress-steps-container[data-completed-steps="1"]::before {
   background:
     linear-gradient(to right,
@@ -124,12 +124,12 @@
       var(--success) 29.16%,
       transparent 29.16%,
       transparent 41.67%,
-      rgba(255, 255, 255, 0.1) 41.67%,
-      rgba(255, 255, 255, 0.1) 58.33%,
+      var(--wizard-line-inactive) 41.67%,
+      var(--wizard-line-inactive) 58.33%,
       transparent 58.33%,
       transparent 70.84%,
-      rgba(255, 255, 255, 0.1) 70.84%,
-      rgba(255, 255, 255, 0.1) 87.5%,
+      var(--wizard-line-inactive) 70.84%,
+      var(--wizard-line-inactive) 87.5%,
       transparent 87.5%,
       transparent 100%
     );
@@ -148,8 +148,8 @@
       var(--success) 58.33%,
       transparent 58.33%,
       transparent 70.84%,
-      rgba(255, 255, 255, 0.1) 70.84%,
-      rgba(255, 255, 255, 0.1) 87.5%,
+      var(--wizard-line-inactive) 70.84%,
+      var(--wizard-line-inactive) 87.5%,
       transparent 87.5%,
       transparent 100%
     );
@@ -175,8 +175,7 @@
     );
 }
 
-
-/* Clean step icons */
+/* Step icons */
 .step-icon {
   width: 48px;
   height: 48px;
@@ -192,21 +191,23 @@
   z-index: 2;
 }
 
-/* Step states */
+/* Pending step */
 .progress-step.pending .step-icon {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: var(--wizard-step-pending-bg);
+  color: var(--wizard-step-pending-color);
+  border: 2px solid var(--wizard-step-pending-border);
 }
 
+/* Active step */
 .progress-step.active .step-icon {
-  background: #ffffff;
-  color: #1f2937;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  background: var(--wizard-step-active-bg);
+  color: var(--wizard-step-active-color);
+  border: 2px solid var(--wizard-step-active-border);
+  box-shadow: 0 0 0 3px var(--wizard-step-active-shadow);
   font-weight: 800;
 }
 
+/* Completed step */
 .progress-step.completed .step-icon {
   background: var(--success);
   color: white;
@@ -214,7 +215,14 @@
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15), 0 4px 12px rgba(16, 185, 129, 0.25);
 }
 
-/* Step text content */
+/* Future step */
+.progress-step.future .step-icon {
+  background: var(--wizard-step-future-bg);
+  color: var(--wizard-step-future-color);
+  border: 2px solid var(--wizard-step-future-border);
+}
+
+/* Step text */
 .step-label {
   font-size: var(--text-lg);
   font-weight: var(--font-extrabold);
@@ -233,41 +241,27 @@
   text-transform: capitalize;
 }
 
-/* Step text colors */
+/* Pending step text */
 .progress-step.pending .step-label {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--wizard-text-pending);
 }
 
 .progress-step.pending .step-detail {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--wizard-text-pending-detail);
 }
 
-/* Future steps - dimmed but readable */
-.progress-step.future .step-icon {
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.35);
-  border: 2px solid rgba(255, 255, 255, 0.08);
-}
-
-.progress-step.future .step-label {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.progress-step.future .step-detail {
-  color: rgba(255, 255, 255, 0.3);
-}
-
+/* Active step text */
 .progress-step.active .step-label {
-  color: #ffffff;
+  color: var(--wizard-text-active);
   position: relative;
   font-weight: var(--font-bold);
 }
 
-
 .progress-step.active .step-detail {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--wizard-text-active-detail);
 }
 
+/* Completed step text */
 .progress-step.completed .step-label {
   color: var(--success);
 }
@@ -276,7 +270,16 @@
   color: var(--text-subtle);
 }
 
-/* Responsive progress bar */
+/* Future step text */
+.progress-step.future .step-label {
+  color: var(--wizard-text-future);
+}
+
+.progress-step.future .step-detail {
+  color: var(--wizard-text-future-detail);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .progress-bar {
     flex-direction: column;

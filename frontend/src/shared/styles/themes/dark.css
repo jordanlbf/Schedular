@@ -55,8 +55,8 @@ html.theme-dark {
   --border-gradient: rgba(255, 255, 255, 0.05);
 
   /* ===== Accents ===== */
-  --accent-primary: #ef4444;     /* red accent */
-  --accent-secondary: #0ea5e9;   /* blue accent */
+  --accent-primary: #ef4444;
+  --accent-secondary: #0ea5e9;
   --accent-cyan: #06b6d4;
   --accent-warm: #f39c12;
   --accent-solid: #ef4444;
@@ -78,28 +78,28 @@ html.theme-dark {
   --info-light: rgba(59, 130, 246, 0.1);
   --info-dark: #1d4ed8;
 
-  /* ===== Header (neutral gray chrome in DARK) ===== */
+  /* ===== Header ===== */
   --header-bg: #2B2C2E;
   --header-text: #EBF3F7;
   --header-muted: #AAB6BE;
   --header-border: #1F2124;
 
-  /* Brand wordmark — blue only in DARK mode */
+  /* Brand */
   --brand-color: #0EA5E9;
   --brand-color-hover: #38BDF8;
 
-  /* ===== Nav (keep for backward compatibility) ===== */
+  /* ===== Nav ===== */
   --nav-bg: var(--header-bg);
   --nav-text: var(--header-text);
   --nav-muted: var(--header-muted);
   --nav-border: var(--header-border);
 
-  /* Footer stays neutral gray in dark mode (already defined) */
+  /* ===== Footer ===== */
   --footer-bg: #2B2C2E;
   --footer-text: #CBD5E1;
   --footer-border: #1F2124;
 
-  /* ===== Buttons (tokens to match light API) ===== */
+  /* ===== Buttons ===== */
   --btn-primary-bg: var(--accent-secondary);
   --btn-primary-color: #0B1220;
   --btn-primary-hover-bg: #0284c7;
@@ -122,7 +122,7 @@ html.theme-dark {
   --shadow-glow: 0 0 16px rgba(239, 68, 68, 0.4);
 
   /* ===== Component-Specific ===== */
-  --card-header-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.03) 0%, rgba(147, 197, 253, 0.01) 100%);
+  --card-header-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(59, 130, 246, 0.04) 100%);
   --card-header-color: var(--accent-secondary);
   --card-header-font-size: var(--text-lg);
   --card-header-font-weight: var(--font-semibold);
@@ -130,7 +130,7 @@ html.theme-dark {
   --card-header-text-transform: uppercase;
   --card-header-padding: var(--spacing-xl) var(--spacing-2xl);
 
-  /* Card tokens parity with light (map to existing surfaces) */
+  /* Cards */
   --card-bg: var(--panel);
   --card-border: var(--panel-border);
   --card-hover-bg: var(--panel-hover);
@@ -150,4 +150,78 @@ html.theme-dark {
   /* Overlays */
   --overlay-bg: rgba(0, 0, 0, 0.5);
   --overlay-backdrop: blur(4px);
+
+  /* ===== Wizard Progress Bar ===== */
+  /* Connection lines */
+  --wizard-line-inactive: rgba(255, 255, 255, 0.1);
+
+  /* Pending step */
+  --wizard-step-pending-bg: rgba(255, 255, 255, 0.08);
+  --wizard-step-pending-color: rgba(255, 255, 255, 0.6);
+  --wizard-step-pending-border: rgba(255, 255, 255, 0.15);
+  --wizard-text-pending: rgba(255, 255, 255, 0.6);
+  --wizard-text-pending-detail: rgba(255, 255, 255, 0.45);
+
+  /* Active step */
+  --wizard-step-active-bg: #ffffff;
+  --wizard-step-active-color: #1f2937;
+  --wizard-step-active-border: #ffffff;
+  --wizard-step-active-shadow: rgba(255, 255, 255, 0.1);
+  --wizard-text-active: #ffffff;
+  --wizard-text-active-detail: rgba(255, 255, 255, 0.9);
+
+  /* Future step */
+  --wizard-step-future-bg: rgba(255, 255, 255, 0.04);
+  --wizard-step-future-color: rgba(255, 255, 255, 0.35);
+  --wizard-step-future-border: rgba(255, 255, 255, 0.08);
+  --wizard-text-future: rgba(255, 255, 255, 0.4);
+  --wizard-text-future-detail: rgba(255, 255, 255, 0.3);
+
+  /* Accessible/clickable step */
+  --wizard-step-accessible-border: rgba(255, 255, 255, 0.3);
+  --wizard-text-accessible: rgba(255, 255, 255, 0.8);
+  --wizard-text-accessible-detail: rgba(255, 255, 255, 0.6);
+
+  /* Hover states */
+  --wizard-hover-shadow: rgba(14, 165, 233, 0.3);
+
+  /* ===== Form Cards & Inputs ===== */
+  /* Card shadows */
+  --form-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --form-card-shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.08), 0 6px 24px rgba(0, 0, 0, 0.06);
+  --form-card-shadow-active: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+
+  /* Card borders */
+  --form-card-border: rgba(0, 0, 0, 0.04);
+  --form-card-border-hover: rgba(14, 165, 233, 0.08);
+  --form-card-border-active: rgba(14, 165, 233, 0.4);
+  --form-card-border-focus: rgba(14, 165, 233, 0.3);
+
+  /* Card focus shadow */
+  --form-card-focus-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+
+  /* Input focus */
+  --form-input-focus-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  --form-input-focus-ring: 0 0 0 1px var(--accent-secondary);
+
+  /* Success states */
+  --form-success-ring: 0 0 0 2px rgba(16, 185, 129, 0.15);
+  --form-success-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+  --form-success-bg-light: rgba(16, 185, 129, 0.03);
+
+  /* Error states */
+  --form-error-bg: rgba(239, 68, 68, 0.05);
+  --form-error-ring: 0 0 0 2px rgba(239, 68, 68, 0.1);
+
+  /* Completion indicator */
+  --form-complete-border: rgba(34, 197, 94, 0.5);
+  --form-complete-bg: var(--success-light);
+  --form-complete-border-ring: rgba(34, 197, 94, 0.3);
+
+  /* Add person section */
+  --form-add-person-bg: rgba(14, 165, 233, 0.05);
+  --form-add-person-bg-hover: rgba(14, 165, 233, 0.08);
+  --form-add-person-border: rgba(14, 165, 233, 0.2);
+  --form-add-person-border-hover: rgba(14, 165, 233, 0.3);
+  --form-add-person-badge-bg: rgba(14, 165, 233, 0.15);
 }

@@ -8,28 +8,31 @@ html.theme-light {
   color-scheme: light;
 
   /* ===== Canvas & Surfaces ===== */
-  --bg: #EEF1F7;                              /* cool soft background */
-  --bg-overlay: rgba(28, 33, 53, 0.03);
+  --bg: #E8EDF5;                              /* deeper cool background for better card contrast */
+  --bg-overlay: rgba(28, 33, 53, 0.05);
 
   --panel: #FFFFFF;                           /* cards, sheets */
   --panel-rgb: 255,255,255;
   --panel-elev: #FFFFFF;
   --panel-hover: #F9FAFF;                     /* neutral hover for generic panels */
-  --panel-border: #E3E8EF;                    /* light periwinkle-tinted gray */
+  --panel-border: #DFE5EE;                    /* slightly stronger periwinkle-tinted gray */
 
   /* Cards (tiles) */
   --card-bg: #FFFFFF;
-  --card-border: #E3E8EF;
-  --card-hover-bg: #F3F4FE;                   /* subtle periwinkle tint */
+  --card-border: #DFE5EE;
+  --card-hover-bg: #F0F2FE;                   /* more vibrant periwinkle tint */
   --card-hover-border: #6C63FF;               /* periwinkle on hover */
 
   /* ===== Typography ===== */
   --text: #1F2937;                            /* dark slate */
   --text-primary: var(--text);
-  --text-subtle: #4B5563;                     /* medium slate */
-  --text-muted: #6B7280;                      /* light slate */
+  --text-subtle: #374151;                     /* darker medium slate for better contrast */
+  --text-muted: #6B7280;                      /* refined light slate */
   --muted: var(--text-muted);
   --muted-light: #9CA3AF;
+
+  /* Optional heading gradient for enhanced titles */
+  --text-gradient: linear-gradient(135deg, #1F2937 0%, #4B5563 100%);
 
   /* ===== Brand / Accents ===== */
   --accent-primary: #6C63FF;                  /* Periwinkle */
@@ -58,8 +61,8 @@ html.theme-light {
   --error-dark: #E54848;
 
   /* ===== Borders ===== */
-  --border: #E3E8EF;
-  --border-strong: #D1D5DB;
+  --border: #DFE5EE;
+  --border-strong: #C9D1DB;
   --border-hover: #6C63FF;                    /* periwinkle on hover */
   --border-gradient: linear-gradient(90deg, #6C63FF, #4F7BFF);
 
@@ -111,14 +114,14 @@ html.theme-light {
   --input-placeholder: #9CA3AF;
 
   /* ===== Shadows (subtle, modern) ===== */
-  --shadow: 0 2px 6px rgba(17, 24, 39, 0.08), 0 1px 2px rgba(17, 24, 39, 0.06);
-  --shadow-soft: 0 1px 3px rgba(17, 24, 39, 0.08);
+  --shadow: 0 2px 8px rgba(17, 24, 39, 0.10), 0 1px 3px rgba(17, 24, 39, 0.08);
+  --shadow-soft: 0 2px 4px rgba(17, 24, 39, 0.10);
   --shadow-md: 0 6px 14px rgba(17, 24, 39, 0.10);
   --shadow-lg: 0 12px 24px rgba(17, 24, 39, 0.12);
   --shadow-xl: 0 20px 28px rgba(17, 24, 39, 0.14);
   --shadow-ambient: 0 10px 20px rgba(17, 24, 39, 0.10);
-  --shadow-glass: 0 6px 12px rgba(17, 24, 39, 0.08), inset 0 1px 0 rgba(255,255,255,0.9);
-  --shadow-float: 0 12px 24px rgba(17, 24, 39, 0.12);
+  --shadow-glass: 0 8px 16px rgba(17, 24, 39, 0.10), inset 0 1px 0 rgba(255,255,255,0.9);
+  --shadow-float: 0 16px 32px rgba(17, 24, 39, 0.14);
   --shadow-glow: 0 0 0 3px rgba(108, 99, 255, 0.22);       /* focus ring */
 
   /* ===== Card Headers (optional) ===== */

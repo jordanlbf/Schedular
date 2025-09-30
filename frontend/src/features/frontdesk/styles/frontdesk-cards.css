@@ -36,15 +36,35 @@
   overflow: hidden;
 }
 
-/* Light theme specific card styling */
+/* Light theme specific card styling - use enhanced theme variables */
 html.theme-light .frontdesk .home-card {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-glass);
+  border: 1px solid var(--card-border);
 }
 
 html.theme-light .frontdesk .home-card:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-color: var(--border-hover);
+  box-shadow: var(--shadow-float);
+}
+
+/* Create Sale - Green theme */
+html.theme-light .frontdesk .home-card:nth-child(1):hover {
+  border-color: #10b981;
+  background: #f0fdf4;
+  box-shadow: 0 16px 32px rgba(16, 185, 129, 0.20), 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Check Stock - Purple theme */
+html.theme-light .frontdesk .home-card:nth-child(2):hover {
+  border-color: #8b5cf6;
+  background: #faf5ff;
+  box-shadow: 0 16px 32px rgba(139, 92, 246, 0.20), 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+/* Search Customer - Orange theme */
+html.theme-light .frontdesk .home-card:nth-child(3):hover {
+  border-color: #f59e0b;
+  background: #fffbeb;
+  box-shadow: 0 16px 32px rgba(245, 158, 11, 0.20), 0 0 0 3px rgba(245, 158, 11, 0.15);
 }
 
 /* Strategic accent border */
@@ -61,10 +81,7 @@ html.theme-light .frontdesk .home-card:hover {
 }
 
 .frontdesk .home-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-float);
-  background: var(--panel-hover);
+  transform: translateY(-4px) scale(1.01);
 }
 
 .frontdesk .home-card:hover::before {

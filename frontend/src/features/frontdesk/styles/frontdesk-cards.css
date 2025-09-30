@@ -1,6 +1,6 @@
-/* Frontdesk Cards Styles */
+/* Frontdesk Cards */
 
-/* Card Grid System - 3 cards side-by-side, slightly smaller */
+/* Card grid */
 .frontdesk .home-cards {
   width: 100%;
   max-width: 1100px;
@@ -10,13 +10,12 @@
   padding: 20px;
 }
 
-/* Frontdesk cards - slightly smaller than home cards */
+/* Card styles */
 .frontdesk .home-card {
-  /* icon sizing variable (increased by 1.2x for better visibility) */
   --icon-size: 94px;
 
   display: grid;
-  grid-template-rows: 1fr auto 2fr;  /* bigger bottom zone to push text lower */
+  grid-template-rows: 1fr auto 2fr;
   place-items: center;
 
   text-align: center;
@@ -36,7 +35,27 @@
   overflow: hidden;
 }
 
-/* Light theme specific card styling - use enhanced theme variables */
+/* Shine overlay */
+.frontdesk .home-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--ambient-shine);
+  opacity: 0;
+  transition: all 0.6s var(--ease-out);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.frontdesk .home-card:hover::after {
+  left: 100%;
+  opacity: 0.3;
+}
+
+/* Light theme card styling */
 html.theme-light .frontdesk .home-card {
   box-shadow: var(--shadow-glass);
   border: 1px solid var(--card-border);
@@ -46,28 +65,30 @@ html.theme-light .frontdesk .home-card:hover {
   box-shadow: var(--shadow-float);
 }
 
-/* Create Sale - Green theme */
+/* Card hover themes */
+
+/* Green theme */
 html.theme-light .frontdesk .home-card:nth-child(1):hover {
   border-color: #10b981;
   background: #f0fdf4;
   box-shadow: 0 16px 32px rgba(16, 185, 129, 0.20), 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
 
-/* Check Stock - Purple theme */
+/* Purple theme */
 html.theme-light .frontdesk .home-card:nth-child(2):hover {
   border-color: #8b5cf6;
   background: #faf5ff;
   box-shadow: 0 16px 32px rgba(139, 92, 246, 0.20), 0 0 0 3px rgba(139, 92, 246, 0.15);
 }
 
-/* Search Customer - Orange theme */
+/* Orange theme */
 html.theme-light .frontdesk .home-card:nth-child(3):hover {
   border-color: #f59e0b;
   background: #fffbeb;
   box-shadow: 0 16px 32px rgba(245, 158, 11, 0.20), 0 0 0 3px rgba(245, 158, 11, 0.15);
 }
 
-/* Strategic accent border */
+/* Top accent strip */
 .frontdesk .home-card::before {
   content: '';
   position: absolute;
@@ -88,7 +109,7 @@ html.theme-light .frontdesk .home-card:nth-child(3):hover {
   transform: scaleX(1);
 }
 
-/* Strategic accent colors for different cards with gradients */
+/* Accent strip colors */
 .frontdesk .home-card:nth-child(1)::before {
   background: linear-gradient(90deg, #10b981, #059669);
 }
@@ -101,12 +122,14 @@ html.theme-light .frontdesk .home-card:nth-child(3):hover {
   background: linear-gradient(90deg, #f59e0b, #d97706);
 }
 
-/* Card Content */
+/* Card title */
 .frontdesk .home-card h2 {
-  grid-row: 3;              /* sits in lower third */
-  margin: 24px 0 0;         /* moved further down relative to icon */
+  grid-row: 3;
+  margin: 24px 0 0;
   font-size: var(--text-xl);
   font-weight: var(--font-semibold);
   letter-spacing: var(--tracking-normal);
   line-height: var(--leading-snug);
+  position: relative;
+  z-index: 2;
 }

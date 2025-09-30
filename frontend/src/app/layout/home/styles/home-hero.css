@@ -13,6 +13,25 @@
   position: relative;
 }
 
+/* Ambient glow effect */
+.home-hero::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 40%;
+  background: var(--ambient-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
 .home-title {
   font-size: var(--text-4xl);
   font-weight: var(--font-extrabold);

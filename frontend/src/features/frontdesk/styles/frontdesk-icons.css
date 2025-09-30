@@ -1,23 +1,39 @@
-/* Frontdesk Icon Styles */
+/* Frontdesk Icons */
 
-/* Icon System */
+/* Icon system */
 .frontdesk .card-icon {
-  grid-row: 2;                      /* dead-centre of the card */
-  width: calc(var(--icon-size) * 1.2);   /* 1.2x larger */
-  height: calc(var(--icon-size) * 1.2);  /* 1.2x larger */
-  margin: 0;                        /* no bottom margin to keep true centering */
+  grid-row: 2;
+  width: calc(var(--icon-size) * 1.2);
+  height: calc(var(--icon-size) * 1.2);
+  margin: 0;
   position: relative;
   transition: transform var(--transition-normal);
+  z-index: 2;
 }
 
+/* Icon hover animation */
 .frontdesk .home-card:hover .card-icon {
   transform: scale(1.1);
 }
 
-/* SVG Icon Polish */
+/* Icon styles */
 .create-sale,
 .check-stock,
 .search-customer {
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: filter var(--transition-normal);
+}
+
+/* Icon glow on hover */
+.frontdesk .home-card:nth-child(1):hover .create-sale {
+  filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.4)) drop-shadow(var(--glow-success));
+}
+
+.frontdesk .home-card:nth-child(2):hover .check-stock {
+  filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.4)) drop-shadow(var(--glow-purple));
+}
+
+.frontdesk .home-card:nth-child(3):hover .search-customer {
+  filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.4)) drop-shadow(var(--glow-warning));
 }

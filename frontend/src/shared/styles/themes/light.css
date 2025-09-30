@@ -8,46 +8,62 @@ html.theme-light {
   color-scheme: light;
 
   /* ===== Canvas & Surfaces ===== */
-  --bg: #E8EDF5;                              /* deeper cool background for better card contrast */
+  --bg: #E8EDF5;
   --bg-overlay: rgba(28, 33, 53, 0.05);
+  --bg-gradient: linear-gradient(180deg, #EBF0F7 0%, #E8EDF5 50%, #E5EAF3 100%);
+  --bg-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236C63FF' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 
-  --panel: #FFFFFF;                           /* cards, sheets */
+  --panel: #FFFFFF;
   --panel-rgb: 255,255,255;
   --panel-elev: #FFFFFF;
-  --panel-hover: #F9FAFF;                     /* neutral hover for generic panels */
-  --panel-border: #DFE5EE;                    /* slightly stronger periwinkle-tinted gray */
+  --panel-hover: #F6F8FF;
+  --panel-border: #DFE5EE;
 
-  /* Cards (tiles) */
+  /* Cards */
   --card-bg: #FFFFFF;
   --card-border: #DFE5EE;
-  --card-hover-bg: #F0F2FE;                   /* more vibrant periwinkle tint */
-  --card-hover-border: #6C63FF;               /* periwinkle on hover */
+  --card-hover-bg: #F0F2FE;
+  --card-hover-border: #6C63FF;
 
   /* ===== Typography ===== */
-  --text: #1F2937;                            /* dark slate */
+  --text: #1F2937;
   --text-primary: var(--text);
-  --text-subtle: #374151;                     /* darker medium slate for better contrast */
-  --text-muted: #6B7280;                      /* refined light slate */
+  --text-subtle: #374151;
+  --text-muted: #6B7280;
   --muted: var(--text-muted);
   --muted-light: #9CA3AF;
-
-  /* Optional heading gradient for enhanced titles */
   --text-gradient: linear-gradient(135deg, #1F2937 0%, #4B5563 100%);
 
   /* ===== Brand / Accents ===== */
-  --accent-primary: #6C63FF;                  /* Periwinkle */
+  --accent-primary: #6C63FF;
   --accent-primary-contrast: #FFFFFF;
-  --accent-secondary: #4F7BFF;                /* brighter blue for hover/focus */
-  --accent-cyan: #62B2FF;                     /* optional highlight */
-  --accent-warm: #FF8FA3;                     /* warm/coral tags */
+  --accent-secondary: #4F7BFF;
+  --accent-cyan: #62B2FF;
+  --accent-warm: #FF8FA3;
   --accent-solid: var(--accent-primary);
 
-  /* Info uses cooler blue to separate from purple primary */
+  /* Icon gradients */
+  --icon-gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  --icon-gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --icon-gradient-orange: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --icon-gradient-blue: linear-gradient(135deg, #6C63FF 0%, #4F7BFF 100%);
+
+  /* Glow effects */
+  --glow-primary: 0 0 20px rgba(108, 99, 255, 0.3);
+  --glow-success: 0 0 20px rgba(16, 185, 129, 0.3);
+  --glow-warning: 0 0 20px rgba(245, 158, 11, 0.3);
+  --glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
+
+  /* Ambient effects */
+  --ambient-glow: radial-gradient(circle at 50% 0%, rgba(108, 99, 255, 0.08) 0%, transparent 50%);
+  --ambient-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 50%);
+
+  /* Info */
   --info: #4F7BFF;
   --info-light: #EDF3FF;
   --info-dark: #2E5DFF;
 
-  /* States (kept professional & consistent) */
+  /* States */
   --success: #22C55E;
   --success-light: #ECFDF5;
   --success-dark: #16A34A;
@@ -63,32 +79,32 @@ html.theme-light {
   /* ===== Borders ===== */
   --border: #DFE5EE;
   --border-strong: #C9D1DB;
-  --border-hover: #6C63FF;                    /* periwinkle on hover */
+  --border-hover: #6C63FF;
   --border-gradient: linear-gradient(90deg, #6C63FF, #4F7BFF);
 
-  /* ===== Header (white chrome) ===== */
+  /* ===== Header ===== */
   --header-bg: #FFFFFF;
-  --header-text: #1F2937;          /* dark slate for nav links */
+  --header-text: #1F2937;
   --header-muted: #6B7280;
   --header-border: #E3E8EF;
 
-  /* Brand wordmark in LIGHT mode: periwinkle */
-  --brand-color: #6C63FF;          /* periwinkle */
-  --brand-color-hover: #4F7BFF;    /* brighter blue on hover */
+  /* Brand */
+  --brand-color: #6C63FF;
+  --brand-color-hover: #4F7BFF;
 
-  /* ===== Nav (keep for backward compatibility) ===== */
+  /* ===== Nav ===== */
   --nav-bg: var(--header-bg);
   --nav-text: var(--header-text);
   --nav-muted: var(--header-muted);
   --nav-border: var(--header-border);
 
-  /* ===== Footer (keep existing purple) ===== */
+  /* ===== Footer ===== */
   --footer-bg: #6C63FF;
   --footer-text: #F3F4FF;
   --footer-muted: #E0E4FF;
   --footer-border: #5B54D6;
 
-  /* Theme toggle (optional helper used by some UIs) */
+  /* Theme toggle */
   --toggle-light-bg: #DDD6FE;
 
   /* ===== Buttons ===== */
@@ -99,7 +115,7 @@ html.theme-light {
 
   --btn-secondary-bg: #FFFFFF;
   --btn-secondary-color: #4F7BFF;
-  --btn-secondary-hover-bg: #F3F4FE;
+  --btn-secondary-hover-bg: #F0F2FE;
   --btn-secondary-border: #CDD6F6;
 
   --btn-danger-bg: #FF6B6B;
@@ -109,11 +125,11 @@ html.theme-light {
   --input-bg: #FFFFFF;
   --input-border: #E3E8EF;
   --input-focus-border: #6C63FF;
-  --input-focus-shadow: 0 0 0 3px rgba(108, 99, 255, 0.22); /* periwinkle glow */
+  --input-focus-shadow: 0 0 0 3px rgba(108, 99, 255, 0.22);
   --input-text: var(--text);
   --input-placeholder: #9CA3AF;
 
-  /* ===== Shadows (subtle, modern) ===== */
+  /* ===== Shadows ===== */
   --shadow: 0 2px 8px rgba(17, 24, 39, 0.10), 0 1px 3px rgba(17, 24, 39, 0.08);
   --shadow-soft: 0 2px 4px rgba(17, 24, 39, 0.10);
   --shadow-md: 0 6px 14px rgba(17, 24, 39, 0.10);
@@ -122,9 +138,9 @@ html.theme-light {
   --shadow-ambient: 0 10px 20px rgba(17, 24, 39, 0.10);
   --shadow-glass: 0 8px 16px rgba(17, 24, 39, 0.10), inset 0 1px 0 rgba(255,255,255,0.9);
   --shadow-float: 0 16px 32px rgba(17, 24, 39, 0.14);
-  --shadow-glow: 0 0 0 3px rgba(108, 99, 255, 0.22);       /* focus ring */
+  --shadow-glow: 0 0 0 3px rgba(108, 99, 255, 0.22);
 
-  /* ===== Card Headers (optional) ===== */
+  /* ===== Card Headers ===== */
   --card-header-bg: linear-gradient(180deg, #F8FAFF 0%, #EEF1F7 100%);
   --card-header-color: #2C3257;
 
@@ -140,11 +156,11 @@ html.theme-light {
   --badge-info-bg: #ECF2FF;
   --badge-info-color: #3757FF;
 
-  /* ===== Optional gradients for your home card strips ===== */
+  /* ===== Card Strips ===== */
   --card-strip-front: linear-gradient(90deg, #6C63FF, #8B80FF);
   --card-strip-back:  linear-gradient(90deg, #4F7BFF, #6C63FF);
 
-  /* Stock status (kept for your app) */
+  /* Stock status */
   --stock-low-bg: #FFF7E6;
   --stock-low-color: #C9832A;
   --stock-out-bg: #FFE9EC;

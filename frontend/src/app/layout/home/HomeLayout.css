@@ -5,9 +5,34 @@
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  background: var(--bg-gradient);
+  position: relative;
 }
 
-/* Footer styles moved to Footer.css */
+/* Background pattern overlay */
+.home-wrap::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-pattern);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content appears above pattern */
+.home-wrap > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure header is clickable */
+.home-wrap > header {
+  z-index: 10;
+}
 
 /* Utility pages */
 .page {

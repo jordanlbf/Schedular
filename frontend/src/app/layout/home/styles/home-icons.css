@@ -2,22 +2,33 @@
 
 /* Icon System */
 .card-icon {
-  grid-row: 2;                      /* dead-centre of the card */
-  width: calc(var(--icon-size) * 1.2);   /* 1.2x larger */
-  height: calc(var(--icon-size) * 1.2);  /* 1.2x larger */
-  margin: 0;                        /* no bottom margin to keep true centering */
+  grid-row: 2;
+  width: calc(var(--icon-size) * 1.2);
+  height: calc(var(--icon-size) * 1.2);
+  margin: 0;
   position: relative;
   transition: transform var(--transition-normal);
+  z-index: 2;
 }
 
-/* Unified hover animation for all icons */
+/* Icon hover animation */
 .home-card:hover .card-icon {
   transform: scale(1.1);
 }
 
-/* SVG Icon Polish */
+/* Icon styles */
 .frontdesk-register,
 .backend-inventory {
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: filter var(--transition-normal);
+}
+
+/* Icon glow on hover */
+.home-card:nth-child(1):hover .frontdesk-register {
+  filter: drop-shadow(0 4px 8px rgba(108, 99, 255, 0.4)) drop-shadow(var(--glow-primary));
+}
+
+.home-card:nth-child(2):hover .backend-inventory {
+  filter: drop-shadow(0 4px 8px rgba(79, 123, 255, 0.4)) drop-shadow(var(--glow-primary));
 }

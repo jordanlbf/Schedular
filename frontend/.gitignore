@@ -17,6 +17,10 @@ dist-ssr
 # TypeScript build cache
 *.tsbuildinfo
 
+# CSS analysis reports
+css-analysis-report.json
+temp-purged/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

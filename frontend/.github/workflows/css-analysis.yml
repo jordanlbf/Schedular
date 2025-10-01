@@ -1,0 +1,108 @@
+name: CSS Analysis
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'src/**/*.css'
+      - 'src/**/*.tsx'
+      - 'src/**/*.ts'
+  push:
+    branches: [main, develop]
+    paths:
+      - 'src/**/*.css'
+      - 'src/**/*.tsx'
+      - 'src/**/*.ts'
+  workflow_dispatch: # Allow manual triggers
+
+jobs:
+  analyse-css:
+    name: Analyse CSS Usage
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run CSS analysis
+        id: css_analysis
+        run: |
+          npm run css:unused
+          echo "Analysis complete"
+
+      - name: Upload CSS analysis report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: css-analysis-report-${{ github.sha }}
+          path: css-analysis-report.json
+          retention-days: 30
+
+      - name: Comment on PR with results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let report;
+            try {
+              report = JSON.parse(fs.readFileSync('css-analysis-report.json', 'utf8'));
+            } catch (error) {
+              console.log('No report file found');
+              return;
+            }
+
+            const { summary, files } = report;
+            const highWasteFiles = files.filter(f => f.savingsPercent > 30);
+            
+            let comment = '## 📊 CSS Analysis Report\n\n';
+            comment += '### Summary\n';
+            comment += `- **Total CSS Size**: ${(summary.totalOriginalSize / 1024).toFixed(2)} KB\n`;
+            comment += `- **Potential Savings**: ${(summary.totalSavings / 1024).toFixed(2)} KB (${summary.savingsPercent}%)\n`;
+            comment += `- **Unused Selectors**: ${summary.totalRejectedSelectors}\n\n`;
+            
+            if (highWasteFiles.length > 0) {
+              comment += '### ⚠️ Files with High CSS Waste (>30%)\n\n';
+              highWasteFiles.forEach(f => {
+                comment += `- **${f.file}**: ${f.savingsPercent}% unused (${f.rejectedSelectors.length} selectors)\n`;
+              });
+              comment += '\n💡 Consider reviewing these files for unused styles.\n';
+            } else {
+              comment += '### ✅ CSS Health: Good\n\n';
+              comment += 'All CSS files have reasonable usage patterns.\n';
+            }
+            
+            comment += '\n---\n';
+            comment += '_Download the full report from the workflow artefacts for detailed information._';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Fail if excessive CSS waste
+        if: always()
+        run: |
+          if [ -f css-analysis-report.json ]; then
+            WASTE=$(node -pe "JSON.parse(require('fs').readFileSync('css-analysis-report.json')).summary.savingsPercent")
+            echo "CSS waste: $WASTE%"
+            
+            # Warning threshold
+            if [ "$(echo "$WASTE > 40" | bc)" -eq 1 ]; then
+              echo "⚠️ WARNING: CSS waste exceeds 40%"
+              echo "Consider cleaning up unused styles"
+              exit 1
+            fi
+          fi

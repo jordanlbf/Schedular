@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "gen:routes": "tsx scripts/generate-routes-docs.ts"
+    "gen:routes": "tsx scripts/generate-routes-docs.ts",
+    "css:analyse": "purgecss --css 'src/**/*.css' --content 'src/**/*.{tsx,ts,jsx,js}' --output temp-purged --rejected",
+    "css:unused": "node scripts/analyse-unused-css.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -26,7 +28,9 @@
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "glob": "^11.0.0",
     "globals": "^16.3.0",
+    "purgecss": "^6.0.0",
     "tsx": "^4.20.5",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",

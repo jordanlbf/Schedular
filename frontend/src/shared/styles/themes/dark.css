@@ -62,9 +62,9 @@ html.theme-dark {
   --accent-solid: #ef4444;
 
   /* ===== States ===== */
-  --success: #10b981;
-  --success-light: rgba(16, 185, 129, 0.1);
-  --success-dark: #047857;
+  --success: #22C55E;
+  --success-light: rgba(34, 197, 94, 0.1);
+  --success-dark: #16A34A;
 
   --warning: #f59e0b;
   --warning-light: rgba(245, 158, 11, 0.1);
@@ -154,6 +154,7 @@ html.theme-dark {
   /* ===== Wizard Progress Bar ===== */
   /* Connection lines */
   --wizard-line-inactive: rgba(255, 255, 255, 0.1);
+  --wizard-line-completed: #22C55E;
 
   /* Pending step */
   --wizard-step-pending-bg: rgba(255, 255, 255, 0.08);
@@ -167,8 +168,16 @@ html.theme-dark {
   --wizard-step-active-color: #1f2937;
   --wizard-step-active-border: #ffffff;
   --wizard-step-active-shadow: rgba(255, 255, 255, 0.1);
+  --wizard-step-active-glow: 0 0 0 3px rgba(255, 255, 255, 0.15), 0 4px 12px rgba(255, 255, 255, 0.25);
   --wizard-text-active: #ffffff;
   --wizard-text-active-detail: rgba(255, 255, 255, 0.9);
+
+  /* Completed step - original bright green */
+  --wizard-step-completed-bg: #22C55E;
+  --wizard-step-completed-color: #FFFFFF;
+  --wizard-step-completed-border: #22C55E;
+  --wizard-step-completed-shadow: rgba(34, 197, 94, 0.25);
+  --wizard-step-completed-glow: 0 0 0 3px rgba(34, 197, 94, 0.15), 0 4px 12px rgba(34, 197, 94, 0.25);
 
   /* Future step */
   --wizard-step-future-bg: rgba(255, 255, 255, 0.04);
@@ -176,6 +185,10 @@ html.theme-dark {
   --wizard-step-future-border: rgba(255, 255, 255, 0.08);
   --wizard-text-future: rgba(255, 255, 255, 0.4);
   --wizard-text-future-detail: rgba(255, 255, 255, 0.3);
+
+  /* Completed step text */
+  --wizard-text-completed: #22C55E;
+  --wizard-text-completed-detail: #16A34A;
 
   /* Accessible/clickable step */
   --wizard-step-accessible-border: rgba(255, 255, 255, 0.3);
@@ -205,9 +218,9 @@ html.theme-dark {
   --form-input-focus-ring: 0 0 0 1px var(--accent-secondary);
 
   /* Success states */
-  --form-success-ring: 0 0 0 2px rgba(16, 185, 129, 0.15);
-  --form-success-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
-  --form-success-bg-light: rgba(16, 185, 129, 0.03);
+  --form-success-ring: 0 0 0 2px rgba(34, 197, 94, 0.15);
+  --form-success-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+  --form-success-bg-light: rgba(34, 197, 94, 0.03);
 
   /* Error states */
   --form-error-bg: rgba(239, 68, 68, 0.05);

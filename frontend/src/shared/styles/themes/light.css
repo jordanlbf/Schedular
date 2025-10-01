@@ -44,13 +44,13 @@ html.theme-light {
 
   /* Icon gradients */
   --icon-gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-  --icon-gradient-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --icon-gradient-green: linear-gradient(135deg, #14B8A6 0%, #0D9488 100%);
   --icon-gradient-orange: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
   --icon-gradient-blue: linear-gradient(135deg, #6C63FF 0%, #4F7BFF 100%);
 
   /* Glow effects */
   --glow-primary: 0 0 20px rgba(108, 99, 255, 0.3);
-  --glow-success: 0 0 20px rgba(16, 185, 129, 0.3);
+  --glow-success: 0 0 20px rgba(20, 184, 166, 0.3);
   --glow-warning: 0 0 20px rgba(245, 158, 11, 0.3);
   --glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
 
@@ -64,9 +64,9 @@ html.theme-light {
   --info-dark: #2E5DFF;
 
   /* States */
-  --success: #22C55E;
-  --success-light: #ECFDF5;
-  --success-dark: #16A34A;
+  --success: #14B8A6;
+  --success-light: #F0FDFA;
+  --success-dark: #0D9488;
 
   --warning: #F7B267;
   --warning-light: #FFF6EA;
@@ -147,8 +147,8 @@ html.theme-light {
   /* ===== Badges ===== */
   --badge-default-bg: #EEF2FF;
   --badge-default-color: #3730A3;
-  --badge-success-bg: #E6F9F0;
-  --badge-success-color: #178F4A;
+  --badge-success-bg: #F0FDFA;
+  --badge-success-color: #0D9488;
   --badge-warning-bg: #FFF2E3;
   --badge-warning-color: #C9832A;
   --badge-danger-bg: #FFE9EC;
@@ -165,46 +165,64 @@ html.theme-light {
   --stock-low-color: #C9832A;
   --stock-out-bg: #FFE9EC;
   --stock-out-color: #D95C6A;
-  --stock-available-bg: #E6F9F0;
-  --stock-available-color: #178F4A;
+  --stock-available-bg: #F0FDFA;
+  --stock-available-color: #0D9488;
 
-  /* ===== Wizard Progress Bar ===== */
-  /* Connection lines - more visible */
-  --wizard-line-inactive: #B8BFC9;
+  /* ===== Wizard Progress Bar - Enhanced Visual Hierarchy ===== */
+  /* Connection lines - elegant and subtle */
+  --wizard-line-inactive: #D1D5DB;
+  --wizard-line-completed: #14B8A6;
 
-  /* Step icon states - much stronger contrast */
-  --wizard-step-pending-bg: #E5E7EB;
-  --wizard-step-pending-color: #4B5563;
-  --wizard-step-pending-border: #9CA3AF;
+  /* Pending step - stronger visual presence */
+  --wizard-step-pending-bg: #EEF2FF;
+  --wizard-step-pending-color: #4338CA;
+  --wizard-step-pending-border: #818CF8;
 
-  --wizard-step-active-bg: #6C63FF;
+  /* Active step - brand color emphasis with gradient */
+  --wizard-step-active-bg: linear-gradient(135deg, #6366F1 0%, #818CF8 100%);
   --wizard-step-active-color: #FFFFFF;
-  --wizard-step-active-border: #6C63FF;
-  --wizard-step-active-shadow: rgba(108, 99, 255, 0.25);
+  --wizard-step-active-border: #6366F1;
+  --wizard-step-active-shadow: rgba(99, 102, 241, 0.4);
+  --wizard-step-active-glow: 0 0 0 4px rgba(99, 102, 241, 0.2), 0 8px 16px rgba(99, 102, 241, 0.3);
 
-  --wizard-step-future-bg: #F3F4F6;
-  --wizard-step-future-color: #6B7280;
-  --wizard-step-future-border: #D1D5DB;
+  /* Completed step - refined teal accent */
+  --wizard-step-completed-bg: #0D9488;
+  --wizard-step-completed-color: #FFFFFF;
+  --wizard-step-completed-border: #0D9488;
+  --wizard-step-completed-shadow: rgba(13, 148, 136, 0.3);
+  --wizard-step-completed-glow: 0 0 0 3px rgba(13, 148, 136, 0.2), 0 6px 14px rgba(13, 148, 136, 0.3);
 
-  /* Step text states - much darker for readability */
+  /* Future step - subtle and recessed (NOT clickable) */
+  --wizard-step-future-bg: #F9FAFB;
+  --wizard-step-future-color: #D1D5DB;
+  --wizard-step-future-border: #E5E7EB;
+
+  /* Step text states - enhanced readability */
   --wizard-text-pending: #1F2937;
-  --wizard-text-pending-detail: #4B5563;
+  --wizard-text-pending-detail: #6B7280;
 
-  --wizard-text-active: #1F2937;
-  --wizard-text-active-detail: #374151;
+  --wizard-text-active: #111827;
+  --wizard-text-active-detail: #4338CA;
 
-  --wizard-text-future: #6B7280;
-  --wizard-text-future-detail: #9CA3AF;
+  --wizard-text-completed: #0F766E;
+  --wizard-text-completed-detail: #0D9488;
 
-  /* Clickable/accessible step states */
-  --wizard-step-accessible-border: #6B7280;
-  --wizard-text-accessible: #374151;
-  --wizard-text-accessible-detail: #4B5563;
+  --wizard-text-future: #D1D5DB;
+  --wizard-text-future-detail: #E5E7EB;
 
-  /* Hover states */
+  /* Clickable/accessible step states (can navigate back to) */
+  --wizard-step-accessible-bg: #F3F4F6;
+  --wizard-step-accessible-color: #4B5563;
+  --wizard-step-accessible-border: #9CA3AF;
+  --wizard-text-accessible: #4B5563;
+  --wizard-text-accessible-detail: #6B7280;
+
+  /* Hover states - refined interaction feedback */
+  --wizard-hover-bg: #EEF2FF;
+  --wizard-hover-border: #A5B4FC;
   --wizard-hover-text: #1F2937;
-  --wizard-hover-text-detail: #374151;
-  --wizard-hover-shadow: rgba(108, 99, 255, 0.3);
+  --wizard-hover-text-detail: #4B5563;
+  --wizard-hover-shadow: rgba(99, 102, 241, 0.2);
 
   /* ===== Form Cards & Inputs ===== */
   /* Card shadows */
@@ -226,18 +244,18 @@ html.theme-light {
   --form-input-focus-ring: 0 0 0 1px var(--accent-primary);
 
   /* Success states */
-  --form-success-ring: 0 0 0 2px rgba(34, 197, 94, 0.25);
-  --form-success-shadow: 0 2px 8px rgba(34, 197, 94, 0.20);
-  --form-success-bg-light: rgba(34, 197, 94, 0.06);
+  --form-success-ring: 0 0 0 2px rgba(20, 184, 166, 0.25);
+  --form-success-shadow: 0 2px 8px rgba(20, 184, 166, 0.20);
+  --form-success-bg-light: rgba(20, 184, 166, 0.06);
 
   /* Error states */
   --form-error-bg: rgba(255, 107, 107, 0.10);
   --form-error-ring: 0 0 0 2px rgba(255, 107, 107, 0.20);
 
   /* Completion indicator */
-  --form-complete-border: rgba(34, 197, 94, 0.7);
-  --form-complete-bg: #ECFDF5;
-  --form-complete-border-ring: rgba(34, 197, 94, 0.5);
+  --form-complete-border: rgba(20, 184, 166, 0.7);
+  --form-complete-bg: #F0FDFA;
+  --form-complete-border-ring: rgba(20, 184, 166, 0.5);
 
   /* Add person section */
   --form-add-person-bg: rgba(108, 99, 255, 0.08);

@@ -1,4 +1,4 @@
-/* Progressive Delivery Components - Ultra Consolidated */
+/* Progressive Delivery Components */
 
 /* Radio Card Selection */
 .delivery-choice-container {
@@ -24,8 +24,8 @@
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  background: rgba(100, 116, 139, 0.05);
-  border: 2px solid rgba(100, 116, 139, 0.12);
+  background: var(--delivery-radio-bg);
+  border: 2px solid var(--delivery-radio-border);
   border-radius: 8px;
   min-height: 52px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -33,16 +33,14 @@
 }
 
 .delivery-radio-card:hover .radio-card-content {
-  border-color: rgba(100, 116, 139, 0.2);
-  background: rgba(100, 116, 139, 0.08);
+  border-color: var(--delivery-radio-border-hover);
+  background: var(--delivery-radio-bg-hover);
   transform: translateY(-1px);
 }
 
 .delivery-radio-input:checked + .radio-card-content {
-  border-color: rgba(71, 85, 105, 0.8);
-  background: linear-gradient(135deg,
-    rgba(71, 85, 105, 0.12) 0%,
-    rgba(100, 116, 139, 0.08) 100%);
+  border-color: var(--delivery-radio-checked-border);
+  background: var(--delivery-radio-checked-bg);
 }
 
 .radio-indicator {
@@ -50,15 +48,15 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid rgba(100, 116, 139, 0.3);
+  border: 2px solid var(--delivery-radio-indicator-border);
   margin-right: 12px;
   flex-shrink: 0;
   transition: all 0.25s ease;
 }
 
 .delivery-radio-input:checked ~ .radio-card-content .radio-indicator {
-  border-color: rgba(71, 85, 105, 1);
-  background: rgba(71, 85, 105, 1);
+  border-color: var(--delivery-radio-indicator-checked-border);
+  background: var(--delivery-radio-indicator-checked-bg);
 }
 
 .delivery-radio-input:checked ~ .radio-card-content .radio-indicator::after {
@@ -77,25 +75,23 @@
 .radio-title {
   font-size: 15px;
   font-weight: 600;
-  color: rgba(15, 23, 42, 0.9);
+  color: var(--delivery-radio-title-color);
   line-height: 1.2;
 }
 
 .delivery-radio-input:checked ~ .radio-card-content .radio-title {
-  color: rgba(71, 85, 105, 1);
+  color: var(--delivery-radio-title-checked-color);
 }
 
 /* Helper Text */
 .delivery-helper-text {
   padding: 8px 14px;
-  background: linear-gradient(135deg,
-    rgba(14, 165, 233, 0.05) 0%,
-    rgba(59, 130, 246, 0.02) 100%);
+  background: var(--delivery-helper-bg);
   border-radius: 6px;
-  border-left: 3px solid rgba(14, 165, 233, 0.3);
+  border-left: 3px solid var(--delivery-helper-border);
   font-size: 12px;
   font-weight: 500;
-  color: rgba(15, 23, 42, 0.7);
+  color: var(--delivery-helper-color);
   line-height: 1.4;
   margin-top: 8px;
   animation: fadeInUp 0.3s ease-out;
@@ -117,11 +113,9 @@
 
 .collapsible-content {
   padding: 16px 18px;
-  background: linear-gradient(135deg,
-    rgba(22, 27, 37, 0.98) 0%,
-    rgba(27, 32, 42, 0.95) 100%);
+  background: var(--delivery-collapsible-bg);
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--delivery-collapsible-border);
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
@@ -132,12 +126,12 @@
 .section-label {
   font-size: 13px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--delivery-section-label-color);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 10px;
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--delivery-section-label-border);
 }
 
 .section-content {
@@ -160,8 +154,8 @@
   align-items: center;
   justify-content: center;
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: var(--delivery-date-pill-bg);
+  border: 2px solid var(--delivery-date-pill-border);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -172,30 +166,30 @@
 }
 
 .date-pill:hover:not(.selected):not(:disabled) {
-  border-color: rgba(0, 212, 255, 0.4);
-  background: rgba(0, 212, 255, 0.08);
+  border-color: var(--delivery-date-pill-border-hover);
+  background: var(--delivery-date-pill-bg-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.15);
+  box-shadow: var(--delivery-date-pill-shadow-hover);
 }
 
 .date-pill.selected {
-  border-color: #00d4ff;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.08) 100%);
-  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.25), 0 0 0 1px rgba(0, 212, 255, 0.2);
+  border-color: var(--delivery-date-pill-selected-border);
+  background: var(--delivery-date-pill-selected-bg);
+  box-shadow: var(--delivery-date-pill-selected-shadow);
   transform: translateY(-2px);
 }
 
 .date-pill:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  background: rgba(100, 116, 139, 0.05);
-  border-color: rgba(100, 116, 139, 0.1);
+  background: var(--delivery-date-pill-disabled-bg);
+  border-color: var(--delivery-date-pill-disabled-border);
 }
 
 .pill-day {
   font-size: 10px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--delivery-pill-day-color);
   margin-bottom: 2px;
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -204,34 +198,34 @@
 .pill-date {
   font-size: 14px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--delivery-pill-date-color);
   line-height: 1;
 }
 
 .date-pill.selected .pill-day {
-  color: rgba(0, 212, 255, 0.9);
+  color: var(--delivery-pill-day-selected-color);
 }
 
 .date-pill.selected .pill-date {
-  color: #00d4ff;
+  color: var(--delivery-pill-date-selected-color);
 }
 
 .date-pill.more-dates {
-  background: rgba(100, 116, 139, 0.08);
-  border-color: rgba(100, 116, 139, 0.2);
+  background: var(--delivery-date-more-bg);
+  border-color: var(--delivery-date-more-border);
   border-style: dashed;
 }
 
 .date-pill.more-dates:hover:not(:disabled) {
-  border-color: rgba(148, 163, 184, 0.4);
-  background: rgba(148, 163, 184, 0.12);
+  border-color: var(--delivery-date-more-border-hover);
+  background: var(--delivery-date-more-bg-hover);
   transform: translateY(-1px);
 }
 
 .more-text {
   font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--delivery-more-text-color);
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }

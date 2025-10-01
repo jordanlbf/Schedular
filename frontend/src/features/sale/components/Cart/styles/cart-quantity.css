@@ -8,8 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--cart-quantity-bg);
+  border: 1px solid var(--cart-quantity-border);
   border-radius: var(--radius-full);
   overflow: hidden;
   height: 32px;
@@ -19,8 +19,8 @@
 }
 
 .cart-item-quantity:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: var(--cart-quantity-bg-hover);
+  border-color: var(--cart-quantity-border-hover);
 }
 
 .qty-value {
@@ -72,7 +72,7 @@
 }
 
 .qty-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--cart-qty-btn-bg-hover);
   color: var(--text);
   transform: scale(1.15);
   z-index: 1;
@@ -88,7 +88,7 @@
 }
 
 .qty-btn:focus-visible {
-  outline: 2px solid rgba(14, 165, 233, 0.5);
+  outline: 2px solid var(--cart-qty-btn-focus);
   outline-offset: 2px;
 }
 
@@ -98,13 +98,13 @@
 }
 
 .qty-decrease:hover {
-  background: rgba(239, 68, 68, 0.08);
+  background: var(--cart-qty-decrease-bg-hover);
   color: var(--error);
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+  box-shadow: var(--cart-qty-decrease-shadow);
 }
 
 .qty-decrease:active {
-  background: rgba(239, 68, 68, 0.12);
+  background: var(--cart-qty-decrease-bg-active);
 }
 
 /* Increase button */
@@ -113,13 +113,13 @@
 }
 
 .qty-increase:hover {
-  background: rgba(16, 185, 129, 0.08);
+  background: var(--cart-qty-increase-bg-hover);
   color: var(--success);
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+  box-shadow: var(--cart-qty-increase-shadow);
 }
 
 .qty-increase:active {
-  background: rgba(16, 185, 129, 0.12);
+  background: var(--cart-qty-increase-bg-active);
 }
 
 /* Disabled state */
@@ -145,7 +145,7 @@
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--cart-qty-btn-ripple);
   transform: translate(-50%, -50%);
   transition: width 0.4s ease, height 0.4s ease;
 }
@@ -160,12 +160,12 @@
 /* Special styling when at minimum (qty = 1) */
 .qty-decrease.at-minimum {
   color: var(--error);
-  background: rgba(239, 68, 68, 0.05);
+  background: var(--cart-qty-decrease-min-bg);
 }
 
 .qty-decrease.at-minimum:hover {
-  background: rgba(239, 68, 68, 0.12);
-  color: #dc2626;
+  background: var(--cart-qty-decrease-min-bg-hover);
+  color: var(--cart-qty-decrease-min-color-hover);
   transform: scale(1.15) rotate(-2deg);
 }
 
@@ -183,12 +183,12 @@
 .qty-increase.at-maximum {
   opacity: 0.4;
   cursor: not-allowed;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--cart-qty-increase-max-bg);
 }
 
 .qty-increase.at-maximum:hover {
   transform: scale(1);
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--cart-qty-increase-max-bg);
   color: var(--text-subtle);
 }
 
@@ -227,8 +227,8 @@
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%) scale(0.9);
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
+  background: var(--cart-qty-tooltip-bg);
+  color: var(--cart-qty-tooltip-color);
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 11px;
@@ -238,7 +238,7 @@
   pointer-events: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--cart-qty-tooltip-shadow);
 }
 
 .qty-btn-wrapper::after {
@@ -248,7 +248,7 @@
   left: 50%;
   transform: translateX(-50%) scale(0.9);
   border: 5px solid transparent;
-  border-top-color: rgba(0, 0, 0, 0.9);
+  border-top-color: var(--cart-qty-tooltip-bg);
   opacity: 0;
   pointer-events: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -297,40 +297,6 @@
   50% {
     opacity: 0.6;
   }
-}
-
-/* ==========  THEME SPECIFIC STYLES  ========== */
-
-/* Dark mode adjustments */
-html.theme-dark .cart-item-quantity {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.06);
-}
-
-html.theme-dark .cart-item-quantity:hover {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Dark mode adjustments for tooltips */
-html.theme-dark .qty-btn-wrapper::before {
-  background: rgba(255, 255, 255, 0.95);
-  color: #1f2937;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-}
-
-html.theme-dark .qty-btn-wrapper::after {
-  border-top-color: rgba(255, 255, 255, 0.95);
-}
-
-/* Light mode adjustments */
-html:not(.theme-dark) .qty-btn-wrapper::before {
-  background: #1f2937;
-  color: white;
-}
-
-html:not(.theme-dark) .qty-btn-wrapper::after {
-  border-top-color: #1f2937;
 }
 
 /* ==========  RESPONSIVE STYLES  ========== */

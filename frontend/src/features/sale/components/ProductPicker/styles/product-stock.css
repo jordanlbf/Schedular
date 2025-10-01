@@ -18,29 +18,29 @@
 }
 
 .stock-badge.in-stock {
-  color: #064e3b;
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-  border: 1px solid #059669;
-  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.2);
+  color: var(--stock-in-stock-color);
+  background: var(--stock-in-stock-bg);
+  border: 1px solid var(--stock-in-stock-border);
+  box-shadow: var(--stock-in-stock-shadow);
 }
 
 .stock-badge.low-stock {
-  color: #78350f;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border: 1px solid #d97706;
-  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.2);
+  color: var(--stock-low-stock-color);
+  background: var(--stock-low-stock-bg);
+  border: 1px solid var(--stock-low-stock-border);
+  box-shadow: var(--stock-low-stock-shadow);
 }
 
 .stock-badge.out-of-stock {
-  color: #7f1d1d;
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-  border: 1px solid #dc2626;
-  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.2);
+  color: var(--stock-out-of-stock-color);
+  background: var(--stock-out-of-stock-bg);
+  border: 1px solid var(--stock-out-of-stock-border);
+  box-shadow: var(--stock-out-of-stock-shadow);
 }
 
 .stock-badge.discontinued {
-  color: #1f2937;
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-  border: 1px solid #6b7280;
-  box-shadow: 0 1px 3px rgba(156, 163, 175, 0.2);
+  color: var(--stock-discontinued-color);
+  background: var(--stock-discontinued-bg);
+  border: 1px solid var(--stock-discontinued-border);
+  box-shadow: var(--stock-discontinued-shadow);
 }

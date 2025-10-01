@@ -1,20 +1,20 @@
-/* Summary Module - Consolidated */
+/* Summary Module */
 
 /* Fee Input Styling */
 .fee-input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
-  background: var(--panel-elev);
-  border: 2px solid var(--border);
+  background: var(--delivery-summary-fee-bg);
+  border: 2px solid var(--delivery-summary-fee-border);
   border-radius: var(--radius-lg);
   transition: all 0.2s ease;
 }
 
 .fee-input-wrapper:focus-within {
-  border-color: var(--accent-secondary);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
-  background: var(--panel);
+  border-color: var(--delivery-summary-fee-border-focus);
+  box-shadow: var(--delivery-summary-fee-shadow-focus);
+  background: var(--delivery-summary-fee-bg-focus);
 }
 
 .fee-currency {
@@ -22,7 +22,7 @@
   left: var(--spacing-md);
   font-size: var(--text-lg);
   font-weight: var(--font-bold);
-  color: var(--text);
+  color: var(--delivery-summary-currency-color);
   pointer-events: none;
   z-index: 1;
 }
@@ -33,7 +33,7 @@
   font-weight: var(--font-bold);
   border: none;
   background: transparent;
-  color: var(--text);
+  color: var(--delivery-summary-input-color);
   width: 100%;
   text-align: left;
 }
@@ -44,7 +44,7 @@
 }
 
 .fee-input::placeholder {
-  color: var(--text-subtle);
+  color: var(--delivery-summary-placeholder-color);
   font-weight: var(--font-medium);
 }
 
@@ -52,7 +52,7 @@
 .summary-breakdown {
   margin-top: var(--spacing-xl);
   padding-top: var(--spacing-lg);
-  border-top: 2px solid var(--border);
+  border-top: 2px solid var(--delivery-summary-breakdown-border);
 }
 
 .summary-row {
@@ -61,7 +61,7 @@
   align-items: center;
   padding: var(--spacing-xs) 0;
   font-size: var(--text-sm);
-  color: var(--text);
+  color: var(--delivery-summary-row-color);
 }
 
 .summary-row:not(:last-child) {
@@ -72,45 +72,7 @@
   font-weight: var(--font-bold);
   font-size: var(--text-base);
   padding-top: var(--spacing-sm);
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--delivery-summary-total-border);
   margin-top: var(--spacing-sm);
-  color: var(--accent-secondary);
-}
-
-
-/* Dark Mode Theme Variants */
-html.theme-dark .fee-input-wrapper {
-  background: rgba(39, 39, 40, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-html.theme-dark .fee-input-wrapper:focus-within {
-  border-color: rgba(14, 165, 233, 0.6);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.08);
-  background: rgba(39, 39, 40, 0.8);
-}
-
-html.theme-dark .fee-currency {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-html.theme-dark .fee-input {
-  color: rgba(255, 255, 255, 0.95);
-}
-
-html.theme-dark .fee-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-html.theme-dark .summary-breakdown {
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-html.theme-dark .summary-row {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-html.theme-dark .summary-row.summary-total {
-  border-color: rgba(255, 255, 255, 0.1);
-  color: rgba(14, 165, 233, 0.9);
+  color: var(--delivery-summary-total-color);
 }

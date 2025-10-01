@@ -4,9 +4,9 @@
 }
 
 .product-card .btn.adding {
-  background: #059669 !important;
-  border-color: #059669 !important;
-  color: #ffffff !important;
+  background: var(--product-btn-success-bg) !important;
+  border-color: var(--product-btn-success-bg) !important;
+  color: var(--product-btn-success-color) !important;
   animation: buttonSuccess 0.6s ease-out;
   transform: scale(1.05);
 }
@@ -15,15 +15,15 @@
 @keyframes cardAddPulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--product-animation-shadow-start);
   }
   50% {
     transform: scale(1.02);
-    box-shadow: 0 8px 32px rgba(5, 150, 105, 0.2);
+    box-shadow: var(--product-animation-shadow-mid);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--product-animation-shadow-end);
   }
 }
 
@@ -33,10 +33,10 @@
   }
   50% {
     transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+    box-shadow: var(--product-btn-animation-shadow-mid);
   }
   100% {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    box-shadow: var(--product-btn-animation-shadow-end);
   }
 }

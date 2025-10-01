@@ -107,7 +107,7 @@
 /* Total row styling - anchored at bottom */
 .price-grid-total-row {
   padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--cart-price-total-border);
   margin-top: auto;
   flex-shrink: 0;
   min-height: 38px;
@@ -151,11 +151,11 @@
 
 /* Save styling - only color differences */
 .price-grid-save-row .price-grid-label {
-  color: #10b981;
+  color: var(--cart-price-save-color);
 }
 
 .price-grid-save {
-  color: #10b981;
+  color: var(--cart-price-save-color);
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -190,7 +190,7 @@
 }
 
 .price-grid-editable:hover::before {
-  background: rgba(14, 165, 233, 0.08);
+  background: var(--cart-price-editable-bg-hover);
 }
 
 .price-grid-editable:hover {
@@ -201,7 +201,7 @@
   font-size: var(--text-lg);
   font-weight: var(--font-semibold);
   color: var(--accent-secondary);
-  border: 1px solid rgba(14, 165, 233, 0.3);
+  border: 1px solid var(--cart-price-input-border);
   border-radius: var(--radius-sm);
   padding: 2px 6px;
   width: 100%;
@@ -209,7 +209,7 @@
   max-width: 110px;
   outline: none;
   text-align: right;
-  background: rgba(14, 165, 233, 0.05);
+  background: var(--cart-price-input-bg);
   font-variant-numeric: tabular-nums;
   transition: all 0.2s ease;
   box-sizing: border-box;
@@ -228,15 +228,15 @@
 }
 
 .price-input::placeholder {
-  color: rgba(14, 165, 233, 0.5);
+  color: var(--cart-price-input-placeholder);
   font-size: 0.875rem;
   font-style: italic;
 }
 
 .price-input:focus {
   border-color: var(--accent-secondary);
-  background: rgba(14, 165, 233, 0.08);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  background: var(--cart-price-input-bg-focus);
+  box-shadow: var(--cart-price-input-shadow-focus);
   font-weight: var(--font-semibold);
   transform: scale(1.02);
 }
@@ -298,41 +298,17 @@
 
 @keyframes savePulse {
   0% {
-    color: #10b981;
+    color: var(--cart-price-save-color);
     transform: scale(1);
   }
   50% {
-    color: #34d399;
+    color: var(--cart-price-save-color-mid);
     transform: scale(1.05);
   }
   100% {
-    color: #10b981;
+    color: var(--cart-price-save-color);
     transform: scale(1);
   }
-}
-
-/* ==========  THEME SPECIFIC STYLES  ========== */
-
-/* Dark mode adjustments */
-html.theme-dark .price-grid-save-row .price-grid-label {
-  color: #34d399;
-}
-
-html.theme-dark .price-grid-save {
-  color: #34d399;
-}
-
-html.theme-dark .price-grid-total-row {
-  border-top-color: rgba(255, 255, 255, 0.04);
-}
-
-/* Light mode adjustments */
-html:not(.theme-dark) .price-grid-label {
-  opacity: 0.6;
-}
-
-html:not(.theme-dark) .price-grid-total {
-  color: #1f2937;
 }
 
 /* ==========  RESPONSIVE STYLES  ========== */

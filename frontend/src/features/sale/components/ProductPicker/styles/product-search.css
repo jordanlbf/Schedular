@@ -11,12 +11,12 @@
   border: 2px solid var(--border);
   background: var(--panel);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--product-search-shadow);
 }
 
 .product-search input.form-input:focus {
   border-color: var(--accent-secondary);
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--product-search-shadow-focus);
   transform: translateY(-1px);
 }
 

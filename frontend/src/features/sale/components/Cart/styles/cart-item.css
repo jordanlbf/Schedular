@@ -19,7 +19,7 @@
   padding: var(--spacing-lg) var(--spacing-2xl);
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--cart-item-border);
   transition: all 0.2s ease;
   min-height: 110px;
   animation: cartItemFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -27,7 +27,7 @@
 }
 
 .cart-item-grid:hover {
-  background: rgba(255, 255, 255, 0.015);
+  background: var(--cart-item-bg-hover);
   transform: translateX(2px);
   box-shadow: -4px 0 0 0 var(--accent-secondary);
 }
@@ -97,26 +97,22 @@
 .cart-item-thumbnail {
   width: 90px;
   height: 90px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--cart-thumbnail-bg);
+  border: 1px solid var(--cart-thumbnail-border);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
-              0 2px 4px rgba(0, 0, 0, 0.06),
-              0 1px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--cart-thumbnail-shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cart-item-thumbnail:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12),
-              0 4px 8px rgba(0, 0, 0, 0.08),
-              0 2px 4px rgba(0, 0, 0, 0.06);
-  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: var(--cart-thumbnail-shadow-hover);
+  border-color: var(--cart-thumbnail-border-hover);
 }
 
 .cart-item-thumbnail img {
@@ -140,7 +136,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: var(--cart-placeholder-bg);
   position: relative;
 }
 
@@ -171,10 +167,10 @@
   font-size: 10px;
   font-weight: 500;
   color: var(--text-subtle);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--cart-sku-bg);
   padding: 2px 6px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--cart-sku-border);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   display: inline;
@@ -198,9 +194,9 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--cart-color-dot-border);
   flex-shrink: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--cart-color-dot-shadow);
 }
 
 .color-name {
@@ -216,42 +212,6 @@
   margin-bottom: 0;
   display: flex;
   align-items: flex-end;
-}
-
-/* ==========  THEME SPECIFIC STYLES  ========== */
-
-/* Light mode specific styles */
-html:not(.theme-dark) .cart-item-thumbnail {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06),
-              0 1px 4px rgba(0, 0, 0, 0.04),
-              0 0 1px rgba(0, 0, 0, 0.02);
-}
-
-html:not(.theme-dark) .cart-item-thumbnail:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08),
-              0 3px 8px rgba(0, 0, 0, 0.06),
-              0 1px 2px rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.12);
-}
-
-/* Dark mode specific styles */
-html.theme-dark .cart-item-thumbnail {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-  border-color: rgba(255, 255, 255, 0.06);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
-              0 2px 8px rgba(0, 0, 0, 0.15),
-              0 1px 4px rgba(0, 0, 0, 0.1),
-              inset 0 1px 0 rgba(255, 255, 255, 0.03);
-}
-
-html.theme-dark .cart-item-thumbnail:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25),
-              0 4px 12px rgba(0, 0, 0, 0.2),
-              0 2px 6px rgba(0, 0, 0, 0.15),
-              inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ==========  ANIMATIONS  ========== */
@@ -329,7 +289,7 @@ html.theme-dark .cart-item-thumbnail:hover {
     justify-content: flex-start;
     margin-top: var(--spacing-sm);
     padding-top: var(--spacing-sm);
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-top: 1px solid var(--cart-item-border);
   }
 }
 

@@ -237,4 +237,227 @@ html.theme-dark {
   --form-add-person-border: rgba(14, 165, 233, 0.2);
   --form-add-person-border-hover: rgba(14, 165, 233, 0.3);
   --form-add-person-badge-bg: rgba(14, 165, 233, 0.15);
+
+  /* ===== ProductPicker ===== */
+  /* Product card */
+  --product-card-bg: rgba(255, 255, 255, 0.08);
+  --product-card-bg-hover: rgba(255, 255, 255, 0.12);
+  --product-card-border-hover: rgba(14, 165, 233, 0.2);
+  --product-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --product-card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --product-card-strip: linear-gradient(90deg, var(--accent-secondary), var(--info));
+
+  /* Product price */
+  --product-price-color: #0ea5e9;
+  --product-price-shadow: 0 1px 2px rgba(14, 165, 233, 0.1);
+
+  /* Product button */
+  --product-btn-bg: #0284c7;
+  --product-btn-color: #ffffff;
+  --product-btn-border: #0284c7;
+  --product-btn-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+  --product-btn-bg-hover: #0369a1;
+  --product-btn-shadow-hover: 0 4px 12px rgba(3, 105, 161, 0.4);
+  --product-btn-bg-disabled: #6b7280;
+  --product-btn-shadow-disabled: 0 1px 2px rgba(107, 114, 128, 0.2);
+
+  /* Product search */
+  --product-search-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --product-search-shadow-focus: 0 0 0 3px rgba(14, 165, 233, 0.1), 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  /* Product color selector */
+  --product-color-option-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  --product-color-option-border-hover: rgba(0, 0, 0, 0.3);
+  --product-color-option-shadow-selected: 0 0 0 3px rgba(14, 165, 233, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  /* Product layout */
+  --product-cart-shadow: 0 12px 48px rgba(14, 165, 233, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --product-cart-border: rgba(14, 165, 233, 0.1);
+  --product-empty-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.02) 0%, rgba(14, 165, 233, 0.05) 100%);
+  --product-empty-border: rgba(14, 165, 233, 0.2);
+
+  /* Product animations */
+  --product-btn-success-bg: #059669;
+  --product-btn-success-color: #ffffff;
+  --product-animation-shadow-start: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --product-animation-shadow-mid: 0 8px 32px rgba(5, 150, 105, 0.2);
+  --product-animation-shadow-end: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --product-btn-animation-shadow-mid: 0 6px 20px rgba(5, 150, 105, 0.4);
+  --product-btn-animation-shadow-end: 0 4px 12px rgba(5, 150, 105, 0.3);
+
+  /* Stock badges */
+  --stock-in-stock-color: #064e3b;
+  --stock-in-stock-bg: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  --stock-in-stock-border: #059669;
+  --stock-in-stock-shadow: 0 1px 3px rgba(16, 185, 129, 0.2);
+
+  --stock-low-stock-color: #78350f;
+  --stock-low-stock-bg: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  --stock-low-stock-border: #d97706;
+  --stock-low-stock-shadow: 0 1px 3px rgba(245, 158, 11, 0.2);
+
+  --stock-out-of-stock-color: #7f1d1d;
+  --stock-out-of-stock-bg: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  --stock-out-of-stock-border: #dc2626;
+  --stock-out-of-stock-shadow: 0 1px 3px rgba(239, 68, 68, 0.2);
+
+  --stock-discontinued-color: #1f2937;
+  --stock-discontinued-bg: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  --stock-discontinued-border: #6b7280;
+  --stock-discontinued-shadow: 0 1px 3px rgba(156, 163, 175, 0.2);
+
+  /* ===== Cart ===== */
+  /* Cart container */
+  --cart-header-badge-bg: linear-gradient(135deg, #0ea5e9, #3b82f6);
+  --cart-header-badge-color: white;
+  --cart-header-badge-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
+
+  /* Cart item */
+  --cart-item-border: rgba(255, 255, 255, 0.05);
+  --cart-item-bg-hover: rgba(255, 255, 255, 0.015);
+  --cart-thumbnail-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --cart-thumbnail-border: rgba(255, 255, 255, 0.06);
+  --cart-thumbnail-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  --cart-thumbnail-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --cart-thumbnail-border-hover: rgba(255, 255, 255, 0.1);
+  --cart-sku-bg: rgba(255, 255, 255, 0.04);
+  --cart-sku-border: rgba(255, 255, 255, 0.06);
+  --cart-color-dot-border: rgba(255, 255, 255, 0.2);
+  --cart-color-dot-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --cart-placeholder-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+  /* Cart quantity */
+  --cart-quantity-bg: rgba(255, 255, 255, 0.02);
+  --cart-quantity-border: rgba(255, 255, 255, 0.06);
+  --cart-quantity-bg-hover: rgba(255, 255, 255, 0.03);
+  --cart-quantity-border-hover: rgba(255, 255, 255, 0.1);
+  --cart-qty-btn-bg-hover: rgba(255, 255, 255, 0.06);
+  --cart-qty-btn-focus: rgba(14, 165, 233, 0.5);
+  --cart-qty-decrease-bg-hover: rgba(239, 68, 68, 0.08);
+  --cart-qty-decrease-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+  --cart-qty-decrease-bg-active: rgba(239, 68, 68, 0.12);
+  --cart-qty-decrease-min-bg: rgba(239, 68, 68, 0.05);
+  --cart-qty-decrease-min-bg-hover: rgba(239, 68, 68, 0.12);
+  --cart-qty-decrease-min-color-hover: #dc2626;
+  --cart-qty-increase-bg-hover: rgba(16, 185, 129, 0.08);
+  --cart-qty-increase-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+  --cart-qty-increase-bg-active: rgba(16, 185, 129, 0.12);
+  --cart-qty-increase-max-bg: rgba(255, 255, 255, 0.02);
+  --cart-qty-btn-ripple: rgba(255, 255, 255, 0.3);
+  --cart-qty-tooltip-bg: rgba(255, 255, 255, 0.95);
+  --cart-qty-tooltip-color: #1f2937;
+  --cart-qty-tooltip-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+
+  /* Cart price */
+  --cart-price-total-border: rgba(255, 255, 255, 0.04);
+  --cart-price-save-color: #34d399;
+  --cart-price-save-color-mid: #34d399;
+  --cart-price-editable-bg-hover: rgba(14, 165, 233, 0.08);
+  --cart-price-input-border: rgba(14, 165, 233, 0.3);
+  --cart-price-input-bg: rgba(14, 165, 233, 0.05);
+  --cart-price-input-bg-focus: rgba(14, 165, 233, 0.08);
+  --cart-price-input-shadow-focus: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  --cart-price-input-placeholder: rgba(14, 165, 233, 0.5);
+  --cart-price-total-color: var(--text);
+
+  /* Cart animations */
+  --cart-overlay-subtle: rgba(255, 255, 255, 0.03);
+  --cart-overlay-light: rgba(255, 255, 255, 0.05);
+  --cart-overlay-medium: rgba(255, 255, 255, 0.08);
+  --cart-overlay-strong: rgba(255, 255, 255, 0.12);
+
+  /* ===== ScheduleDelivery ===== */
+  /* Services */
+  --delivery-service-bg: rgba(39, 39, 40, 0.6);
+  --delivery-service-border: rgba(255, 255, 255, 0.08);
+  --delivery-service-bg-hover: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(39, 39, 40, 0.8) 100%);
+  --delivery-service-border-hover: rgba(14, 165, 233, 0.3);
+  --delivery-service-name-color: rgba(255, 255, 255, 0.9);
+  --delivery-service-desc-color: rgba(255, 255, 255, 0.6);
+  --delivery-service-no-additional-bg: linear-gradient(135deg, rgba(100, 116, 139, 0.08) 0%, rgba(39, 39, 40, 0.6) 100%);
+  --delivery-service-no-additional-border: rgba(148, 163, 184, 0.2);
+  --delivery-service-no-additional-bg-hover: linear-gradient(135deg, rgba(100, 116, 139, 0.12) 0%, rgba(39, 39, 40, 0.8) 100%);
+  --delivery-service-no-additional-border-hover: rgba(148, 163, 184, 0.3);
+
+  /* Time slots */
+  --delivery-slot-bg: rgba(39, 39, 40, 0.9);
+  --delivery-slot-border: rgba(255, 255, 255, 0.08);
+  --delivery-slot-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --delivery-slot-bg-hover: rgba(100, 116, 139, 0.12);
+  --delivery-slot-border-hover: rgba(148, 163, 184, 0.2);
+  --delivery-slot-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --delivery-slot-selected-bg: linear-gradient(135deg, rgba(100, 116, 139, 0.95) 0%, rgba(71, 85, 105, 1) 100%);
+  --delivery-slot-selected-border: rgba(148, 163, 184, 0.8);
+  --delivery-slot-selected-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --delivery-slot-selected-title-color: rgba(255, 255, 255, 0.95);
+  --delivery-slot-selected-range-color: rgba(255, 255, 255, 0.8);
+  --delivery-slot-warning-bg: rgba(251, 191, 36, 0.2);
+  --delivery-slot-warning-color: rgba(180, 83, 9, 1);
+  --delivery-slot-unavailable-bg: rgba(239, 68, 68, 0.2);
+  --delivery-slot-unavailable-color: rgba(153, 27, 27, 1);
+  --delivery-slot-indicator-bg: rgba(34, 197, 94, 0.9);
+  --delivery-slot-indicator-color: rgba(255, 255, 255, 0.9);
+  --delivery-slot-placeholder-bg: rgba(100, 116, 139, 0.08);
+  --delivery-slot-placeholder-border: rgba(148, 163, 184, 0.15);
+  --delivery-slot-skeleton-bg: rgba(100, 116, 139, 0.12);
+  --delivery-slot-skeleton-border: rgba(148, 163, 184, 0.2);
+  --delivery-validation-bg: rgba(239, 68, 68, 0.08);
+  --delivery-validation-border: rgba(239, 68, 68, 0.3);
+
+  /* Progressive delivery */
+  --delivery-radio-bg: rgba(100, 116, 139, 0.05);
+  --delivery-radio-border: rgba(100, 116, 139, 0.12);
+  --delivery-radio-bg-hover: rgba(100, 116, 139, 0.08);
+  --delivery-radio-border-hover: rgba(100, 116, 139, 0.2);
+  --delivery-radio-checked-border: rgba(71, 85, 105, 0.8);
+  --delivery-radio-checked-bg: linear-gradient(135deg, rgba(71, 85, 105, 0.12) 0%, rgba(100, 116, 139, 0.08) 100%);
+  --delivery-radio-indicator-border: rgba(100, 116, 139, 0.3);
+  --delivery-radio-indicator-checked-border: rgba(71, 85, 105, 1);
+  --delivery-radio-indicator-checked-bg: rgba(71, 85, 105, 1);
+  --delivery-radio-title-color: rgba(15, 23, 42, 0.9);
+  --delivery-radio-title-checked-color: rgba(71, 85, 105, 1);
+  --delivery-helper-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(59, 130, 246, 0.02) 100%);
+  --delivery-helper-border: rgba(14, 165, 233, 0.3);
+  --delivery-helper-color: rgba(15, 23, 42, 0.7);
+  --delivery-collapsible-bg: linear-gradient(135deg, rgba(22, 27, 37, 0.98) 0%, rgba(27, 32, 42, 0.95) 100%);
+  --delivery-collapsible-border: rgba(255, 255, 255, 0.08);
+  --delivery-section-label-color: rgba(255, 255, 255, 0.9);
+  --delivery-section-label-border: rgba(255, 255, 255, 0.1);
+  --delivery-date-pill-bg: rgba(255, 255, 255, 0.05);
+  --delivery-date-pill-border: rgba(255, 255, 255, 0.12);
+  --delivery-date-pill-bg-hover: rgba(0, 212, 255, 0.08);
+  --delivery-date-pill-border-hover: rgba(0, 212, 255, 0.4);
+  --delivery-date-pill-shadow-hover: 0 4px 12px rgba(0, 212, 255, 0.15);
+  --delivery-date-pill-selected-border: #00d4ff;
+  --delivery-date-pill-selected-bg: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.08) 100%);
+  --delivery-date-pill-selected-shadow: 0 6px 20px rgba(0, 212, 255, 0.25), 0 0 0 1px rgba(0, 212, 255, 0.2);
+  --delivery-date-pill-disabled-bg: rgba(100, 116, 139, 0.05);
+  --delivery-date-pill-disabled-border: rgba(100, 116, 139, 0.1);
+  --delivery-pill-day-color: rgba(255, 255, 255, 0.75);
+  --delivery-pill-date-color: rgba(255, 255, 255, 0.95);
+  --delivery-pill-day-selected-color: rgba(0, 212, 255, 0.9);
+  --delivery-pill-date-selected-color: #00d4ff;
+  --delivery-date-more-bg: rgba(100, 116, 139, 0.08);
+  --delivery-date-more-border: rgba(100, 116, 139, 0.2);
+  --delivery-date-more-bg-hover: rgba(148, 163, 184, 0.12);
+  --delivery-date-more-border-hover: rgba(148, 163, 184, 0.4);
+  --delivery-more-text-color: rgba(255, 255, 255, 0.8);
+
+  /* Summary */
+  --delivery-summary-fee-bg: rgba(39, 39, 40, 0.6);
+  --delivery-summary-fee-border: rgba(255, 255, 255, 0.08);
+  --delivery-summary-fee-bg-focus: rgba(39, 39, 40, 0.8);
+  --delivery-summary-fee-border-focus: rgba(14, 165, 233, 0.6);
+  --delivery-summary-fee-shadow-focus: 0 0 0 3px rgba(14, 165, 233, 0.08);
+  --delivery-summary-currency-color: rgba(255, 255, 255, 0.9);
+  --delivery-summary-input-color: rgba(255, 255, 255, 0.95);
+  --delivery-summary-placeholder-color: rgba(255, 255, 255, 0.4);
+  --delivery-summary-breakdown-border: rgba(255, 255, 255, 0.08);
+  --delivery-summary-row-color: rgba(255, 255, 255, 0.9);
+  --delivery-summary-total-border: rgba(255, 255, 255, 0.1);
+  --delivery-summary-total-color: rgba(14, 165, 233, 0.9);
+
+  /* ===== OrderCheckout ===== */
+  --checkout-payment-option-border-hover: rgba(14, 165, 233, 0.3);
+  --checkout-payment-option-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
 }

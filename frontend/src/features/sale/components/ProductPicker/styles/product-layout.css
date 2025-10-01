@@ -56,8 +56,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 12px 48px rgba(14, 165, 233, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(14, 165, 233, 0.1);
+  box-shadow: var(--product-cart-shadow);
+  border: 1px solid var(--product-cart-border);
   position: relative;
   overflow: hidden;
 }
@@ -98,11 +98,8 @@
   padding: var(--spacing-4xl);
   color: var(--text-subtle);
   font-style: italic;
-  background: linear-gradient(135deg,
-    rgba(14, 165, 233, 0.02) 0%,
-    rgba(14, 165, 233, 0.05) 100%
-  );
-  border: 2px dashed rgba(14, 165, 233, 0.2);
+  background: var(--product-empty-bg);
+  border: 2px dashed var(--product-empty-border);
   border-radius: var(--radius-xl);
   margin: var(--spacing-xl) 0;
 }

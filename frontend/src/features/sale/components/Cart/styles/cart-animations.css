@@ -14,10 +14,10 @@
   --duration-extra-slow: 0.6s;
 
   /* Overlay Opacity Tokens */
-  --overlay-subtle: rgba(255, 255, 255, 0.03);
-  --overlay-light: rgba(255, 255, 255, 0.05);
-  --overlay-medium: rgba(255, 255, 255, 0.08);
-  --overlay-strong: rgba(255, 255, 255, 0.12);
+  --overlay-subtle: var(--cart-overlay-subtle);
+  --overlay-light: var(--cart-overlay-light);
+  --overlay-medium: var(--cart-overlay-medium);
+  --overlay-strong: var(--cart-overlay-strong);
 }
 
 /* Global cart animations */

@@ -72,7 +72,7 @@ body:has(.step-actions) .action-bar {
   border: none;
   color: var(--text-subtle);
   font-size: var(--text-sm);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-semibold);
   cursor: pointer;
   transition: all var(--transition-normal);
   white-space: nowrap;
@@ -131,7 +131,7 @@ body:has(.step-actions) .action-bar {
   animation: bounce-left 0.5s ease;
 }
 
-/* Light theme specific styling */
+/* Light theme specific styling - much more visible */
 html.theme-light .action-bar__container {
   background: transparent;
   border: none;
@@ -141,13 +141,14 @@ html.theme-light .action-bar__container {
 html.theme-light .action-bar__back-btn {
   background: transparent;
   border: none;
-  color: var(--gray-600);
+  color: #4B5563;
+  font-weight: 600;
 }
 
 html.theme-light .action-bar__back-btn:hover {
   background: transparent;
   border: none;
-  color: var(--gray-900);
+  color: #1F2937;
 }
 
 html.theme-light .action-bar__back-btn::after {

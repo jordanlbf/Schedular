@@ -2,10 +2,11 @@
 
 .cart-footer {
   margin-top: auto;
-  padding: var(--spacing-xl) var(--spacing-2xl);
+  padding: var(--spacing-2xl) var(--spacing-3xl);
   padding-bottom: var(--spacing-2xl);
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border);
   background: var(--panel);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .cart-totals {
@@ -15,16 +16,17 @@
 .totals-summary {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
 }
 
 .summary-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   animation: cartItemFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   animation-fill-mode: both;
+  padding: var(--spacing-xs) 0;
 }
 
 .summary-row:nth-child(1) { animation-delay: 0.1s; }
@@ -33,14 +35,15 @@
 
 .summary-label {
   color: var(--text-subtle);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-base);
 }
 
 .summary-value {
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-bold);
   color: var(--text);
   font-variant-numeric: tabular-nums;
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
 }
 
 /* Discount row */
@@ -59,22 +62,24 @@
 
 /* Total row */
 .summary-total {
-  padding-top: var(--spacing-md);
-  margin-top: var(--spacing-md);
-  border-top: 1px solid var(--border);
+  padding-top: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+  border-top: 2px solid var(--border);
 }
 
 .summary-total .summary-label {
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
   color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .summary-total .summary-value {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-bold);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-extrabold);
   color: var(--text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 /* Empty cart state */

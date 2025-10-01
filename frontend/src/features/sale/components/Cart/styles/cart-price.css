@@ -7,7 +7,7 @@
 .price-block-grid {
   display: flex;
   flex-direction: column;
-  min-width: 180px;
+  min-width: 200px;
   padding: 0;
   margin: 0;
   height: 100%;
@@ -16,10 +16,10 @@
 
 .price-grid-row {
   display: grid;
-  grid-template-columns: 80px minmax(110px, 1fr);
-  gap: var(--spacing-lg);
+  grid-template-columns: 90px minmax(120px, 1fr);
+  gap: var(--spacing-xl);
   align-items: center;
-  min-height: 24px;
+  min-height: 26px;
   margin: 0;
 }
 
@@ -30,20 +30,21 @@
 .price-grid-label {
   font-size: var(--text-sm);
   color: var(--text-subtle);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-semibold);
   text-align: left;
   text-transform: none;
   letter-spacing: 0;
+  opacity: 0.9;
 }
 
 .price-grid-value {
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
   color: var(--text);
   font-variant-numeric: tabular-nums;
   text-align: right;
-  min-width: 110px;
-  width: 110px;
+  min-width: 120px;
+  width: 120px;
   display: block;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -54,8 +55,8 @@
 .price-grid-value > * {
   display: block;
   text-align: right;
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
   font-variant-numeric: tabular-nums;
   width: 100%;
 }
@@ -106,11 +107,11 @@
 
 /* Total row styling - anchored at bottom */
 .price-grid-total-row {
-  padding-top: 10px;
-  border-top: 1px solid var(--cart-price-total-border);
+  padding-top: var(--spacing-md);
+  border-top: 2px solid var(--cart-price-total-border);
   margin-top: auto;
   flex-shrink: 0;
-  min-height: 38px;
+  min-height: 42px;
   display: grid;
   align-items: flex-end;
   padding-bottom: 2px;
@@ -122,8 +123,8 @@
 .price-grid-save,
 .price-grid-editable,
 .price-grid-value > span:not(.price-grid-total):not(.price-grid-rrp):not(.price-grid-save):not(.price-grid-editable) {
-  font-size: var(--text-lg) !important;
-  font-weight: var(--font-semibold) !important;
+  font-size: var(--text-xl) !important;
+  font-weight: var(--font-bold) !important;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   text-align: right !important;
@@ -132,6 +133,12 @@
   padding: 0 !important;
   margin: 0 !important;
   box-sizing: border-box;
+}
+
+/* Total gets extra emphasis */
+.price-grid-total {
+  font-size: var(--text-2xl) !important;
+  font-weight: var(--font-extrabold) !important;
 }
 
 /* ==========  PRICE VARIANTS  ========== */

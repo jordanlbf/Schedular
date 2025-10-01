@@ -9,26 +9,28 @@
   align-items: center;
   justify-content: space-between;
   background: var(--cart-quantity-bg);
-  border: 1px solid var(--cart-quantity-border);
+  border: 1.5px solid var(--cart-quantity-border);
   border-radius: var(--radius-full);
   overflow: hidden;
-  height: 32px;
+  height: 38px;
   width: 100px;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .cart-item-quantity:hover {
   background: var(--cart-quantity-bg-hover);
   border-color: var(--cart-quantity-border-hover);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .qty-value {
   flex: 1;
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
-  font-size: 13px;
+  font-size: 14px;
   padding: 0;
   height: 100%;
   display: flex;
@@ -37,7 +39,7 @@
   user-select: none;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
-  min-width: 32px;
+  min-width: 36px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
@@ -55,10 +57,10 @@
   border: none;
   background: transparent;
   color: var(--text-subtle);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;

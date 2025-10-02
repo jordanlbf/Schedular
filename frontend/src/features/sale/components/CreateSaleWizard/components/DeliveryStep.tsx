@@ -13,7 +13,6 @@ interface DeliveryStepProps {
   onNext: () => void;
   onPrev: () => void;
   canProceed: boolean;
-  errors?: string[];
 }
 
 export default function DeliveryStep({
@@ -24,8 +23,7 @@ export default function DeliveryStep({
   estimatedDelivery,
   onNext,
   onPrev,
-  canProceed,
-  errors = []
+  canProceed
 }: DeliveryStepProps) {
   const { isFormValid, handleValidationChange } = useScheduleDeliveryForm();
 
@@ -47,7 +45,6 @@ export default function DeliveryStep({
       onPrev={onPrev}
       canProceed={canActuallyProceed}
       nextLabel="Continue to Payment"
-      errors={errors}
     >
       <ScheduleDelivery
         deliveryDetails={deliveryDetails}
@@ -56,7 +53,6 @@ export default function DeliveryStep({
         setDeliveryFee={setDeliveryFee}
         estimatedDelivery={estimatedDelivery}
         canProceed={canActuallyProceed}
-        errors={errors}
         onValidationChange={handleValidationChange}
       />
     </WizardStepLayout>

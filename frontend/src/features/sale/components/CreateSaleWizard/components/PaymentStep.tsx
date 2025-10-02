@@ -18,7 +18,6 @@ interface PaymentStepProps {
   onPrev: () => void;
   onComplete: () => void;
   canProceed: boolean;
-  errors?: string[];
 }
 
 export default function PaymentStep({
@@ -34,8 +33,7 @@ export default function PaymentStep({
   deliveryDetails,
   onPrev,
   onComplete,
-  canProceed,
-  errors = []
+  canProceed
 }: PaymentStepProps) {
   return (
     <WizardStepLayout
@@ -45,7 +43,6 @@ export default function PaymentStep({
       canProceed={canProceed}
       nextLabel="Complete Order"
       onNext={onComplete}
-      errors={errors}
     >
       <OrderCheckout
         paymentMethod={paymentMethod}

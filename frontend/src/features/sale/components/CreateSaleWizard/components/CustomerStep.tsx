@@ -13,7 +13,6 @@ interface CustomerStepProps {
   setCustomer: (customer: Customer) => void;
   onNext: () => void;
   canProceed: boolean;
-  errors?: string[];
   fieldErrors?: { [key: string]: string };
 }
 
@@ -22,7 +21,6 @@ export default function CustomerStep({
   setCustomer,
   onNext,
   canProceed,
-  errors = [],
   fieldErrors = {}
 }: CustomerStepProps) {
   const { updateDeliveryAddress } = useCustomerStepForm({ customer, setCustomer });
@@ -34,7 +32,6 @@ export default function CustomerStep({
       onNext={onNext}
       canProceed={canProceed}
       nextLabel="Continue to Products"
-      errors={errors}
     >
       <div className="form-cards-grid">
         <ContactDetailsForm

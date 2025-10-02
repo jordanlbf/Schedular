@@ -66,7 +66,6 @@ export function WizardSteps({
         setCustomer={(value) => updateField('customer', value)}
         onNext={navigation.nextStep}
         canProceed={validation.customer.isValid}
-        errors={validation.customer.errors}
         fieldErrors={validation.customer.fieldErrors}
       />
     ),
@@ -83,7 +82,6 @@ export function WizardSteps({
         onPrev={navigation.prevStep}
         canProceed={validation.products.isValid}
         subtotal={subtotal}
-        errors={validation.products.errors}
         onAddSuccess={onAddSuccess}
       />
     ),
@@ -97,7 +95,6 @@ export function WizardSteps({
         onNext={navigation.nextStep}
         onPrev={navigation.prevStep}
         canProceed={validation.delivery.isValid}
-        errors={validation.delivery.errors}
       />
     ),
     payment: (
@@ -115,7 +112,6 @@ export function WizardSteps({
         onPrev={navigation.prevStep}
         onComplete={onComplete}
         canProceed={validation.payment.isValid}
-        errors={validation.payment.errors}
       />
     )
   };

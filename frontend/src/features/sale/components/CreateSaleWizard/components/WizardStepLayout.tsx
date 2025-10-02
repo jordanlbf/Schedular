@@ -9,7 +9,6 @@ interface WizardStepLayoutProps {
   canProceed?: boolean;
   nextLabel?: string;
   prevLabel?: string;
-  errors?: string[];
   helpText?: string;
 }
 
@@ -20,7 +19,6 @@ export function WizardStepLayout({
   canProceed = true,
   nextLabel = 'Continue',
   prevLabel = 'Back',
-  errors = [],
   helpText
 }: WizardStepLayoutProps) {
   return (
@@ -30,14 +28,6 @@ export function WizardStepLayout({
           <div className="step-main">
 
             {children}
-            
-            {errors.length > 0 && (
-              <div className="subtle-error-message" role="alert">
-                {errors.map((error, index) => (
-                  <p key={index}>{error}</p>
-                ))}
-              </div>
-            )}
           </div>
 
           {helpText && !canProceed && (

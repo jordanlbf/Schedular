@@ -16,7 +16,6 @@ interface ProductsStepProps {
   onPrev: () => void;
   canProceed: boolean;
   subtotal: number;
-  errors?: string[];
   onAddSuccess?: (productName: string) => void;
 }
 
@@ -32,7 +31,6 @@ export default function ProductsStep({
   onPrev,
   canProceed,
   subtotal,
-  errors = [],
   onAddSuccess
 }: ProductsStepProps) {
   return (
@@ -43,7 +41,6 @@ export default function ProductsStep({
       onPrev={onPrev}
       canProceed={canProceed}
       nextLabel="Continue to Delivery"
-      errors={errors}
     >
       <ProductSelection
         lines={lines}

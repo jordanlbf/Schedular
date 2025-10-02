@@ -15,7 +15,6 @@ Price grid has two states:
   min-width: 200px;
   padding: 0;
   margin: 0;
-  height: 100%;
   position: relative;
 }
 
@@ -65,19 +64,15 @@ Price grid has two states:
   width: 100%;
 }
 
-/* Item Price row - anchored at TOP when discount exists, BOTTOM when no discount */
+/* Item Price row - anchored at BOTTOM when no discount, TOP when discount exists */
 .price-grid-item-row {
-  align-items: flex-start;
-  padding-top: 2px;
   flex-shrink: 0;
-  /* When no discount (RRP and Save are hidden), Item Price goes to bottom */
   order: 3;
   margin-top: auto;
   padding-top: 8px;
   border-top: none;
   min-height: 28px;
   align-items: flex-end;
-  padding-bottom: 2px;
 }
 
 /* When discount exists (RRP is visible), Item Price moves to top */
@@ -85,12 +80,9 @@ Price grid has two states:
   order: 0;
   margin-top: 0;
   margin-bottom: auto;
-  padding-top: 2px;
-  border-top: none;
+  padding-top: 0;
   min-height: 20px;
   align-items: flex-start;
-  padding-bottom: 0;
-  border-bottom: none;
 }
 
 /* Ensure Item Price value is aligned properly */
@@ -135,7 +127,7 @@ Price grid has two states:
 
 /* Item Price gets top padding when discount exists to center the border */
 .price-grid-rrp-row:not(.price-grid-row-hidden) ~ .price-grid-item-row {
-  padding-top: calc(8px - 4px);
+  padding-top: 4px;
 }
 
 /* Total row styling - always hidden in cart items */
@@ -143,12 +135,11 @@ Price grid has two states:
   display: none;
 }
 
-/* Ensure all price values have the same styling and alignment */
+/* Ensure all price values have consistent styling */
 .price-grid-total,
 .price-grid-rrp,
 .price-grid-save,
-.price-grid-editable,
-.price-grid-value > span:not(.price-grid-total):not(.price-grid-rrp):not(.price-grid-save):not(.price-grid-editable) {
+.price-grid-editable {
   font-size: var(--text-lg) !important;
   font-weight: var(--font-bold) !important;
   line-height: 1;
@@ -158,13 +149,6 @@ Price grid has two states:
   display: block !important;
   padding: 0 !important;
   margin: 0 !important;
-  box-sizing: border-box;
-}
-
-/* Total gets extra emphasis */
-.price-grid-total {
-  font-size: var(--text-lg) !important;
-  font-weight: var(--font-bold) !important;
 }
 
 /* ==========  PRICE VARIANTS  ========== */
@@ -350,24 +334,7 @@ Price grid has two states:
 
 /* ==========  RESPONSIVE STYLES  ========== */
 
-/* Cart item specific sizing - now matching footer styles */
-.cart-item-price .price-grid-label {
-  font-size: var(--text-sm);
-  color: var(--text-subtle);
-  opacity: 1;
-  font-weight: var(--font-medium);
-}
-
-.cart-item-price .price-grid-value {
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
-}
-
-.cart-item-price .price-grid-total {
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
-}
-
+/* Cart item specific sizing */
 .cart-item-price .price-grid-save {
   font-size: var(--text-xl);
   font-weight: var(--font-bold);

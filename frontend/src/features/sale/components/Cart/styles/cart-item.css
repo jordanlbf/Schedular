@@ -229,22 +229,8 @@
   opacity: 0.85;
 }
 
-.cart-item-stock {
-  margin-top: auto;
-  padding: 0;
-  margin-bottom: 0;
-  display: flex;
-  align-items: flex-end;
-}
+/* ==========  REMOVE BUTTON  ========== */
 
-/* Stock badge overlay on thumbnail */
-.cart-item-thumbnail .stock-badge {
-  display: none;
-}
-
-/* ==========  FOOTER STYLES  ========== */
-
-/* Remove button in top right corner */
 .cart-item-remove {
   position: absolute;
   top: var(--spacing-xs);
@@ -327,10 +313,6 @@
     padding: var(--spacing-md) var(--spacing-lg);
   }
 
-  .cart-item-media-stack {
-    width: 85px;
-  }
-
   .cart-item-thumbnail {
     width: 85px;
     height: 85px;
@@ -343,11 +325,6 @@
   .cart-item-meta .sku {
     font-size: 9px;
     padding: 1px 4px;
-    margin-left: 4px;
-  }
-
-  .cart-item-footer-value {
-    font-size: var(--text-lg);
   }
 }
 
@@ -362,10 +339,6 @@
     padding: var(--spacing-sm) var(--spacing-md);
   }
 
-  .cart-item-media-stack {
-    width: 75px;
-  }
-
   .cart-item-thumbnail {
     width: 75px;
     height: 75px;
@@ -375,7 +348,6 @@
   .cart-item-meta .sku {
     font-size: 8px;
     padding: 1px 3px;
-    margin-left: 3px;
   }
 
   .cart-item-price {
@@ -397,14 +369,12 @@
 
 /* ==========  STOCK BADGE (CART-SPECIFIC)  ========== */
 
-/* Wrapper for quantity controls + stock badge */
 .cart-item-quantity-row {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
 }
 
-/* Override stock badge for cart layout - hide stock badges */
 .cart-item-quantity-row .stock-badge {
   display: none;
 }

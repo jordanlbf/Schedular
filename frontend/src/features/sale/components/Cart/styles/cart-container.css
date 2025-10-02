@@ -1,7 +1,11 @@
 /* Shopping cart wrapper for badge positioning */
 .shopping-cart-wrapper {
   position: relative;
-  height: 100%;
+  height: 850px; /* Adjusted to match typical form height */
+  max-height: 850px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* Shopping Cart Container */
@@ -9,11 +13,20 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  height: 100%;
+  height: 850px; /* Adjusted height */
+  max-height: 850px;
   display: flex;
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
+}
+
+/* Override Card min-height for shopping cart */
+.products-cart-section .shopping-cart-section.form-card {
+  min-height: 850px;
+  max-height: 850px;
+  height: 850px;
+  padding-bottom: 0;
 }
 
 /* Cart header badge styling - displays item count */
@@ -50,17 +63,50 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
   overflow: hidden;
+  min-height: 0;
+  height: calc(850px - 80px); /* Fixed height minus header */
+  max-height: calc(850px - 80px);
 }
 
 .cart-items-section {
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
+  overflow-x: hidden;
   margin: 0;
-  padding: var(--spacing-md) var(--spacing-lg) 0 var(--spacing-lg);
+  padding: var(--spacing-lg);
   min-height: 0;
-  max-height: calc(100vh - 400px);
+  max-height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.cart-items-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cart-items-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cart-items-section::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.cart-items-section::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Cart content wrapper for proper flex layout */
+.cart-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  flex: 1;
 }
 
 /* Empty cart state */
@@ -104,3 +150,37 @@
     transform: translateY(-10px);
   }
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shopping-cart-wrapper,
+  .products-cart-section .shopping-cart-section,
+  .products-cart-section .shopping-cart-section.form-card {
+    height: 500px;
+    max-height: 500px;
+    min-height: 500px;
+  }
+  
+  .shopping-cart-section .form-card-body {
+    height: calc(500px - 80px);
+    max-height: calc(500px - 80px);
+  }
+}
+
+/* For medium screens, use intermediate height */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .shopping-cart-wrapper,
+  .products-cart-section .shopping-cart-section,
+  .products-cart-section .shopping-cart-section.form-card {
+    height: 700px;
+    max-height: 700px;
+    min-height: 700px;
+  }
+  
+  .shopping-cart-section .form-card-body {
+    height: calc(700px - 80px);
+    max-height: calc(700px - 80px);
+  }
+}
+
+

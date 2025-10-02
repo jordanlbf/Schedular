@@ -2,6 +2,7 @@
 .product-search {
   position: relative;
   margin-bottom: var(--spacing-xl);
+  flex-shrink: 0; /* Don't shrink */
 }
 
 .product-search input.form-input {
@@ -37,7 +38,8 @@
   text-align: center;
   font-size: var(--text-sm);
   color: var(--text-subtle);
-  margin: calc(var(--spacing-4xl) * 2) 0 var(--spacing-lg) 0;
+  margin: var(--spacing-xl) 0 var(--spacing-md) 0; /* Reduced margin */
   font-style: italic;
   opacity: 0.7;
+  flex-shrink: 0; /* Don't shrink */
 }

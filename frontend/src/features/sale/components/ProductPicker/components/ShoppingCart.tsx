@@ -35,7 +35,7 @@ export function ShoppingCart({
           className="shopping-cart-section"
         >
           {!isEmpty ? (
-            <>
+            <div className="cart-content-wrapper">
               <div className="cart-items-section">
                 <CartTable
                   lines={lines}
@@ -71,7 +71,7 @@ export function ShoppingCart({
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           ) : (
             <div className="empty-cart">
               <div className="empty-cart-icon">🛒</div>

@@ -90,7 +90,8 @@ export default function ProductSelection({
               </div>
             )}
 
-            <div className="product-grid">
+            <div className="product-grid-container">
+              <div className="product-grid">
               {filteredProducts.map((p) => {
                 const isOutOfStock = p.stock.status === 'out-of-stock' || p.stock.status === 'discontinued';
                 const isAdding = isProductAdding(p.sku);
@@ -153,10 +154,11 @@ export default function ProductSelection({
               })}
 
               {filteredProducts.length === 0 && isSearching && (
-                <div className="product-empty">
-                  No products match "{searchQuery}"
-                </div>
+              <div className="product-empty">
+              No products match "{searchQuery}"
+              </div>
               )}
+              </div>
             </div>
           </div>
         </Card>

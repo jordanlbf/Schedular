@@ -1,5 +1,5 @@
 import { AppLayout } from "@/app/layout";
-import SearchCustomer from "@/features/customers/components/SearchCustomer";
+import SearchCustomer from "@/features/customer/components/SearchCustomer";
 
 export default function CustomersPage() {
   return (

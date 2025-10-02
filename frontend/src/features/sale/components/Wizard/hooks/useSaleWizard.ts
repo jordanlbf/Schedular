@@ -3,7 +3,7 @@ import { useSaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { useSaleValidation } from './useSaleValidation';
 import { useWizardNavigation } from './useWizardNavigation';
 import type { WizardStep, SaleDraftState } from '@/features/sale/stores/useSaleDraftStore';
-import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/Wizard/constants/wizard';
 
 export function useSaleWizard(
   state: SaleDraftState,

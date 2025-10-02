@@ -1,12 +1,12 @@
 import type { Customer } from '@/shared/types';
-import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/components/WizardStepLayout';
-import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
+import { WizardStepLayout } from '@/features/sale/components/Wizard/components/WizardStepLayout';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/Wizard/constants/wizard';
 import {
   AUSTRALIAN_STATES,
   ContactDetailsForm,
   AddressForm,
   useCustomerStepForm
-} from '../../CreateCustomer';
+} from '../../CustomerForm';
 
 interface CustomerStepProps {
   customer: Customer;

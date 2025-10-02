@@ -1,4 +1,4 @@
-// CreateCustomer feature exports
+// CustomerForm feature exports
 export { AddressForm } from './components/AddressForm';
 export { ContactDetailsForm } from './components/ContactDetailsForm';
 

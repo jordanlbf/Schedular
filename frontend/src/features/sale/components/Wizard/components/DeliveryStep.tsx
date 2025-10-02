@@ -1,8 +1,8 @@
 import type { DeliveryDetails } from '@/features/sale/types';
-import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/components/WizardStepLayout';
+import { WizardStepLayout } from '@/features/sale/components/Wizard/components/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '../constants/wizard';
-import ScheduleDelivery from '@/features/sale/components/ScheduleDelivery/components/ScheduleDelivery';
-import { useScheduleDeliveryForm } from '@/features/sale/components/ScheduleDelivery/hooks/useScheduleDeliveryForm';
+import ScheduleDelivery from '@/features/sale/components/DeliveryScheduler/components/ScheduleDelivery';
+import { useScheduleDeliveryForm } from '@/features/sale/components/DeliveryScheduler/hooks/useScheduleDeliveryForm';
 
 interface DeliveryStepProps {
   deliveryDetails: DeliveryDetails;

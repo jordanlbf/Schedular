@@ -1,2 +1,2 @@
-// CreateSaleWizard feature exports
+// Wizard feature exports
 export { default } from './components/CreateSaleWizard';

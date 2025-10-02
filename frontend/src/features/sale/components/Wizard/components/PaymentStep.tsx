@@ -1,8 +1,8 @@
 import type { Customer, Line, DeliveryDetails } from '@/features/sale/types';
 import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
-import { WizardStepLayout } from '@/features/sale/components/CreateSaleWizard/components/WizardStepLayout';
-import { WIZARD_STEP_TITLES } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
-import OrderCheckout from '@/features/sale/components/OrderCheckout/components/OrderCheckout';
+import { WizardStepLayout } from '@/features/sale/components/Wizard/components/WizardStepLayout';
+import { WIZARD_STEP_TITLES } from '@/features/sale/components/Wizard/constants/wizard';
+import OrderCheckout from '@/features/sale/components/Checkout/components/OrderCheckout';
 
 interface PaymentStepProps {
   paymentMethod: string;

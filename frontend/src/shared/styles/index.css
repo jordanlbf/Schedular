@@ -7,6 +7,6 @@
 @import url('../../features/sale/styles');
 @import url('../../features/sale/components/ProductPicker/styles/index.css');
 @import url('../../features/sale/components/Cart/styles/index.css');
-@import url('../../features/sale/components/CreateSaleWizard/styles/index.css');
-@import url('../../features/sale/components/OrderCheckout/styles/index.css');
-@import url('../../features/sale/components/ScheduleDelivery/styles/index.css');
+@import url('../../features/sale/components/Wizard/styles/index.css');
+@import url('../../features/sale/components/Checkout/styles/index.css');
+@import url('../../features/sale/components/DeliveryScheduler/styles/index.css');

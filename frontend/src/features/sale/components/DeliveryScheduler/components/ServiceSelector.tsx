@@ -1,5 +1,5 @@
 import type { DeliveryDetails } from '@/features/sale/types';
-import { SERVICE_OPTIONS } from '@/features/sale/components/CreateSaleWizard/constants/wizard';
+import { SERVICE_OPTIONS } from '@/features/sale/components/Wizard/constants/wizard';
 import { Card } from '@/shared/components';
 
 interface ServiceSelectorProps {

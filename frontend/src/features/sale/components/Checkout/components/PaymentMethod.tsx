@@ -1,7 +1,7 @@
 import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { fmt } from '@/shared/utils';
 import { PAYMENT_METHODS } from '../constants/payment';
-import { Card } from '@/shared/components';
+import { Card } from '@/ui';
 import { usePaymentMethod } from '../hooks/usePaymentMethod';
 
 interface PaymentMethodProps {

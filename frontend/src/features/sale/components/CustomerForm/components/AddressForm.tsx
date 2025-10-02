@@ -1,5 +1,5 @@
 import type { Address } from '@/shared/types';
-import { FormField, Card } from '@/shared/components';
+import { FormField, Card } from '@/ui';
 import { isValidPostcode } from '../utils/customerUtils';
 import { useAddressForm } from '../hooks/useAddressForm';
 

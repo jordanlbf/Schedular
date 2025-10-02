@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@/shared/components';
+import { Card } from '@/ui';
 
 interface DeliverySummaryProps {
   deliveryFee: number;

@@ -63,7 +63,7 @@ export function useNavigationPrompt({ when, message, onProceed }: UseNavigationP
     };
 
     // Handle back/forward browser navigation
-    const handlePopState = (event: PopStateEvent) => {
+    const handlePopState = (_event: PopStateEvent) => {
       const shouldProceed = window.confirm(message || defaultMessage);
       if (!shouldProceed) {
         // Push current state back to prevent navigation

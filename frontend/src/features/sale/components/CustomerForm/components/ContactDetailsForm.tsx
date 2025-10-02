@@ -1,5 +1,5 @@
 import type { Customer } from '@/shared/types';
-import { FormField, Card } from '@/shared/components';
+import { FormField, Card } from '@/ui';
 import { formatPhone, isValidEmail, isValidPhone } from '../utils/customerUtils';
 import { useContactDetailsForm } from '../hooks/useContactDetailsForm';
 

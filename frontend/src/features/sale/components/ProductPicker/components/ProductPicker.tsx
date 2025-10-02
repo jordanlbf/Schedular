@@ -1,9 +1,10 @@
-import { useEffect, useRef, MutableRefObject } from "react";
+import { useEffect, useRef } from "react";
+import type { MutableRefObject } from "react";
 
 import type { Line, CatalogItem } from '@/features/sale/types';
 import { formatPrice } from '@/shared/utils';
-import { StockBadge } from '@/shared/components/StockBadge';
-import { Card } from '@/shared/components';
+import { StockBadge } from '@/ui/StockBadge';
+import { Card } from '@/ui';
 import { ColourSelector } from './ColourSelector';
 import { ShoppingCart } from './ShoppingCart';
 import { useProductSearch } from '../hooks/useProductSearch';

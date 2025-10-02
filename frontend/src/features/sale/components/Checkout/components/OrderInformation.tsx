@@ -1,5 +1,5 @@
 import type { Customer, DeliveryDetails } from '@/features/sale/types';
-import { Card } from '@/shared/components';
+import { Card } from '@/ui';
 
 interface OrderInformationProps {
   customer: Customer;

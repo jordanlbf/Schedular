@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './ActionBar.css';
 
@@ -32,8 +32,8 @@ function DefaultBackButton({ fallbackTo = '/' }: { fallbackTo?: string }) {
     } else if (path.startsWith('/admin/')) {
       navigate('/admin');
     } else {
-      // Fallback to home for any other routes
-      navigate('/');
+      // Use fallbackTo or default to home
+      navigate(fallbackTo);
     }
   };
 

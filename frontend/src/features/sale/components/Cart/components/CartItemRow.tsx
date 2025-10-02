@@ -2,7 +2,7 @@ import type { Line } from "@/features/sale/types";
 import type { Product } from '@/shared/types';
 import { getColorValue } from '@/shared/utils/colors';
 import { formatPrice } from '@/shared/utils';
-import { StockBadge } from '@/shared/components/StockBadge';
+import { StockBadge } from '@/ui/StockBadge';
 import { PriceBlock } from './PriceBlock';
 import {
   useCartItemPrice,

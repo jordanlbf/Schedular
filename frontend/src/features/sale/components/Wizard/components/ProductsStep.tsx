@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import type { MutableRefObject } from 'react';
 import type { Line, CatalogItem } from '@/features/sale/types';
 import { WizardStepLayout } from '@/features/sale/components/Wizard/components/WizardStepLayout';
 import { WIZARD_STEP_TITLES } from '@/features/sale/components/Wizard/constants/wizard';

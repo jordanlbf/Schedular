@@ -70,7 +70,7 @@ export function useSaleWizard(
       {
         id: 'customer',
         label: WIZARD_STEP_TITLES.customer,
-        detail: validation.customer.isValid ? (state.customer.name || 'Customer details') : 'Name & delivery address',
+        detail: validation.customer.isValid ? (state.customer.name || 'Customer details') : 'Contact Details & Delivery Address',
         icon: '1',
         isActive: state.currentStep === 'customer',
         isCompleted: isStepCompleted('customer'),
@@ -81,7 +81,7 @@ export function useSaleWizard(
         label: WIZARD_STEP_TITLES.products,
         detail: validation.products.isValid
           ? `${state.lines.length} item${state.lines.length !== 1 ? 's' : ''}`
-          : 'Choose product-picker',
+          : 'Choose Products',
         icon: '2',
         isActive: state.currentStep === 'products',
         isCompleted: isStepCompleted('products'),
@@ -92,7 +92,7 @@ export function useSaleWizard(
         label: WIZARD_STEP_TITLES.delivery,
         detail: validation.delivery.isValid
           ? (state.deliveryDetails.preferredDate || 'Delivery scheduled')
-          : 'Schedule delivery',
+          : 'Schedule Delivery',
         icon: '3',
         isActive: state.currentStep === 'delivery',
         isCompleted: isStepCompleted('delivery'),
@@ -103,7 +103,7 @@ export function useSaleWizard(
         label: WIZARD_STEP_TITLES.payment,
         detail: validation.payment.isValid
           ? state.paymentMethod.charAt(0).toUpperCase() + state.paymentMethod.slice(1)
-          : 'Select payment method',
+          : 'Select Payment Method',
         icon: '💳',
         isActive: state.currentStep === 'payment',
         isCompleted: isStepCompleted('payment'),

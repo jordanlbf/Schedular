@@ -9,7 +9,6 @@
   gap: var(--spacing-md);
   position: relative;
   overflow: hidden;
-  cursor: pointer;
   box-shadow: var(--product-card-shadow);
   min-height: 420px;
 }

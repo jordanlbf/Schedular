@@ -266,7 +266,7 @@ html.theme-light {
 
   /* ===== ProductPicker ===== */
   /* Product card */
-  --product-card-bg: #FFFFFF;
+  --product-card-bg: rgba(108, 99, 255, 0.08);
   --product-card-bg-hover: #F0F2FE;
   --product-card-border-hover: rgba(108, 99, 255, 0.3);
   --product-card-shadow: 0 2px 8px rgba(17, 24, 39, 0.10), 0 1px 3px rgba(17, 24, 39, 0.08);

@@ -5,7 +5,7 @@
 export const WIZARD_STEP_TITLES = {
   customer: 'Customer Details',
   products: 'Product Selection',
-  delivery: 'Delivery Details',
+  delivery: 'Schedule Delivery',
   payment: 'Payment'
 } as const;
 

@@ -2,7 +2,12 @@
    CART PRICE STYLES - Consolidated Module
    ========================================================================== */
 
-/* ==========  LAYOUT & GRID  ========== */
+/* ==========  LAYOUT & GRID  ==========
+
+Price grid has two states:
+1. No discount: Item Price at bottom (like Total used to be)
+2. With discount: Item Price at top, RRP and Save in middle
+*/
 
 .price-block-grid {
   display: flex;
@@ -16,10 +21,10 @@
 
 .price-grid-row {
   display: grid;
-  grid-template-columns: 90px minmax(120px, 1fr);
-  gap: var(--spacing-xl);
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-lg);
   align-items: center;
-  min-height: 26px;
+  min-height: 20px;
   margin: 0;
 }
 
@@ -30,21 +35,20 @@
 .price-grid-label {
   font-size: var(--text-sm);
   color: var(--text-subtle);
-  font-weight: var(--font-semibold);
-  text-align: left;
+  font-weight: var(--font-medium);
+  text-align: right;
   text-transform: none;
   letter-spacing: 0;
   opacity: 0.9;
+  white-space: nowrap;
 }
 
 .price-grid-value {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
   color: var(--text);
   font-variant-numeric: tabular-nums;
   text-align: right;
-  min-width: 120px;
-  width: 120px;
   display: block;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -55,18 +59,38 @@
 .price-grid-value > * {
   display: block;
   text-align: right;
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
   font-variant-numeric: tabular-nums;
   width: 100%;
 }
 
-/* First row - Item Price - anchored at top */
+/* Item Price row - anchored at TOP when discount exists, BOTTOM when no discount */
 .price-grid-item-row {
-  margin-top: 0;
   align-items: flex-start;
   padding-top: 2px;
   flex-shrink: 0;
+  /* When no discount (RRP and Save are hidden), Item Price goes to bottom */
+  order: 3;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: none;
+  min-height: 28px;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}
+
+/* When discount exists (RRP is visible), Item Price moves to top */
+.price-grid-rrp-row:not(.price-grid-row-hidden) ~ .price-grid-item-row {
+  order: 0;
+  margin-top: 0;
+  margin-bottom: auto;
+  padding-top: 2px;
+  border-top: none;
+  min-height: 20px;
+  align-items: flex-start;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 /* Ensure Item Price value is aligned properly */
@@ -81,7 +105,7 @@
   display: grid;
   align-items: center;
   flex: 0 1 auto;
-  margin-top: auto;
+  order: 1;
 }
 
 .price-grid-rrp-row.price-grid-row-hidden {
@@ -93,28 +117,30 @@
   display: grid;
   align-items: center;
   flex: 0 1 auto;
-  margin-bottom: auto;
+  margin-top: auto;
+  order: 2;
 }
 
 .price-grid-save-row.price-grid-row-hidden {
   display: none;
 }
 
-/* When RRP and Save are visible, they share the middle space evenly */
+/* When RRP and Save are visible, add consistent spacing and centered border */
 .price-grid-rrp-row:not(.price-grid-row-hidden) ~ .price-grid-save-row:not(.price-grid-row-hidden) {
-  margin-top: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--cart-price-total-border);
 }
 
-/* Total row styling - anchored at bottom */
+/* Item Price gets top padding when discount exists to center the border */
+.price-grid-rrp-row:not(.price-grid-row-hidden) ~ .price-grid-item-row {
+  padding-top: calc(8px - 4px);
+}
+
+/* Total row styling - always hidden in cart items */
 .price-grid-total-row {
-  padding-top: var(--spacing-md);
-  border-top: 2px solid var(--cart-price-total-border);
-  margin-top: auto;
-  flex-shrink: 0;
-  min-height: 42px;
-  display: grid;
-  align-items: flex-end;
-  padding-bottom: 2px;
+  display: none;
 }
 
 /* Ensure all price values have the same styling and alignment */
@@ -123,7 +149,7 @@
 .price-grid-save,
 .price-grid-editable,
 .price-grid-value > span:not(.price-grid-total):not(.price-grid-rrp):not(.price-grid-save):not(.price-grid-editable) {
-  font-size: var(--text-xl) !important;
+  font-size: var(--text-lg) !important;
   font-weight: var(--font-bold) !important;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -137,8 +163,8 @@
 
 /* Total gets extra emphasis */
 .price-grid-total {
-  font-size: var(--text-2xl) !important;
-  font-weight: var(--font-extrabold) !important;
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-bold) !important;
 }
 
 /* ==========  PRICE VARIANTS  ========== */
@@ -154,6 +180,8 @@
   text-decoration: line-through;
   opacity: 0.65;
   transition: all 0.3s ease;
+  font-size: var(--text-base) !important;
+  font-weight: var(--font-medium) !important;
 }
 
 /* Save styling - only color differences */
@@ -163,6 +191,8 @@
 
 .price-grid-save {
   color: var(--cart-price-save-color);
+  font-size: var(--text-lg) !important;
+  font-weight: var(--font-bold) !important;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -329,17 +359,17 @@
 }
 
 .cart-item-price .price-grid-value {
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
 }
 
 .cart-item-price .price-grid-total {
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: var(--font-bold);
 }
 
 .cart-item-price .price-grid-save {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: var(--font-bold);
 }
 

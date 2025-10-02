@@ -16,14 +16,14 @@
 .totals-summary {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm);
 }
 
 .summary-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   animation: cartItemFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   animation-fill-mode: both;
   padding: var(--spacing-xs) 0;
@@ -35,8 +35,8 @@
 
 .summary-label {
   color: var(--text-subtle);
-  font-weight: var(--font-semibold);
-  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
 }
 
 .summary-value {
@@ -62,13 +62,13 @@
 
 /* Total row */
 .summary-total {
-  padding-top: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  margin-top: var(--spacing-md);
   border-top: 2px solid var(--border);
 }
 
 .summary-total .summary-label {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   font-weight: var(--font-bold);
   color: var(--text);
   text-transform: uppercase;
@@ -76,7 +76,7 @@
 }
 
 .summary-total .summary-value {
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: var(--font-extrabold);
   color: var(--text);
   letter-spacing: -0.03em;

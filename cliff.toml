@@ -1,31 +1,42 @@
-# cliff.toml
+# git-cliff ~ configuration file
+# https://git-cliff.org/docs/configuration
+
 [changelog]
+# changelog header
 header = """
 # Changelog
 All notable changes to this project will be documented here.
 """
+# template for the changelog body
+# https://keats.github.io/tera/docs/#introduction
 body = """
 {% for group, commits in commits | group_by(attribute="group") %}
 ## {{ group }}
 {% for commit in commits %}
-- {{ commit.message | split(pat="\n") | first }} ({{ commit.id | truncate(length=7, end="" }})
+- {{ commit.message | split(pat="\n") | first }} ({{ commit.id | truncate(length=7, end="") }})
 {%- if commit.breaking %} **BREAKING**{% endif -%}
 {%- if commit.footers %}{% for f in commit.footers %}{% if f.token == "PR" %} [#{{ f.value }}]{% endif %}{% endfor %}{% endif %}
 {% endfor %}
 
 {% endfor %}
 """
+# changelog footer
 footer = ""
+# remove leading and trailing whitespace from the template
 trim = true
 
 [git]
+# parse the commits based on https://www.conventionalcommits.org
 conventional_commits = true
-split_commits = false
+# filter out the commits that are not conventional
 filter_unconventional = true
-tag_pattern = "v[0-9]*"
-protect_breaking_commits = true
-
-# Map types to groups
+# require all commits to be conventional (takes precedence over filter_unconventional)
+require_conventional = false
+# process each line of a commit as an individual commit
+split_commits = false
+# regex for preprocessing the commit messages
+commit_preprocessors = []
+# regex for parsing and grouping commits
 commit_parsers = [
   { message = "^feat", group = "Features" },
   { message = "^fix", group = "Fixes" },
@@ -34,10 +45,20 @@ commit_parsers = [
   { message = "^docs", group = "Docs" },
   { message = "^test", group = "Tests" },
   { message = "^build|^ci|^chore", group = "Build" },
+  { message = "merge branch", skip = true },
+  { message = "^chore\\(release\\)", skip = true },
 ]
-
-# Exclude noise
-filter_commits = [
-  { message = "merge branch" },
-  { message = "^chore\\(release\\)" },
-]
+# protect breaking changes from being skipped due to matching a skipping commit_parser
+protect_breaking_commits = false
+# filter out the commits that are not matched by commit parsers
+filter_commits = false
+# regex for matching git tags
+tag_pattern = "v[0-9]*"
+# regex for skipping tags
+skip_tags = ""
+# regex for ignoring tags
+ignore_tags = ""
+# sort the tags topologically
+topo_order = false
+# sort the commits inside sections by oldest/newest order
+sort_commits = "oldest"

@@ -444,6 +444,13 @@ html.theme-dark {
   --delivery-date-more-border-hover: rgba(148, 163, 184, 0.4);
   --delivery-more-text-color: rgba(255, 255, 255, 0.8);
 
+  /* Service Icon Grid */
+  --delivery-service-selected-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.08) 100%);
+  --delivery-icon-bg-start: rgba(14, 165, 233, 0.1);
+  --delivery-icon-bg-end: rgba(14, 165, 233, 0.05);
+  --accent-secondary-light: rgba(14, 165, 233, 0.3);
+  --accent-secondary-dark: #0284c7;
+
   /* Summary */
   --delivery-summary-fee-bg: rgba(39, 39, 40, 0.6);
   --delivery-summary-fee-border: rgba(255, 255, 255, 0.08);

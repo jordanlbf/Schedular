@@ -6,7 +6,7 @@ interface UseWizardCartManagementProps {
   lines: Line[];
   nextId: number;
   currentStep: WizardStep;
-  updateField: <K extends keyof SaleDraftState>(field: K, value: SaleDraftState[K]) => void;
+  updateField: <K extends keyof SaleDraftState>(field: K, value: SaleDraftState[K] | ((prev: SaleDraftState[K]) => SaleDraftState[K])) => void;
   validation: {
     resetStepAttempted: (step: string) => void;
   };
@@ -22,37 +22,46 @@ export function useWizardCartManagement({
 
   // Product management functions
   const addLine = (sku: string | number, color?: string) => {
-    const result = addLineToCart(lines, sku, nextId, color);
-    updateField('lines', result.lines);
-    updateField('nextId', result.nextId);
+    updateField('lines', (currentLines: Line[]) => {
+      const result = addLineToCart(currentLines, sku, nextId, color);
+      if (result.nextId !== nextId) {
+        updateField('nextId', result.nextId);
+      }
+      return result.lines;
+    });
   };
 
   const changeQty = (id: number, delta: number) => {
-    const newLines = updateLineQuantity(lines, id, delta);
-    updateField('lines', newLines);
-    // Reset validation state if no valid items remain
-    if (currentStep === 'products') {
-      const validItems = newLines.filter(line => line.qty > 0);
-      if (validItems.length === 0) {
-        validation.resetStepAttempted('productsAttempted');
+    updateField('lines', (currentLines: Line[]) => {
+      const newLines = updateLineQuantity(currentLines, id, delta);
+      // Reset validation state if no valid items remain
+      if (currentStep === 'products') {
+        const validItems = newLines.filter(line => line.qty > 0);
+        if (validItems.length === 0) {
+          validation.resetStepAttempted('productsAttempted');
+        }
       }
-    }
+      return newLines;
+    });
   };
 
   const removeLineFromCart = (id: number) => {
-    const newLines = removeLine(lines, id);
-    updateField('lines', newLines);
-    // Reset validation state if cart becomes empty
-    if (newLines.length === 0 && currentStep === 'products') {
-      validation.resetStepAttempted('productsAttempted');
-    }
+    updateField('lines', (currentLines: Line[]) => {
+      const newLines = removeLine(currentLines, id);
+      // Reset validation state if cart becomes empty
+      if (newLines.length === 0 && currentStep === 'products') {
+        validation.resetStepAttempted('productsAttempted');
+      }
+      return newLines;
+    });
   };
 
   const changePriceForLine = (id: number, newPrice: number) => {
-    const newLines = lines.map(line =>
-      line.id === id ? { ...line, price: newPrice } : line
-    );
-    updateField('lines', newLines);
+    updateField('lines', (currentLines: Line[]) => {
+      return currentLines.map(line =>
+        line.id === id ? { ...line, price: newPrice } : line
+      );
+    });
   };
 
   // Calculate subtotal for product-picker step

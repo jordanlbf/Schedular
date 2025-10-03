@@ -222,46 +222,7 @@
   justify-content: center;
 }
 
-/* Tooltip styles */
-.qty-btn-wrapper::before {
-  content: attr(title);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%) scale(0.9);
-  background: var(--cart-qty-tooltip-bg);
-  color: var(--cart-qty-tooltip-color);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
-  box-shadow: var(--cart-qty-tooltip-shadow);
-}
-
-.qty-btn-wrapper::after {
-  content: '';
-  position: absolute;
-  bottom: calc(100% + 3px);
-  left: 50%;
-  transform: translateX(-50%) scale(0.9);
-  border: 5px solid transparent;
-  border-top-color: var(--cart-qty-tooltip-bg);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
-}
-
-.qty-btn-wrapper:hover::before,
-.qty-btn-wrapper:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-}
+/* Tooltips removed - no longer needed */
 
 /* ==========  ANIMATIONS  ========== */
 
@@ -331,13 +292,8 @@
   }
 }
 
-/* Mobile adjustments - hide tooltips on touch devices */
+/* Mobile adjustments */
 @media (hover: none) and (pointer: coarse) {
-  .qty-btn-wrapper::before,
-  .qty-btn-wrapper::after {
-    display: none;
-  }
-
   .qty-btn:hover:not(:disabled) {
     transform: scale(1);
   }

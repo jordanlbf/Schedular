@@ -10,7 +10,7 @@
   font-size: var(--text-lg);
   height: 56px;
   border: 2px solid var(--border);
-  background: var(--panel);
+  background: var(--product-search-input-bg);
   transition: all 0.3s ease;
   box-shadow: var(--product-search-shadow);
 }

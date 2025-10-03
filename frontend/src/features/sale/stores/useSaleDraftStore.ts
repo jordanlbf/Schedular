@@ -69,9 +69,12 @@ export function useSaleDraftStore() {
 
   const updateField = useCallback(<K extends keyof SaleDraftState>(
     field: K,
-    value: SaleDraftState[K]
+    value: SaleDraftState[K] | ((prev: SaleDraftState[K]) => SaleDraftState[K])
   ) => {
-    setState(prev => ({ ...prev, [field]: value }));
+    setState(prev => {
+      const newValue = typeof value === 'function' ? value(prev[field]) : value;
+      return { ...prev, [field]: newValue };
+    });
   }, []);
 
   const hasUnsavedData = useCallback(() => {

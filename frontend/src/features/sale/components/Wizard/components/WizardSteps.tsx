@@ -23,7 +23,7 @@ interface WizardStepsProps {
   state: Omit<SaleDraftState, 'savedAt'>;
   updateField: <K extends keyof SaleDraftState>(
     field: K,
-    value: SaleDraftState[K]
+    value: SaleDraftState[K] | ((prev: SaleDraftState[K]) => SaleDraftState[K])
   ) => void;
   navigation: WizardNavigation;
   validation: StepValidation & {

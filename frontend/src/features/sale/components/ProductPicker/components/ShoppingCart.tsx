@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import type { Line, CatalogItem } from '@/features/sale/types';
 import { CartTable } from '../../Cart';
 import { formatPrice, formatSavings } from '@/shared/utils';
@@ -27,6 +28,26 @@ export function ShoppingCart({
     subtotal
   });
 
+  const cartItemsRef = useRef<HTMLDivElement>(null);
+  const previousLineCount = useRef(lines.length);
+
+  // Auto-scroll to bottom when new items are added
+  useEffect(() => {
+    // Only scroll if items were added (not removed)
+    if (lines.length > previousLineCount.current && cartItemsRef.current) {
+      // Small delay to ensure DOM has updated
+      setTimeout(() => {
+        if (cartItemsRef.current) {
+          cartItemsRef.current.scrollTo({
+            top: cartItemsRef.current.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+    previousLineCount.current = lines.length;
+  }, [lines.length]);
+
   return (
     <div className="products-cart-section">
       <div className="shopping-cart-wrapper">
@@ -36,7 +57,7 @@ export function ShoppingCart({
         >
           {!isEmpty ? (
             <div className="cart-content-wrapper">
-              <div className="cart-items-section">
+              <div className="cart-items-section" ref={cartItemsRef}>
                 <CartTable
                   lines={lines}
                   onChangeQty={onChangeQty}

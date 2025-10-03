@@ -109,8 +109,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: var(--spacing-sm);
-  margin-right: calc(var(--spacing-sm) * -1);
+  padding-right: var(--spacing-md);
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }

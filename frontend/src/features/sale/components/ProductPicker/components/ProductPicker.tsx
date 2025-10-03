@@ -37,6 +37,7 @@ export default function ProductSelection({
 }: ProductSelectionProps) {
   const internalInputRef = useRef<HTMLInputElement>(null);
   const finalInputRef = searchRef || internalInputRef;
+  const productGridContainerRef = useRef<HTMLDivElement>(null);
 
   const { searchQuery, setSearchQuery, filteredProducts, clearSearch, isSearching } = useProductSearch({
     catalog,
@@ -67,6 +68,13 @@ export default function ProductSelection({
     finalInputRef.current?.focus();
   }, [finalInputRef]);
 
+  // Scroll to top when search query changes
+  useEffect(() => {
+    if (productGridContainerRef.current) {
+      productGridContainerRef.current.scrollTop = 0;
+    }
+  }, [searchQuery]);
+
   return (
     <div className="products-layout">
       <div className="products-search-section">
@@ -90,7 +98,7 @@ export default function ProductSelection({
               </div>
             )}
 
-            <div className="product-grid-container">
+            <div className="product-grid-container" ref={productGridContainerRef}>
               <div className="product-grid">
               {filteredProducts.map((p) => {
                 const isOutOfStock = p.stock.status === 'out-of-stock' || p.stock.status === 'discontinued';

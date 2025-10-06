@@ -41,6 +41,8 @@ All notable changes to this project will be documented here.
 
 - Fix cliff file (f53658f)
 
+- Fix sidebar not rendering on ADD PRODUCTS card (f857c7c)
+
 
 
 ## Docs
@@ -54,6 +56,8 @@ All notable changes to this project will be documented here.
 - Updated layout of routing table in README (86672f0)
 
 - add license section; chore(frontend): polish routes generator output (75ff7a9)
+
+- update CHANGELOG.md [skip ci] (ef5949a)
 
 
 
@@ -76,6 +80,8 @@ All notable changes to this project will be documented here.
 - Update light mode colour palette to 'periwinkle' (326ff52)
 
 - Light mode header and footer have white background (9a52724)
+
+- Enhance Sale Wizard Delivery Schedule Step with Glassmorphic UI Design (50fc73f)
 
 
 
@@ -127,6 +133,10 @@ All notable changes to this project will be documented here.
 
 - enhance shopping cart layout with premium design improvements (cd16f44)
 
+- redesign Additional Services card with icon grid layout (f4fe66f)
+
+- optimize additional services cards with frosted glass design (540cc73)
+
 
 
 ## Fix
@@ -152,6 +162,10 @@ All notable changes to this project will be documented here.
 - replace any type with proper SaleTotals interface in WizardSteps (e7f3264)
 
 - clip product card hover strip to border radius (733bea7)
+
+- Fixed height layout with scrollable overflow for cart and products (5e3b34e)
+
+- remove cart item quantity tooltips causing rendering artifacts (7ca4bcf)
 
 
 
@@ -274,6 +288,16 @@ All notable changes to this project will be documented here.
 - consolidate and modernize configuration files (241db5c)
 
 - centralize color tokens for ProductPicker, Cart, ScheduleDelivery, and OrderCheckout (99a14a0)
+
+- enhance product cards and wizard step labels (38be121)
+
+- remove redundant error lists from wizard forms (57316b5)
+
+- modernize feature and component naming conventions (76daa15)
+
+- organize codebase with domain-driven architecture (ce225f4)
+
+- redesign cart item layout and improve visual hierarchy (e983e77)
 
 
 

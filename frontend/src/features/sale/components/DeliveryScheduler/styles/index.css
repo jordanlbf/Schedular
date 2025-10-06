@@ -3,6 +3,9 @@
 /* Core layout and animations */
 @import './layout.css';
 
+/* Shared glassmorphic tile styles */
+@import './glassmorphic-tiles.css';
+
 /* Progressive disclosure components */
 @import './progressive.css';
 

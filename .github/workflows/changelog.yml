@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-cargo-
 
       - name: Install git-cliff
-        run: cargo install git-cliff
+        run: which git-cliff || cargo install git-cliff
 
       - name: Generate CHANGELOG.md
         run: |

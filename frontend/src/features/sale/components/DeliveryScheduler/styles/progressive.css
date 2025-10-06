@@ -1,365 +1,365 @@
-/* Progressive Delivery Components */
+/* Schedule Delivery - Progressive Disclosure with Glassmorphic Tiles */
 
-/* Radio Card Selection */
+/* Delivery Choice Container */
 .delivery-choice-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
+/* Delivery Radio Card - extends glass-tile */
 .delivery-radio-card {
-  display: block;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 24px 16px;
+  height: 130px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Hide default radio input */
 .delivery-radio-input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
+/* Radio Card Content - vertical layout centered */
 .radio-card-content {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  background: var(--delivery-radio-bg);
-  border: 2px solid var(--delivery-radio-border);
-  border-radius: 8px;
-  min-height: 52px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.delivery-radio-card:hover .radio-card-content {
-  border-color: var(--delivery-radio-border-hover);
-  background: var(--delivery-radio-bg-hover);
-  transform: translateY(-1px);
-}
-
-.delivery-radio-input:checked + .radio-card-content {
-  border-color: var(--delivery-radio-checked-border);
-  background: var(--delivery-radio-checked-bg);
-}
-
-.radio-indicator {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--delivery-radio-indicator-border);
-  margin-right: 12px;
-  flex-shrink: 0;
-  transition: all 0.25s ease;
-}
-
-.delivery-radio-input:checked ~ .radio-card-content .radio-indicator {
-  border-color: var(--delivery-radio-indicator-checked-border);
-  background: var(--delivery-radio-indicator-checked-bg);
-}
-
-.delivery-radio-input:checked ~ .radio-card-content .radio-indicator::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: white;
-  transform: translate(-50%, -50%) scale(1);
-  animation: radioSelect 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.radio-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--delivery-radio-title-color);
-  line-height: 1.2;
-}
-
-.delivery-radio-input:checked ~ .radio-card-content .radio-title {
-  color: var(--delivery-radio-title-checked-color);
-}
-
-/* Helper Text */
-.delivery-helper-text {
-  padding: 8px 14px;
-  background: var(--delivery-helper-bg);
-  border-radius: 6px;
-  border-left: 3px solid var(--delivery-helper-border);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--delivery-helper-color);
-  line-height: 1.4;
-  margin-top: 8px;
-  animation: fadeInUp 0.3s ease-out;
-}
-
-/* Collapsible Sections */
-.delivery-collapsible {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.delivery-collapsible.expanded {
-  max-height: 240px;
-  opacity: 1;
-  margin-top: 12px;
-}
-
-.collapsible-content {
-  padding: 16px 18px;
-  background: var(--delivery-collapsible-bg);
-  border-radius: 8px;
-  border: 1px solid var(--delivery-collapsible-border);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Section Styling */
-.section-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--delivery-section-label-color);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--delivery-section-label-border);
-}
-
-.section-content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* Date Pills */
-.date-pills-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.date-pill {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 12px;
-  background: var(--delivery-date-pill-bg);
-  border: 2px solid var(--delivery-date-pill-border);
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+/* Radio Icon Wrapper - larger */
+.radio-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.radio-svg-icon {
+  width: 52px;
+  height: 52px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.25s ease;
+}
+
+.delivery-radio-card:hover .radio-svg-icon {
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+}
+
+.delivery-radio-card.selected .radio-svg-icon {
+  color: rgba(255, 255, 255, 1);
+  animation: icon-pop 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.3));
+}
+
+@keyframes icon-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* Radio Title - larger and bolder */
+.radio-title {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.2s ease;
+  text-align: center;
+  line-height: 1.2;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+.delivery-radio-card.selected .radio-title {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* Remove description - not used */
+.radio-description {
+  display: none;
+}
+
+/* Collapsible Section */
+.delivery-collapsible {
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.delivery-collapsible.expanded {
+  max-height: 140px;
+  opacity: 1;
+}
+
+.collapsible-content {
+  padding-top: 0;
+  animation: fadeIn 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding-bottom: 32px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Segmented Controls Layout */
+.segmented-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.segmented-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Segmented Label */
+.segmented-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.segment-icon {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.segment-label-text {
+  font-size: 12px;
+  color: #AAB6BE;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Segmented Control Container */
+.segmented-control {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 4px;
+  gap: 5px;
+  min-height: 58px;
+  height: 58px;
+}
+
+.segmented-control.disabled,
+.segmented-control.loading {
+  opacity: 0.5;
+}
+
+/* Segment Button */
+.segment-btn {
+  flex: 1;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-align: center;
+  font-size: 11px;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  min-width: 60px;
-  height: 60px;
-  font-size: 11px;
-  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  color: #AAB6BE;
+  font-family: inherit;
+  border: none;
+  background: transparent;
+  position: relative;
+  font-weight: 500;
 }
 
-.date-pill:hover:not(.selected):not(:disabled) {
-  border-color: var(--delivery-date-pill-border-hover);
-  background: var(--delivery-date-pill-bg-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--delivery-date-pill-shadow-hover);
+.segment-btn:hover:not(:disabled):not(.unavailable) {
+  background: rgba(255, 255, 255, 0.05);
+  color: #EBF3F7;
 }
 
-.date-pill.selected {
-  border-color: var(--delivery-date-pill-selected-border);
-  background: var(--delivery-date-pill-selected-bg);
-  box-shadow: var(--delivery-date-pill-selected-shadow);
-  transform: translateY(-2px);
-}
-
-.date-pill:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  background: var(--delivery-date-pill-disabled-bg);
-  border-color: var(--delivery-date-pill-disabled-border);
-}
-
-.pill-day {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--delivery-pill-day-color);
-  margin-bottom: 2px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-
-.pill-date {
-  font-size: 14px;
+.segment-btn.selected {
+  background: rgba(14, 165, 233, 0.13);
+  color: #0ea5e9;
   font-weight: 700;
-  color: var(--delivery-pill-date-color);
+  border: 1.5px solid rgba(14, 165, 233, 0.5);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08),
+              inset 0 0 16px rgba(14, 165, 233, 0.05);
+}
+
+.segment-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.segment-btn.unavailable {
+  cursor: not-allowed;
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+/* Date Segment Specific */
+.segment-weekday {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.75;
+}
+
+.segment-date {
+  font-size: 20px;
+  font-weight: 800;
   line-height: 1;
 }
 
-.date-pill.selected .pill-day {
-  color: var(--delivery-pill-day-selected-color);
+.segment-btn.selected .segment-weekday {
+  opacity: 1;
 }
 
-.date-pill.selected .pill-date {
-  color: var(--delivery-pill-date-selected-color);
-}
-
-.date-pill.more-dates {
-  background: var(--delivery-date-more-bg);
-  border-color: var(--delivery-date-more-border);
-  border-style: dashed;
-}
-
-.date-pill.more-dates:hover:not(:disabled) {
-  border-color: var(--delivery-date-more-border-hover);
-  background: var(--delivery-date-more-bg-hover);
-  transform: translateY(-1px);
-}
-
-.more-text {
+/* More Button */
+.segment-more {
   font-size: 11px;
-  font-weight: 600;
-  color: var(--delivery-more-text-color);
+  font-weight: 700;
+}
+
+.segment-more-text {
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.8px;
+  font-weight: 700;
 }
 
-/* Animations */
-@keyframes radioSelect {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
+/* Time Segment Specific */
+.segment-text {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Badge for "few left" indicator */
+.segment-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 12px;
+  height: 12px;
+  background: #f59e0b;
+  color: #78350f;
+  border-radius: 50%;
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(245, 158, 11, 0.5);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Override card body padding for schedule delivery */
+.delivery-layout-grid .form-card .form-card-body:has(.delivery-choice-container) {
+  padding: var(--spacing-3xl) var(--spacing-4xl);
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
-}
-
-/* Responsive Design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .delivery-choice-container {
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 10px;
   }
-
-  .radio-card-content {
-    padding: 8px 14px;
-    min-height: 44px;
+  
+  .delivery-radio-card {
+    padding: 20px 12px;
+    height: 115px;
   }
-
-  .radio-indicator {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
+  
+  .radio-svg-icon {
+    width: 44px;
+    height: 44px;
   }
-
+  
   .radio-title {
-    font-size: 14px;
-  }
-
-  .delivery-helper-text {
-    padding: 6px 12px;
     font-size: 11px;
   }
 
-  .delivery-collapsible.expanded {
-    max-height: 200px;
+  .segmented-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .collapsible-content {
-    padding: 12px 14px;
-    gap: 12px;
-  }
-
-  .section-label {
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-
-  .date-pills-row {
-    gap: 6px;
-  }
-
-  .date-pill {
-    padding: 6px 8px;
-    min-width: 50px;
-    height: 50px;
-    font-size: 10px;
-  }
-
-  .pill-day {
-    font-size: 9px;
-  }
-
-  .pill-date {
-    font-size: 12px;
-  }
-
-  .more-text {
-    font-size: 10px;
+  .segment-btn {
+    padding: 10px 6px;
   }
 }
 
-@media (max-width: 480px) {
-  .delivery-choice-container {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
+/* Light theme adjustments */
+html.theme-light .radio-svg-icon {
+  color: rgba(108, 99, 255, 0.7);
+}
 
-  .date-pills-row {
-    justify-content: space-between;
-  }
+html.theme-light .delivery-radio-card:hover .radio-svg-icon {
+  color: rgba(108, 99, 255, 0.9);
+}
 
-  .date-pill {
-    flex: 1;
-    max-width: 70px;
-  }
+html.theme-light .delivery-radio-card.selected .radio-svg-icon {
+  color: var(--accent-primary);
+  filter: drop-shadow(0 2px 8px rgba(108, 99, 255, 0.4));
+}
+
+html.theme-light .radio-title {
+  color: var(--text-muted);
+}
+
+html.theme-light .delivery-radio-card.selected .radio-title {
+  color: var(--text);
+}
+
+html.theme-light .segmented-control {
+  background: rgba(108, 99, 255, 0.05);
+}
+
+html.theme-light .segment-btn.selected {
+  background: rgba(108, 99, 255, 0.09);
+  color: var(--accent-primary);
+  border: 1.5px solid rgba(108, 99, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.9),
+              inset 0 0 16px rgba(108, 99, 255, 0.05);
+}
+
+html.theme-light .segment-btn:hover:not(:disabled):not(.unavailable) {
+  background: rgba(108, 99, 255, 0.08);
+  color: var(--text);
 }

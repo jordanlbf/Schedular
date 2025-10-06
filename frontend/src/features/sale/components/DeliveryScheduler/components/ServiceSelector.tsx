@@ -57,7 +57,7 @@ export function ServiceSelector({
         {/* Standard Delivery */}
         <button
           type="button"
-          className={`service-minimal-tile ${isStandardSelected ? 'selected' : ''}`}
+          className={`service-minimal-tile glass-tile ${isStandardSelected ? 'selected' : ''}`}
           onClick={() => handleServiceToggle('standard')}
           aria-pressed={isStandardSelected}
         >
@@ -74,7 +74,7 @@ export function ServiceSelector({
         {/* White Glove Service */}
         <button
           type="button"
-          className={`service-minimal-tile ${deliveryDetails.whiteGloveService ? 'selected' : ''}`}
+          className={`service-minimal-tile glass-tile ${deliveryDetails.whiteGloveService ? 'selected' : ''}`}
           onClick={() => handleServiceToggle('whiteGlove')}
           aria-pressed={deliveryDetails.whiteGloveService}
         >
@@ -91,7 +91,7 @@ export function ServiceSelector({
         {/* Mattress Removal */}
         <button
           type="button"
-          className={`service-minimal-tile ${deliveryDetails.oldMattressRemoval ? 'selected' : ''}`}
+          className={`service-minimal-tile glass-tile ${deliveryDetails.oldMattressRemoval ? 'selected' : ''}`}
           onClick={() => handleServiceToggle('mattressRemoval')}
           aria-pressed={deliveryDetails.oldMattressRemoval}
         >
@@ -108,7 +108,7 @@ export function ServiceSelector({
         {/* Basic Setup */}
         <button
           type="button"
-          className={`service-minimal-tile ${deliveryDetails.setupService ? 'selected' : ''}`}
+          className={`service-minimal-tile glass-tile ${deliveryDetails.setupService ? 'selected' : ''}`}
           onClick={() => handleServiceToggle('setup')}
           aria-pressed={deliveryDetails.setupService}
         >

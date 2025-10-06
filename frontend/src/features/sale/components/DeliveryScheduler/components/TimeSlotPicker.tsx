@@ -25,98 +25,77 @@ export function TimeSlotPicker({
   deliveryChoiceMode,
   validationErrors
 }: TimeSlotPickerProps) {
-  // Handle keyboard navigation for time slots
-  const handleTimeSlotKeyDown = (event: React.KeyboardEvent, currentSlotId: string) => {
-    const availableSlots = timeSlots.filter(slot => slot.available);
-    const currentIndex = availableSlots.findIndex(slot => slot.id === currentSlotId);
+  
+  const handleTimeSlotSelect = (slotId: string) => {
+    setDeliveryDetails({ ...deliveryDetails, timeSlot: slotId });
+  };
 
-    let nextIndex = currentIndex;
-
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        event.preventDefault();
-        nextIndex = currentIndex > 0 ? currentIndex - 1 : availableSlots.length - 1;
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        event.preventDefault();
-        nextIndex = currentIndex < availableSlots.length - 1 ? currentIndex + 1 : 0;
-        break;
-      case 'Enter':
-      case ' ':
-        event.preventDefault();
-        if (availableSlots[currentIndex]?.available) {
-          setDeliveryDetails({ ...deliveryDetails, timeSlot: currentSlotId });
-        }
-        return;
-    }
-
-    if (availableSlots[nextIndex]) {
-      // Focus the next slot
-      const nextSlotElement = document.querySelector(`[data-slot-id="${availableSlots[nextIndex].id}"]`) as HTMLElement;
-      nextSlotElement?.focus();
-    }
+  // Map slot IDs to display values
+  const getSlotLabel = (slotId: string) => {
+    if (slotId === 'morning') return 'AM';
+    if (slotId === 'afternoon') return 'PM';
+    if (slotId === 'evening') return 'EVE';
+    return slotId;
   };
 
   return (
-    <div className="selection-section">
-      <label className="section-label">
-        Select Time Slot
-        <span className="required-indicator">*</span>
-      </label>
-
+    <div className="segmented-section">
+      <div className="segmented-label">
+        <span className="segment-icon">🕐</span>
+        <span className="segment-label-text">TIME</span>
+      </div>
+      
       {!deliveryDetails.preferredDate ? (
-        <div className="time-slots-row disabled">
-          <div className="time-slot-placeholder">Morning</div>
-          <div className="time-slot-placeholder">Afternoon</div>
-          <div className="time-slot-placeholder">Evening</div>
+        <div className="segmented-control disabled">
+          <button className="segment-btn" disabled>
+            <span className="segment-text">ANY</span>
+          </button>
+          <button className="segment-btn" disabled>
+            <span className="segment-text">AM</span>
+          </button>
+          <button className="segment-btn" disabled>
+            <span className="segment-text">PM</span>
+          </button>
         </div>
       ) : loadingTimeSlots ? (
-        <div className="time-slots-row loading">
-          <div className="time-slot-skeleton">Loading...</div>
-          <div className="time-slot-skeleton">Loading...</div>
-          <div className="time-slot-skeleton">Loading...</div>
+        <div className="segmented-control loading">
+          <button className="segment-btn" disabled>
+            <span className="segment-text">Loading</span>
+          </button>
+          <button className="segment-btn" disabled>
+            <span className="segment-text">AM</span>
+          </button>
+          <button className="segment-btn" disabled>
+            <span className="segment-text">PM</span>
+          </button>
         </div>
       ) : (
-        <div className="time-slots-row">
-          {timeSlots.map((slot, index) => (
+        <div className="segmented-control">
+          <button
+            type="button"
+            className={`segment-btn ${!deliveryDetails.timeSlot ? 'selected' : ''}`}
+            onClick={() => handleTimeSlotSelect('')}
+            disabled={deliveryChoiceMode === 'later'}
+            aria-label="Anytime - no preference"
+          >
+            <span className="segment-text">ANY</span>
+          </button>
+          {timeSlots.filter(slot => slot.id !== 'evening').map((slot) => (
             <button
               key={slot.id}
               type="button"
-              data-slot-id={slot.id}
-              className={`time-slot-card ${deliveryDetails.timeSlot === slot.id ? 'selected' : ''} ${!slot.available ? 'unavailable' : ''}`}
-              onClick={() => slot.available && setDeliveryDetails({ ...deliveryDetails, timeSlot: slot.id })}
-              onKeyDown={(e) => handleTimeSlotKeyDown(e, slot.id)}
-              disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
-              aria-disabled={!slot.available || deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate}
-              tabIndex={deliveryChoiceMode === 'later' || !deliveryDetails.preferredDate ? -1 : (slot.available && index === 0 ? 0 : -1)}
-              title={!slot.available ? 'No capacity for this date' : ''}
+              className={`segment-btn ${deliveryDetails.timeSlot === slot.id ? 'selected' : ''} ${!slot.available ? 'unavailable' : ''}`}
+              onClick={() => slot.available && handleTimeSlotSelect(slot.id)}
+              disabled={!slot.available || deliveryChoiceMode === 'later'}
               aria-label={`${slot.label} slot ${slot.timeRange}, ${slot.capacity === 'available' ? 'Available' : slot.capacity === 'few-left' ? 'Few slots left' : 'Full'}`}
+              title={!slot.available ? 'No capacity for this time slot' : ''}
             >
-              <div className="slot-header">
-                <span className="slot-title">{slot.label}</span>
-                <span className="slot-range">{slot.timeRange}</span>
-              </div>
+              <span className="segment-text">{getSlotLabel(slot.id)}</span>
               {slot.capacity === 'few-left' && (
-                <span className="slot-status warning">FEW LEFT</span>
-              )}
-              {slot.capacity === 'full' && (
-                <span className="slot-status unavailable">FULL</span>
-              )}
-              {deliveryDetails.timeSlot === slot.id && (
-                <span className="slot-selected-indicator" aria-hidden="true">✓</span>
+                <span className="segment-badge">!</span>
               )}
             </button>
           ))}
-        </div>
-      )}
-
-      {/* Validation Messages */}
-      {deliveryChoiceMode === 'now' && validationErrors.length > 0 && (
-        <div className="validation-message" role="alert" aria-live="assertive">
-          <span className="validation-icon">⚠️</span>
-          {validationErrors[0]}
         </div>
       )}
     </div>

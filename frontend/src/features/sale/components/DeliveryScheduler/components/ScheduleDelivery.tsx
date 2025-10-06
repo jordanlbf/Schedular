@@ -61,7 +61,7 @@ export default function ScheduleDelivery({
         <Card title="Schedule Delivery" size="compact">
             {/* Delivery Choice Radio Cards */}
             <div className="delivery-choice-container">
-              <label className={`delivery-radio-card ${deliveryChoiceMode === 'later' ? 'selected' : ''}`}>
+              <label className={`delivery-radio-card glass-tile ${deliveryChoiceMode === 'later' ? 'selected' : ''}`}>
                 <input
                   type="radio"
                   name="deliveryTiming"
@@ -71,15 +71,18 @@ export default function ScheduleDelivery({
                   className="delivery-radio-input"
                   aria-label="Choose delivery date and time later"
                 />
+                <span className="ripple"></span>
                 <div className="radio-card-content">
-                  <span className="radio-indicator"></span>
-                  <div className="radio-text">
-                    <h4 className="radio-title">Choose Later</h4>
+                  <div className="radio-icon-wrapper">
+                    <svg className="radio-svg-icon" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M19,8H5V6H19V8M12,13H17V18H12V13Z"/>
+                    </svg>
                   </div>
+                  <h4 className="radio-title">Choose Later</h4>
                 </div>
               </label>
 
-              <label className={`delivery-radio-card ${deliveryChoiceMode === 'now' ? 'selected' : ''}`}>
+              <label className={`delivery-radio-card glass-tile ${deliveryChoiceMode === 'now' ? 'selected' : ''}`}>
                 <input
                   type="radio"
                   name="deliveryTiming"
@@ -89,22 +92,17 @@ export default function ScheduleDelivery({
                   className="delivery-radio-input"
                   aria-label="Choose delivery date and time now"
                 />
+                <span className="ripple"></span>
                 <div className="radio-card-content">
-                  <span className="radio-indicator"></span>
-                  <div className="radio-text">
-                    <h4 className="radio-title">Choose Now</h4>
+                  <div className="radio-icon-wrapper">
+                    <svg className="radio-svg-icon" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19,4H18V2H16V4H8V2H6V4H5C3.89,4 3,4.9 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4M19,20H5V10H19V20M17,13.5L16,14.5L11.5,10V7H13V9.5L17,13.5Z"/>
+                    </svg>
                   </div>
+                  <h4 className="radio-title">Choose Now</h4>
                 </div>
               </label>
             </div>
-
-            {/* Helper Text for Later Choice */}
-            {deliveryChoiceMode === 'later' && (
-              <div className="delivery-helper-text" role="status" aria-live="polite">
-                <span className="helper-icon">ℹ️</span>
-                You can select delivery date & time during Payment or later.
-              </div>
-            )}
 
             {/* Collapsible Section with Date and Time Selection */}
             <div
@@ -112,23 +110,25 @@ export default function ScheduleDelivery({
               aria-hidden={deliveryChoiceMode === 'later'}
             >
               <div className="collapsible-content">
-                <DateSelector
-                  deliveryDetails={deliveryDetails}
-                  setDeliveryDetails={setDeliveryDetails}
-                  pillDates={pillDates}
-                  deliveryChoiceMode={deliveryChoiceMode}
-                  showCalendar={showCalendar}
-                  setShowCalendar={setShowCalendar}
-                />
+                <div className="segmented-grid">
+                  <DateSelector
+                    deliveryDetails={deliveryDetails}
+                    setDeliveryDetails={setDeliveryDetails}
+                    pillDates={pillDates}
+                    deliveryChoiceMode={deliveryChoiceMode}
+                    showCalendar={showCalendar}
+                    setShowCalendar={setShowCalendar}
+                  />
 
-                <TimeSlotPicker
-                  deliveryDetails={deliveryDetails}
-                  setDeliveryDetails={setDeliveryDetails}
-                  timeSlots={timeSlots}
-                  loadingTimeSlots={loadingTimeSlots}
-                  deliveryChoiceMode={deliveryChoiceMode}
-                  validationErrors={validationErrors}
-                />
+                  <TimeSlotPicker
+                    deliveryDetails={deliveryDetails}
+                    setDeliveryDetails={setDeliveryDetails}
+                    timeSlots={timeSlots}
+                    loadingTimeSlots={loadingTimeSlots}
+                    deliveryChoiceMode={deliveryChoiceMode}
+                    validationErrors={validationErrors}
+                  />
+                </div>
               </div>
             </div>
         </Card>

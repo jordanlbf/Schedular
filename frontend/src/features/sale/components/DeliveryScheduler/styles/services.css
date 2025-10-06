@@ -1,4 +1,4 @@
-/* Services Selection - Optimized Space Usage with White Icons */
+/* Services Selection - Using Shared Glassmorphic Tiles */
 
 /* Minimal Grid Container */
 .services-minimal-grid {
@@ -13,126 +13,12 @@
   justify-items: center;
 }
 
-/* Minimal Service Tile - reduced height for better space usage */
+/* Service Tile - extends glass-tile */
 .service-minimal-tile {
-  background: rgba(39, 39, 40, 0.6);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
   padding: 12px 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   gap: 0;
-  position: relative;
-  height: 122px;
+  height: 110px;
   width: 100%;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
-              inset 0 1px 0 rgba(255, 255, 255, 0.03);
-  
-  font-family: inherit;
-  color: inherit;
-  outline: none;
-  border-width: 1px;
-}
-
-/* Glass reflection effect */
-.service-minimal-tile::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(180deg, 
-    rgba(255, 255, 255, 0.05) 0%, 
-    transparent 100%);
-  border-radius: 16px 16px 0 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.service-minimal-tile:hover {
-  background: rgba(86, 94, 99, 0.5);
-  transform: scale(1.02) translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15),
-              inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.service-minimal-tile:active {
-  transform: scale(0.98);
-}
-
-.service-minimal-tile.selected {
-  background: rgba(14, 165, 233, 0.13);
-  border-color: rgba(14, 165, 233, 0.5);
-  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.15),
-              inset 0 1px 0 rgba(255, 255, 255, 0.08),
-              inset 0 0 20px rgba(14, 165, 233, 0.05);
-}
-
-/* Green dot indicator for selected state */
-.service-minimal-tile.selected::after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 7px;
-  height: 7px;
-  background: var(--success);
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
-  animation: pulse-dot 2s ease-in-out infinite;
-  z-index: 2;
-}
-
-@keyframes pulse-dot {
-  0%, 100% {
-    box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
-  }
-  50% {
-    box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
-  }
-}
-
-/* Ripple Effect */
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(14, 165, 233, 0.3);
-  transform: scale(0);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.service-minimal-tile:active .ripple {
-  animation: ripple-effect 0.6s ease-out;
-}
-
-@keyframes ripple-effect {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-.service-minimal-tile:active .ripple {
-  width: 100px;
-  height: 100px;
-  top: 50%;
-  left: 50%;
-  margin-left: -50px;
-  margin-top: -50px;
 }
 
 /* Service Title - at the top */
@@ -155,7 +41,7 @@
   font-weight: 700;
 }
 
-/* Icon Wrapper - in the middle, smaller and white */
+/* Icon Wrapper - in the middle */
 .minimal-icon-wrapper {
   flex: 1;
   display: flex;
@@ -228,23 +114,6 @@
   justify-content: center;
 }
 
-/* Focus states for accessibility */
-.service-minimal-tile:focus-visible {
-  outline: 2px solid var(--accent-secondary);
-  outline-offset: 2px;
-}
-
-/* Click feedback animation */
-.service-minimal-tile:active {
-  animation: click-feedback 0.2s ease;
-}
-
-@keyframes click-feedback {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.95); }
-  100% { transform: scale(1); }
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .services-minimal-grid {
@@ -275,37 +144,6 @@
   }
 }
 
-/* Light theme adjustments */
-html.theme-light .service-minimal-tile {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(108, 99, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05),
-              inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-html.theme-light .service-minimal-tile::before {
-  background: linear-gradient(180deg, 
-    rgba(255, 255, 255, 0.8) 0%, 
-    transparent 100%);
-}
-
-html.theme-light .service-minimal-tile:hover {
-  background: rgba(248, 249, 250, 0.9);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08),
-              inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  border-color: rgba(108, 99, 255, 0.15);
-}
-
-html.theme-light .service-minimal-tile.selected {
-  background: rgba(108, 99, 255, 0.09);
-  border-color: rgba(108, 99, 255, 0.4);
-  box-shadow: 0 8px 24px rgba(108, 99, 255, 0.12),
-              inset 0 1px 0 rgba(255, 255, 255, 0.9),
-              inset 0 0 20px rgba(108, 99, 255, 0.05);
-}
-
 /* Light theme - darker icons for visibility */
 html.theme-light .minimal-svg-icon {
   color: rgba(108, 99, 255, 0.7);
@@ -330,8 +168,4 @@ html.theme-light .service-minimal-tile.selected .minimal-service-title {
 
 html.theme-light .minimal-service-amount.free {
   color: var(--success);
-}
-
-html.theme-light .ripple {
-  background: rgba(108, 99, 255, 0.3);
 }

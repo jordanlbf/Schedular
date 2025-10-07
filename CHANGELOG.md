@@ -59,6 +59,8 @@ All notable changes to this project will be documented here.
 
 - update CHANGELOG.md [skip ci] (ef5949a)
 
+- update CHANGELOG.md [skip ci] (a4bd6d7)
+
 
 
 ## Enhance
@@ -136,6 +138,8 @@ All notable changes to this project will be documented here.
 - redesign Additional Services card with icon grid layout (f4fe66f)
 
 - optimize additional services cards with frosted glass design (540cc73)
+
+- align summary tiles with service grid and refine styling (fe0d038)
 
 
 

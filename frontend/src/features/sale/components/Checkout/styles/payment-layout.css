@@ -69,6 +69,7 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  align-items: start;
 }
 
 /* Left column - Order Summary (spans full height) */
@@ -126,15 +127,8 @@
   gap: var(--spacing-lg);
 }
 
-/* Pin pricing breakdown to bottom */
-.payment-order-summary .order-totals {
-  flex-shrink: 0;
-  border-top: 2px solid var(--border);
-  background: var(--panel-elev);
-  padding: var(--spacing-lg);
-  margin: var(--spacing-lg) calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg));
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-}
+/* Pin pricing breakdown to bottom - NO LONGER NEEDED, TOTALS ARE INTEGRATED */
+/* Keeping this comment as a marker but the styling is removed */
 
 /* Payment Step Animations - matching form-cards-grid pattern */
 .payment-layout-grid .payment-order-summary .form-card {

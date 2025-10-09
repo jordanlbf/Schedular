@@ -61,6 +61,8 @@ All notable changes to this project will be documented here.
 
 - update CHANGELOG.md [skip ci] (a4bd6d7)
 
+- update CHANGELOG.md [skip ci] (49d3998)
+
 
 
 ## Enhance
@@ -84,6 +86,8 @@ All notable changes to this project will be documented here.
 - Light mode header and footer have white background (9a52724)
 
 - Enhance Sale Wizard Delivery Schedule Step with Glassmorphic UI Design (50fc73f)
+
+- Simplify UI for Delivery Schedule in Sale Wizard (96423e9)
 
 
 

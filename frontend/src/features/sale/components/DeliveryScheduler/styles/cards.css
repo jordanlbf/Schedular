@@ -1,6 +1,6 @@
 /* Cards Module - Consolidated */
 
-/* Delivery Instructions Card */
+/* Delivery Instructions Card - Design 8: Minimal Clean */
 .delivery-instructions-card {
   height: 100%;
   display: flex;
@@ -11,6 +11,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 16px 24px 24px;
 }
 
 .delivery-instructions-group {
@@ -19,38 +20,97 @@
   flex-direction: column;
 }
 
+/* Minimal Clean Textarea - Design 8 - Override all form-input styles */
 .delivery-instructions-textarea {
   flex: 1;
-  min-height: 120px;
+  min-height: 200px !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 0 !important;
+  padding: 12px 0 !important;
+  color: var(--text) !important;
+  font-family: inherit;
+  font-size: 14px;
   resize: vertical;
+  transition: all 0.2s ease !important;
+  box-shadow: none !important;
+  transform: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
-/* Delivery Instructions Footer */
+.delivery-instructions-textarea:hover {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.delivery-instructions-textarea:focus {
+  outline: none !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom-color: var(--accent-secondary) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  min-height: 200px !important;
+}
+
+.delivery-instructions-textarea:valid:not(:placeholder-shown):not(:focus) {
+  border: none !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.delivery-instructions-textarea::placeholder {
+  color: var(--text-subtle);
+}
+
+/* Minimal Footer */
 .delivery-instructions-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 4px 0;
+  padding-top: 12px;
   gap: 12px;
 }
 
-.instructions-helper-text {
+/* Status Indicator */
+.instructions-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: #64748b;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
-  flex: 1;
 }
 
+.instructions-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  transition: background 0.2s ease;
+}
+
+.instructions-status-dot.empty {
+  background: #64748b;
+}
+
+/* Character Counter */
 .instructions-char-counter {
-  color: #64748b;
-  font-size: 11px;
+  color: var(--text-subtle);
+  font-size: 13px;
   font-weight: 600;
   flex-shrink: 0;
   transition: color 0.2s ease;
 }
 
 .instructions-char-counter.warning {
-  color: #ef4444;
+  color: var(--error);
 }
 
 /* Responsive Design */
@@ -68,16 +128,29 @@
     padding: var(--spacing-md) var(--spacing-xl);
   }
 
-  .delivery-instructions-textarea {
-    min-height: 100px;
+  .delivery-instructions-card .form-card-body {
+    padding: 12px 20px 20px;
   }
 
-  .instructions-helper-text {
-    font-size: 10px;
+  .delivery-instructions-textarea {
+    min-height: 140px !important;
+  }
+
+  .delivery-instructions-textarea:focus {
+    min-height: 140px !important;
+  }
+
+  .instructions-status-indicator {
+    font-size: 12px;
+  }
+
+  .instructions-status-dot {
+    width: 5px;
+    height: 5px;
   }
 
   .instructions-char-counter {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -91,19 +164,32 @@
     padding: var(--spacing-sm) var(--spacing-lg);
   }
 
+  .delivery-instructions-card .form-card-body {
+    padding: 10px 16px 16px;
+  }
+
   .compact-card .form-group {
     margin-bottom: var(--spacing-sm);
   }
 
   .delivery-instructions-textarea {
-    min-height: 80px;
+    min-height: 120px !important;
   }
 
-  .instructions-helper-text {
-    font-size: 9px;
+  .delivery-instructions-textarea:focus {
+    min-height: 120px !important;
+  }
+
+  .instructions-status-indicator {
+    font-size: 11px;
+  }
+
+  .instructions-status-dot {
+    width: 4px;
+    height: 4px;
   }
 
   .instructions-char-counter {
-    font-size: 9px;
+    font-size: 11px;
   }
 }

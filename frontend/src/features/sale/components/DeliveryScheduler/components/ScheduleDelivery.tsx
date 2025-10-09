@@ -149,13 +149,16 @@ export default function ScheduleDelivery({
                 className="form-input form-textarea delivery-instructions-textarea"
                 value={deliveryDetails.specialInstructions}
                 onChange={(e) => handleSpecialInstructionsChange(e.target.value.slice(0, 500))}
-                placeholder="Special requirements: gate codes, stairs, contact preferences, etc."
+                placeholder="Type your delivery instructions here..."
                 maxLength={500}
               />
               <div className="delivery-instructions-footer">
-                <span className="instructions-helper-text">
-                  {deliveryDetails.specialInstructions.length > 0 ? '💡 Be specific for smooth delivery' : ''}
-                </span>
+                <div className="instructions-status-indicator">
+                  <span className={`instructions-status-dot ${
+                    deliveryDetails.specialInstructions.length === 0 ? 'empty' : ''
+                  }`}></span>
+                  <span>{deliveryDetails.specialInstructions.length > 0 ? 'Ready' : 'Optional'}</span>
+                </div>
                 <span className={`instructions-char-counter ${
                   deliveryDetails.specialInstructions.length > 450 ? 'warning' : ''
                 }`}>

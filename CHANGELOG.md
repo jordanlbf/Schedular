@@ -63,6 +63,8 @@ All notable changes to this project will be documented here.
 
 - update CHANGELOG.md [skip ci] (49d3998)
 
+- update CHANGELOG.md [skip ci] (31fb1c1)
+
 
 
 ## Enhance
@@ -144,6 +146,8 @@ All notable changes to this project will be documented here.
 - optimize additional services cards with frosted glass design (540cc73)
 
 - align summary tiles with service grid and refine styling (fe0d038)
+
+- implement minimal clean design for delivery instructions card (393647e)
 
 
 

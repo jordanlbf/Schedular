@@ -4,7 +4,7 @@
 .services-minimal-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -15,19 +15,19 @@
 
 /* Service Tile - extends glass-tile */
 .service-minimal-tile {
-  padding: 12px 10px;
+  padding: 10px 10px;
   gap: 0;
-  height: 110px;
+  height: 125px;
   width: 100%;
 }
 
 /* Service Title - at the top */
 .minimal-service-title {
   color: var(--text-muted);
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 1px;
   transition: color 0.2s ease;
   line-height: 1.2;
   position: relative;
@@ -132,7 +132,7 @@
   }
   
   .minimal-service-title {
-    font-size: 9px;
+    font-size: 11px;
   }
   
   .minimal-service-amount {

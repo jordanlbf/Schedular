@@ -25,6 +25,34 @@
   resize: vertical;
 }
 
+/* Delivery Instructions Footer */
+.delivery-instructions-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px 0;
+  gap: 12px;
+}
+
+.instructions-helper-text {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.instructions-char-counter {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.instructions-char-counter.warning {
+  color: #ef4444;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .delivery-choice-radiogroup {
@@ -42,6 +70,14 @@
 
   .delivery-instructions-textarea {
     min-height: 100px;
+  }
+
+  .instructions-helper-text {
+    font-size: 10px;
+  }
+
+  .instructions-char-counter {
+    font-size: 10px;
   }
 }
 
@@ -61,5 +97,13 @@
 
   .delivery-instructions-textarea {
     min-height: 80px;
+  }
+
+  .instructions-helper-text {
+    font-size: 9px;
+  }
+
+  .instructions-char-counter {
+    font-size: 9px;
   }
 }

@@ -3,7 +3,7 @@ interface TruckIconProps {
   size?: number;
 }
 
-export default function TruckIcon({ className = "", size = 36 }: TruckIconProps) {
+export default function TruckIcon({ className = "", size = 40 }: TruckIconProps) {
   return (
     <svg 
       className={className} 
@@ -17,18 +17,7 @@ export default function TruckIcon({ className = "", size = 36 }: TruckIconProps)
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      {/* Truck body */}
-      <rect x="1" y="6" width="14" height="8" rx="1" />
-      <path d="M15 8h3l3 3v5h-6V8z" />
-      
-      {/* Wheels */}
-      <circle cx="5.5" cy="17.5" r="2.5" />
-      <circle cx="18.5" cy="17.5" r="2.5" />
-      
-      {/* Details */}
-      <path d="M4 6V4" />
-      <path d="M8 6V4" />
-      <path d="M12 6V4" />
+      <path d="M13 16V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h1m8-1a1 1 0 0 1-1 1H9m4-1V8a1 1 0 0 1 1-1h2.586a1 1 0 0 1 .707.293l3.414 3.414a1 1 0 0 1 .293.707V16a1 1 0 0 1-1 1h-1m-6-1a1 1 0 0 0 1 1h1M5 17a2 2 0 1 0 4 0m-4 0a2 2 0 1 1 4 0m-4 0v-5h-.5a1 1 0 0 1-.866-.5L3 11m0 0l-.5-1a1 1 0 0 1 .866-1.5H5M3 11V8m10 8a2 2 0 1 0 4 0m-4 0a2 2 0 1 1 4 0m-4 0v-5h2" />
     </svg>
   );
 }

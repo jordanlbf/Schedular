@@ -74,7 +74,7 @@
 /* Radio Title - larger and bolder */
 .radio-title {
   color: var(--text-muted);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;

@@ -7,12 +7,12 @@
 .summary-glass-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 12px;
   padding: 0;
   max-width: 100%;
   /* Align with service tiles: 2 tiles (110px each) + 1 gap (10px) = 230px */
-  height: 240px;
-  margin-top: 4px; /* Fine-tune vertical alignment with service tiles */
+  height: 260px;
+  margin-top: 0px; /* Fine-tune vertical alignment with service tiles */
 }
 
 /* Glass Item - matching service-minimal-tile exactly */
@@ -86,10 +86,10 @@
 /* Label - at the top (matching minimal-service-title EXACTLY) */
 .summary-label {
   color: var(--text-muted);
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 1px;
   transition: color 0.2s ease;
   line-height: 1.2;
   position: relative;
@@ -120,8 +120,8 @@
 }
 
 .summary-icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   color: rgba(255, 255, 255, 0.7);
   transition: all 0.25s ease;
   stroke-width: 2;
@@ -145,7 +145,7 @@
 /* Value - at the bottom (matching minimal-service-amount EXACTLY) */
 .summary-value {
   color: var(--text);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   transition: all 0.2s ease;
   line-height: 1;
@@ -162,7 +162,7 @@
 
 .summary-value-total {
   color: var(--accent-secondary);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
 }
 
@@ -208,7 +208,7 @@
   }
 
   .summary-label {
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .summary-value {
@@ -299,4 +299,179 @@ html.theme-light .summary-label {
 html.theme-light .summary-glass-item:hover .summary-label,
 html.theme-light .summary-label-total {
   color: var(--text);
+}
+
+/* ============================================
+   EDITABLE BASE DELIVERY FEE STYLES (ADDITIVE)
+   ============================================ */
+
+/* Value with Edit Button Container */
+.summary-value-with-edit {
+  display: inline-block;
+  position: relative;
+}
+
+.summary-value-with-edit > span {
+  display: inline-block;
+}
+
+/* Edit Button */
+.summary-edit-button {
+  position: absolute;
+  left: 100%;
+  margin-left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.summary-edit-button:hover {
+  background: rgba(14, 165, 233, 0.25);
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+/* Edit Icon */
+.summary-edit-icon {
+  color: #0ea5e9;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.summary-edit-button:hover .summary-edit-icon {
+  color: #38bdf8;
+}
+
+/* Edit Text Label */
+.summary-edit-text {
+  color: #0ea5e9;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: color 0.2s ease;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.summary-edit-button:hover .summary-edit-text {
+  color: #38bdf8;
+}
+
+/* Input Field for Editing */
+.summary-value-input {
+  width: 100%;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(14, 165, 233, 0.5);
+  border-radius: 8px;
+  padding: 6px 8px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  appearance: textfield;
+}
+
+.summary-value-input::-webkit-inner-spin-button,
+.summary-value-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.summary-value-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(14, 165, 233, 0.7);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+/* Light Theme Overrides for Editable Elements */
+html.theme-light .summary-edit-button {
+  background: rgba(108, 99, 255, 0.12);
+  border-color: rgba(108, 99, 255, 0.3);
+}
+
+html.theme-light .summary-edit-button:hover {
+  background: rgba(108, 99, 255, 0.2);
+  border-color: rgba(108, 99, 255, 0.5);
+}
+
+html.theme-light .summary-edit-icon {
+  color: var(--accent-primary);
+}
+
+html.theme-light .summary-edit-button:hover .summary-edit-icon {
+  color: rgba(108, 99, 255, 0.9);
+}
+
+html.theme-light .summary-edit-text {
+  color: var(--accent-primary);
+}
+
+html.theme-light .summary-edit-button:hover .summary-edit-text {
+  color: rgba(108, 99, 255, 0.9);
+}
+
+html.theme-light .summary-value-input {
+  background: rgba(108, 99, 255, 0.08);
+  border-color: rgba(108, 99, 255, 0.4);
+  color: var(--text);
+}
+
+html.theme-light .summary-value-input:focus {
+  background: rgba(108, 99, 255, 0.12);
+  border-color: rgba(108, 99, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+}
+
+/* Responsive Adjustments for Editable Elements */
+@media (max-width: 768px) {
+  .summary-edit-button {
+    margin-left: 8px;
+    padding: 3px 6px;
+    gap: 4px;
+  }
+
+  .summary-edit-text {
+    font-size: 10px;
+  }
+
+  .summary-value-input {
+    font-size: 15px;
+    padding: 5px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-edit-button {
+    margin-left: 6px;
+    padding: 3px 5px;
+    gap: 3px;
+  }
+
+  .summary-edit-text {
+    font-size: 9px;
+  }
+
+  .summary-value-input {
+    font-size: 14px;
+    padding: 4px 6px;
+  }
 }

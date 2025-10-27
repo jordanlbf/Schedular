@@ -1,57 +1,204 @@
-/* Payment Step Layout */
+/* Payment Step Layout - Balanced Spacing */
 
-/* Payment Method Card - Optimized for 390px height */
-.payment-methods {
+/* Payment Method Card - 3 Column Grid Layout */
+.payment-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0; /* Remove all margins */
+  align-items: stretch;
+  flex-shrink: 0; /* Prevent shrinking */
+  flex-grow: 0; /* Prevent growing - stay at natural size */
+}
+
+.payment-option-card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.payment-option {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-md);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-md);
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 18px;
+  background: linear-gradient(145deg, rgba(14, 165, 233, 0.08) 0%, rgba(14, 165, 233, 0.03) 100%);
+  border: 2px solid rgba(14, 165, 233, 0.25);
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  min-height: auto;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 14px rgba(0, 0, 0, 0.1), 
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.payment-option:hover {
-  border-color: var(--checkout-payment-option-border-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--checkout-payment-option-shadow-hover);
+/* Radial glow effect on background */
+.payment-option-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
-.payment-option input[type="radio"] {
-  width: 16px;
-  height: 16px;
-  margin: 1px 0 0 0;
-  accent-color: var(--primary);
-  flex-shrink: 0;
+.payment-option-card:hover::before {
+  opacity: 1;
+  animation: rotateGlow 8s linear infinite;
 }
 
-.payment-details {
+@keyframes rotateGlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Left accent for visual depth */
+.payment-option-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(to bottom, #0ea5e9 0%, #38bdf8 50%, #0ea5e9 100%);
+  border-radius: 12px 0 0 12px;
+  transition: width 0.35s ease;
+  box-shadow: 3px 0 10px rgba(14, 165, 233, 0.5);
+}
+
+/* Hover state */
+.payment-option-card:hover {
+  background: linear-gradient(145deg, rgba(14, 165, 233, 0.14) 0%, rgba(14, 165, 233, 0.05) 100%);
+  border-color: rgba(14, 165, 233, 0.5);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    0 14px 32px rgba(14, 165, 233, 0.22), 
+    0 7px 16px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Selected state */
+.payment-option-card:has(input:checked) {
+  background: linear-gradient(145deg, rgba(14, 165, 233, 0.18) 0%, rgba(14, 165, 233, 0.08) 100%);
+  border-color: rgba(14, 165, 233, 0.7);
+  box-shadow: 
+    0 10px 28px rgba(14, 165, 233, 0.3), 
+    0 5px 14px rgba(14, 165, 233, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.payment-option-card:has(input:checked)::after {
+  width: 4px;
+}
+
+.payment-icon {
+  font-size: 52px;
+  margin-bottom: 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.15));
+  position: relative;
+  z-index: 1;
+}
+
+.payment-option-card:hover .payment-icon {
+  transform: scale(1.15) rotate(-6deg);
+  filter: drop-shadow(0 5px 10px rgba(14, 165, 233, 0.35));
+}
+
+.payment-option-card:has(input:checked) .payment-icon {
+  transform: scale(1.1);
+  animation: iconPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes iconPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.payment-content {
   flex: 1;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
 }
 
 .payment-name {
-  font-weight: var(--font-semibold);
-  font-size: var(--text-sm);
-  color: var(--text);
-  margin: 0 0 var(--spacing-xs) 0;
-  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
+  font-size: 17px;
+  color: #EBF3F7;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.payment-option-card:hover .payment-name {
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.payment-option-card:has(input:checked) .payment-name {
+  color: #FFFFFF;
+  text-shadow: 0 2px 6px rgba(14, 165, 233, 0.4);
 }
 
 .payment-description {
-  font-size: var(--text-xs);
-  color: var(--text-subtle);
-  line-height: var(--leading-normal);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.3;
+  transition: all 0.3s ease;
+}
+
+.payment-option-card:hover .payment-description {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.payment-option-card:has(input:checked) .payment-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.payment-option-card input[type="radio"] {
+  width: 22px;
+  height: 22px;
   margin: 0;
+  margin-top: 10px;
+  accent-color: #0ea5e9;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(14, 165, 233, 0.3));
+}
+
+.payment-option-card:hover input[type="radio"] {
+  transform: scale(1.15);
+}
+
+.payment-option-card:has(input:checked) input[type="radio"] {
+  transform: scale(1.1);
+  filter: drop-shadow(0 3px 6px rgba(14, 165, 233, 0.5));
 }
 
 /* Payment Step Layout - Full width alignment with wizard container */
@@ -62,7 +209,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 32px;
   width: min(99.5vw, 2200px);
-  max-width: none;  /* Remove max-width constraint */
+  max-width: none;
   margin: 0;
   padding: 0;
   padding-bottom: calc(80px + var(--spacing-lg));
@@ -77,19 +224,38 @@
   /* This will naturally take the height it needs */
 }
 
-/* Right column - Stacked cards with proper spacing */
+/* Right column - Stacked cards with fixed calculated heights */
 .payment-right-column {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xl);  /* Consistent gap */
-  height: fit-content;
+  gap: var(--spacing-2xl);
+  /* Height will be set by JavaScript to match left column */
+}
+
+/* Fixed heights for right column cards */
+.payment-right-column .form-card {
+  height: 410px;
+  min-height: 410px;
+  max-height: 410px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.payment-right-column .form-card .form-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 /* Set heights for payment components - Order Summary taller, right cards shorter */
 .payment-layout-grid .form-card {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0; /* Override default form-card margin to prevent alignment issues */
+  margin-bottom: 0;
 }
 
 .payment-layout-grid .form-card .form-card-body {
@@ -97,12 +263,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
-
-/* Right column cards - Auto-sized for content */
-.payment-right-column .form-card {
-  min-height: 360px;
-  flex: 1;
 }
 
 /* Order Summary - Dynamic height to match right column */
@@ -126,9 +286,6 @@
   flex-direction: column;
   gap: var(--spacing-lg);
 }
-
-/* Pin pricing breakdown to bottom - NO LONGER NEEDED, TOTALS ARE INTEGRATED */
-/* Keeping this comment as a marker but the styling is removed */
 
 /* Payment Step Animations - matching form-cards-grid pattern */
 .payment-layout-grid .payment-order-summary .form-card {
@@ -215,6 +372,22 @@
   color: var(--text-subtle);
 }
 
+/* CRITICAL: Override card AND card body for payment method card - MUST come after all generic rules */
+.payment-layout-grid .payment-right-column .form-card:has(.payment-methods-grid) {
+  padding-bottom: 0 !important;
+}
+
+.payment-layout-grid .payment-right-column .form-card:has(.payment-methods-grid) .form-card-body {
+  padding: var(--spacing-4xl) !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+  min-height: 0 !important;
+}
+
 /* Responsive Payment Layout */
 @media (max-width: 768px) {
   .wizard-content {
@@ -230,12 +403,24 @@
     gap: var(--spacing-xl);
   }
 
+  /* Stack payment methods vertically on mobile */
+  .payment-methods-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
   /* Reset heights on mobile */
   .payment-layout-grid .form-card,
   .payment-order-summary .form-card,
   .payment-right-column .form-card {
     min-height: auto;
     max-height: none;
+    height: auto;
+  }
+
+  .payment-right-column {
+    display: flex;
+    flex-direction: column;
     height: auto;
   }
 

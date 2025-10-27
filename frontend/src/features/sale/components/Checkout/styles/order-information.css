@@ -1,0 +1,399 @@
+/* Order Information - Clean Sections Style (Option A) */
+
+/* Container for the entire order information section - FILL ALL AVAILABLE SPACE */
+.order-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  height: 100%;
+  align-items: stretch;
+  position: relative;
+}
+
+/* Vertical Divider */
+.order-info-grid::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(14, 165, 233, 0.2) 10%,
+    rgba(14, 165, 233, 0.4) 50%,
+    rgba(14, 165, 233, 0.2) 90%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Individual cards (Customer and Delivery) */
+.order-info-card {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.10) 0%, rgba(14, 165, 233, 0.04) 100%);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 4px rgba(0, 0, 0, 0.08);
+  animation: slideInCard 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+/* Staggered animation for second card */
+.order-info-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+/* Slide-in animation */
+@keyframes slideInCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Left accent border */
+.order-info-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, 
+    #0ea5e9 0%, 
+    rgba(14, 165, 233, 0.7) 50%,
+    #0ea5e9 100%
+  );
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+/* Hover effect */
+.order-info-card:hover {
+  border-color: rgba(14, 165, 233, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.06) 100%);
+}
+
+/* === CORNER ICON BADGE === */
+.order-info-icon {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(14, 165, 233, 0.15) 100%);
+  border: 1px solid rgba(14, 165, 233, 0.5);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0ea5e9;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25), 0 1px 3px rgba(14, 165, 233, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+/* Icon hover animation */
+.order-info-card:hover .order-info-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35), 0 2px 6px rgba(14, 165, 233, 0.25);
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.35) 0%, rgba(14, 165, 233, 0.25) 100%);
+}
+
+/* Subtle icon pulse on page load */
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.order-info-icon {
+  animation: iconPulse 2s ease-in-out 0.6s 2;
+}
+
+/* === MAIN LABEL (CUSTOMER/DELIVERY) - BUBBLE STYLE === */
+.order-info-label {
+  font-size: 9px;
+  font-weight: var(--font-bold);
+  color: #0ea5e9;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-md);
+  flex-shrink: 0;
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  padding: 6px 12px;
+  border-radius: 12px;
+  width: fit-content;
+  box-shadow: 0 2px 6px rgba(14, 165, 233, 0.2);
+}
+
+/* === CONTENT CONTAINER === */
+.order-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  flex: 1;
+  min-height: 0;
+  padding-right: 50px; /* Space for corner icon */
+}
+
+/* === PRIMARY TEXT (Name/Date) === */
+.content-primary {
+  font-size: 28px;
+  font-weight: var(--font-bold);
+  color: #EBF3F7;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Status indicator dot - only on delivery card */
+.order-info-card:nth-child(2) .content-primary::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.7), 0 0 5px rgba(34, 197, 94, 0.5);
+  animation: statusPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Pulse animation for status indicator */
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.15);
+  }
+}
+
+/* === OPTION A: CLEAN SECTIONS (NO CARD BACKGROUNDS) === */
+
+/* Section container - simple labeled sections */
+.content-group,
+.content-address {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  transition: all 0.2s ease;
+}
+
+/* Section label - DEFAULT STYLE (for all subsections) */
+.section-label {
+  font-size: 10px;
+  color: #0ea5e9;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+  font-weight: var(--font-bold);
+  opacity: 0.9;
+}
+
+/* Section items */
+.content-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 15px;
+  color: #EBF3F7;
+  font-weight: var(--font-medium);
+  transition: all 0.2s ease;
+  padding-left: var(--spacing-xs);
+}
+
+.content-item:hover {
+  transform: translateX(2px);
+  color: #FFFFFF;
+}
+
+.content-item svg {
+  width: 16px;
+  height: 16px;
+  color: #0ea5e9;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* Address section */
+.content-address {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.address-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding-left: var(--spacing-xs);
+}
+
+.address-content svg {
+  width: 16px;
+  height: 16px;
+  color: #0ea5e9;
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.9;
+}
+
+.address-content span {
+  font-size: 15px;
+  color: #EBF3F7;
+  font-weight: var(--font-medium);
+  line-height: var(--leading-relaxed);
+}
+
+/* === SERVICES SECTION === */
+.content-services {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+/* Service items - simple list with checkmarks */
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 15px;
+  color: #EBF3F7;
+  font-weight: var(--font-medium);
+  transition: all 0.2s ease;
+  padding-left: var(--spacing-xs);
+}
+
+.service-item:hover {
+  transform: translateX(2px);
+  color: #FFFFFF;
+}
+
+.service-item svg {
+  width: 16px;
+  height: 16px;
+  color: #22c55e;
+  flex-shrink: 0;
+}
+
+/* Optional: Add subtle dividers between major sections */
+.content-group:not(:last-child)::after,
+.content-address:not(:last-child)::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(14, 165, 233, 0.2) 20%,
+    rgba(14, 165, 233, 0.2) 80%,
+    transparent 100%
+  );
+  margin-top: var(--spacing-sm);
+}
+
+/* 
+  HEIGHT CONTROL FOR ORDER INFORMATION CARD
+*/
+.payment-right-column .form-card:has(.order-info-grid) {
+  height: 400px;
+  min-height: 400px;
+  max-height: 400px;
+  padding-bottom: 0;
+}
+
+.payment-right-column .form-card:has(.order-info-grid) .form-card-header {
+  padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
+}
+
+.payment-right-column .form-card:has(.order-info-grid) .form-card-body {
+  overflow-y: auto;
+  min-height: 0;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Custom Scrollbar */
+.payment-right-column .form-card:has(.order-info-grid) .form-card-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.payment-right-column .form-card:has(.order-info-grid) .form-card-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.payment-right-column .form-card:has(.order-info-grid) .form-card-body::-webkit-scrollbar-thumb {
+  background: rgba(14, 165, 233, 0.3);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.payment-right-column .form-card:has(.order-info-grid) .form-card-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(14, 165, 233, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-info-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .order-info-grid::before {
+    display: none;
+  }
+
+  .order-info-card {
+    height: auto;
+  }
+
+  .order-info-content {
+    padding-right: 50px;
+  }
+
+  .payment-right-column .form-card:has(.order-info-grid) {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    padding-bottom: 60px;
+  }
+  
+  .payment-right-column .form-card:has(.order-info-grid) .form-card-header {
+    padding: var(--spacing-3xl) var(--spacing-4xl) var(--spacing-2xl);
+  }
+  
+  .payment-right-column .form-card:has(.order-info-grid) .form-card-body {
+    padding: var(--spacing-4xl);
+  }
+}

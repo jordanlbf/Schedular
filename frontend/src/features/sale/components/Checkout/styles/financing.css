@@ -1,4 +1,4 @@
-/* Financing and Input Controls */
+/* Financing and Input Controls - Premium Design */
 
 /* Discount Controls */
 .discount-input-wrapper {
@@ -42,47 +42,176 @@
   padding-left: var(--spacing-xl) !important;
 }
 
-/* Financing Details - Compact for 390px height */
+/* Financing Details - Premium card design */
 .financing-details {
-  margin-top: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: var(--panel-elev);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-lg) 20px;
+  background: linear-gradient(145deg, rgba(14, 165, 233, 0.1) 0%, rgba(14, 165, 233, 0.03) 100%);
+  border-radius: 14px;
+  border: 2px solid rgba(14, 165, 233, 0.3);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.1), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Top accent bar */
+.financing-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #0ea5e9 0%, #38bdf8 50%, #0ea5e9 100%);
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.5);
+}
+
+.financing-details:hover {
+  border-color: rgba(14, 165, 233, 0.5);
+  box-shadow: 
+    0 6px 20px rgba(14, 165, 233, 0.15), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0.04) 100%);
+  transform: translateY(-2px);
 }
 
 .financing-details .form-group {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
 }
 
 .financing-details .form-label {
-  font-size: var(--text-xs);
-  margin-bottom: var(--spacing-xs);
+  font-size: 12px;
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-bold);
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* Enhanced input styling */
+.financing-details .deposit-input {
+  background: rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(14, 165, 233, 0.35);
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-weight: var(--font-semibold);
+}
+
+.financing-details .deposit-input:focus {
+  border-color: rgba(14, 165, 233, 0.7);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 
+    0 0 0 4px rgba(14, 165, 233, 0.15), 
+    inset 0 2px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Financing Summary - Premium card */
 .financing-summary {
-  margin-top: var(--spacing-sm);
-  padding: var(--spacing-sm);
-  background: var(--bg);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
+  margin-top: var(--spacing-md);
+  padding: 16px;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.25) 100%);
+  border-radius: 12px;
+  border: 1.5px solid rgba(14, 165, 233, 0.25);
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.25),
+    0 2px 8px rgba(14, 165, 233, 0.1);
+  position: relative;
+}
+
+/* Top accent for summary */
+.financing-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(to right, transparent 0%, rgba(14, 165, 233, 0.5) 50%, transparent 100%);
+  box-shadow: 0 1px 4px rgba(14, 165, 233, 0.3);
 }
 
 .financing-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: var(--text-sm);
-  margin-bottom: var(--spacing-xs);
+  font-size: 14.5px;
+  margin-bottom: 12px;
+  padding: 6px 0;
+  transition: all 0.25s ease;
+  border-radius: 6px;
+}
+
+.financing-row:hover {
+  transform: translateX(3px);
+  background: rgba(14, 165, 233, 0.05);
+  padding-left: 8px;
 }
 
 .financing-row:last-child {
   margin-bottom: 0;
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 2px solid rgba(14, 165, 233, 0.25);
+  font-weight: var(--font-bold);
+  font-size: 16px;
+}
+
+.financing-row:last-child:hover {
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.financing-row span:first-child {
+  color: #F0F9FF;
   font-weight: var(--font-semibold);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .financing-row .amount {
-  font-weight: var(--font-medium);
+  font-weight: var(--font-bold);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.5px;
+}
+
+.financing-row:last-child .amount {
+  color: #22c55e;
+  font-size: 17px;
+  text-shadow: 
+    0 0 12px rgba(34, 197, 94, 0.5), 
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: amountGlow 2s ease-in-out infinite;
+}
+
+@keyframes amountGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 12px rgba(34, 197, 94, 0.5), 
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(34, 197, 94, 0.8), 
+      0 2px 6px rgba(0, 0, 0, 0.4);
+  }
 }
 
 /* Utility Classes */

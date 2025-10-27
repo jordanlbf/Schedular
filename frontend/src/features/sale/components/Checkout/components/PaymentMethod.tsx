@@ -12,6 +12,13 @@ interface PaymentMethodProps {
   totals: SaleTotals;
 }
 
+// Payment method icons
+const PAYMENT_ICONS: Record<string, string> = {
+  cash: '💵',
+  card: '💳',
+  financing: '📊'
+};
+
 export function PaymentMethod({
   paymentMethod,
   setPaymentMethod,
@@ -32,11 +39,17 @@ export function PaymentMethod({
     setDepositAmount,
     totals
   });
+  
   return (
     <Card title="Payment Method">
-        <div className="payment-methods">
+        <div className="payment-methods-grid">
           {PAYMENT_METHODS.map((method) => (
-            <label key={method.value} className="payment-option">
+            <label key={method.value} className="payment-option-card">
+              <div className="payment-icon">{PAYMENT_ICONS[method.value]}</div>
+              <div className="payment-content">
+                <div className="payment-name">{method.label}</div>
+                <div className="payment-description">{method.description}</div>
+              </div>
               <input
                 type="radio"
                 name="payment"
@@ -44,10 +57,6 @@ export function PaymentMethod({
                 checked={paymentMethod === method.value}
                 onChange={(e) => handlePaymentMethodChange(e.target.value)}
               />
-              <div className="payment-details">
-                <div className="payment-name">{method.label}</div>
-                <div className="payment-description">{method.description}</div>
-              </div>
             </label>
           ))}
         </div>

@@ -21,6 +21,7 @@ export interface DeliveryDetails {
 
 export interface SaleOrder {
   id?: number; // Optional for creation, required after backend response
+  orderNumber?: number; // Sequential order number, set by backend
   customer: Customer;
   items: LineItem[];
   delivery: DeliveryDetails;

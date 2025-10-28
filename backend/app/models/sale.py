@@ -8,6 +8,7 @@ from app.core.db import Base
 class Sale(Base):
     __tablename__ = "sales"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    order_number: Mapped[int] = mapped_column(Integer, unique=True, index=True)
     # JSON blobs as text for now (easy to evolve later)
     customer_json: Mapped[str] = mapped_column(Text)
     delivery_json: Mapped[str] = mapped_column(Text)

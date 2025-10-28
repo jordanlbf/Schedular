@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from decimal import Decimal
 import json
 from app.core.db import get_db, Base, engine
@@ -7,6 +8,11 @@ from app.models.sale import Sale, SaleItem
 from app.schemas.sale import SaleOrderCreate, SaleOrderRead, LineItemPayload, Totals
 
 router = APIRouter()
+
+def _get_next_order_number(db: Session) -> int:
+    """Generate the next sequential order number"""
+    max_order_number = db.query(func.max(Sale.order_number)).scalar()
+    return (max_order_number or 0) + 1
 
 def _decimal_to_float(obj):
     """Convert Decimal objects to float for JSON serialization"""
@@ -31,17 +37,21 @@ def _sale_to_read(sale: Sale) -> SaleOrderRead:
     items = [LineItemPayload(id=i.id, sku=i.sku, name=i.name, qty=i.qty, price=i.unit_price, color=i.color) for i in sale.items]
     totals = Totals(subtotal=sale.subtotal, deliveryFee=sale.delivery_fee, discount=sale.discount, total=sale.total)
     return SaleOrderRead(
-        id=sale.id, customer=customer, items=items, delivery=delivery, payment=payment,
+        id=sale.id, orderNumber=sale.order_number, customer=customer, items=items, delivery=delivery, payment=payment,
         totals=totals, createdAt=sale.created_at.isoformat() + "Z", status=sale.status
     )
 
 @router.post("/sales", response_model=SaleOrderRead, status_code=status.HTTP_201_CREATED)
 def create_order(payload: SaleOrderCreate, db: Session = Depends(get_db)):
+    # Generate next sequential order number
+    order_number = _get_next_order_number(db)
+    
     # Convert payment data to dict and handle Decimal conversion
     payment_data = payload.payment.model_dump()
     payment_data_serializable = _decimal_to_float(payment_data)
     
     sale = Sale(
+        order_number=order_number,
         customer_json=json.dumps(payload.customer.model_dump()),
         delivery_json=json.dumps(payload.delivery.model_dump()),
         payment_json=json.dumps(payment_data_serializable),

@@ -56,7 +56,7 @@ export function useWizardCompletion({
     });
 
     if (createdOrder) {
-      toast.success(`Order #${createdOrder.id} created successfully!`);
+      toast.success(`Order #${createdOrder.orderNumber} created successfully!`);
       
       // Clear the draft immediately
       clearDraft();

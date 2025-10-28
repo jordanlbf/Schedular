@@ -70,6 +70,7 @@ class SaleOrderCreate(BaseModel):
 class SaleOrderRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: int
+    orderNumber: int
     customer: Customer
     items: List[LineItemPayload]
     delivery: DeliveryDetails

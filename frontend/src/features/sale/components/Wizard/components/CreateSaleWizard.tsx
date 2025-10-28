@@ -29,7 +29,15 @@ export default function CreateSaleWizard() {
 
   usePageReloadHandler(clearDraft, toast);
 
-  const { handleComplete, handleAddSuccess } = useWizardCompletion({
+  const { handleComplete, handleAddSuccess, isSubmitting } = useWizardCompletion({
+    customer: state.customer,
+    lines: state.lines,
+    deliveryDetails: state.deliveryDetails,
+    deliveryFee: state.deliveryFee,
+    paymentMethod: state.paymentMethod,
+    discountPct: state.discountPct,
+    depositAmount: state.depositAmount,
+    totals: wizard.totals,
     clearDraft,
     toast,
     isValid: wizard.validation.isValid ?? false
@@ -63,6 +71,7 @@ export default function CreateSaleWizard() {
           validation={wizard.validation}
           onComplete={handleComplete}
           onAddSuccess={handleAddSuccess}
+          isSubmitting={isSubmitting}
         />
 
         <ToastContainer toasts={toast.toasts} onRemove={toast.removeToast} />

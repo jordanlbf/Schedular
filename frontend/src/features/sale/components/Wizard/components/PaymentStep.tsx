@@ -18,6 +18,7 @@ interface PaymentStepProps {
   onPrev: () => void;
   onComplete: () => void;
   canProceed: boolean;
+  isSubmitting?: boolean;
 }
 
 export default function PaymentStep({
@@ -33,15 +34,16 @@ export default function PaymentStep({
   deliveryDetails,
   onPrev,
   onComplete,
-  canProceed
+  canProceed,
+  isSubmitting = false
 }: PaymentStepProps) {
   return (
     <WizardStepLayout
       title={WIZARD_STEP_TITLES.payment}
       stepNumber="4"
       onPrev={onPrev}
-      canProceed={canProceed}
-      nextLabel="Complete Order"
+      canProceed={canProceed && !isSubmitting}
+      nextLabel={isSubmitting ? "Submitting..." : "Complete Order"}
       onNext={onComplete}
     >
       <OrderCheckout

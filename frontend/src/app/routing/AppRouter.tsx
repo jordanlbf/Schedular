@@ -7,6 +7,7 @@ import { LoadingFallback } from "./LoadingFallback";
 const HomePage = lazy(() => import("@/pages/home"));
 const DashboardPage = lazy(() => import("@/pages/dashboard"));
 const SalesPage = lazy(() => import("@/pages/sales"));
+const OrderConfirmationPage = lazy(() => import("@/pages/sales/OrderConfirmation"));
 const CustomersPage = lazy(() => import("@/pages/customers"));
 const InventoryPage = lazy(() => import("@/pages/inventory"));
 const AdminPage = lazy(() => import("@/pages/admin"));
@@ -19,6 +20,7 @@ export function AppRouter() {
         <Route path={paths.home()} element={<HomePage />} />
         <Route path={paths.dashboard()} element={<DashboardPage />} />
         <Route path={paths.sales.root()} element={<SalesPage />} />
+        <Route path="/pos/sale/confirmation/:orderId" element={<OrderConfirmationPage />} />
         <Route path={paths.customers.root()} element={<CustomersPage />} />
         <Route path={paths.inventory.root()} element={<InventoryPage />} />
         <Route path={paths.admin()} element={<AdminPage />} />

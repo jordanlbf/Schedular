@@ -13,6 +13,7 @@ export const paths = {
   // Sales module
   sales: {
     root: () => "/pos/sale",
+    confirmation: (orderId: number) => `/pos/sale/confirmation/${orderId}`,
   },
 
   // Customer management

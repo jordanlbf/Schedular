@@ -25,7 +25,10 @@ class ApiClient {
    * Build URL with query parameters
    */
   private buildURL(endpoint: string, params?: Record<string, string | number>): string {
-    const url = new URL(endpoint, this.baseURL);
+    // Remove leading slash from endpoint to properly append to baseURL
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+    const fullPath = `${this.baseURL}/${cleanEndpoint}`;
+    const url = new URL(fullPath);
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {

@@ -12,7 +12,7 @@ FRONTEND_DIR="${FRONTEND_DIR:-frontend}"
 BACKEND_HOST="${BACKEND_HOST:-127.0.0.1}"
 BACKEND_PORT="${PORT:-8000}"           # backend port
 FRONTEND_PORT="${VITE_PORT:-5173}"     # vite default
-UVICORN_APP="${UVICORN_APP:-app:app}"  # module:app
+UVICORN_APP="${UVICORN_APP:-app.main:app}"  # module:app
 
 # --- Helpers ---
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

@@ -20,6 +20,7 @@ export interface DeliveryDetails {
 }
 
 export interface SaleOrder {
+  id?: number; // Optional for creation, required after backend response
   customer: Customer;
   items: LineItem[];
   delivery: DeliveryDetails;
@@ -34,6 +35,6 @@ export interface SaleOrder {
     discount: number;
     total: number;
   };
-  createdAt: string;
+  createdAt?: string; // Optional for creation, set by backend
   status: 'draft' | 'pending' | 'confirmed' | 'completed' | 'cancelled';
 }

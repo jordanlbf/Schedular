@@ -32,6 +32,7 @@ interface WizardStepsProps {
   };
   onComplete: () => void;
   onAddSuccess?: (productName: string) => void;
+  isSubmitting?: boolean;
 }
 
 export function WizardSteps({
@@ -41,7 +42,8 @@ export function WizardSteps({
   navigation,
   validation,
   onComplete,
-  onAddSuccess
+  onAddSuccess,
+  isSubmitting = false
 }: WizardStepsProps) {
   const searchRef = useRef<HTMLInputElement | null>(null);
 
@@ -112,6 +114,7 @@ export function WizardSteps({
         onPrev={navigation.prevStep}
         onComplete={onComplete}
         canProceed={validation.payment.isValid}
+        isSubmitting={isSubmitting}
       />
     )
   };

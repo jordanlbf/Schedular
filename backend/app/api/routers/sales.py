@@ -8,6 +8,16 @@ from app.schemas.sale import SaleOrderCreate, SaleOrderRead, LineItemPayload, To
 
 router = APIRouter()
 
+def _decimal_to_float(obj):
+    """Convert Decimal objects to float for JSON serialization"""
+    if isinstance(obj, Decimal):
+        return float(obj)
+    elif isinstance(obj, dict):
+        return {k: _decimal_to_float(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [_decimal_to_float(item) for item in obj]
+    return obj
+
 def _calc_totals(items: list[SaleItem], discount_percent: Decimal, delivery_fee: Decimal) -> Totals:
     subtotal = sum((i.unit_price * i.qty for i in items), Decimal("0.00"))
     discount = (subtotal * (discount_percent or Decimal("0"))) / Decimal("100")
@@ -27,10 +37,14 @@ def _sale_to_read(sale: Sale) -> SaleOrderRead:
 
 @router.post("/sales", response_model=SaleOrderRead, status_code=status.HTTP_201_CREATED)
 def create_order(payload: SaleOrderCreate, db: Session = Depends(get_db)):
+    # Convert payment data to dict and handle Decimal conversion
+    payment_data = payload.payment.model_dump()
+    payment_data_serializable = _decimal_to_float(payment_data)
+    
     sale = Sale(
         customer_json=json.dumps(payload.customer.model_dump()),
         delivery_json=json.dumps(payload.delivery.model_dump()),
-        payment_json=json.dumps(payload.payment.model_dump()),
+        payment_json=json.dumps(payment_data_serializable),
         status=payload.status or "draft",
     )
     sale.items = [
@@ -64,7 +78,7 @@ def update_order(order_id: int, updates: dict, db: Session = Depends(get_db)):
     if "customer" in updates: sale.customer_json = json.dumps(updates["customer"])
     if "delivery" in updates: sale.delivery_json = json.dumps(updates["delivery"])
     if "payment" in updates:
-        sale.payment_json = json.dumps(updates["payment"])
+        sale.payment_json = json.dumps(_decimal_to_float(updates["payment"]))
     if "status" in updates: sale.status = updates["status"]
     if "items" in updates:
         sale.items.clear()

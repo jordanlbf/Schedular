@@ -1,6 +1,7 @@
 import { addLineToCart, updateLineQuantity, removeLine } from '@/features/sale/components/Cart/utils/cartUtils';
 import type {Line, WizardStep} from '@/features/sale/types';
 import type { SaleDraftState } from '@/features/sale/stores/useSaleDraftStore';
+import { useProductsContext } from '@/features/sale/contexts/ProductsContext';
 
 interface UseWizardCartManagementProps {
   lines: Line[];
@@ -19,11 +20,12 @@ export function useWizardCartManagement({
   updateField,
   validation
 }: UseWizardCartManagementProps) {
+  const { products } = useProductsContext();
 
   // Product management functions
   const addLine = (sku: string | number, color?: string) => {
     updateField('lines', (currentLines: Line[]) => {
-      const result = addLineToCart(currentLines, sku, nextId, color);
+      const result = addLineToCart(currentLines, sku, nextId, products, color);
       if (result.nextId !== nextId) {
         updateField('nextId', result.nextId);
       }
@@ -33,7 +35,7 @@ export function useWizardCartManagement({
 
   const changeQty = (id: number, delta: number) => {
     updateField('lines', (currentLines: Line[]) => {
-      const newLines = updateLineQuantity(currentLines, id, delta);
+      const newLines = updateLineQuantity(currentLines, id, delta, products);
       // Reset validation state if no valid items remain
       if (currentStep === 'products') {
         const validItems = newLines.filter(line => line.qty > 0);

@@ -1,5 +1,5 @@
 import type { Line } from '@/features/sale/types';
-import { CATALOG } from '@/features/sale/catalog';
+import type { Product } from '@/shared/types';
 
 /**
  * Cart management utilities
@@ -9,9 +9,10 @@ export function addLineToCart(
   currentLines: Line[],
   sku: string | number,
   nextId: number,
+  products: Product[],
   color?: string
 ): { lines: Line[]; nextId: number } {
-  const item = CATALOG.find(x => x.sku === sku);
+  const item = products.find(x => x.sku === sku);
   if (!item) return { lines: currentLines, nextId };
 
   // Don't add discontinued items
@@ -64,7 +65,7 @@ export function addLineToCart(
   }
 }
 
-export function updateLineQuantity(lines: Line[], id: number, delta: number): Line[] {
+export function updateLineQuantity(lines: Line[], id: number, delta: number, products: Product[]): Line[] {
   return lines.map(line => {
     if (line.id !== id) return line;
 
@@ -74,7 +75,7 @@ export function updateLineQuantity(lines: Line[], id: number, delta: number): Li
     if (newQty < 1) return line;
 
     // Check stock limits
-    const item = CATALOG.find(x => x.sku === line.sku);
+    const item = products.find(x => x.sku === line.sku);
     if (item && item.stock.status !== 'out-of-stock' && item.stock.quantity > 0) {
       // Respect stock limits for in-stock and low-stock items
       const maxQty = item.stock.quantity;

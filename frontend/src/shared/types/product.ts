@@ -19,8 +19,22 @@ export interface Product {
   name: string;
   price: number;
   category?: string;
-  inStock?: boolean; // Keep for backwards compatibility
   image?: string;
   stock: StockInfo;
   colors?: ColorOption[];
+}
+
+export interface ProductFilters {
+  activeOnly?: boolean;
+  category?: string;
+  inStockOnly?: boolean;
+  search?: string;
+}
+
+export interface ProductListResponse {
+  items: Product[];
+  total: number;
+  page: number;
+  page_size: number;
+  has_more: boolean;
 }

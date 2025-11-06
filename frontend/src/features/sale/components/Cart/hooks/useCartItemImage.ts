@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import type { Product, Line } from '@/features/sale/types';
-import { CATALOG } from '@/features/sale/catalog';
+import { useProductsContext } from '@/features/sale/contexts/ProductsContext';
 
 interface UseCartItemImageProps {
   line: Line;
@@ -21,9 +21,10 @@ export function useCartItemImage({
 }: UseCartItemImageProps): UseCartItemImageReturn {
   const [imageLoading, setImageLoading] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const { getProduct } = useProductsContext();
 
   // Memoize expensive calculations
-  const originalProduct = useMemo(() => CATALOG.find(p => p.sku === line.sku), [line.sku]);
+  const originalProduct = useMemo(() => getProduct(line.sku), [line.sku, getProduct]);
 
   // Get the correct image based on selected color
   const productImage = useMemo(() => {

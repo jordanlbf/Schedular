@@ -8,7 +8,7 @@ from app.api.routers import sales, products, delivery, customers
 
 app = FastAPI(title="Schedular API", version="0.1.0")
 
-# CORS for your Vite dev server
+# CORS for Vite dev server
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,

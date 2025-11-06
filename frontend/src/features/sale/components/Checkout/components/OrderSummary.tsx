@@ -3,7 +3,7 @@ import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { fmt } from '@/shared/utils';
 import { Card } from '@/ui';
 import { useOrderSummary } from '../hooks/useOrderSummary';
-import { CATALOG } from '@/features/sale/catalog';
+import { useProductsContext } from '@/features/sale/contexts/ProductsContext';
 import { useRef, useEffect } from 'react';
 
 interface OrderSummaryProps {
@@ -20,10 +20,11 @@ export function OrderSummary({
   setDiscountPct
 }: OrderSummaryProps) {
   const customInputRef = useRef<HTMLInputElement>(null);
-  
-  const { 
-    itemCountLabel, 
-    handleDiscountChange, 
+  const { getProduct } = useProductsContext();
+
+  const {
+    itemCountLabel,
+    handleDiscountChange,
     formatDiscountValue,
     isCustomDiscount,
     handlePresetClick,
@@ -44,7 +45,7 @@ export function OrderSummary({
 
   // Helper function to get product image
   const getProductImage = (line: Line) => {
-    const product = CATALOG.find(p => p.sku === line.sku);
+    const product = getProduct(line.sku);
     if (!product) return undefined;
 
     // If no color is selected, use default product image
@@ -57,7 +58,7 @@ export function OrderSummary({
 
   // Helper function to get discount info
   const getDiscountInfo = (line: Line) => {
-    const product = CATALOG.find(p => p.sku === line.sku);
+    const product = getProduct(line.sku);
     if (!product) return null;
 
     const rrpPrice = product.price;

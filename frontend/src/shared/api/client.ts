@@ -76,16 +76,23 @@ class ApiClient {
   async get<T>(endpoint: string, config?: RequestConfig): Promise<T> {
     const url = this.buildURL(endpoint, config?.params);
 
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        ...config?.headers,
-      },
-      ...config,
-    });
+    try {
+      // Extract params from config and don't spread it into fetch options
+      const { params, ...fetchConfig } = config || {};
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          ...fetchConfig.headers,
+        },
+        ...fetchConfig,  // Now this doesn't include 'params'
+      });
 
-    return this.handleResponse<T>(response);
+      return this.handleResponse<T>(response);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**

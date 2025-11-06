@@ -7,8 +7,9 @@ import { ProgressBar } from "./ProgressBar";
 import { WizardSteps } from "./WizardSteps";
 import { ToastContainer } from "./ToastContainer";
 import { useToast, useBeforeUnload, useNavigationPrompt } from "@/shared/hooks";
+import { ProductsProvider } from "@/features/sale/contexts/ProductsContext";
 
-export default function CreateSaleWizard() {
+function CreateSaleWizardInner() {
   const { state, updateField, hasUnsavedData, clearDraft } = useSaleDraftStore();
   const wizard = useSaleWizard(state, updateField);
   const toast = useToast();
@@ -78,5 +79,18 @@ export default function CreateSaleWizard() {
       </main>
       <ActionBar />
     </>
+  );
+}
+
+/**
+ * CreateSaleWizard wrapped with ProductsProvider
+ *
+ * This ensures all hooks and components have access to products from the backend API
+ */
+export default function CreateSaleWizard() {
+  return (
+    <ProductsProvider>
+      <CreateSaleWizardInner />
+    </ProductsProvider>
   );
 }

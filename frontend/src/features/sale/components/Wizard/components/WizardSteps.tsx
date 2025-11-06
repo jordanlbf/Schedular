@@ -3,12 +3,12 @@ import CustomerStep from './CustomerStep';
 import ProductsStep from './ProductsStep';
 import DeliveryStep from './DeliveryStep';
 import PaymentStep from './PaymentStep';
-import { CATALOG } from '@/features/sale/catalog';
 import { getEstimatedDeliveryDate } from '@/shared/utils';
 import type { WizardStep, SaleDraftState } from '@/features/sale/stores/useSaleDraftStore';
 import type { StepValidation } from '../hooks/useSaleValidation';
 import type { SaleTotals } from '@/features/sale/hooks/useSaleTotals';
 import { useWizardCartManagement } from '../hooks/useWizardCartManagement';
+import { useProductsContext } from '@/features/sale/contexts/ProductsContext';
 
 interface WizardNavigation {
   nextStep: () => void;
@@ -47,6 +47,9 @@ export function WizardSteps({
 }: WizardStepsProps) {
   const searchRef = useRef<HTMLInputElement | null>(null);
 
+  // Get products from context
+  const { products, isLoading: isLoadingProducts, error: productsError } = useProductsContext();
+
   const {
     addLine,
     changeQty,
@@ -74,7 +77,7 @@ export function WizardSteps({
     products: (
       <ProductsStep
         lines={state.lines}
-        catalog={CATALOG}
+        catalog={products}
         onAddLine={addLine}
         onChangeQty={changeQty}
         onRemoveLine={removeLineFromCart}
@@ -85,6 +88,8 @@ export function WizardSteps({
         canProceed={validation.products.isValid}
         subtotal={subtotal}
         onAddSuccess={onAddSuccess}
+        isLoadingProducts={isLoadingProducts}
+        productsError={productsError}
       />
     ),
     delivery: (

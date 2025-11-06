@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { Line, CatalogItem } from '@/features/sale/types';
-import { CATALOG } from '@/features/sale/catalog';
+import { useProductsContext } from '@/features/sale/contexts/ProductsContext';
 
 interface UseCartItemHelpersProps {
   line: Line;
@@ -14,8 +14,10 @@ interface UseCartItemHelpersReturn {
 export function useCartItemHelpers({
   line
 }: UseCartItemHelpersProps): UseCartItemHelpersReturn {
+  const { getProduct } = useProductsContext();
+
   // Memoize expensive calculations
-  const originalProduct = useMemo(() => CATALOG.find(p => p.sku === line.sku), [line.sku]);
+  const originalProduct = useMemo(() => getProduct(line.sku), [line.sku, getProduct]);
   const rrpPrice = originalProduct?.price || line.price;
 
   return {

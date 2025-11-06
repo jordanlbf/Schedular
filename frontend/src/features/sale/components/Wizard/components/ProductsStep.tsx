@@ -17,6 +17,8 @@ interface ProductsStepProps {
   canProceed: boolean;
   subtotal: number;
   onAddSuccess?: (productName: string) => void;
+  isLoadingProducts?: boolean;
+  productsError?: string | null;
 }
 
 export default function ProductsStep({
@@ -31,7 +33,9 @@ export default function ProductsStep({
   onPrev,
   canProceed,
   subtotal,
-  onAddSuccess
+  onAddSuccess,
+  isLoadingProducts = false,
+  productsError = null
 }: ProductsStepProps) {
   return (
     <WizardStepLayout
@@ -42,17 +46,28 @@ export default function ProductsStep({
       canProceed={canProceed}
       nextLabel="Continue to Delivery"
     >
-      <ProductSelection
-        lines={lines}
-        catalog={catalog}
-        onAddLine={onAddLine}
-        onChangeQty={onChangeQty}
-        onRemoveLine={onRemoveLine}
-        onPriceChange={onPriceChange}
-        searchRef={searchRef}
-        subtotal={subtotal}
-        onAddSuccess={onAddSuccess}
-      />
+      {isLoadingProducts ? (
+        <div className="products-loading">
+          <p>Loading products...</p>
+        </div>
+      ) : productsError ? (
+        <div className="products-error">
+          <p>Error loading products: {productsError}</p>
+          <button onClick={() => window.location.reload()}>Retry</button>
+        </div>
+      ) : (
+        <ProductSelection
+          lines={lines}
+          catalog={catalog}
+          onAddLine={onAddLine}
+          onChangeQty={onChangeQty}
+          onRemoveLine={onRemoveLine}
+          onPriceChange={onPriceChange}
+          searchRef={searchRef}
+          subtotal={subtotal}
+          onAddSuccess={onAddSuccess}
+        />
+      )}
     </WizardStepLayout>
   );
 }

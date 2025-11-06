@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { LineItem, DeliveryDetails } from '@/shared/types';
-import { CATALOG } from '../catalog';
+import { useProductsContext } from '../contexts/ProductsContext';
 
 export interface SaleTotals {
   itemsSum: number;    // Sum of RRP prices
@@ -21,16 +21,18 @@ export function useSaleTotals(
   deliveryFee: number,
   discountPct: number
 ): SaleTotals {
+  const { getProduct } = useProductsContext();
+
   return useMemo(() => {
     // Calculate items sum (RRP) and line discount
     let itemsSum = 0;
     let actualSum = 0;
-    
+
     lines.forEach(line => {
-      // Find the product in catalog to get RRP
-      const catalogProduct = CATALOG.find(p => p.sku === line.sku);
-      const rrp = catalogProduct?.price || line.price; // Use catalog price as RRP, fallback to line price
-      
+      // Find the product to get RRP
+      const product = getProduct(line.sku);
+      const rrp = product?.price || line.price; // Use product price as RRP, fallback to line price
+
       itemsSum += rrp * line.qty;
       actualSum += line.price * line.qty;
     });
@@ -61,5 +63,5 @@ export function useSaleTotals(
       deposit,
       remaining,
     };
-  }, [lines, deliveryDetails, deliveryFee, discountPct]);
+  }, [lines, deliveryDetails, deliveryFee, discountPct, getProduct]);
 }

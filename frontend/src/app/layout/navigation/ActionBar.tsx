@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { paths } from '@/app/routing/paths';
 import './ActionBar.css';
 
 interface ActionBarProps {
@@ -15,7 +16,7 @@ interface ActionBarProps {
   className?: string;
 }
 
-function DefaultBackButton({ fallbackTo = '/' }: { fallbackTo?: string }) {
+function DefaultBackButton({ fallbackTo = paths.home() }: { fallbackTo?: string }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,22 +24,22 @@ function DefaultBackButton({ fallbackTo = '/' }: { fallbackTo?: string }) {
     // Navigate based on route hierarchy, not browser history
     const path = location.pathname;
 
-    if (path === '/pos') {
-      navigate('/');
+    if (path === paths.dashboard()) {
+      navigate(paths.home());
     } else if (path.startsWith('/pos/')) {
-      navigate('/pos');
-    } else if (path === '/admin') {
-      navigate('/');
+      navigate(paths.dashboard());
+    } else if (path === paths.admin()) {
+      navigate(paths.home());
     } else if (path.startsWith('/admin/')) {
-      navigate('/admin');
+      navigate(paths.admin());
     } else {
       // Use fallbackTo or default to home
       navigate(fallbackTo);
     }
   };
 
-  // Don't show back button on home page
-  if (location.pathname === '/') {
+  // Don't show back button on home page or login page
+  if (location.pathname === paths.home() || location.pathname === paths.login()) {
     return null;
   }
 
@@ -46,11 +47,11 @@ function DefaultBackButton({ fallbackTo = '/' }: { fallbackTo?: string }) {
   const getBackButtonLabel = () => {
     const path = location.pathname;
 
-    if (path === '/pos') {
+    if (path === paths.dashboard()) {
       return 'Return to Home';
     } else if (path.startsWith('/pos/')) {
       return 'Return to Dashboard';
-    } else if (path === '/admin') {
+    } else if (path === paths.admin()) {
       return 'Return to Home';
     } else if (path.startsWith('/admin/')) {
       return 'Return to Back Office';
@@ -78,13 +79,13 @@ export default function ActionBar({
   middle,
   primaryAction,
   backButton,
-  fallbackTo = '/',
+  fallbackTo = paths.home(),
   className = ''
 }: ActionBarProps) {
   const location = useLocation();
 
-  // Hide on home page unless explicitly shown
-  if (location.pathname === '/' && !backButton && !primaryAction && !middle) {
+  // Hide on home page or login page unless explicitly shown
+  if ((location.pathname === paths.home() || location.pathname === paths.login()) && !backButton && !primaryAction && !middle) {
     return null;
   }
 

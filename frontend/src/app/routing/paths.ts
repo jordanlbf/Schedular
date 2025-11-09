@@ -3,8 +3,11 @@
  * Uses entity-based naming for better scalability and maintainability.
  */
 export const paths = {
+  // Auth
+  login: () => "/login",
+
   // Core pages
-  home: () => "/",
+  home: () => "/home",
   admin: () => "/admin",
 
   // Front desk dashboard
@@ -32,6 +35,7 @@ export type AppPaths = typeof paths;
 
 // Helper for getting all possible route paths
 export type RoutePath =
+  | ReturnType<typeof paths.login>
   | ReturnType<typeof paths.home>
   | ReturnType<typeof paths.dashboard>
   | ReturnType<typeof paths.sales.root>

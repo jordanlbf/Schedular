@@ -1,21 +1,36 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuth, type UserRole } from "@/core/auth";
 import { paths } from "./paths";
 
-// Stubbed auth hook
-const useAuth = () => ({ user: null, loading: false });
-
+/**
+ * Route guard that requires authentication
+ * Redirects to login page if user is not authenticated
+ */
 export function RequireAuth() {
-  const { user, loading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
-  if (loading) return null;
-  if (!user) return <Navigate to={paths.home()} state={{ from: location }} replace />;
+
+  if (isLoading) {
+    return null; // Or a loading spinner
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
   return <Outlet />;
 }
 
-export function RequireRole({ role }: { role: "admin" | "staff" | string }) {
-  const { user } = useAuth();
-  if (!user || !Array.isArray((user as any).roles) || !(user as any).roles.includes(role)) {
+/**
+ * Route guard that requires a specific role
+ * Redirects to home if user doesn't have the required role
+ */
+export function RequireRole({ role }: { role: UserRole }) {
+  const { user, isAuthenticated } = useAuth();
+
+  if (!isAuthenticated || user?.role !== role) {
     return <Navigate to={paths.home()} replace />;
   }
+
   return <Outlet />;
 }

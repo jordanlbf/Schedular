@@ -1,8 +1,1 @@
-// Components
-export * from './components';
-
-// API
-export * from './api';
-
-// Hooks
-export * from './hooks';
+export { default as CheckStock } from './components/CheckStock';

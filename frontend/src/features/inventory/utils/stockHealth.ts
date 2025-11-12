@@ -1,3 +1,5 @@
+import type { StockInfo } from '@/shared/types';
+
 const MAX_STOCK = 15;
 
 export type StockHealthClass = 'high' | 'low' | 'zero';
@@ -10,7 +12,8 @@ export interface StockHealth {
 /**
  * Calculate stock health metrics for visual indicators
  */
-export function getStockHealth(stock: number): StockHealth {
+export function getStockHealth(stockInfo: StockInfo): StockHealth {
+  const stock = stockInfo.quantity;
   const percentage = Math.min((stock / MAX_STOCK) * 100, 100);
   let healthClass: StockHealthClass = 'high';
 

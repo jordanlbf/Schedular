@@ -1,15 +1,8 @@
 import { useState, useMemo } from 'react';
-
-interface Product {
-  sku: string;
-  name: string;
-  category: string;
-  price: number;
-  stock: number;
-}
+import type { Product } from '@/shared/types';
 
 type SortDirection = 'asc' | 'desc';
-type SortColumn = keyof Product;
+type SortColumn = 'sku' | 'name' | 'category' | 'price' | 'stock';
 
 interface UseInventoryTableOptions {
   products: Product[];
@@ -37,8 +30,17 @@ export function useInventoryTable({
 
   const sortedProducts = useMemo(() => {
     return [...products].sort((a, b) => {
-      const aVal = a[sortBy];
-      const bVal = b[sortBy];
+      let aVal: string | number;
+      let bVal: string | number;
+
+      // Handle stock sorting specially since it's nested
+      if (sortBy === 'stock') {
+        aVal = a.stock.quantity;
+        bVal = b.stock.quantity;
+      } else {
+        aVal = a[sortBy] ?? '';
+        bVal = b[sortBy] ?? '';
+      }
 
       if (sortDir === 'asc') {
         return aVal > bVal ? 1 : -1;

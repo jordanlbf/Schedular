@@ -1,24 +1,15 @@
 import { Header, ActionBar, Footer } from '@/app/layout';
+import { useProducts } from '@/shared/hooks';
 import { useInventoryTable } from '../hooks';
 import { getStockHealth } from '../utils';
-import { getCategoryIcon } from '../constants';
 import { SortIcon } from './SortIcon';
 import '../styles/check-stock.css';
 
 export default function CheckStock() {
-  // Mock data - to be replaced with API integration
-  const products = [
-    { sku: 'MAT-001', name: 'Premium Orthopedic Mattress', category: 'Mattresses', price: 1299.00, stock: 15 },
-    { sku: 'SOF-002', name: 'Modern Leather Sofa', category: 'Sofas', price: 2499.00, stock: 3 },
-    { sku: 'BED-003', name: 'Oak Platform Bed Frame', category: 'Beds', price: 899.00, stock: 0 },
-    { sku: 'TBL-004', name: 'Glass Dining Table', category: 'Tables', price: 699.00, stock: 8 },
-    { sku: 'CHR-005', name: 'Ergonomic Office Chair', category: 'Chairs', price: 449.00, stock: 2 },
-    { sku: 'DRS-006', name: 'Walnut Dresser', category: 'Storage', price: 1099.00, stock: 6 },
-    { sku: 'LMP-007', name: 'Modern Floor Lamp', category: 'Lighting', price: 179.00, stock: 12 },
-    { sku: 'RUG-008', name: 'Persian Area Rug', category: 'Decor', price: 599.00, stock: 0 },
-    { sku: 'DSK-009', name: 'Standing Desk', category: 'Tables', price: 799.00, stock: 4 },
-    { sku: 'COU-010', name: 'Velvet Accent Chair', category: 'Chairs', price: 349.00, stock: 7 },
-  ];
+  const { products, isLoading, error } = useProducts({
+    activeOnly: true,
+    autoFetch: true,
+  });
 
   const {
     searchQuery,
@@ -53,11 +44,34 @@ export default function CheckStock() {
               </div>
             </div>
 
-            {/* Enhanced Table */}
-            <div className="stock-table-card">
-              <div className="table-wrapper">
-                <div className="stock-table-scroll">
-                  <table className="stock-table">
+            {/* Loading State */}
+            {isLoading && (
+              <div className="stock-table-card">
+                <div className="empty-state">
+                  <div className="empty-icon">⏳</div>
+                  <h3 className="empty-title">Loading inventory...</h3>
+                  <p className="empty-text">Please wait while we fetch product data</p>
+                </div>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && !isLoading && (
+              <div className="stock-table-card">
+                <div className="empty-state">
+                  <div className="empty-icon">⚠️</div>
+                  <h3 className="empty-title">Failed to load inventory</h3>
+                  <p className="empty-text">{error}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Table */}
+            {!isLoading && !error && (
+              <div className="stock-table-card">
+                <div className="table-wrapper">
+                  <div className="stock-table-scroll">
+                    <table className="stock-table">
                     <thead>
                       <tr>
                         <th onClick={() => handleSort('name')} className="sortable">
@@ -85,14 +99,19 @@ export default function CheckStock() {
                     <tbody>
                       {filteredProducts.map((product) => {
                         const { percentage, healthClass } = getStockHealth(product.stock);
-                        const icon = getCategoryIcon(product.category);
-                        
+
                         return (
                           <tr key={product.sku}>
                             <td>
                               <div className="product-cell">
                                 <div className="product-image">
-                                  {icon}
+                                  {product.image && (
+                                    <img
+                                      src={product.image}
+                                      alt={product.name}
+                                      className="product-img"
+                                    />
+                                  )}
                                 </div>
                                 <div className="product-info">
                                   <div className="product-name">{product.name}</div>
@@ -114,7 +133,7 @@ export default function CheckStock() {
                                     style={{ width: `${percentage}%` }}
                                   />
                                 </div>
-                                <span className="qty-text">{product.stock}</span>
+                                <span className="qty-text">{product.stock.quantity}</span>
                               </div>
                             </td>
                           </tr>
@@ -125,14 +144,15 @@ export default function CheckStock() {
                 </div>
               </div>
 
-              {filteredProducts.length === 0 && (
-                <div className="empty-state">
-                  <div className="empty-icon">📋</div>
-                  <h3 className="empty-title">No products found</h3>
-                  <p className="empty-text">Try a different search term</p>
-                </div>
-              )}
-            </div>
+                {filteredProducts.length === 0 && !isLoading && (
+                  <div className="empty-state">
+                    <div className="empty-icon">📋</div>
+                    <h3 className="empty-title">No products found</h3>
+                    <p className="empty-text">Try a different search term</p>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Footer Stats */}
             <div className="footer-stats">

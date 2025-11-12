@@ -1,4 +1,4 @@
-/* Check Stock Page Styles - Enhanced Visual Hierarchy Design */
+/* Inventory Page Styles */
 
 /* Wrapper layout with grid for header/main/footer */
 .check-stock-page-wrapper {
@@ -215,7 +215,7 @@ html.theme-dark .check-stock-page::before {
   font-weight: var(--font-bold);
 }
 
-/* Table Body - Enhanced rows with spacing */
+/* Table Body */
 .stock-table tbody tr {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -271,15 +271,21 @@ html.theme-dark .stock-table tbody tr:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
   flex-shrink: 0;
+  overflow: hidden;
   transition: all var(--transition-normal);
 }
 
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .stock-table tbody tr:hover .product-image {
-  background: var(--panel);
   border-color: var(--accent-secondary);
   transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
 }
 
 .product-info {
